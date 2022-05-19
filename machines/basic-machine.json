@@ -1,0 +1,15 @@
+{
+    "name": "test machine",
+    "alphabet": ["0", "1", "."],
+    "blank": ".",
+    "states": ["IDLE", "HALT"],
+    "initial": "IDLE",
+    "finals": ["HALT"],
+    "transitions": {
+        "IDLE": [
+            { "read": "0", "to_state": "IDLE", "write": ".", "action": "LEFT" },
+            { "read": "1", "to_state": "IDLE", "write": "0", "action": "RIGHT" },
+            { "read": ".", "to_state": "HALT", "write": ".", "action": "LEFT" }
+        ]
+    }
+}

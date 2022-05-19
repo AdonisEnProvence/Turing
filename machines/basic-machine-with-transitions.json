@@ -1,0 +1,20 @@
+{
+    "name": "test machine",
+    "alphabet": ["0", "1", ".", "y", "n", "e"],
+    "blank": ".",
+    "states": [ "DAY", "NIGHT", "HALT"],
+    "initial": "DAY",
+    "finals": ["HALT"],
+    "transitions": {
+        "DAY": [
+            { "read": "0", "to_state": "DAY", "write": "d", "action": "RIGHT" },
+            { "read": "1", "to_state": "NIGHT", "write": "d", "action": "RIGHT" },
+            { "read": ".", "to_state": "HALT", "write": "e", "action": "RIGHT" }
+        ],
+        "NIGHT": [
+            { "read": "0", "to_state": "NIGHT", "write": "n", "action": "RIGHT" },
+            { "read": "1", "to_state": "DAY", "write": "n", "action": "RIGHT" },
+            { "read": ".", "to_state": "HALT", "write": "e", "action": "RIGHT" }
+        ]
+    }
+} 
