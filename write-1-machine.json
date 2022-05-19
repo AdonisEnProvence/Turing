@@ -1,0 +1,15 @@
+{
+    "name": "write 1 on band machine",
+    "alphabet": ["0", "1", "."],
+    "blank": ".",
+    "states": ["writing"],
+    "initial": "writing",
+    "finals": [],
+    "transitions": {
+        "writing": [
+            { "read": ".", "to_state": "writing", "write": "1", "action": "RIGHT" },
+            { "read": "0", "to_state": "writing", "write": "1", "action": "RIGHT" },
+            { "read": "1", "to_state": "writing", "write": "1", "action": "RIGHT" }
+        ]
+    }
+}
