@@ -19,7 +19,7 @@ main(Args) ->
                 #{"read" => "1", "to_state" => "halt", "write" => "1", "action" => "RIGHT"}
             ]
     },
-    interpreter:start(ParsedMachineConfig, ["a", "a", "b", "b"]),
+    interpreter:start(ParsedMachineConfig, ["0", "1", "0"]),
     erlang:halt(0).
 
 %%====================================================================
