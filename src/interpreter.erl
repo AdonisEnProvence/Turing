@@ -1,6 +1,10 @@
 -module(interpreter).
 
+-ifdef(TEST).
+-export([start/2, read_and_exec/3]).
+-else.
 -export([start/2]).
+-endif.
 
 start(MachineConfig, Input) ->
     io:format("Interpreter starting...~n"),
