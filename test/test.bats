@@ -12,14 +12,14 @@ setup() {
 }
 
 @test "Default turing machine static input, output test" {
-    run _build/default/bin/turing # notice `run`!
-    assert_output 'Interpreter starting...
-Tape: [<"1">,"1","0"]
-Tape: ["0",<"1">,"0"]
-Tape: ["0","0",<"0">]
-Tape: ["0",<"0">,"."]
-Tape: [<"0">,".","."]
-Tape: [<".">,".",".","."]
-Machine is blocked no more transitions available
-Interpreter closing...'
+    run bash -c './_build/default/bin/turing | cat -e' # notice `run`!
+    assert_output 'Interpreter starting...$
+Tape: [<"1">,"1","0"]$
+Tape: ["0",<"1">,"0"]$
+Tape: ["0","0",<"0">]$
+Tape: ["0",<"0">,"."]$
+Tape: [<"0">,".","."]$
+Tape: [<".">,".",".","."]$
+Machine is blocked no more transitions available$
+Interpreter closing...$'
 }

@@ -38,7 +38,7 @@ docker run -d --name turing -v $PWD:/turing turing
 docker exec -it turing sh
 
 # Remove container
-docker rm -f turing/ID
+docker rm -f turing
 ```
 
 ## Bats shell tests
