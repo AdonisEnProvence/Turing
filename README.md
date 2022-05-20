@@ -36,4 +36,15 @@ docker run -d --name turing -v $PWD:/turing turing
 # Launch a shell inside the container.
 # We will write the same commands as if we were developing directly on our machine.
 docker exec -it turing sh
+
+# Remove container
+docker rm -f turing/ID
+```
+
+## Bats shell tests
+
+To run shell tests you have to be inside the docker container
+Run
+```sh
+./test/bats/bin/bats test/test.bats
 ```

@@ -1,5 +1,4 @@
-FROM erlang:24-alpine
-
+FROM erlang:24
 WORKDIR /turing
 
 ADD . .
