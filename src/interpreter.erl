@@ -56,11 +56,24 @@ read_and_exec(IndexOnTape, Tape, MachineConfig) ->
     TapeCurrentValue = lists:nth(IndexOnTape, Tape),
     if
         TapeCurrentValue =:= "0" ->
-            {NewIndex, NewTape} = move_index_on_tape({IndexOnTape, Tape, left}),
+            RewrittenTape = replace_character_on_square(Tape, IndexOnTape, "."),
+            {NewIndex, NewTape} = move_index_on_tape({IndexOnTape, RewrittenTape, left}),
             read_and_exec(NewIndex, NewTape, MachineConfig);
         TapeCurrentValue =:= "1" ->
-            {NewIndex, NewTape} = move_index_on_tape({IndexOnTape, Tape, right}),
+            RewrittenTape = replace_character_on_square(Tape, IndexOnTape, "0"),
+            {NewIndex, NewTape} = move_index_on_tape({IndexOnTape, RewrittenTape, right}),
             read_and_exec(NewIndex, NewTape, MachineConfig);
         true ->
             io:format("Machine is blocked no more transitions available~n", [])
     end.
+
+replace_character_on_square(Tape, 1 = IndexOnTape, CharacterToWrite) ->
+    Right = lists:nthtail(IndexOnTape, Tape),
+    [CharacterToWrite | Right];
+replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) when IndexOnTape =:= length(Tape) ->
+    Left = lists:sublist(Tape, IndexOnTape - 1),
+    Left ++ [CharacterToWrite];
+replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) ->
+    Left = lists:sublist(Tape, IndexOnTape - 1),
+    Right = lists:nthtail(IndexOnTape, Tape),
+    Left ++ [CharacterToWrite] ++ Right.
