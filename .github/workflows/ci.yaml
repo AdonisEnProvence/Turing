@@ -15,9 +15,16 @@ jobs:
       image: erlang:24.2
     steps:
     - uses: actions/checkout@v2
-
+    
     - name: Compile
       run: rebar3 compile
 
-    - name: Run tests
+    - name: Run unit tests
       run: rebar3 eunit
+
+    - name: Build
+      run: rebar3 escriptize
+
+    - name: Run integrations tests
+      run: ./bats-core/bin/bats test/test.bats    
+
