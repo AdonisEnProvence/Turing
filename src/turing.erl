@@ -9,7 +9,6 @@
 
 %% escript Entry point
 main(Args) ->
-    io:format("Args: ~p~n", [Args]),
     % Parser step
     ParsedMachineConfig = #{
         "transitions" =>
