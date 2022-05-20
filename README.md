@@ -10,6 +10,16 @@ An escript
 
     $ _build/default/bin/turing
 
+## Test
+
+    $ rebar3 eunit
+
+### Generate code coverage reports
+
+    $ rebar3 cover --verbose
+
+You can visualize code coverage, and which lines of code are not tested, by opening `_build/test/cover/index.html`.
+
 ## Dockerfile
 
 Follow those steps to launch a Docker container with Erlang installed.
