@@ -14,13 +14,28 @@ setup() {
 @test "Default turing machine static input, output test" {
     run bash -c './_build/default/bin/turing | cat -e' # notice `run`!
     assert_output 'Interpreter starting...$
-Tape: [<"1">,"1","0"] STATE="IDLE"$
-Tape: ["0",<"1">,"0"] STATE="IDLE"$
-Tape: ["0","0",<"0">] STATE="IDLE"$
-Tape: ["0",<"0">,"."] STATE="IDLE"$
-Tape: [<"0">,".","."] STATE="IDLE"$
-Tape: [<".">,".",".","."] STATE="IDLE"$
-Tape: [<".">,".",".",".","."] STATE="HALT"$
-Machine is blocked no more transitions available$
+Tape: [<"1">,"1","1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
+Tape: ["1",<"1">,"1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
+Tape: ["1","1",<"1">,"-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
+Tape: ["1","1","1",<"-">,"1","1","="] ("scanright", "-") -> ("scanright", "-", right)$
+Tape: ["1","1","1","-",<"1">,"1","="] ("scanright", "1") -> ("scanright", "1", right)$
+Tape: ["1","1","1","-","1",<"1">,"="] ("scanright", "1") -> ("scanright", "1", right)$
+Tape: ["1","1","1","-","1","1",<"=">] ("scanright", "=") -> ("eraseone", ".", left)$
+Tape: ["1","1","1","-","1",<"1">,"."] ("eraseone", "1") -> ("subone", "=", left)$
+Tape: ["1","1","1","-",<"1">,"=","."] ("subone", "1") -> ("subone", "1", left)$
+Tape: ["1","1","1",<"-">,"1","=","."] ("subone", "-") -> ("skip", "-", left)$
+Tape: ["1","1",<"1">,"-","1","=","."] ("skip", "1") -> ("scanright", ".", right)$
+Tape: ["1","1",".",<"-">,"1","=","."] ("scanright", "-") -> ("scanright", "-", right)$
+Tape: ["1","1",".","-",<"1">,"=","."] ("scanright", "1") -> ("scanright", "1", right)$
+Tape: ["1","1",".","-","1",<"=">,"."] ("scanright", "=") -> ("eraseone", ".", left)$
+Tape: ["1","1",".","-",<"1">,".","."] ("eraseone", "1") -> ("subone", "=", left)$
+Tape: ["1","1",".",<"-">,"=",".","."] ("subone", "-") -> ("skip", "-", left)$
+Tape: ["1","1",<".">,"-","=",".","."] ("skip", ".") -> ("skip", ".", left)$
+Tape: ["1",<"1">,".","-","=",".","."] ("skip", "1") -> ("scanright", ".", right)$
+Tape: ["1",".",<".">,"-","=",".","."] ("scanright", ".") -> ("scanright", ".", right)$
+Tape: ["1",".",".",<"-">,"=",".","."] ("scanright", "-") -> ("scanright", "-", right)$
+Tape: ["1",".",".","-",<"=">,".","."] ("scanright", "=") -> ("eraseone", ".", left)$
+Tape: ["1",".",".",<"-">,".",".","."] ("eraseone", "-") -> ("HALT", ".", left)$
+Tape: ["1",".",<".">,".",".",".","."] Final state reached !$
 Interpreter closing...$'
 }

@@ -8,5 +8,7 @@
 -record(parsed_machine_config, {
     states :: list(string()),
     initial :: string(),
+    finals :: list(string()),
+    blank :: string(),
     transitions :: #{string() := list(#parsed_machine_config_transition{})}
 }).
