@@ -2,7 +2,7 @@
 -include("machine.hrl").
 
 -ifdef(TEST).
--export([start/2, read_and_exec/4]).
+-export([start/2, read_and_exec/5]).
 -else.
 -export([start/2]).
 -endif.
