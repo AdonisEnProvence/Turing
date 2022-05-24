@@ -2,7 +2,7 @@
 -include("machine.hrl").
 
 -ifdef(TEST).
--export([start/2, read_and_exec/3]).
+-export([start/2, read_and_exec/4]).
 -else.
 -export([start/2]).
 -endif.
@@ -22,7 +22,9 @@ loop(IndexOnTape, Tape, MachineConfig, CurrentState) ->
     AvailableTransitions = maps:get(
         CurrentState, MachineConfig#parsed_machine_config.transitions, []
     ),
-    ReadResult = read_and_exec(IndexOnTape, Tape, AvailableTransitions),
+    ReadResult = read_and_exec(
+        IndexOnTape, Tape, AvailableTransitions, MachineConfig#parsed_machine_config.blank
+    ),
     case ReadResult of
         {continue, NewTape, NewIndexOnTape, NewState} ->
             loop(NewIndexOnTape, NewTape, MachineConfig, NewState);
@@ -32,20 +34,20 @@ loop(IndexOnTape, Tape, MachineConfig, CurrentState) ->
             io:format("Machine is blocked no more transitions available~n")
     end.
 
-move_index_on_tape({Index, Tape, left}) ->
+move_index_on_tape({Index, Tape, BlankChar, left}) ->
     LeftIndex = Index - 1,
     if
         LeftIndex < 1 ->
-            {1, ["." | Tape]};
+            {1, [BlankChar | Tape]};
         true ->
             {LeftIndex, Tape}
     end;
-move_index_on_tape({Index, Tape, right}) ->
+move_index_on_tape({Index, Tape, BlankChar, right}) ->
     RightIndex = Index + 1,
     TapeLength = length(Tape),
     if
         RightIndex > TapeLength ->
-            {RightIndex, Tape ++ ["."]};
+            {RightIndex, Tape ++ [BlankChar]};
         true ->
             {RightIndex, Tape}
     end.
@@ -83,7 +85,7 @@ retrieve_transition_to_perform(TapeCurrentValue, [
 retrieve_transition_to_perform(TapeCurrentValue, [_Transition | AvailableTransitions]) ->
     retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions).
 
-read_and_exec(IndexOnTape, Tape, AvailableTransitions) ->
+read_and_exec(IndexOnTape, Tape, AvailableTransitions, BlankChar) ->
     TapeCurrentValue = lists:nth(IndexOnTape, Tape),
 
     RawTransition = retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions),
@@ -95,7 +97,8 @@ read_and_exec(IndexOnTape, Tape, AvailableTransitions) ->
                 Tape, IndexOnTape, Transition#parsed_machine_config_transition.write
             ),
             {NewIndex, ExtentedTape} = move_index_on_tape(
-                {IndexOnTape, RewrittenTape, Transition#parsed_machine_config_transition.action}
+                {IndexOnTape, RewrittenTape, BlankChar,
+                    Transition#parsed_machine_config_transition.action}
             ),
             {continue, ExtentedTape, NewIndex, Transition#parsed_machine_config_transition.to_state}
     end.

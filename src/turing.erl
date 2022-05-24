@@ -26,6 +26,7 @@ main(Args) ->
     ParsedMachineConfig = #parsed_machine_config{
         states = ["IDLE", "HALT"],
         initial = "IDLE",
+        blank = "*",
         transitions = #{
             "IDLE" => [
                 #parsed_machine_config_transition{
