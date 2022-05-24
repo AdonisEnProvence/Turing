@@ -1,4 +1,5 @@
 -module(interpreter).
+-include("machine.hrl").
 
 -ifdef(TEST).
 -export([start/2, read_and_exec/3]).
@@ -6,21 +7,27 @@
 -export([start/2]).
 -endif.
 
+-spec start(#parsed_machine_config{}, list(string())) -> no_return().
+
 start(MachineConfig, Input) ->
     io:format("Interpreter starting...~n"),
     Tape = Input,
     IndexOnTape = 1,
-    loop(IndexOnTape, Tape, MachineConfig),
+    loop(IndexOnTape, Tape, MachineConfig, MachineConfig#parsed_machine_config.initial),
     io:format("Interpreter closing...~n").
 
-loop(IndexOnTape, Tape, MachineConfig) -> 
-    print_tape_and_head_on_tape(IndexOnTape, Tape),
-    ReadResult = read_and_exec(IndexOnTape, Tape, MachineConfig),
+loop(IndexOnTape, Tape, MachineConfig, CurrentState) ->
+    print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState),
+
+    AvailableTransitions = maps:get(
+        CurrentState, MachineConfig#parsed_machine_config.transitions, []
+    ),
+    ReadResult = read_and_exec(IndexOnTape, Tape, AvailableTransitions),
     case ReadResult of
-        {continue, NewTape, NewIndexOnTape} ->
-            loop(NewIndexOnTape, NewTape, MachineConfig);
-        {halt, _NewTape} ->
-            io:format("should for the moment never occurs~n");
+        {continue, NewTape, NewIndexOnTape, NewState} ->
+            loop(NewIndexOnTape, NewTape, MachineConfig, NewState);
+        % {halt, _NewTape} ->
+        %     io:format("should for the moment never occurs~n");
         {blocked, _NewTape, _NewIndexOnTape} ->
             io:format("Machine is blocked no more transitions available~n")
     end.
@@ -43,49 +50,62 @@ move_index_on_tape({Index, Tape, right}) ->
             {RightIndex, Tape}
     end.
 
-print_tape_and_head_on_tape(IndexOnTape, Tape) ->
+print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState) ->
     io:format("Tape: ["),
-    print_tape_and_head_on_tape(IndexOnTape, Tape, 1),
-    io:format("]~n").
+    print_head_index_value_on_tape(IndexOnTape, Tape, 1),
+    io:format("] STATE=~p~n", [CurrentState]).
 
-print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
+print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
     IndexOnTapeIsCurrentIndex = IndexOnTape =:= CurrentIndexOnTape,
     TapeCurrentValue = lists:nth(CurrentIndexOnTape, Tape),
     CurrentIndexOnTapeIsLastIndex = CurrentIndexOnTape =:= length(Tape),
 
-    if 
+    if
         IndexOnTapeIsCurrentIndex ->
             io:format("<~p>", [TapeCurrentValue]);
         true ->
             io:format("~p", [TapeCurrentValue])
     end,
-    if 
+    if
         CurrentIndexOnTapeIsLastIndex ->
             ok;
         true ->
             io:format(","),
-            print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentIndexOnTape + 1)
+            print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape + 1)
     end.
 
-read_and_exec(IndexOnTape, Tape, MachineConfig) ->
+retrieve_transition_to_perform(_, []) ->
+    error;
+retrieve_transition_to_perform(TapeCurrentValue, [
+    #parsed_machine_config_transition{read = TapeCurrentValue} = Transition | _AvailableTransitions
+]) ->
+    {ok, Transition};
+retrieve_transition_to_perform(TapeCurrentValue, [_Transition | AvailableTransitions]) ->
+    retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions).
+
+read_and_exec(IndexOnTape, Tape, AvailableTransitions) ->
     TapeCurrentValue = lists:nth(IndexOnTape, Tape),
-    if
-        TapeCurrentValue =:= "0" ->
-            RewrittenTape = replace_character_on_square(Tape, IndexOnTape, "."),
-            {NewIndex, NewTape} = move_index_on_tape({IndexOnTape, RewrittenTape, left}),
-            {continue, NewTape, NewIndex};
-        TapeCurrentValue =:= "1" ->
-            RewrittenTape = replace_character_on_square(Tape, IndexOnTape, "0"),
-            {NewIndex, NewTape} = move_index_on_tape({IndexOnTape, RewrittenTape, right}),
-            {continue, NewTape, NewIndex};
-        true ->
-            {blocked, Tape, IndexOnTape}
+
+    RawTransition = retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions),
+    case RawTransition of
+        error ->
+            {blocked, Tape, IndexOnTape};
+        {ok, Transition} ->
+            RewrittenTape = replace_character_on_square(
+                Tape, IndexOnTape, Transition#parsed_machine_config_transition.write
+            ),
+            {NewIndex, ExtentedTape} = move_index_on_tape(
+                {IndexOnTape, RewrittenTape, Transition#parsed_machine_config_transition.action}
+            ),
+            {continue, ExtentedTape, NewIndex, Transition#parsed_machine_config_transition.to_state}
     end.
 
 replace_character_on_square(Tape, 1 = IndexOnTape, CharacterToWrite) ->
     Right = lists:nthtail(IndexOnTape, Tape),
     [CharacterToWrite | Right];
-replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) when IndexOnTape =:= length(Tape) ->
+replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) when
+    IndexOnTape =:= length(Tape)
+->
     Left = lists:sublist(Tape, IndexOnTape - 1),
     Left ++ [CharacterToWrite];
 replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) ->
