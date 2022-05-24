@@ -17,21 +17,28 @@ start(MachineConfig, Input) ->
     io:format("Interpreter closing...~n").
 
 loop(IndexOnTape, Tape, MachineConfig, CurrentState) ->
-    print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState),
+    CurrentStateIsFinalState = lists:member(
+        CurrentState, MachineConfig#parsed_machine_config.finals
+    ),
 
-    AvailableTransitions = maps:get(
-        CurrentState, MachineConfig#parsed_machine_config.transitions, []
-    ),
-    ReadResult = read_and_exec(
-        IndexOnTape, Tape, AvailableTransitions, MachineConfig#parsed_machine_config.blank
-    ),
-    case ReadResult of
-        {continue, NewTape, NewIndexOnTape, NewState} ->
-            loop(NewIndexOnTape, NewTape, MachineConfig, NewState);
-        % {halt, _NewTape} ->
-        %     io:format("should for the moment never occurs~n");
-        {blocked, _NewTape, _NewIndexOnTape} ->
-            io:format("Machine is blocked no more transitions available~n")
+    if
+        CurrentStateIsFinalState =:= true ->
+            print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState),
+            io:format("Final state reached !~n");
+        true ->
+            print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState),
+            AvailableTransitions = maps:get(
+                CurrentState, MachineConfig#parsed_machine_config.transitions, []
+            ),
+            ReadResult = read_and_exec(
+                IndexOnTape, Tape, AvailableTransitions, MachineConfig#parsed_machine_config.blank
+            ),
+            case ReadResult of
+                {continue, NewTape, NewIndexOnTape, NewState} ->
+                    loop(NewIndexOnTape, NewTape, MachineConfig, NewState);
+                {blocked, _NewTape, _NewIndexOnTape} ->
+                    io:format("Machine is blocked no more transitions available~n")
+            end
     end.
 
 move_index_on_tape({Index, Tape, BlankChar, left}) ->
