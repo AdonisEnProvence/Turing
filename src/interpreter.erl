@@ -23,15 +23,19 @@ loop(IndexOnTape, Tape, MachineConfig, CurrentState) ->
 
     if
         CurrentStateIsFinalState =:= true ->
-            print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState),
+            print_tape_and_head_on_tape(IndexOnTape, Tape),
             io:format("Final state reached !~n");
         true ->
-            print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState),
+            print_tape_and_head_on_tape(IndexOnTape, Tape),
             AvailableTransitions = maps:get(
                 CurrentState, MachineConfig#parsed_machine_config.transitions, []
             ),
             ReadResult = read_and_exec(
-                IndexOnTape, Tape, AvailableTransitions, MachineConfig#parsed_machine_config.blank
+                IndexOnTape,
+                Tape,
+                AvailableTransitions,
+                MachineConfig#parsed_machine_config.blank,
+                CurrentState
             ),
             case ReadResult of
                 {continue, NewTape, NewIndexOnTape, NewState} ->
@@ -59,10 +63,18 @@ move_index_on_tape({Index, Tape, BlankChar, right}) ->
             {RightIndex, Tape}
     end.
 
-print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState) ->
+print_transition_details(CurrentState, #parsed_machine_config_transition{
+    to_state = ToState, read = Read, action = Action, write = Write
+}) ->
+    io:format("(~p, ~p) -> (~p, ~p, ~p)~n", [CurrentState, Read, ToState, Write, Action]).
+
+print_blocked_transition_details(CurrentState, TapeCurrentValue) ->
+    io:format("(~p, ~p) -> BLOCKED~n", [CurrentState, TapeCurrentValue]).
+
+print_tape_and_head_on_tape(IndexOnTape, Tape) ->
     io:format("Tape: ["),
     print_head_index_value_on_tape(IndexOnTape, Tape, 1),
-    io:format("] STATE=~p~n", [CurrentState]).
+    io:format("] ").
 
 print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
     IndexOnTapeIsCurrentIndex = IndexOnTape =:= CurrentIndexOnTape,
@@ -92,14 +104,16 @@ retrieve_transition_to_perform(TapeCurrentValue, [
 retrieve_transition_to_perform(TapeCurrentValue, [_Transition | AvailableTransitions]) ->
     retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions).
 
-read_and_exec(IndexOnTape, Tape, AvailableTransitions, BlankChar) ->
+read_and_exec(IndexOnTape, Tape, AvailableTransitions, BlankChar, CurrentState) ->
     TapeCurrentValue = lists:nth(IndexOnTape, Tape),
 
     RawTransition = retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions),
     case RawTransition of
         error ->
+            print_blocked_transition_details(CurrentState, TapeCurrentValue),
             {blocked, Tape, IndexOnTape};
         {ok, Transition} ->
+            print_transition_details(CurrentState, Transition),
             RewrittenTape = replace_character_on_square(
                 Tape, IndexOnTape, Transition#parsed_machine_config_transition.write
             ),
