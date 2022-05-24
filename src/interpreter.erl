@@ -52,10 +52,10 @@ move_index_on_tape({Index, Tape, right}) ->
 
 print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentState) ->
     io:format("Tape: ["),
-    print_tape_and_head_on_tape(IndexOnTape, Tape, 1, CurrentState),
+    print_head_index_value_on_tape(IndexOnTape, Tape, 1),
     io:format("] STATE=~p~n", [CurrentState]).
 
-print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentIndexOnTape, CurrentState) ->
+print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
     IndexOnTapeIsCurrentIndex = IndexOnTape =:= CurrentIndexOnTape,
     TapeCurrentValue = lists:nth(CurrentIndexOnTape, Tape),
     CurrentIndexOnTapeIsLastIndex = CurrentIndexOnTape =:= length(Tape),
@@ -71,7 +71,7 @@ print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentIndexOnTape, CurrentState)
             ok;
         true ->
             io:format(","),
-            print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentIndexOnTape + 1, CurrentState)
+            print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape + 1)
     end.
 
 retrieve_transition_to_perform(_, []) ->

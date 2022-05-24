@@ -40,7 +40,6 @@ main(Args) ->
             ]
         }
     },
-    ParsedMachineConfig#parsed_machine_config.states,
     interpreter:start(ParsedMachineConfig, ["1", "1", "0"]),
     erlang:halt(0).
 
