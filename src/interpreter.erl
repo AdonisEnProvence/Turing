@@ -1,4 +1,5 @@
 -module(interpreter).
+-include("machine.hrl").
 
 -ifdef(TEST).
 -export([start/2, read_and_exec/3]).
@@ -6,14 +7,17 @@
 -export([start/2]).
 -endif.
 
+-spec start(#parsed_machine_config{}, list(string())) -> no_return().
+
 start(MachineConfig, Input) ->
     io:format("Interpreter starting...~n"),
+    Result = Input + 1,
     Tape = Input,
     IndexOnTape = 1,
     loop(IndexOnTape, Tape, MachineConfig),
     io:format("Interpreter closing...~n").
 
-loop(IndexOnTape, Tape, MachineConfig) -> 
+loop(IndexOnTape, Tape, MachineConfig) ->
     print_tape_and_head_on_tape(IndexOnTape, Tape),
     ReadResult = read_and_exec(IndexOnTape, Tape, MachineConfig),
     case ReadResult of
@@ -53,13 +57,13 @@ print_tape_and_head_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
     TapeCurrentValue = lists:nth(CurrentIndexOnTape, Tape),
     CurrentIndexOnTapeIsLastIndex = CurrentIndexOnTape =:= length(Tape),
 
-    if 
+    if
         IndexOnTapeIsCurrentIndex ->
             io:format("<~p>", [TapeCurrentValue]);
         true ->
             io:format("~p", [TapeCurrentValue])
     end,
-    if 
+    if
         CurrentIndexOnTapeIsLastIndex ->
             ok;
         true ->
@@ -85,7 +89,9 @@ read_and_exec(IndexOnTape, Tape, MachineConfig) ->
 replace_character_on_square(Tape, 1 = IndexOnTape, CharacterToWrite) ->
     Right = lists:nthtail(IndexOnTape, Tape),
     [CharacterToWrite | Right];
-replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) when IndexOnTape =:= length(Tape) ->
+replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) when
+    IndexOnTape =:= length(Tape)
+->
     Left = lists:sublist(Tape, IndexOnTape - 1),
     Left ++ [CharacterToWrite];
 replace_character_on_square(Tape, IndexOnTape, CharacterToWrite) ->
