@@ -27,12 +27,8 @@ parse_machine_blank(_) ->
 parse_machine_states(#{<<"states">> := States}) when is_list(States) ->
     Result = parse_state_list(States, []),
     case Result of
-        {error, invalid} ->
-            {error, invalid_element};
-        {error, empty_list} ->
-            {error, empty_list};
-        {error, empty_element} ->
-            {error, empty_element};
+        {error, Error} ->
+            {error, Error};
         {ok, ParsedStates} ->
             {ok, ParsedStates}
     end;
@@ -42,12 +38,8 @@ parse_machine_states(_) ->
 parse_machine_finals(#{<<"finals">> := FinalStates}) when is_list(FinalStates) ->
     Result = parse_state_list(FinalStates, []),
     case Result of
-        {error, invalid} ->
-            {error, invalid_element};
-        {error, empty_list} ->
-            {error, empty_list};
-        {error, empty_element} ->
-            {error, empty_element};
+        {error, Error} ->
+            {error, Error};
         {ok, ParsedStates} ->
             {ok, ParsedStates}
     end;
@@ -61,35 +53,33 @@ parse_state_list([], ParsedStates) ->
 parse_state_list([State | States], ParsedStates) ->
     Result = parse_state(State),
     case Result of
-        {error, invalid} ->
-            {error, invalid};
-        {error, empty} ->
-            {error, empty_element};
+        {error, Error} ->
+            {error, Error};
         {ok, ParsedState} ->
             parse_state_list(States, [ParsedState | ParsedStates])
     end.
 
 parse_state(<<"">>) ->
-    {error, empty};
+    {error, empty_state};
 parse_state(State) when is_bitstring(State) ->
     {ok, binary_to_list(State)};
-parse_state(_) ->
-    {error, invalid}.
+parse_state(State) ->
+    {error, {expected_bitstring, State}}.
 
 parse_alphabet_character(<<"">>) ->
-    {error, empty};
+    {error, empty_alphabet_character};
 parse_alphabet_character(Character) when is_bitstring(Character) ->
     CharacterString = binary_to_list(Character),
     CharacterStringLength = length(CharacterString),
 
     if
         CharacterStringLength > 1 ->
-            {error, too_long};
+            {error, {too_long_alphabet_character, CharacterString}};
         CharacterStringLength =:= 1 ->
             {ok, CharacterString}
     end;
-parse_alphabet_character(_) ->
-    {error, invalid}.
+parse_alphabet_character(UnknownCharacter) ->
+    {error, {expected_bitstring, UnknownCharacter}}.
 
 parse_machine_transitions(#{<<"transitions">> := Transitions}) when is_map(Transitions) ->
     Iterator = maps:iterator(Transitions),
@@ -109,16 +99,19 @@ iterate_on_machine_states_transitions_map(Iterator) ->
 iterate_on_machine_states_transitions_map(Iterator, State, Transitions, ParsedTransitionMap) when
     is_bitstring(State)
 ->
+    StateString = binary_to_list(State),
     ParsedTransitionsResult = iterate_on_machine_transitions_list(Transitions),
     case ParsedTransitionsResult of
-        {error, Type, Error} ->
+        {error, CurrentTransitionIndex, Type, Error} ->
+            % MOVE LOGS IN HIGHER SCOPE
             io:format("Parser failed => Invalid transitions~n"),
-            io:format("In state ~p, the following error occured: [~p | ~p]~n", [State, Type, Error]),
+            io:format("In state ~p and transition number ~p, the following error occured: ~s~n", [
+                StateString, CurrentTransitionIndex, format_error(Type, Error)
+            ]),
             {error, invalid};
         {ok, ParsedTransitions} ->
-            ?debugFmt("State = ~p~n", [State]),
             MapWithNewState = maps:put(
-                binary_to_list(State), ParsedTransitions, ParsedTransitionMap
+                StateString, ParsedTransitions, ParsedTransitionMap
             ),
             NextIteratorResult = maps:next(Iterator),
             case NextIteratorResult of
@@ -136,19 +129,17 @@ iterate_on_machine_states_transitions_map(_Iterator, _Key, _Value, _ParsedTransi
 parse_transition_read(#{<<"read">> := Read}) ->
     parse_alphabet_character(Read);
 parse_transition_read(_) ->
-    {error, invalid}.
+    {error, no_entry}.
 
-parse_transition_write(#{<<"write">> := <<"">>}) ->
-    {error, empty};
 parse_transition_write(#{<<"write">> := Write}) ->
     parse_alphabet_character(Write);
 parse_transition_write(_) ->
-    {error, invalid}.
+    {error, no_entry}.
 
 parse_transition_target_state(#{<<"to_state">> := TargetState}) ->
     parse_state(TargetState);
 parse_transition_target_state(_) ->
-    {error, invalid}.
+    {error, no_entry}.
 
 parse_transition_action(#{<<"action">> := <<"LEFT">>}) ->
     {ok, left};
@@ -157,22 +148,25 @@ parse_transition_action(#{<<"action">> := <<"RIGHT">>}) ->
 parse_transition_action(#{<<"action">> := UnknownAction}) ->
     {error, {unknown_action, UnknownAction}};
 parse_transition_action(_) ->
-    {error, invalid}.
+    {error, no_entry}.
 
 iterate_on_machine_transitions_list(TransitionsList) ->
-    iterate_on_machine_transitions_list(TransitionsList, []).
+    iterate_on_machine_transitions_list(TransitionsList, [], length(TransitionsList)).
 
-iterate_on_machine_transitions_list([], ParsedTransitionsList) ->
+iterate_on_machine_transitions_list([], ParsedTransitionsList, 0) ->
     {ok, lists:reverse(ParsedTransitionsList)};
-iterate_on_machine_transitions_list([RawTransition | OtherRawTransitions], ParsedTransitionsList) ->
-    ?debugFmt("Processing transitions iteration = ~p ~n", [RawTransition]),
+iterate_on_machine_transitions_list(
+    [RawTransition | OtherRawTransitions], ParsedTransitionsList, CurrentTransitionIndex
+) ->
     ParseTransitionResult = parse_transition(RawTransition),
     case ParseTransitionResult of
         {error, Type, Error} ->
-            {error, Type, Error};
+            {error, CurrentTransitionIndex, Type, Error};
         {ok, ParsedTransition} ->
             iterate_on_machine_transitions_list(
-                OtherRawTransitions, [ParsedTransition | ParsedTransitionsList]
+                OtherRawTransitions,
+                [ParsedTransition | ParsedTransitionsList],
+                CurrentTransitionIndex - 1
             )
     end.
 
@@ -207,3 +201,14 @@ parse_transition(RawTransition) ->
                     end
             end
     end.
+
+with_quotes(String) -> "\"" ++ String ++ "\"".
+
+format_error(read, no_entry) ->
+    "property read not found";
+format_error(read, empty_alphabet_character) ->
+    "given read value is empty";
+format_error(read, {too_long_alphabet_character, ErrorValue}) ->
+    "given read value is longer than 1 character; received: " ++ with_quotes(ErrorValue);
+format_error(read, {expected_bitstring, ErrorValue}) ->
+    "expected read value to be a string; received: " ++ with_quotes(ErrorValue).
