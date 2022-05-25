@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "Default turing machine static input, output test" {
-    run bash -c './_build/default/bin/turing | cat -e' # notice `run`!
+    run bash -c './_build/default/bin/turing machines/unary_sub.json | cat -e' # notice `run`!
     assert_output 'Interpreter starting...$
 Tape: [<"1">,"1","1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
 Tape: ["1",<"1">,"1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
