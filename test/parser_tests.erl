@@ -26,24 +26,95 @@ parse_machine_blank_error_empty_test() ->
 parse_machine_blank_error_too_long_test() ->
     {error, too_long} = parser:parse_machine_blank(#{<<"blank">> => <<"..">>}).
 
-% Machine States
-parse_machine_states_test() ->
-    {ok, ["add", "sub", "abs"]} = parser:parse_machine_states(#{
-        <<"states">> => [<<"add">>, <<"sub">>, <<"abs">>]
-    }).
-parse_machine_states_error_invalid_state_test() ->
-    {error, invalid_element} = parser:parse_machine_states(
-        (#{<<"states">> => [<<"add">>, "sub", <<"abs">>]})
-    ).
-parse_machine_states_error_invalid_key_test() ->
-    {error, invalid} = parser:parse_machine_states(#{
-        "states" => [<<"add">>, <<"sub">>, <<"abs">>]
-    }).
-parse_machine_states_error_empty_list_test() ->
-    {error, empty_list} = parser:parse_machine_states(#{
-        <<"states">> => []
-    }).
-parse_machine_states_error_empty_state_test() ->
-    {error, empty_element} = parser:parse_machine_states(#{
-        <<"states">> => [<<"add">>, <<"sub">>, <<"">>]
+parse_machine_transitions_test() ->
+    RawTransitions = #{
+        <<"add">> => [
+            #{
+                <<"read">> => <<".">>,
+                <<"to_state">> => <<"scanright">>,
+                <<"write">> => <<".">>,
+                <<"action">> => <<"RIGHT">>
+            },
+            #{
+                <<"read">> => <<"?">>,
+                <<"to_state">> => <<"cocorico">>,
+                <<"write">> => <<"*">>,
+                <<"action">> => <<"LEFT">>
+            }
+        ],
+        <<"sub">> => [
+            #{
+                <<"read">> => <<".">>,
+                <<"to_state">> => <<"scanright">>,
+                <<"write">> => <<".">>,
+                <<"action">> => <<"RIGHT">>
+            },
+            #{
+                <<"read">> => <<"?">>,
+                <<"to_state">> => <<"cocorico">>,
+                <<"write">> => <<"*">>,
+                <<"action">> => <<"LEFT">>
+            }
+        ],
+        <<"abs">> => [
+            #{
+                <<"read">> => <<".">>,
+                <<"to_state">> => <<"scanright">>,
+                <<"write">> => <<".">>,
+                <<"action">> => <<"RIGHT">>
+            },
+            #{
+                <<"read">> => <<"?">>,
+                <<"to_state">> => <<"cocorico">>,
+                <<"write">> => <<"*">>,
+                <<"action">> => <<"LEFT">>
+            }
+        ]
+    },
+    ExpectedParsedTransitionsResult = #{
+        "abs" => [
+            #parsed_machine_config_transition{
+                read = ".",
+                to_state = "scanright",
+                write = ".",
+                action = right
+            },
+            #parsed_machine_config_transition{
+                read = "?",
+                to_state = "cocorico",
+                write = "*",
+                action = left
+            }
+        ],
+        "add" => [
+            #parsed_machine_config_transition{
+                read = ".",
+                to_state = "scanright",
+                write = ".",
+                action = right
+            },
+            #parsed_machine_config_transition{
+                read = "?",
+                to_state = "cocorico",
+                write = "*",
+                action = left
+            }
+        ],
+        "sub" => [
+            #parsed_machine_config_transition{
+                read = ".",
+                to_state = "scanright",
+                write = ".",
+                action = right
+            },
+            #parsed_machine_config_transition{
+                read = "?",
+                to_state = "cocorico",
+                write = "*",
+                action = left
+            }
+        ]
+    },
+    {ok, ExpectedParsedTransitionsResult} = parser:parse_machine_transitions(#{
+        <<"transitions">> => RawTransitions
     }).
