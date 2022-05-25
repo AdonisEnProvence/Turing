@@ -18,15 +18,17 @@ main(Args) ->
     % io:format("~p~n", [DecodedMachineConfig]),
 
     % ?
-    ParsedName = parse:parse_machine_name(DecodedMachineConfig),
-    ParsedStates = parse:parse_machine_states(DecodedMachineConfig),
-    ParsedBlank = parse:parse_machine_blank(DecodedMachineConfig),
+    ParsedTransitions = parser:parse_machine_transitions(DecodedMachineConfig),
+    ParsedName = parser:parse_machine_name(DecodedMachineConfig),
+    ParsedStates = parser:parse_machine_states(DecodedMachineConfig),
+    ParsedBlank = parser:parse_machine_blank(DecodedMachineConfig),
 
     io:format("~p~n", [
         [
             ParsedName,
             ParsedStates,
-            ParsedBlank
+            ParsedBlank,
+            ParsedTransitions
         ]
     ]),
 

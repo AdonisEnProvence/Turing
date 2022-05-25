@@ -85,8 +85,8 @@ parse_machine_transitions(#{<<"transitions">> := Transitions}) when is_map(Trans
     Iterator = maps:iterator(Transitions),
     Result = iterate_on_machine_states_transitions_map(Iterator),
     case Result of
-        {error, invalid} ->
-            {error};
+        {error, Error} ->
+            {error, Error};
         {ok, ParsedTransitions} ->
             {ok, ParsedTransitions}
     end;
@@ -103,12 +103,7 @@ iterate_on_machine_states_transitions_map(Iterator, State, Transitions, ParsedTr
     ParsedTransitionsResult = iterate_on_machine_transitions_list(Transitions),
     case ParsedTransitionsResult of
         {error, CurrentTransitionIndex, Type, Error} ->
-            % MOVE LOGS IN HIGHER SCOPE
-            io:format("Parser failed => Invalid transitions~n"),
-            io:format("In state ~p and transition number ~p, the following error occured: ~s~n", [
-                StateString, CurrentTransitionIndex, format_error(Type, Error)
-            ]),
-            {error, invalid};
+            {error, {CurrentTransitionIndex, Type, Error}};
         {ok, ParsedTransitions} ->
             MapWithNewState = maps:put(
                 StateString, ParsedTransitions, ParsedTransitionMap
@@ -123,8 +118,8 @@ iterate_on_machine_states_transitions_map(Iterator, State, Transitions, ParsedTr
                     )
             end
     end;
-iterate_on_machine_states_transitions_map(_Iterator, _Key, _Value, _ParsedTransitionMap) ->
-    {error, invalid}.
+iterate_on_machine_states_transitions_map(_Iterator, State, _Value, _ParsedTransitionMap) ->
+    {error, {expected_state_bitstring, State}}.
 
 parse_transition_read(#{<<"read">> := Read}) ->
     parse_alphabet_character(Read);
@@ -151,9 +146,9 @@ parse_transition_action(_) ->
     {error, no_entry}.
 
 iterate_on_machine_transitions_list(TransitionsList) ->
-    iterate_on_machine_transitions_list(TransitionsList, [], length(TransitionsList)).
+    iterate_on_machine_transitions_list(TransitionsList, [], 0).
 
-iterate_on_machine_transitions_list([], ParsedTransitionsList, 0) ->
+iterate_on_machine_transitions_list([], ParsedTransitionsList, _) ->
     {ok, lists:reverse(ParsedTransitionsList)};
 iterate_on_machine_transitions_list(
     [RawTransition | OtherRawTransitions], ParsedTransitionsList, CurrentTransitionIndex
@@ -166,7 +161,7 @@ iterate_on_machine_transitions_list(
             iterate_on_machine_transitions_list(
                 OtherRawTransitions,
                 [ParsedTransition | ParsedTransitionsList],
-                CurrentTransitionIndex - 1
+                CurrentTransitionIndex + 1
             )
     end.
 
