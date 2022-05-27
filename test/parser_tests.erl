@@ -74,8 +74,8 @@ get_raw_machine_config() ->
 % Machine Name
 parse_machine_name_test() ->
     {ok, "unary_add"} = parser:parse_machine_name(#{<<"name">> => <<"unary_add">>}).
-parse_machine_name_error_invalid_test() ->
-    {error, invalid} = parser:parse_machine_name(#{<<"name">> => "unary_add"}).
+parse_machine_name_is_not_bitstring_test() ->
+    {error, {expected_bitstring, 2}} = parser:parse_machine_name(#{<<"name">> => 2}).
 parse_machine_name_error_invalid_key_test() ->
     {error, invalid} = parser:parse_machine_name(#{"name" => <<"unary_add">>}).
 parse_machine_name_error_empty_test() ->
@@ -820,7 +820,6 @@ parse_machine_alphabet_expected_bitstring_test() ->
         },
     {error, {expected_bitstring, "b"}} = parser:parse_machine_alphabet(RawAlphabet).
 
-
 %Machine whole parser tests
 parse_machine_parses_valid_machine_test() ->
     ExpectedParsedMachineConfig = #parsed_machine_config{
@@ -961,3 +960,19 @@ parse_machine_transitions_error_test() ->
             ]
         }, get_raw_machine_config()),
     {error, transitions, {expected_state_bitstring, "abs"}} = parser:parse_machine(RawMachineConfig).
+
+format_error_name_is_empty_test() ->
+    ?assertMatch("machine name is empty; a machine must have a name of at least one character", parser:format_error({name, empty})).
+format_error_name_is_not_a_string_test() ->
+    ?assertMatch("machine name is not a string (received: {\"key\":2}); a machine must have a name of at least one character", parser:format_error({name, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_name_does_not_exist_test() ->
+    ?assertMatch("machine has no name; a machine must have a name of at least one character", parser:format_error({name, invalid})).
+
+format_error_blank_is_empty_test() ->
+    ?assertMatch("machine blank character is empty; a machine must have a blank character exactly made of one character", parser:format_error({blank, empty_alphabet_character})).
+format_error_blank_is_not_a_string_test() ->
+    ?assertMatch("machine blank character is not a string (received: {\"key\":2}); a machine must have a blank character exactly made of one character", parser:format_error({blank, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_blank_does_not_exist_test() ->
+    ?assertMatch("machine has no blank character; a machine must have a blank character exactly made of one character", parser:format_error({blank, invalid})).
+format_error_blank_is_too_long_test() ->
+    ?assertMatch("machine blank character is too long (received: yolo); a machine must have a blank character exactly made of one character", parser:format_error({blank, {too_long_alphabet_character, "yolo"}})).

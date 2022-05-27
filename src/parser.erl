@@ -11,7 +11,8 @@
     parse_machine_finals/1,
     parse_machine_transitions/1,
     parse_machine_alphabet/1,
-    parse_machine/1
+    parse_machine/1,
+    format_error/1
 ]).
 -else.
 -export([parse_machine/1]).
@@ -60,6 +61,7 @@ parse_machine([{Field, ParsingFunction} | OtherParsingSteps], ParsedMachineConfi
 
 parse_machine_name(#{<<"name">> := <<"">>}) -> {error, empty};
 parse_machine_name(#{<<"name">> := Name}) when is_bitstring(Name) -> {ok, binary_to_list(Name)};
+parse_machine_name(#{<<"name">> := Name}) -> {error, {expected_bitstring, Name}};
 parse_machine_name(_) -> {error, invalid}.
 
 parse_machine_alphabet(#{<<"alphabet">> := Alphabet}) when is_list(Alphabet) ->
@@ -263,11 +265,18 @@ parse_transition(RawTransition) ->
 
 with_quotes(String) -> "\"" ++ String ++ "\"".
 
-format_error(read, no_entry) ->
-    "property read not found";
-format_error(read, empty_alphabet_character) ->
-    "given read value is empty";
-format_error(read, {too_long_alphabet_character, ErrorValue}) ->
-    "given read value is longer than 1 character; received: " ++ with_quotes(ErrorValue);
-format_error(read, {expected_bitstring, ErrorValue}) ->
-    "expected read value to be a string; received: " ++ with_quotes(ErrorValue).
+% Transforms a value returned by jsone:decode into a pretty string.
+% This function must NOT be used to prettify a string.
+to_pretty_value(Value) -> binary_to_list(jsone:encode(Value)).
+
+get_rules_for_name_field() -> "a machine must have a name of at least one character".
+
+get_rules_for_blank_field() -> "a machine must have a blank character exactly made of one character".
+
+format_error({name, empty}) -> "machine name is empty; " ++ get_rules_for_name_field();
+format_error({name, {expected_bitstring, Name}}) -> "machine name is not a string (received: " ++ to_pretty_value(Name) ++ "); " ++ get_rules_for_name_field();
+format_error({name, invalid}) -> "machine has no name; " ++ get_rules_for_name_field();
+format_error({blank, empty_alphabet_character}) -> "machine blank character is empty; " ++ get_rules_for_blank_field();
+format_error({blank, {expected_bitstring, Blank}}) -> "machine blank character is not a string (received: " ++ to_pretty_value(Blank) ++ "); " ++ get_rules_for_blank_field();
+format_error({blank, invalid}) -> "machine has no blank character; " ++ get_rules_for_blank_field();
+format_error({blank, {too_long_alphabet_character, Blank}}) -> "machine blank character is too long (received: " ++ Blank ++ "); " ++ get_rules_for_blank_field().
