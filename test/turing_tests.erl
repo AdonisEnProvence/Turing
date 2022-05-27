@@ -17,3 +17,5 @@ parse_optionnal_first_flag_arg_empty_args_test() ->
     {error, empty_args} = turing:parse_optionnal_first_flag_arg([]).
 parse_optionnal_first_flag_arg_too_many_args_test() ->
     {error, too_many_args} = turing:parse_optionnal_first_flag_arg(["myFile.json", "010101", "--help"]).
+parse_optionnal_first_flag_arg_test() ->
+    ok = turing:parse_optionnal_first_flag_arg(["myFile.json", "010101"]).

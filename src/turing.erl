@@ -12,15 +12,25 @@
 %% API functions
 %%====================================================================
 
+format_program_usage() ->
+    io:format("usage: ft_turing [-h] jsonfile input
+positional arguments:
+jsonfile json description of the machine
+input input of the machine
+optional arguments:
+-h, --help show this help message and exit\n").
 
 %% escript Entry point
 parse_optionnal_first_flag_arg([]) ->
+    format_program_usage(),
     {error, empty_args};
 parse_optionnal_first_flag_arg([FirstArg | _OtherArgs]) when FirstArg =:= "--help"; FirstArg =:= "-h" ->
+    format_program_usage(),
     exit;
 parse_optionnal_first_flag_arg(Args) when length(Args) =:= 2 ->
     get_raw_machine_config(Args);
 parse_optionnal_first_flag_arg(_) ->
+    format_program_usage(),
     {error, too_many_args}.
 
 
@@ -36,10 +46,10 @@ get_raw_machine_config([FilePath, _Input]) ->
 decode_raw_machine_config(BinaryFile) ->
     TryDecodeBinaryFileResult = jsone:try_decode(BinaryFile),
     case TryDecodeBinaryFileResult of 
+        {ok, DecodedBinaryFile, _} ->
+            parse_decoded_machine_config(DecodedBinaryFile);
         {error, Error} ->
-            io:format("AIE AIE AIE~n");
-        {ok, DecodedBinaryFile} ->
-            parse_decoded_machine_config(DecodedBinaryFile)
+            io:format("AIE AIE AIE~n")
     end.
 
 parse_decoded_machine_config(DecodedMachineConfig) -> 
