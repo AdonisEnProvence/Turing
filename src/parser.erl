@@ -275,6 +275,8 @@ get_rules_for_blank_field() -> "a machine must have a blank character exactly ma
 
 get_rules_for_initial_state_field() -> "a machine must have a non-empty initial state".
 
+get_rules_for_states_field() -> "a machine must have a non-empty list of states, which must all be non-empty strings".
+
 format_error({name, empty}) -> "machine name is empty; " ++ get_rules_for_name_field();
 format_error({name, {expected_bitstring, Name}}) -> "machine name is not a string (received: " ++ to_pretty_value(Name) ++ "); " ++ get_rules_for_name_field();
 format_error({name, invalid}) -> "machine has no name; " ++ get_rules_for_name_field();
@@ -284,4 +286,8 @@ format_error({blank, invalid}) -> "machine has no blank character; " ++ get_rule
 format_error({blank, {too_long_alphabet_character, Blank}}) -> "machine blank character is too long (received: " ++ Blank ++ "); " ++ get_rules_for_blank_field();
 format_error({initial, {expected_bitstring, InitialState}}) -> "machine initial state is not a string (received: " ++ to_pretty_value(InitialState) ++ "); " ++ get_rules_for_initial_state_field();
 format_error({initial, invalid}) -> "machine has no initial state; " ++ get_rules_for_initial_state_field();
-format_error({initial, empty_state}) -> "machine initial state is empty; " ++ get_rules_for_initial_state_field().
+format_error({initial, empty_state}) -> "machine initial state is empty; " ++ get_rules_for_initial_state_field();
+format_error({states, {expected_bitstring, State}}) -> "machine has a state that is not a string (" ++ to_pretty_value(State) ++ "); " ++ get_rules_for_states_field();
+format_error({states, empty_state}) -> "machine has an empty state; " ++ get_rules_for_states_field();
+format_error({states, invalid}) -> "machine has no states; " ++ get_rules_for_states_field();
+format_error({states, empty_list}) -> "machine has an empty list of states; " ++ get_rules_for_states_field().
