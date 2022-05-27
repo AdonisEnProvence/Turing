@@ -9,7 +9,8 @@
     parse_machine_blank/1,
     parse_machine_states/1,
     parse_machine_finals/1,
-    parse_machine_transitions/1
+    parse_machine_transitions/1,
+    parse_machine_alphabet/1
 ]).
 -else.
 -export([]).
@@ -19,30 +20,36 @@ parse_machine_name(#{<<"name">> := <<"">>}) -> {error, empty};
 parse_machine_name(#{<<"name">> := Name}) when is_bitstring(Name) -> {ok, binary_to_list(Name)};
 parse_machine_name(_) -> {error, invalid}.
 
+parse_machine_alphabet(#{<<"alphabet">> := Alphabet}) when is_list(Alphabet) ->
+    parse_alphabet_list(Alphabet, []);
+parse_machine_alphabet(_) -> 
+    {error, no_entry}.
+
+parse_alphabet_list([], []) ->
+    {error, empty_list};
+parse_alphabet_list([], ParsedAlphabet) ->
+    {ok, lists:reverse(ParsedAlphabet)};
+parse_alphabet_list([AlphabetCharacter | OtherAlphabetCharacters], ParsedAlphabet) ->
+    Result = parse_alphabet_character(AlphabetCharacter),
+    case Result of
+        {error, Error} ->
+            {error, Error};
+        {ok, ParsedAlphabetCharacter} ->
+            parse_alphabet_list(OtherAlphabetCharacters, [ParsedAlphabetCharacter | ParsedAlphabet])
+    end.
+
 parse_machine_blank(#{<<"blank">> := Blank}) ->
     parse_alphabet_character(Blank);
 parse_machine_blank(_) ->
     {error, invalid}.
 
 parse_machine_states(#{<<"states">> := States}) when is_list(States) ->
-    Result = parse_state_list(States, []),
-    case Result of
-        {error, Error} ->
-            {error, Error};
-        {ok, ParsedStates} ->
-            {ok, ParsedStates}
-    end;
+    parse_state_list(States, []);
 parse_machine_states(_) ->
     {error, invalid}.
 
 parse_machine_finals(#{<<"finals">> := FinalStates}) when is_list(FinalStates) ->
-    Result = parse_state_list(FinalStates, []),
-    case Result of
-        {error, Error} ->
-            {error, Error};
-        {ok, ParsedStates} ->
-            {ok, ParsedStates}
-    end;
+    parse_state_list(FinalStates, []);
 parse_machine_finals(_) ->
     {error, invalid}.
 
