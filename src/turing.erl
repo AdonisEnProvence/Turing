@@ -23,6 +23,9 @@ optional arguments:
 format_read_file_error(Reason) ->
     io:format("Error while reading machine configuration json file : ~p~n", [Reason]).
 
+format_try_decode_error({Reason, _Stack}) ->
+    io:format("Error while decoding machine configuration json file: ~p~n", [Reason]).
+
 %% escript Entry point
 parse_optionnal_first_flag_arg([]) ->
     format_program_usage(),
@@ -52,7 +55,7 @@ decode_raw_machine_config(BinaryFile) ->
         {ok, DecodedBinaryFile, _} ->
             parse_decoded_machine_config(DecodedBinaryFile);
         {error, Error} ->
-            io:format("AIE AIE AIE~n")
+            format_try_decode_error(Error)
     end.
 
 parse_decoded_machine_config(DecodedMachineConfig) -> 

@@ -74,3 +74,8 @@ optional arguments:$
     run bash -c './_build/default/bin/turing abc.json "abc" | cat -e' # notice `run`!
     assert_output 'Error while reading machine configuration json file : enoent$'
 }
+
+@test "Machine configuration json file cannot be decoded" {
+    run bash -c './_build/default/bin/turing machines/not-a-json.json "abc" | cat -e' # notice `run`!
+    assert_output 'Error while decoding machine configuration json file: badarg$'
+}
