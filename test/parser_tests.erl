@@ -976,3 +976,10 @@ format_error_blank_does_not_exist_test() ->
     ?assertMatch("machine has no blank character; a machine must have a blank character exactly made of one character", parser:format_error({blank, invalid})).
 format_error_blank_is_too_long_test() ->
     ?assertMatch("machine blank character is too long (received: yolo); a machine must have a blank character exactly made of one character", parser:format_error({blank, {too_long_alphabet_character, "yolo"}})).
+
+format_error_initial_state_is_not_a_string_test() ->
+    ?assertMatch("machine initial state is not a string (received: {\"key\":2}); a machine must have a non-empty initial state", parser:format_error({initial, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_initial_state_does_not_exist_test() ->
+    ?assertMatch("machine has no initial state; a machine must have a non-empty initial state", parser:format_error({initial, invalid})).
+format_error_initial_state_is_empty_test() ->
+    ?assertMatch("machine initial state is empty; a machine must have a non-empty initial state", parser:format_error({initial, empty_state})).

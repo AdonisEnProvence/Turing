@@ -273,10 +273,15 @@ get_rules_for_name_field() -> "a machine must have a name of at least one charac
 
 get_rules_for_blank_field() -> "a machine must have a blank character exactly made of one character".
 
+get_rules_for_initial_state_field() -> "a machine must have a non-empty initial state".
+
 format_error({name, empty}) -> "machine name is empty; " ++ get_rules_for_name_field();
 format_error({name, {expected_bitstring, Name}}) -> "machine name is not a string (received: " ++ to_pretty_value(Name) ++ "); " ++ get_rules_for_name_field();
 format_error({name, invalid}) -> "machine has no name; " ++ get_rules_for_name_field();
 format_error({blank, empty_alphabet_character}) -> "machine blank character is empty; " ++ get_rules_for_blank_field();
 format_error({blank, {expected_bitstring, Blank}}) -> "machine blank character is not a string (received: " ++ to_pretty_value(Blank) ++ "); " ++ get_rules_for_blank_field();
 format_error({blank, invalid}) -> "machine has no blank character; " ++ get_rules_for_blank_field();
-format_error({blank, {too_long_alphabet_character, Blank}}) -> "machine blank character is too long (received: " ++ Blank ++ "); " ++ get_rules_for_blank_field().
+format_error({blank, {too_long_alphabet_character, Blank}}) -> "machine blank character is too long (received: " ++ Blank ++ "); " ++ get_rules_for_blank_field();
+format_error({initial, {expected_bitstring, InitialState}}) -> "machine initial state is not a string (received: " ++ to_pretty_value(InitialState) ++ "); " ++ get_rules_for_initial_state_field();
+format_error({initial, invalid}) -> "machine has no initial state; " ++ get_rules_for_initial_state_field();
+format_error({initial, empty_state}) -> "machine initial state is empty; " ++ get_rules_for_initial_state_field().
