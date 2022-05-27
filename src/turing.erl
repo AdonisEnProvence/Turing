@@ -10,9 +10,30 @@
 
 %% escript Entry point
 main(Args) ->
+    [FilePath | _OtherArgs] = Args,
+    {ok, BinaryFile} = file:read_file(FilePath),
+    % io:format("~p~n", [BinaryFile]),
+    DecodedMachineConfig = jsone:decode(BinaryFile),
+    % io:format("~p~n", [DecodedMachineConfig]),
+
+    % ?
+    % ParsedTransitions = parser:parse_machine_transitions(DecodedMachineConfig),
+    % ParsedName = parser:parse_machine_name(DecodedMachineConfig),
+    % ParsedStates = parser:parse_machine_states(DecodedMachineConfig),
+    % ParsedBlank = parser:parse_machine_blank(DecodedMachineConfig),
+
+    % io:format("~p~n", [
+    %     [
+    %         ParsedName,
+    %         ParsedStates,
+    %         ParsedBlank,
+    %         ParsedTransitions
+    %     ]
+    % ]),
+
     % Parser step
     ParsedMachineConfig = #parsed_machine_config{
-        states = ["scanright", "eraseone", "subone", "skip", "HALT"],
+        states = DecodedMachineConfig,
         initial = "scanright",
         finals = ["HALT"],
         blank = ".",
