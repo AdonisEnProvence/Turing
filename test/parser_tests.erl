@@ -292,6 +292,22 @@ parse_machine_transitions_state_is_not_bitstring_test() ->
         }
     ).
 
+parse_machine_transitions_state_key_is_empty_test() ->
+    RawTransitions = #{
+        <<"">> => [
+            #{
+                <<"read">> => <<".">>,
+                <<"to_state">> => <<"scanright">>,
+                <<"write">> => <<".">>,
+                <<"action">> => <<"">>
+            }
+        ]
+    },
+
+    {error, empty_state_key} = parser:parse_machine_transitions(#{
+        <<"transitions">> => RawTransitions
+    }).
+
 parse_machine_transitions_read_value_is_not_bitstring_test() ->
     RawTransitions = #{
         <<"add">> => [

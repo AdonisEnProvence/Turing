@@ -140,6 +140,9 @@ parse_machine_transitions(_) ->
 iterate_on_machine_states_transitions_map(Iterator) ->
     {State, Transitions, NextIterator} = maps:next(Iterator),
     iterate_on_machine_states_transitions_map(NextIterator, State, Transitions, #{}).
+iterate_on_machine_states_transitions_map(_Iterator, <<"">>, _Transitions, _ParsedTransitionMap)
+->
+    {error, empty_state_key};
 iterate_on_machine_states_transitions_map(Iterator, State, Transitions, ParsedTransitionMap) when
     is_bitstring(State)
 ->
