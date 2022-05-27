@@ -4,6 +4,73 @@
 
 -include_lib("eunit/include/eunit.hrl").
 
+get_raw_machine_config() ->
+    #{
+        <<"name">> => <<"unary_sub">>,
+        <<"alphabet">> => [
+            <<"1">>,
+            <<".">>,
+            <<"-">>,
+            <<"=">>
+        ],
+        <<"blank">> => <<".">>,
+        <<"states">> => [
+            <<"scanright">>,
+            <<"eraseone">>,
+            <<"subone">>,
+            <<"skip">>,
+            <<"HALT">>
+        ],
+        <<"initial">> => <<"scanright">>,
+        <<"finals">> => [
+            <<"HALT">>
+        ],
+        <<"transitions">> => #{
+            <<"add">> => [
+                #{
+                    <<"read">> => <<".">>,
+                    <<"to_state">> => <<"scanright">>,
+                    <<"write">> => <<".">>,
+                    <<"action">> => <<"RIGHT">>
+                },
+                #{
+                    <<"read">> => <<"?">>,
+                    <<"to_state">> => <<"cocorico">>,
+                    <<"write">> => <<"*">>,
+                    <<"action">> => <<"LEFT">>
+                }
+            ],
+            <<"sub">> => [
+                #{
+                    <<"read">> => <<".">>,
+                    <<"to_state">> => <<"scanright">>,
+                    <<"write">> => <<".">>,
+                    <<"action">> => <<"RIGHT">>
+                },
+                #{
+                    <<"read">> => <<"?">>,
+                    <<"to_state">> => <<"cocorico">>,
+                    <<"write">> => <<"*">>,
+                    <<"action">> => <<"LEFT">>
+                }
+            ],
+            <<"abs">> => [
+                #{
+                    <<"read">> => <<".">>,
+                    <<"to_state">> => <<"scanright">>,
+                    <<"write">> => <<".">>,
+                    <<"action">> => <<"RIGHT">>
+                },
+                #{
+                    <<"read">> => <<"?">>,
+                    <<"to_state">> => <<"cocorico">>,
+                    <<"write">> => <<"*">>,
+                    <<"action">> => <<"LEFT">>
+                }
+            ]
+        }
+    }.
+
 % Machine Name
 parse_machine_name_test() ->
     {ok, "unary_add"} = parser:parse_machine_name(#{<<"name">> => <<"unary_add">>}).
@@ -805,27 +872,35 @@ parse_machine_parses_valid_machine_test() ->
             ]
         }
     },
-    RawMachineConfig=#{
-        <<"name">> => <<"unary_sub">>,
-        <<"alphabet">> => [
-            <<"1">>,
-            <<".">>,
-            <<"-">>,
-            <<"=">>
-        ],
-        <<"blank">> => <<".">>,
-        <<"states">> => [
-            <<"scanright">>,
-            <<"eraseone">>,
-            <<"subone">>,
-            <<"skip">>,
-            <<"HALT">>
-        ],
-        <<"initial">> => <<"scanright">>,
-        <<"finals">> => [
-            <<"HALT">>
-        ],
-        <<"transitions">> => #{
+    RawMachineConfig = get_raw_machine_config(),
+    {ok, ExpectedParsedMachineConfig} = parser:parse_machine(RawMachineConfig).
+
+parse_machine_name_error_test() ->
+    RawMachineConfig = maps:update(<<"name">>, <<"">>, get_raw_machine_config()),
+    {error, name, empty} = parser:parse_machine(RawMachineConfig).
+
+parse_machine_blank_error_test() ->
+    RawMachineConfig = maps:update(<<"blank">>, <<"wwww">>, get_raw_machine_config()),
+    {error, blank, {too_long_alphabet_character, "wwww"}} = parser:parse_machine(RawMachineConfig).
+
+parse_machine_initial_error_test() ->
+    RawMachineConfig = maps:remove(<<"initial">>, get_raw_machine_config()),
+    {error, initial, invalid} = parser:parse_machine(RawMachineConfig).
+
+parse_machine_alphabet_error_test() ->
+    RawMachineConfig = maps:update(<<"alphabet">>, [], get_raw_machine_config()),
+    {error, alphabet, empty_list} = parser:parse_machine(RawMachineConfig).
+
+parse_machine_states_error_test() ->
+    RawMachineConfig = maps:update(<<"states">>, [<<"word">>, 42, <<"cocorico">>], get_raw_machine_config()),
+    {error, states, {expected_bitstring, 42}} = parser:parse_machine(RawMachineConfig).
+
+parse_machine_finals_error_test() ->
+    RawMachineConfig = maps:update(<<"finals">>, [atom], get_raw_machine_config()),
+    {error, finals, {expected_bitstring, atom}} = parser:parse_machine(RawMachineConfig).
+
+parse_machine_transitions_error_test() ->
+    RawMachineConfig = maps:update(<<"transitions">>, #{
             <<"add">> => [
                 #{
                     <<"read">> => <<".">>,
@@ -854,7 +929,7 @@ parse_machine_parses_valid_machine_test() ->
                     <<"action">> => <<"LEFT">>
                 }
             ],
-            <<"abs">> => [
+            "abs" => [
                 #{
                     <<"read">> => <<".">>,
                     <<"to_state">> => <<"scanright">>,
@@ -868,6 +943,5 @@ parse_machine_parses_valid_machine_test() ->
                     <<"action">> => <<"LEFT">>
                 }
             ]
-        }
-    },
-    {ok, ExpectedParsedMachineConfig} = parser:parse_machine(RawMachineConfig).
+        }, get_raw_machine_config()),
+    {error, transitions, {expected_state_bitstring, "abs"}} = parser:parse_machine(RawMachineConfig).
