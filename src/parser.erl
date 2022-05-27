@@ -54,7 +54,15 @@ parse_machine_states(_) ->
     {error, invalid}.
 
 parse_machine_finals(#{<<"finals">> := FinalStates}) when is_list(FinalStates) ->
-    parse_state_list(FinalStates, []);
+    Result = parse_state_list(FinalStates, []),
+    case Result of
+        {error, empty_list} ->
+            {ok, []};
+        {error, Error} -> 
+            {error,Error};
+        {ok, ParsedFinalStates} ->
+            {ok, ParsedFinalStates}
+    end;
 parse_machine_finals(_) ->
     {error, invalid}.
 
