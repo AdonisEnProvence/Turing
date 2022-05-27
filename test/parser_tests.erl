@@ -79,8 +79,8 @@ parse_machine_finals_error_invalid_key_test() ->
     {error, invalid} = parser:parse_machine_finals(#{
         "finals" => [<<"add">>, <<"sub">>, <<"abs">>]
     }).
-parse_machine_finals_error_empty_list_test() ->
-    {error, empty_list} = parser:parse_machine_finals(#{
+parse_machine_finals_empty_list_test() ->
+    {ok, []} = parser:parse_machine_finals(#{
         <<"finals">> => []
     }).
 parse_machine_finals_error_empty_state_test() ->
