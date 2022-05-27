@@ -682,3 +682,41 @@ parse_machine_transitions_to_state_is_valid_test() ->
     {ok, _} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
+
+%Machine alphabet tests
+
+parse_machine_alphabet_test() -> 
+    RawAlphabet = #{
+        <<"alphabet">> => [
+            <<"a">>, <<"b">>, <<"c">>, <<"d">>, <<"e">>, <<"f">>]
+        },
+    {ok, ["a", "b", "c", "d", "e", "f"]} = parser:parse_machine_alphabet(RawAlphabet).
+parse_machine_alphabet_no_entry_test() -> 
+    RawAlphabet = #{
+        "alphabet" => [
+            <<"a">>, <<"b">>, <<"c">>, <<"d">>, <<"e">>, <<"f">>]
+        },
+    {error, no_entry} = parser:parse_machine_alphabet(RawAlphabet).
+parse_machine_alphabet_too_long_character_test() -> 
+    RawAlphabet = #{
+        <<"alphabet">> => [
+            <<"a">>, <<"b">>, <<"ccccc">>, <<"d">>, <<"e">>, <<"f">>]
+        },
+    {error, {too_long_alphabet_character, "ccccc"}} = parser:parse_machine_alphabet(RawAlphabet).
+parse_machine_alphabet_empty_test() -> 
+    RawAlphabet = #{
+        <<"alphabet">> => [
+            <<"a">>, <<"b">>, <<"c">>, <<"d">>, <<"">>, <<"f">>]
+        },
+    {error, empty_alphabet_character} = parser:parse_machine_alphabet(RawAlphabet).
+parse_machine_alphabet_empty_list_test() -> 
+    RawAlphabet = #{
+        <<"alphabet">> => []
+        },
+    {error, empty_list} = parser:parse_machine_alphabet(RawAlphabet).
+parse_machine_alphabet_expected_bitstring_test() -> 
+    RawAlphabet = #{
+        <<"alphabet">> => [
+            <<"a">>, "b", <<"c">>, <<"d">>, <<"">>, <<"f">>]
+        },
+    {error, {expected_bitstring, "b"}} = parser:parse_machine_alphabet(RawAlphabet).
