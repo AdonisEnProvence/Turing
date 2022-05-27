@@ -69,3 +69,8 @@ input input of the machine$
 optional arguments:$
 -h, --help show this help message and exit$'
 }
+
+@test "Machine configuration json file not found" {
+    run bash -c './_build/default/bin/turing abc.json "abc" | cat -e' # notice `run`!
+    assert_output 'Error while reading machine configuration json file : enoent$'
+}

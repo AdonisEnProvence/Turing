@@ -20,6 +20,9 @@ input input of the machine
 optional arguments:
 -h, --help show this help message and exit\n").
 
+format_read_file_error(Reason) ->
+    io:format("Error while reading machine configuration json file : ~p~n", [Reason]).
+
 %% escript Entry point
 parse_optionnal_first_flag_arg([]) ->
     format_program_usage(),
@@ -38,7 +41,7 @@ get_raw_machine_config([FilePath, _Input]) ->
     ReadFileResult = file:read_file(FilePath),
     case ReadFileResult of
         {error, Reason} ->
-            io:format("Could'nt get given machine config, ~p~n", [Reason]);
+            format_read_file_error(Reason);
         {ok, BinaryFile} ->
             decode_raw_machine_config(BinaryFile)
     end.
