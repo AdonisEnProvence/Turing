@@ -2,7 +2,11 @@
 -include("machine.hrl").
 
 %% API exports
+-ifdef(TEST).
+-export([parse_optionnal_first_flag_arg/1]).
+-else.
 -export([main/1]).
+-endif.
 
 %%====================================================================
 %% API functions
@@ -10,17 +14,17 @@
 
 
 %% escript Entry point
-parse_args(Args) ->
-    Argc = length(Args),
-    if 
-        Argc =:= 2 ->
-            [FilePath | _OtherArgs] = Args,
-            get_raw_machine_config(FilePath);
-        true ->
-            io:format("USAGE~n")
-    end.
+parse_optionnal_first_flag_arg([]) ->
+    {error, empty_args};
+parse_optionnal_first_flag_arg([FirstArg | _OtherArgs]) when FirstArg =:= "--help"; FirstArg =:= "-h" ->
+    exit;
+parse_optionnal_first_flag_arg(Args) when length(Args) =:= 2 ->
+    get_raw_machine_config(Args);
+parse_optionnal_first_flag_arg(_) ->
+    {error, too_many_args}.
 
-get_raw_machine_config(FilePath) ->
+
+get_raw_machine_config([FilePath, _Input]) ->
     ReadFileResult = file:read_file(FilePath),
     case ReadFileResult of
         {error, Reason} ->
@@ -55,7 +59,7 @@ start_machine(ParsedMachineConfig) ->
 
 main(Args) ->
     %We could handle any logs below
-    parse_args(Args),
+    parse_optionnal_first_flag_arg(Args),
     erlang:halt(0).
 
 %%====================================================================
