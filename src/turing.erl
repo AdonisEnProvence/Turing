@@ -8,78 +8,54 @@
 %% API functions
 %%====================================================================
 
+
 %% escript Entry point
+parse_args(Args) ->
+    Argc = length(Args),
+    if 
+        Argc =:= 2 ->
+            [FilePath | _OtherArgs] = Args,
+            get_raw_machine_config(FilePath);
+        true ->
+            io:format("USAGE~n")
+    end.
+
+get_raw_machine_config(FilePath) ->
+    ReadFileResult = file:read_file(FilePath),
+    case ReadFileResult of
+        {error, Reason} ->
+            io:format("Could'nt get given machine config, ~p~n", [Reason]);
+        {ok, BinaryFile} ->
+            decode_raw_machine_config(BinaryFile)
+    end.
+
+decode_raw_machine_config(BinaryFile) ->
+    TryDecodeBinaryFileResult = jsone:try_decode(BinaryFile),
+    case TryDecodeBinaryFileResult of 
+        {error, Error} ->
+            io:format("AIE AIE AIE~n");
+        {ok, DecodedBinaryFile} ->
+            parse_decoded_machine_config(DecodedBinaryFile)
+    end.
+
+parse_decoded_machine_config(DecodedMachineConfig) -> 
+    ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
+    case ParsedMachineResult of 
+        {error, Error} ->
+            % parser:format_error(error, Error);
+            io:format("Parser error");
+        {ok, ParsedMachineConfig} ->
+            % Will change in the future
+            start_machine(ParsedMachineConfig)
+    end.
+% validate_parsed_machine_config(ParsedMachineConfig)->
+% parse_and_validate_word( DecodedMachineConfig) -> 
+start_machine(ParsedMachineConfig) ->
+    interpreter:start(ParsedMachineConfig, ["1", "1", "1", "-", "1", "1", "="]).
+
 main(Args) ->
-    [FilePath | _OtherArgs] = Args,
-    {ok, BinaryFile} = file:read_file(FilePath),
-    % io:format("~p~n", [BinaryFile]),
-    DecodedMachineConfig = jsone:decode(BinaryFile),
-    % io:format("~p~n", [DecodedMachineConfig]),
-
-    % ?
-    % ParsedTransitions = parser:parse_machine_transitions(DecodedMachineConfig),
-    % ParsedName = parser:parse_machine_name(DecodedMachineConfig),
-    % ParsedStates = parser:parse_machine_states(DecodedMachineConfig),
-    % ParsedBlank = parser:parse_machine_blank(DecodedMachineConfig),
-
-    % io:format("~p~n", [
-    %     [
-    %         ParsedName,
-    %         ParsedStates,
-    %         ParsedBlank,
-    %         ParsedTransitions
-    %     ]
-    % ]),
-
-    % Parser step
-    ParsedMachineConfig = #parsed_machine_config{
-        states = DecodedMachineConfig,
-        initial = "scanright",
-        finals = ["HALT"],
-        blank = ".",
-        transitions = #{
-            "scanright" => [
-                #parsed_machine_config_transition{
-                    read = ".", to_state = "scanright", write = ".", action = right
-                },
-                #parsed_machine_config_transition{
-                    read = "1", to_state = "scanright", write = "1", action = right
-                },
-                #parsed_machine_config_transition{
-                    read = "-", to_state = "scanright", write = "-", action = right
-                },
-                #parsed_machine_config_transition{
-                    read = "=", to_state = "eraseone", write = ".", action = left
-                }
-            ],
-            "eraseone" => [
-                #parsed_machine_config_transition{
-                    read = "1", to_state = "subone", write = "=", action = left
-                },
-                #parsed_machine_config_transition{
-                    read = "-", to_state = "HALT", write = ".", action = left
-                }
-            ],
-            "subone" => [
-                #parsed_machine_config_transition{
-                    read = "1", to_state = "subone", write = "1", action = left
-                },
-                #parsed_machine_config_transition{
-                    read = "-", to_state = "skip", write = "-", action = left
-                }
-            ],
-            "skip" => [
-                #parsed_machine_config_transition{
-                    read = ".", to_state = "skip", write = ".", action = left
-                },
-                #parsed_machine_config_transition{
-                    read = "1", to_state = "scanright", write = ".", action = right
-                }
-            ]
-        }
-    },
-
-    interpreter:start(ParsedMachineConfig, ["1", "1", "1", "-", "1", "1", "="]),
+    %We could handle any logs below
+    parse_args(Args),
     erlang:halt(0).
 
 %%====================================================================
