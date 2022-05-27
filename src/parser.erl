@@ -169,7 +169,7 @@ iterate_on_machine_states_transitions_map(Iterator, State, Transitions, ParsedTr
     ParsedTransitionsResult = iterate_on_machine_transitions_list(Transitions),
     case ParsedTransitionsResult of
         {error, CurrentTransitionIndex, Type, Error} ->
-            {error, {CurrentTransitionIndex, Type, Error}};
+            {error, {StateString, CurrentTransitionIndex, Type, Error}};
         {ok, ParsedTransitions} ->
             MapWithNewState = maps:put(
                 StateString, ParsedTransitions, ParsedTransitionMap
@@ -295,4 +295,7 @@ format_error({states, invalid}) -> "machine has no states; " ++ get_rules_for_st
 format_error({states, empty_list}) -> "machine has an empty list of states; " ++ get_rules_for_states_field();
 format_error({finals, {expected_bitstring, State}}) -> "machine has a final state that is not a string (" ++ to_pretty_value(State) ++ "); " ++ get_rules_for_finals_field();
 format_error({finals, empty_state}) -> "machine has an empty final state; " ++ get_rules_for_finals_field();
-format_error({finals, invalid}) -> "machine has no final states; " ++ get_rules_for_finals_field().
+format_error({finals, invalid}) -> "machine has no final states; " ++ get_rules_for_finals_field();
+format_error({transitions, invalid}) -> "machine has an empty transitions object; a machine must contain at least one transition";
+format_error({transitions, {expected_state_bitstring, State}}) -> "machine contains transitions for a state that is not a valid string (" ++ to_pretty_value(State) ++ "); a machine can only contain transitions for valid states, which must be non-empty strings";
+format_error({transitions, {State, TransitionIndex, read, {expected_bitstring, ReadValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its read property that is not a string (" ++ to_pretty_value(ReadValue) ++ "); each transition must have a read property that is a string with exactly one character".
