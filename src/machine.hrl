@@ -6,9 +6,11 @@
 }).
 
 -record(parsed_machine_config, {
+    name :: string(),
+    alphabet :: list(string()),
+    blank :: string(),
     states :: list(string()),
     initial :: string(),
     finals :: list(string()),
-    blank :: string(),
     transitions :: #{string() := list(#parsed_machine_config_transition{})}
 }).

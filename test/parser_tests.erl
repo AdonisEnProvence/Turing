@@ -736,3 +736,138 @@ parse_machine_alphabet_expected_bitstring_test() ->
             <<"a">>, "b", <<"c">>, <<"d">>, <<"">>, <<"f">>]
         },
     {error, {expected_bitstring, "b"}} = parser:parse_machine_alphabet(RawAlphabet).
+
+
+%Machine whole parser tests
+parse_machine_parses_valid_machine_test() ->
+    ExpectedParsedMachineConfig = #parsed_machine_config{
+        name="unary_sub",
+        alphabet=[
+            "1",
+            ".",
+            "-",
+            "="
+        ],
+        blank=".",
+        states=[
+            "scanright",
+            "eraseone",
+            "subone",
+            "skip",
+            "HALT"
+        ],
+        initial="scanright",
+        finals=[
+            "HALT"
+        ],
+        transitions=#{
+            "abs" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ],
+            "add" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ],
+            "sub" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ]
+        }
+    },
+    RawMachineConfig=#{
+        <<"name">> => <<"unary_sub">>,
+        <<"alphabet">> => [
+            <<"1">>,
+            <<".">>,
+            <<"-">>,
+            <<"=">>
+        ],
+        <<"blank">> => <<".">>,
+        <<"states">> => [
+            <<"scanright">>,
+            <<"eraseone">>,
+            <<"subone">>,
+            <<"skip">>,
+            <<"HALT">>
+        ],
+        <<"initial">> => <<"scanright">>,
+        <<"finals">> => [
+            <<"HALT">>
+        ],
+        <<"transitions">> => #{
+            <<"add">> => [
+                #{
+                    <<"read">> => <<".">>,
+                    <<"to_state">> => <<"scanright">>,
+                    <<"write">> => <<".">>,
+                    <<"action">> => <<"RIGHT">>
+                },
+                #{
+                    <<"read">> => <<"?">>,
+                    <<"to_state">> => <<"cocorico">>,
+                    <<"write">> => <<"*">>,
+                    <<"action">> => <<"LEFT">>
+                }
+            ],
+            <<"sub">> => [
+                #{
+                    <<"read">> => <<".">>,
+                    <<"to_state">> => <<"scanright">>,
+                    <<"write">> => <<".">>,
+                    <<"action">> => <<"RIGHT">>
+                },
+                #{
+                    <<"read">> => <<"?">>,
+                    <<"to_state">> => <<"cocorico">>,
+                    <<"write">> => <<"*">>,
+                    <<"action">> => <<"LEFT">>
+                }
+            ],
+            <<"abs">> => [
+                #{
+                    <<"read">> => <<".">>,
+                    <<"to_state">> => <<"scanright">>,
+                    <<"write">> => <<".">>,
+                    <<"action">> => <<"RIGHT">>
+                },
+                #{
+                    <<"read">> => <<"?">>,
+                    <<"to_state">> => <<"cocorico">>,
+                    <<"write">> => <<"*">>,
+                    <<"action">> => <<"LEFT">>
+                }
+            ]
+        }
+    },
+    {ok, ExpectedParsedMachineConfig} = parser:parse_machine(RawMachineConfig).
