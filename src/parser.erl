@@ -7,6 +7,7 @@
 -export([
     parse_machine_name/1,
     parse_machine_blank/1,
+    parse_machine_initial_state/1,
     parse_machine_states/1,
     parse_machine_finals/1,
     parse_machine_transitions/1,
@@ -42,6 +43,10 @@ parse_machine_blank(#{<<"blank">> := Blank}) ->
     parse_alphabet_character(Blank);
 parse_machine_blank(_) ->
     {error, invalid}.
+
+parse_machine_initial_state(#{<<"initial">> := InitialState}) ->
+    parse_state(InitialState);
+parse_machine_initial_state(_) -> {error, invalid}.
 
 parse_machine_states(#{<<"states">> := States}) when is_list(States) ->
     parse_state_list(States, []);

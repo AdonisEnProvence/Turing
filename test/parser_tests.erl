@@ -28,6 +28,22 @@ parse_machine_blank_error_too_long_test() ->
         <<"blank">> => <<"..">>
     }).
 
+% Initial State
+parse_machine_initial_state_is_valid_test() ->
+    {ok, "add"} = parser:parse_machine_initial_state(#{
+        <<"initial">> => <<"add">>
+    }).
+parse_machine_initial_state_is_not_bitstring_test() ->
+    {error, {expected_bitstring, 2}} = parser:parse_machine_initial_state(#{
+        <<"initial">> => 2
+    }).
+parse_machine_initial_state_key_does_not_exist_test() ->
+    {error, invalid} = parser:parse_machine_initial_state(#{}).
+parse_machine_initial_state_is_empty_bitstring_test() ->
+    {error, empty_state} = parser:parse_machine_initial_state(#{
+        <<"initial">> => <<"">>
+    }).
+
 % Machine States
 parse_machine_states_test() ->
     {ok, ["add", "sub", "abs"]} = parser:parse_machine_states(#{
