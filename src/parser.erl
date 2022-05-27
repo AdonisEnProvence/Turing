@@ -25,24 +25,12 @@ parse_machine_blank(_) ->
     {error, invalid}.
 
 parse_machine_states(#{<<"states">> := States}) when is_list(States) ->
-    Result = parse_state_list(States, []),
-    case Result of
-        {error, Error} ->
-            {error, Error};
-        {ok, ParsedStates} ->
-            {ok, ParsedStates}
-    end;
+    parse_state_list(States, []);
 parse_machine_states(_) ->
     {error, invalid}.
 
 parse_machine_finals(#{<<"finals">> := FinalStates}) when is_list(FinalStates) ->
-    Result = parse_state_list(FinalStates, []),
-    case Result of
-        {error, Error} ->
-            {error, Error};
-        {ok, ParsedStates} ->
-            {ok, ParsedStates}
-    end;
+    parse_state_list(FinalStates, []);
 parse_machine_finals(_) ->
     {error, invalid}.
 
