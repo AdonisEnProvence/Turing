@@ -992,3 +992,10 @@ format_error_states_does_not_exist_test() ->
     ?assertMatch("machine has no states; a machine must have a non-empty list of states, which must all be non-empty strings", parser:format_error({states, invalid})).
 format_error_states_is_empty_test() ->
     ?assertMatch("machine has an empty list of states; a machine must have a non-empty list of states, which must all be non-empty strings", parser:format_error({states, empty_list})).
+
+format_error_finals_a_state_is_not_a_string_test() ->
+    ?assertMatch("machine has a final state that is not a string ({\"key\":2}); a machine must have a list of states (optionally empty), which must all be non-empty strings", parser:format_error({finals, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_finals_a_state_is_empty_test() ->
+    ?assertMatch("machine has an empty final state; a machine must have a list of states (optionally empty), which must all be non-empty strings", parser:format_error({finals, empty_state})).
+format_error_finals_does_not_exist_test() ->
+    ?assertMatch("machine has no final states; a machine must have a list of states (optionally empty), which must all be non-empty strings", parser:format_error({finals, invalid})).
