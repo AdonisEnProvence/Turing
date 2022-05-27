@@ -11,11 +11,35 @@
     parse_machine_states/1,
     parse_machine_finals/1,
     parse_machine_transitions/1,
-    parse_machine_alphabet/1
+    parse_machine_alphabet/1,
+    parse_machine/1
 ]).
 -else.
--export([]).
+-export([parse_machine/1]).
 -endif.
+
+parse_machine(MachineConfiguration) ->
+    ParsingSteps = [
+        {name, fun() -> parse_machine_name(MachineConfiguration) end},
+        {alphabet, fun() -> parse_machine_alphabet(MachineConfiguration) end},
+        {blank, fun() -> parse_machine_blank(MachineConfiguration) end},
+        {initial, fun() -> parse_machine_initial_state(MachineConfiguration) end},
+        {states, fun() -> parse_machine_states(MachineConfiguration) end},
+        {finals, fun() -> parse_machine_finals(MachineConfiguration) end},
+        {transitions, fun() -> parse_machine_transitions(MachineConfiguration) end}
+    ],
+    parse_machine(ParsingSteps, #{}).
+
+parse_machine([], #{ name := Name, alphabet := Alphabet, blank := Blank, initial := Initial, states := States, finals := Finals, transitions := Transitions }) ->
+    {ok, #parsed_machine_config{name=Name, alphabet=Alphabet, blank=Blank, initial=Initial, states=States, finals=Finals, transitions=Transitions}};
+parse_machine([{Field, ParsingFunction} | OtherParsingSteps], ParsedMachineConfiguration) ->
+    case ParsingFunction() of
+        {ok, Value} -> parse_machine(
+            OtherParsingSteps,
+            maps:put(Field, Value, ParsedMachineConfiguration)
+        );
+        {error, Error} -> {error, Field, Error}
+    end.
 
 parse_machine_name(#{<<"name">> := <<"">>}) -> {error, empty};
 parse_machine_name(#{<<"name">> := Name}) when is_bitstring(Name) -> {ok, binary_to_list(Name)};

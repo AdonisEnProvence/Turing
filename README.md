@@ -35,7 +35,7 @@ docker run -d --name turing -v $PWD:/turing turing
 
 # Launch a shell inside the container.
 # We will write the same commands as if we were developing directly on our machine.
-docker exec -it turing sh
+docker exec -it turing bash
 
 # Remove container
 docker rm -f turing
