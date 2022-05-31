@@ -67,9 +67,8 @@ decode_raw_machine_config(BinaryFile) ->
 parse_decoded_machine_config(DecodedMachineConfig) ->
     ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
     case ParsedMachineResult of
-        {error, _Error} ->
-            % parser:format_error(error, Error);
-            io:format("Parser error");
+        {error, Error} ->
+            parser:format_error(error, Error);
         {ok, ParsedMachineConfig} ->
             % Will change in the future
             start_machine(ParsedMachineConfig)
