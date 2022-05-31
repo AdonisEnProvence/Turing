@@ -1,7 +1,6 @@
 -module(parser).
 
 -include("machine.hrl").
--include_lib("eunit/include/eunit.hrl").
 
 -ifdef(TEST).
 -export([
@@ -30,15 +29,33 @@ parse_machine(MachineConfiguration) ->
     ],
     parse_machine(ParsingSteps, #{}).
 
-parse_machine([], #{ name := Name, alphabet := Alphabet, blank := Blank, initial := Initial, states := States, finals := Finals, transitions := Transitions }) ->
-    {ok, #parsed_machine_config{name=Name, alphabet=Alphabet, blank=Blank, initial=Initial, states=States, finals=Finals, transitions=Transitions}};
+parse_machine([], #{
+    name := Name,
+    alphabet := Alphabet,
+    blank := Blank,
+    initial := Initial,
+    states := States,
+    finals := Finals,
+    transitions := Transitions
+}) ->
+    {ok, #parsed_machine_config{
+        name = Name,
+        alphabet = Alphabet,
+        blank = Blank,
+        initial = Initial,
+        states = States,
+        finals = Finals,
+        transitions = Transitions
+    }};
 parse_machine([{Field, ParsingFunction} | OtherParsingSteps], ParsedMachineConfiguration) ->
     case ParsingFunction() of
-        {ok, Value} -> parse_machine(
-            OtherParsingSteps,
-            maps:put(Field, Value, ParsedMachineConfiguration)
-        );
-        {error, Error} -> {error, Field, Error}
+        {ok, Value} ->
+            parse_machine(
+                OtherParsingSteps,
+                maps:put(Field, Value, ParsedMachineConfiguration)
+            );
+        {error, Error} ->
+            {error, Field, Error}
     end.
 
 parse_machine_name(#{<<"name">> := <<"">>}) -> {error, empty};
@@ -47,7 +64,7 @@ parse_machine_name(_) -> {error, invalid}.
 
 parse_machine_alphabet(#{<<"alphabet">> := Alphabet}) when is_list(Alphabet) ->
     parse_alphabet_list(Alphabet, []);
-parse_machine_alphabet(_) -> 
+parse_machine_alphabet(_) ->
     {error, no_entry}.
 
 parse_alphabet_list([], []) ->
@@ -70,7 +87,8 @@ parse_machine_blank(_) ->
 
 parse_machine_initial_state(#{<<"initial">> := InitialState}) ->
     parse_state(InitialState);
-parse_machine_initial_state(_) -> {error, invalid}.
+parse_machine_initial_state(_) ->
+    {error, invalid}.
 
 parse_machine_states(#{<<"states">> := States}) when is_list(States) ->
     parse_state_list(States, []);
@@ -82,8 +100,8 @@ parse_machine_finals(#{<<"finals">> := FinalStates}) when is_list(FinalStates) -
     case Result of
         {error, empty_list} ->
             {ok, []};
-        {error, Error} -> 
-            {error,Error};
+        {error, Error} ->
+            {error, Error};
         {ok, ParsedFinalStates} ->
             {ok, ParsedFinalStates}
     end;
@@ -140,8 +158,7 @@ parse_machine_transitions(_) ->
 iterate_on_machine_states_transitions_map(Iterator) ->
     {State, Transitions, NextIterator} = maps:next(Iterator),
     iterate_on_machine_states_transitions_map(NextIterator, State, Transitions, #{}).
-iterate_on_machine_states_transitions_map(_Iterator, <<"">>, _Transitions, _ParsedTransitionMap)
-->
+iterate_on_machine_states_transitions_map(_Iterator, <<"">>, _Transitions, _ParsedTransitionMap) ->
     {error, empty_state_key};
 iterate_on_machine_states_transitions_map(Iterator, State, Transitions, ParsedTransitionMap) when
     is_bitstring(State)
