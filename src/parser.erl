@@ -297,5 +297,6 @@ format_error({finals, {expected_bitstring, State}}) -> "machine has a final stat
 format_error({finals, empty_state}) -> "machine has an empty final state; " ++ get_rules_for_finals_field();
 format_error({finals, invalid}) -> "machine has no final states; " ++ get_rules_for_finals_field();
 format_error({transitions, invalid}) -> "machine has an empty transitions object; a machine must contain at least one transition";
+format_error({transitions, empty_state_key}) -> "machine contains transitions for a state that is an empty string; a machine can only contain transitions for valid states, which must be non-empty strings";
 format_error({transitions, {expected_state_bitstring, State}}) -> "machine contains transitions for a state that is not a valid string (" ++ to_pretty_value(State) ++ "); a machine can only contain transitions for valid states, which must be non-empty strings";
 format_error({transitions, {State, TransitionIndex, read, {expected_bitstring, ReadValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its read property that is not a string (" ++ to_pretty_value(ReadValue) ++ "); each transition must have a read property that is a string with exactly one character".
