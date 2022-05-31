@@ -92,9 +92,10 @@ validate_machine_initial(Initial, States) ->
     is_valid_state(Initial, States).
 
 % Transitions validation
-% 1/ Search for transitions listeners duplication
-% 2/ Validate each read write occurences from alphabet
-% 3/ Validate each key states and to_state from states
+% 1/ Search for transitions read listeners duplication
+% 2/ Validate every read write occurences are valid alphabet characters
+% 3/ Validate every Transitions map keys are valid states
+% 4/ Validate every Transition to_state are valid states
 
 iterate_and_apply_on_map(Iterator, FunctionToApply) ->
     NextIteratorResult = maps:next(Iterator),
@@ -122,7 +123,7 @@ iterate_and_apply_on_list([FirstElement | Rest], FunctionToApply) ->
         {error, Error} -> {error, Error}
     end.
 
-% 1/ Search for transitions listeners duplication
+% 1/ Search for transitions read listeners duplication
 look_for_transitions_entry_read_duplicated(TransitionsList, States) ->
     EveryTransitionReadList = lists:map(
         fun(Transition) -> Transition#parsed_machine_config_transition.read end, TransitionsList
@@ -138,7 +139,7 @@ validation_step_transitions_map_read_duplication(TransitionsMap, States, Alphabe
         {error, State, Error} -> {error, State, Error}
     end.
 
-% 2/ Validate each read write occurences from alphabet
+% 2/ Validate every read write occurences are valid alphabet characters
 verify_read_write_transition(Transition, Alphabet) ->
     Read = Transition#parsed_machine_config_transition.read,
     ReadIsAlphabetCharacter = is_alphabet_character(Read, Alphabet),
@@ -168,7 +169,7 @@ validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alph
         {error, State, Error} -> {error, State, Error}
     end.
 
-% 3/ Validate each key states and to_state from states
+% 3/ Validate every Transitions map keys are valid states
 verify_to_state_transition(Transition, States) ->
     ToState = Transition#parsed_machine_config_transition.to_state,
     Result = is_valid_state(ToState, States),
@@ -201,15 +202,20 @@ validation_step_transitions_map_keys_are_states(TransitionsMap, States, Alphabet
     MapKeysResult = look_for_transitions_map_invalid_state_key(TransitionsMap, States),
     case MapKeysResult of
         ok ->
-            Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
-                look_for_transitions_entry_invalid_to_state(TransitionList, States)
-            end),
-            case Result of
-                ok -> ok;
-                {error, State, Error} -> {error, State, Error}
-            end;
+            validation_step_transitions_to_state_are_states(TransitionsMap, States, Alphabet);
         {error, Error} ->
             {error, Error}
+    end.
+
+% 4/ Validate every Transition to_state are valid states
+
+validation_step_transitions_to_state_are_states(TransitionsMap, States, Alphabet) ->
+    Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
+        look_for_transitions_entry_invalid_to_state(TransitionList, States)
+    end),
+    case Result of
+        ok -> ok;
+        {error, State, Error} -> {error, State, Error}
     end.
 
 validate_machine_transitions(TransitionsMap, States, Alphabet) ->
