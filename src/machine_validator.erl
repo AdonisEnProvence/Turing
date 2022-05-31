@@ -168,7 +168,7 @@ validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alph
         {error, State, Error} -> {error, State, Error}
     end.
 
-% % 3/ Validate each key states and to_state from states
+% 3/ Validate each key states and to_state from states
 verify_to_state_transition(Transition, States) ->
     ToState = Transition#parsed_machine_config_transition.to_state,
     Result = is_valid_state(ToState, States),
