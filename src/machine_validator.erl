@@ -38,6 +38,17 @@ is_alphabet_character(Character, Alphabet) ->
         CharacterIsInAlphabet =:= false -> {error, {expected_alphabet_character, Character}}
     end.
 
+is_valid_state(State, StateList) ->
+    StateIsStateListMember = lists:member(State, StateList),
+    if
+        StateIsStateListMember =:= true ->
+            ok;
+        StateIsStateListMember =:= false ->
+            {
+                error, {expected_state, State}
+            }
+    end.
+
 % Alphabet validation
 validate_machine_alphabet(Alphabet) ->
     look_for_duplicated_in_list(Alphabet).
@@ -78,15 +89,7 @@ validate_machine_finals(Finals, States, expected_states_step) ->
 
 % Initial validation
 validate_machine_initial(Initial, States) ->
-    InitialIsStatesMember = lists:member(Initial, States),
-    if
-        InitialIsStatesMember =:= true ->
-            ok;
-        InitialIsStatesMember =:= false ->
-            {
-                error, {expected_states, Initial}
-            }
-    end.
+    is_valid_state(Initial, States).
 
 % Transitions validation
 % 1/ Search for transitions listeners duplication
@@ -145,10 +148,10 @@ verify_read_write_transition(Transition, Alphabet) ->
             WriteIsAlphabetCharacter = is_alphabet_character(Write, Alphabet),
             case WriteIsAlphabetCharacter of
                 ok -> ok;
-                {error, Error} -> {error, {"write", Error}}
+                {error, Error} -> {error, {write, Error}}
             end;
         {error, Error} ->
-            {error, {"read", Error}}
+            {error, {read, Error}}
     end.
 
 look_for_transitions_entry_read_write_not_alphabet(TransitionList, Alphabet) ->
@@ -160,10 +163,53 @@ validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alph
     Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
         look_for_transitions_entry_read_write_not_alphabet(TransitionList, Alphabet)
     end),
-    io:format("~p~n", [Result]),
+    case Result of
+        ok -> validation_step_transitions_map_keys_are_states(TransitionsMap, States, Alphabet);
+        {error, State, Error} -> {error, State, Error}
+    end.
+
+% % 3/ Validate each key states and to_state from states
+verify_to_state_transition(Transition, States) ->
+    ToState = Transition#parsed_machine_config_transition.to_state,
+    Result = is_valid_state(ToState, States),
     case Result of
         ok -> ok;
-        {error, State, Error} -> {error, State, Error}
+        {error, Error} -> {error, {to_state, Error}}
+    end.
+
+look_for_transitions_entry_invalid_to_state(TransitionList, States) ->
+    iterate_and_apply_on_list(TransitionList, fun(Transition) ->
+        verify_to_state_transition(Transition, States)
+    end).
+
+look_for_transitions_map_invalid_state_key(TransitionsMap, States) ->
+    TransitionsMapKeys = maps:keys(TransitionsMap),
+    TransitionsMapKeysLessStates = TransitionsMapKeys -- States,
+    TransitionsMapKeysLessStatesLength = length(TransitionsMapKeysLessStates),
+    ExpectedTransitionsMapKeysLessStatesLength = 0,
+    EveryTransitionsMapKeysAreStates =
+        TransitionsMapKeysLessStatesLength =:= ExpectedTransitionsMapKeysLessStatesLength,
+
+    if
+        EveryTransitionsMapKeysAreStates =:= true ->
+            ok;
+        EveryTransitionsMapKeysAreStates =:= false ->
+            {error, {expected_states, TransitionsMapKeysLessStates}}
+    end.
+
+validation_step_transitions_map_keys_are_states(TransitionsMap, States, Alphabet) ->
+    MapKeysResult = look_for_transitions_map_invalid_state_key(TransitionsMap, States),
+    case MapKeysResult of
+        ok ->
+            Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
+                look_for_transitions_entry_invalid_to_state(TransitionList, States)
+            end),
+            case Result of
+                ok -> ok;
+                {error, State, Error} -> {error, State, Error}
+            end;
+        {error, Error} ->
+            {error, Error}
     end.
 
 validate_machine_transitions(TransitionsMap, States, Alphabet) ->
