@@ -269,6 +269,8 @@ to_pretty_value(Value) -> binary_to_list(jsone:encode(Value)).
 
 get_rules_for_name_field() -> "a machine must have a name of at least one character".
 
+get_rules_for_alphabet_field() -> "a machine must have a non-empty alphabet, made of strings with exactly one character".
+
 get_rules_for_blank_field() -> "a machine must have a blank character exactly made of one character".
 
 get_rules_for_initial_state_field() -> "a machine must have a non-empty initial state".
@@ -290,6 +292,11 @@ get_rules_for_transitions_field_action_property() -> "each transition must have 
 format_error({name, empty}) -> "machine name is empty; " ++ get_rules_for_name_field();
 format_error({name, {expected_bitstring, Name}}) -> "machine name is not a string (received: " ++ to_pretty_value(Name) ++ "); " ++ get_rules_for_name_field();
 format_error({name, invalid}) -> "machine has no name; " ++ get_rules_for_name_field();
+format_error({alphabet, no_entry}) -> "machine has no alphabet; " ++ get_rules_for_alphabet_field();
+format_error({alphabet, empty_list}) -> "machine alphabet is empty; " ++ get_rules_for_alphabet_field();
+format_error({alphabet, empty_alphabet_character}) -> "machine alphabet contains an empty character; " ++ get_rules_for_alphabet_field();
+format_error({alphabet, {expected_bitstring, Character}}) -> "machine alphabet contains a value that is not a string (received: " ++ to_pretty_value(Character) ++ "); " ++ get_rules_for_alphabet_field();
+format_error({alphabet, {too_long_alphabet_character, Character}}) -> "machine alphabet contains a value that is too long (received: " ++ Character ++ "); " ++ get_rules_for_alphabet_field();
 format_error({blank, empty_alphabet_character}) -> "machine blank character is empty; " ++ get_rules_for_blank_field();
 format_error({blank, {expected_bitstring, Blank}}) -> "machine blank character is not a string (received: " ++ to_pretty_value(Blank) ++ "); " ++ get_rules_for_blank_field();
 format_error({blank, invalid}) -> "machine has no blank character; " ++ get_rules_for_blank_field();

@@ -966,6 +966,17 @@ format_error_name_is_not_a_string_test() ->
 format_error_name_does_not_exist_test() ->
     ?assertMatch("machine has no name; a machine must have a name of at least one character", parser:format_error({name, invalid})).
 
+format_error_alphabet_is_missing_test() ->
+    ?assertMatch("machine has no alphabet; a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, no_entry})).
+format_error_alphabet_is_empty_list_test() ->
+    ?assertMatch("machine alphabet is empty; a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, empty_list})).
+format_error_alphabet_character_is_empty_test() ->
+    ?assertMatch("machine alphabet contains an empty character; a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, empty_alphabet_character})).
+format_error_alphabet_character_is_not_a_string_test() ->
+    ?assertMatch("machine alphabet contains a value that is not a string (received: {\"key\":2}); a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_alphabet_character_is_longer_than_one_character_test() ->
+    ?assertMatch("machine alphabet contains a value that is too long (received: trompinette); a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, {too_long_alphabet_character, "trompinette"}})).
+
 format_error_blank_is_empty_test() ->
     ?assertMatch("machine blank character is empty; a machine must have a blank character exactly made of one character", parser:format_error({blank, empty_alphabet_character})).
 format_error_blank_is_not_a_string_test() ->
