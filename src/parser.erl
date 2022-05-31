@@ -279,6 +279,8 @@ get_rules_for_states_field() -> "a machine must have a non-empty list of states,
 
 get_rules_for_finals_field() -> "a machine must have a list of states (optionally empty), which must all be non-empty strings".
 
+get_rules_for_transitions_field_read_property() -> "each transition must have a read property that is a string with exactly one character".
+
 format_error({name, empty}) -> "machine name is empty; " ++ get_rules_for_name_field();
 format_error({name, {expected_bitstring, Name}}) -> "machine name is not a string (received: " ++ to_pretty_value(Name) ++ "); " ++ get_rules_for_name_field();
 format_error({name, invalid}) -> "machine has no name; " ++ get_rules_for_name_field();
@@ -299,4 +301,7 @@ format_error({finals, invalid}) -> "machine has no final states; " ++ get_rules_
 format_error({transitions, invalid}) -> "machine has an empty transitions object; a machine must contain at least one transition";
 format_error({transitions, empty_state_key}) -> "machine contains transitions for a state that is an empty string; a machine can only contain transitions for valid states, which must be non-empty strings";
 format_error({transitions, {expected_state_bitstring, State}}) -> "machine contains transitions for a state that is not a valid string (" ++ to_pretty_value(State) ++ "); a machine can only contain transitions for valid states, which must be non-empty strings";
-format_error({transitions, {State, TransitionIndex, read, {expected_bitstring, ReadValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its read property that is not a string (" ++ to_pretty_value(ReadValue) ++ "); each transition must have a read property that is a string with exactly one character".
+format_error({transitions, {State, TransitionIndex, read, empty_alphabet_character}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its read property that is empty; " ++ get_rules_for_transitions_field_read_property();
+format_error({transitions, {State, TransitionIndex, read, {expected_bitstring, ReadValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its read property that is not a string (" ++ to_pretty_value(ReadValue) ++ "); " ++ get_rules_for_transitions_field_read_property();
+format_error({transitions, {State, TransitionIndex, read, {too_long_alphabet_character, ReadValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its read property that is too long (" ++ ReadValue ++ "); " ++ get_rules_for_transitions_field_read_property();
+format_error({transitions, {State, TransitionIndex, read, no_entry}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " does not have a read property; " ++ get_rules_for_transitions_field_read_property().
