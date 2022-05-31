@@ -260,6 +260,101 @@ validate_machine_transitions_several_duplicated_error_test() ->
         get_valid_states(),
         get_valid_alphabet()
     ).
+
+validate_machine_transitions_not_alphabet_read_test() ->
+    {error, "skip", {"read", {expected_alphabet_character, "not_alphabet_character"}}} = machine_validator:validate_machine_transitions(
+        #{
+            "scanright" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
+                    action = left
+                }
+            ],
+            "skip" => [
+                #parsed_machine_config_transition{
+                    read = "not_alphabet_character",
+                    to_state = "scanright",
+                    % Below error is voluntary, as it verifies that validator will
+                    % Look at read first
+                    write = "also_not_alphabet_character",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
+                    action = left
+                }
+            ],
+            "subone" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
+                    action = left
+                }
+            ]
+        },
+        get_valid_states(),
+        get_valid_alphabet()
+    ).
+
+validate_machine_transitions_not_alphabet_write_test() ->
+    {error, "scanright", {"write", {expected_alphabet_character, "not_alphabet_character"}}} = machine_validator:validate_machine_transitions(
+        #{
+            "skip" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
+                    action = left
+                }
+            ],
+            "scanright" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = "=",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "=",
+                    to_state = "subone",
+                    write = "not_alphabet_character",
+                    action = left
+                }
+            ],
+            "subone" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
                     action = left
                 }
             ]

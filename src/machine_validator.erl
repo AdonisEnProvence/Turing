@@ -92,13 +92,8 @@ validate_machine_initial(Initial, States) ->
 % 1/ Search for transitions listeners duplication
 % 2/ Validate each read write occurences from alphabet
 % 3/ Validate each key states and to_state from states
-look_for_transitions_read_duplicated(TransitionsList, States) ->
-    EveryTransitionReadList = lists:map(
-        fun(Transition) -> Transition#parsed_machine_config_transition.read end, TransitionsList
-    ),
-    look_for_duplicated_in_list(EveryTransitionReadList).
 
-iterate_on_map(Iterator, FunctionToApply) ->
+iterate_and_apply_on_map(Iterator, FunctionToApply) ->
     NextIteratorResult = maps:next(Iterator),
     case NextIteratorResult of
         none ->
@@ -107,7 +102,7 @@ iterate_on_map(Iterator, FunctionToApply) ->
             Result = FunctionToApply(Value),
             case Result of
                 ok ->
-                    iterate_on_map(
+                    iterate_and_apply_on_map(
                         NextIterator, FunctionToApply
                     );
                 {error, Error} ->
@@ -115,9 +110,61 @@ iterate_on_map(Iterator, FunctionToApply) ->
             end
     end.
 
-validate_machine_transitions(Transitions, States, Alphabet) ->
-    io:format("~p~n", [Transitions]),
-    Iterator = maps:iterator(Transitions),
-    iterate_on_map(Iterator, fun(TransitionList) ->
-        look_for_transitions_read_duplicated(TransitionList, States)
+iterate_and_apply_on_list([], _) ->
+    ok;
+iterate_and_apply_on_list([FirstElement | Rest], FunctionToApply) ->
+    Result = FunctionToApply(FirstElement),
+    case Result of
+        ok -> iterate_and_apply_on_list(Rest, FunctionToApply);
+        {error, Error} -> {error, Error}
+    end.
+
+% 1/ Search for transitions listeners duplication
+look_for_transitions_entry_read_duplicated(TransitionsList, States) ->
+    EveryTransitionReadList = lists:map(
+        fun(Transition) -> Transition#parsed_machine_config_transition.read end, TransitionsList
+    ),
+    look_for_duplicated_in_list(EveryTransitionReadList).
+
+validation_step_transitions_map_read_duplication(TransitionsMap, States, Alphabet) ->
+    Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
+        look_for_transitions_entry_read_duplicated(TransitionList, States)
+    end),
+    case Result of
+        ok -> validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alphabet);
+        {error, State, Error} -> {error, State, Error}
+    end.
+
+% 2/ Validate each read write occurences from alphabet
+verify_read_write_transition(Transition, Alphabet) ->
+    Read = Transition#parsed_machine_config_transition.read,
+    ReadIsAlphabetCharacter = is_alphabet_character(Read, Alphabet),
+    case ReadIsAlphabetCharacter of
+        ok ->
+            Write = Transition#parsed_machine_config_transition.write,
+            WriteIsAlphabetCharacter = is_alphabet_character(Write, Alphabet),
+            case WriteIsAlphabetCharacter of
+                ok -> ok;
+                {error, Error} -> {error, {"write", Error}}
+            end;
+        {error, Error} ->
+            {error, {"read", Error}}
+    end.
+
+look_for_transitions_entry_read_write_not_alphabet(TransitionList, Alphabet) ->
+    iterate_and_apply_on_list(TransitionList, fun(Transition) ->
+        verify_read_write_transition(Transition, Alphabet)
     end).
+
+validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alphabet) ->
+    Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
+        look_for_transitions_entry_read_write_not_alphabet(TransitionList, Alphabet)
+    end),
+    io:format("~p~n", [Result]),
+    case Result of
+        ok -> ok;
+        {error, State, Error} -> {error, State, Error}
+    end.
+
+validate_machine_transitions(TransitionsMap, States, Alphabet) ->
+    validation_step_transitions_map_read_duplication(TransitionsMap, States, Alphabet).
