@@ -14,14 +14,17 @@
 
 format_program_usage() ->
     io:format("usage: ft_turing [-h] jsonfile input
+
 positional arguments:
-jsonfile json description of the machine
-input input of the machine
+  jsonfile          json description of the machine
+
+  input             input of the machine
+
 optional arguments:
--h, --help show this help message and exit\n").
+  -h, --help        show this help message and exit~n").
 
 format_read_file_error(Reason) ->
-    io:format("Error while reading machine configuration json file : ~p~n", [Reason]).
+    io:format("Error while reading machine configuration json file: ~p~n", [Reason]).
 
 format_try_decode_error({Reason, _Stack}) ->
     io:format("Error while decoding machine configuration json file: ~p~n", [Reason]).
@@ -61,7 +64,7 @@ decode_raw_machine_config(BinaryFile) ->
 parse_decoded_machine_config(DecodedMachineConfig) -> 
     ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
     case ParsedMachineResult of 
-        {error, Error} ->
+        {error, _Error} ->
             % parser:format_error(error, Error);
             io:format("Parser error");
         {ok, ParsedMachineConfig} ->
