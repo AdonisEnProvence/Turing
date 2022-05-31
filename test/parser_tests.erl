@@ -1021,3 +1021,9 @@ format_error_transitions_write_property_of_a_transition_is_longer_than_one_chara
     ?assertMatch("transition 0 for state add has its write property that is too long (aaa); each transition must have a write property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, write, {too_long_alphabet_character, "aaa"}}})).
 format_error_transitions_write_property_is_missing_test() ->
     ?assertMatch("transition 0 for state add does not have a write property; each transition must have a write property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, write, no_entry}})).
+format_error_transitions_to_state_property_is_not_a_string_test() ->
+    ?assertMatch("transition 0 for state add has its to_state property that is not a string ({\"key\":2}); each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, {expected_bitstring, #{<<"key">> => 2}}}})).
+format_error_transitions_to_state_property_does_not_exist_test() ->
+    ?assertMatch("transition 0 for state add does not have a to_state property; each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, no_entry}})).
+format_error_transitions_to_state_property_is_empty_test() ->
+    ?assertMatch("transition 0 for state add has its to_state property that is empty; each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, empty_state}})).

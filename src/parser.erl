@@ -283,6 +283,8 @@ get_rules_for_transitions_field_read_property() -> "each transition must have a 
 
 get_rules_for_transitions_field_write_property() -> "each transition must have a write property that is a string with exactly one character".
 
+get_rules_for_transitions_field_to_state_property() -> "each transition must have a to_state property that is a non-empty string".
+
 format_error({name, empty}) -> "machine name is empty; " ++ get_rules_for_name_field();
 format_error({name, {expected_bitstring, Name}}) -> "machine name is not a string (received: " ++ to_pretty_value(Name) ++ "); " ++ get_rules_for_name_field();
 format_error({name, invalid}) -> "machine has no name; " ++ get_rules_for_name_field();
@@ -310,4 +312,7 @@ format_error({transitions, {State, TransitionIndex, read, no_entry}}) -> "transi
 format_error({transitions, {State, TransitionIndex, write, empty_alphabet_character}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its write property that is empty; " ++ get_rules_for_transitions_field_write_property();
 format_error({transitions, {State, TransitionIndex, write, {expected_bitstring, ReadValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its write property that is not a string (" ++ to_pretty_value(ReadValue) ++ "); " ++ get_rules_for_transitions_field_write_property();
 format_error({transitions, {State, TransitionIndex, write, {too_long_alphabet_character, ReadValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its write property that is too long (" ++ ReadValue ++ "); " ++ get_rules_for_transitions_field_write_property();
-format_error({transitions, {State, TransitionIndex, write, no_entry}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " does not have a write property; " ++ get_rules_for_transitions_field_write_property().
+format_error({transitions, {State, TransitionIndex, write, no_entry}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " does not have a write property; " ++ get_rules_for_transitions_field_write_property();
+format_error({transitions, {State, TransitionIndex, to_state, {expected_bitstring, ToStateValue}}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its to_state property that is not a string (" ++ to_pretty_value(ToStateValue) ++ "); " ++ get_rules_for_transitions_field_to_state_property();
+format_error({transitions, {State, TransitionIndex, to_state, no_entry}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " does not have a to_state property; " ++ get_rules_for_transitions_field_to_state_property();
+format_error({transitions, {State, TransitionIndex, to_state, empty_state}}) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State ++ " has its to_state property that is empty; " ++ get_rules_for_transitions_field_to_state_property().
