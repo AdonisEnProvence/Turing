@@ -74,8 +74,8 @@ get_raw_machine_config() ->
 % Machine Name
 parse_machine_name_test() ->
     {ok, "unary_add"} = parser:parse_machine_name(#{<<"name">> => <<"unary_add">>}).
-parse_machine_name_error_invalid_test() ->
-    {error, invalid} = parser:parse_machine_name(#{<<"name">> => "unary_add"}).
+parse_machine_name_is_not_bitstring_test() ->
+    {error, {expected_bitstring, 2}} = parser:parse_machine_name(#{<<"name">> => 2}).
 parse_machine_name_error_invalid_key_test() ->
     {error, invalid} = parser:parse_machine_name(#{"name" => <<"unary_add">>}).
 parse_machine_name_error_empty_test() ->
@@ -326,7 +326,7 @@ parse_machine_transitions_read_value_is_not_bitstring_test() ->
         ]
     },
 
-    {error, {0, read, {expected_bitstring, "."}}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, read, {expected_bitstring, "."}}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 
@@ -348,7 +348,7 @@ parse_machine_transitions_read_is_too_long_alphabet_character_test() ->
         ]
     },
 
-    {error, {1, read, {too_long_alphabet_character, "......"}}} = parser:parse_machine_transitions(
+    {error, {"add", 1, read, {too_long_alphabet_character, "......"}}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -386,7 +386,7 @@ parse_machine_transitions_read_empty_alphabet_character_test() ->
         ]
     },
 
-    {error, {0, read, empty_alphabet_character}} = parser:parse_machine_transitions(
+    {error, {"sub", 0, read, empty_alphabet_character}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -423,7 +423,7 @@ parse_machine_transitions_read_property_not_found_test() ->
         ]
     },
 
-    {error, {1, read, no_entry}} = parser:parse_machine_transitions(
+    {error, {"sub", 1, read, no_entry}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -447,7 +447,6 @@ parse_machine_transitions_read_key_is_not_bitstring_test() ->
         ],
         <<"sub">> => [
             #{
-                "read" => <<".">>,
                 <<"to_state">> => <<"scanright">>,
                 <<"write">> => <<".">>,
                 <<"action">> => <<"RIGHT">>
@@ -461,7 +460,7 @@ parse_machine_transitions_read_key_is_not_bitstring_test() ->
         ]
     },
 
-    {error, {0, read, no_entry}} = parser:parse_machine_transitions(
+    {error, {"sub", 0, read, no_entry}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -475,7 +474,7 @@ parse_machine_transitions_write_value_is_not_bitstring_test() ->
             #{
                 <<"read">> => <<".">>,
                 <<"to_state">> => <<"scanright">>,
-                <<"write">> => ".",
+                <<"write">> => 2,
                 <<"action">> => <<"RIGHT">>
             },
             #{
@@ -487,7 +486,7 @@ parse_machine_transitions_write_value_is_not_bitstring_test() ->
         ]
     },
 
-    {error, {0, write, {expected_bitstring, "."}}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, write, {expected_bitstring, 2}}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 
@@ -509,7 +508,7 @@ parse_machine_transitions_write_is_too_long_alphabet_character_test() ->
         ]
     },
 
-    {error, {1, write, {too_long_alphabet_character, "*****"}}} = parser:parse_machine_transitions(
+    {error, {"add", 1, write, {too_long_alphabet_character, "*****"}}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -547,7 +546,7 @@ parse_machine_transitions_write_empty_alphabet_character_test() ->
         ]
     },
 
-    {error, {0, write, empty_alphabet_character}} = parser:parse_machine_transitions(
+    {error, {"sub", 0, write, empty_alphabet_character}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -584,7 +583,7 @@ parse_machine_transitions_write_property_not_found_test() ->
         ]
     },
 
-    {error, {1, write, no_entry}} = parser:parse_machine_transitions(
+    {error, {"sub", 1, write, no_entry}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -610,7 +609,6 @@ parse_machine_transitions_write_key_is_not_bitstring_test() ->
             #{
                 <<"read">> => <<".">>,
                 <<"to_state">> => <<"scanright">>,
-                "write" => <<".">>,
                 <<"action">> => <<"RIGHT">>
             },
             #{
@@ -622,7 +620,7 @@ parse_machine_transitions_write_key_is_not_bitstring_test() ->
         ]
     },
 
-    {error, {0, write, no_entry}} = parser:parse_machine_transitions(
+    {error, {"sub", 0, write, no_entry}} = parser:parse_machine_transitions(
         #{
             <<"transitions">> => RawTransitions
         }
@@ -641,7 +639,7 @@ parse_machine_transitions_action_is_missing_test() ->
         ]
     },
 
-    {error, {0, action, no_entry}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, action, no_entry}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 parse_machine_transitions_action_is_empty_test() ->
@@ -656,7 +654,7 @@ parse_machine_transitions_action_is_empty_test() ->
         ]
     },
 
-    {error, {0, action, {unknown_action, <<"">>}}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, action, {unknown_action, <<"">>}}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 parse_machine_transitions_action_is_invalid_bitstring_test() ->
@@ -671,7 +669,7 @@ parse_machine_transitions_action_is_invalid_bitstring_test() ->
         ]
     },
 
-    {error, {0, action, {unknown_action, 2}}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, action, {unknown_action, 2}}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 parse_machine_transitions_action_is_not_known_test() ->
@@ -686,7 +684,7 @@ parse_machine_transitions_action_is_not_known_test() ->
         ]
     },
 
-    {error, {0, action, {unknown_action, <<"MIDDLE">>}}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, action, {unknown_action, <<"MIDDLE">>}}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 parse_machine_transitions_action_is_left_test() ->
@@ -733,7 +731,7 @@ parse_machine_transitions_to_state_is_missing_test() ->
         ]
     },
 
-    {error, {0, to_state, no_entry}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, to_state, no_entry}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 parse_machine_transitions_to_state_is_empty_test() ->
@@ -748,7 +746,7 @@ parse_machine_transitions_to_state_is_empty_test() ->
         ]
     },
 
-    {error, {0, to_state, empty_state}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, to_state, empty_state}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 parse_machine_transitions_to_state_is_invalid_bitstring_test() ->
@@ -763,7 +761,7 @@ parse_machine_transitions_to_state_is_invalid_bitstring_test() ->
         ]
     },
 
-    {error, {0, to_state, {expected_bitstring, 2}}} = parser:parse_machine_transitions(#{
+    {error, {"add", 0, to_state, {expected_bitstring, 2}}} = parser:parse_machine_transitions(#{
         <<"transitions">> => RawTransitions
     }).
 parse_machine_transitions_to_state_is_valid_test() ->
@@ -819,7 +817,6 @@ parse_machine_alphabet_expected_bitstring_test() ->
             <<"a">>, "b", <<"c">>, <<"d">>, <<"">>, <<"f">>]
         },
     {error, {expected_bitstring, "b"}} = parser:parse_machine_alphabet(RawAlphabet).
-
 
 %Machine whole parser tests
 parse_machine_parses_valid_machine_test() ->
@@ -961,3 +958,87 @@ parse_machine_transitions_error_test() ->
             ]
         }, get_raw_machine_config()),
     {error, transitions, {expected_state_bitstring, "abs"}} = parser:parse_machine(RawMachineConfig).
+
+format_error_name_is_empty_test() ->
+    ?assertMatch("machine name is empty; a machine must have a name of at least one character", parser:format_error({name, empty})).
+format_error_name_is_not_a_string_test() ->
+    ?assertMatch("machine name is not a string (received: {\"key\":2}); a machine must have a name of at least one character", parser:format_error({name, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_name_does_not_exist_test() ->
+    ?assertMatch("machine has no name; a machine must have a name of at least one character", parser:format_error({name, invalid})).
+
+format_error_alphabet_is_missing_test() ->
+    ?assertMatch("machine has no alphabet; a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, no_entry})).
+format_error_alphabet_is_empty_list_test() ->
+    ?assertMatch("machine alphabet is empty; a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, empty_list})).
+format_error_alphabet_character_is_empty_test() ->
+    ?assertMatch("machine alphabet contains an empty character; a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, empty_alphabet_character})).
+format_error_alphabet_character_is_not_a_string_test() ->
+    ?assertMatch("machine alphabet contains a value that is not a string (received: {\"key\":2}); a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_alphabet_character_is_longer_than_one_character_test() ->
+    ?assertMatch("machine alphabet contains a value that is too long (received: trompinette); a machine must have a non-empty alphabet, made of strings with exactly one character", parser:format_error({alphabet, {too_long_alphabet_character, "trompinette"}})).
+
+format_error_blank_is_empty_test() ->
+    ?assertMatch("machine blank character is empty; a machine must have a blank character exactly made of one character", parser:format_error({blank, empty_alphabet_character})).
+format_error_blank_is_not_a_string_test() ->
+    ?assertMatch("machine blank character is not a string (received: {\"key\":2}); a machine must have a blank character exactly made of one character", parser:format_error({blank, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_blank_does_not_exist_test() ->
+    ?assertMatch("machine has no blank character; a machine must have a blank character exactly made of one character", parser:format_error({blank, invalid})).
+format_error_blank_is_too_long_test() ->
+    ?assertMatch("machine blank character is too long (received: yolo); a machine must have a blank character exactly made of one character", parser:format_error({blank, {too_long_alphabet_character, "yolo"}})).
+
+format_error_initial_state_is_not_a_string_test() ->
+    ?assertMatch("machine initial state is not a string (received: {\"key\":2}); a machine must have a non-empty initial state", parser:format_error({initial, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_initial_state_does_not_exist_test() ->
+    ?assertMatch("machine has no initial state; a machine must have a non-empty initial state", parser:format_error({initial, invalid})).
+format_error_initial_state_is_empty_test() ->
+    ?assertMatch("machine initial state is empty; a machine must have a non-empty initial state", parser:format_error({initial, empty_state})).
+
+format_error_states_a_state_is_not_a_string_test() ->
+    ?assertMatch("machine has a state that is not a string ({\"key\":2}); a machine must have a non-empty list of states, which must all be non-empty strings", parser:format_error({states, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_states_a_state_is_empty_test() ->
+    ?assertMatch("machine has an empty state; a machine must have a non-empty list of states, which must all be non-empty strings", parser:format_error({states, empty_state})).
+format_error_states_does_not_exist_test() ->
+    ?assertMatch("machine has no states; a machine must have a non-empty list of states, which must all be non-empty strings", parser:format_error({states, invalid})).
+format_error_states_is_empty_test() ->
+    ?assertMatch("machine has an empty list of states; a machine must have a non-empty list of states, which must all be non-empty strings", parser:format_error({states, empty_list})).
+
+format_error_finals_a_state_is_not_a_string_test() ->
+    ?assertMatch("machine has a final state that is not a string ({\"key\":2}); a machine must have a list of states (optionally empty), which must all be non-empty strings", parser:format_error({finals, {expected_bitstring, #{<<"key">> => 2}}})).
+format_error_finals_a_state_is_empty_test() ->
+    ?assertMatch("machine has an empty final state; a machine must have a list of states (optionally empty), which must all be non-empty strings", parser:format_error({finals, empty_state})).
+format_error_finals_does_not_exist_test() ->
+    ?assertMatch("machine has no final states; a machine must have a list of states (optionally empty), which must all be non-empty strings", parser:format_error({finals, invalid})).
+
+format_error_transitions_is_empty_test() ->
+    % The message is not accurate.
+    ?assertMatch("machine has an empty transitions object; a machine must contain at least one transition", parser:format_error({transitions, invalid})).
+format_error_transitions_a_state_is_not_a_string_test() ->
+    ?assertMatch("machine contains transitions for a state that is not a valid string ({\"key\":2}); a machine can only contain transitions for valid states, which must be non-empty strings", parser:format_error({transitions, {expected_state_bitstring, #{<<"key">> => 2}}})).
+format_error_transitions_a_state_is_an_empty_string_test() ->
+    ?assertMatch("machine contains transitions for a state that is an empty string; a machine can only contain transitions for valid states, which must be non-empty strings", parser:format_error({transitions, empty_state_key})).
+format_error_transitions_read_property_of_a_transition_is_empty_test() ->
+    ?assertMatch("transition 0 for state add has its read property that is empty; each transition must have a read property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, read, empty_alphabet_character}})).
+format_error_transitions_read_property_of_a_transition_is_not_a_string_test() ->
+    ?assertMatch("transition 0 for state add has its read property that is not a string (2); each transition must have a read property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, read, {expected_bitstring, 2}}})).
+format_error_transitions_read_property_of_a_transition_is_longer_than_one_character_test() ->
+    ?assertMatch("transition 0 for state add has its read property that is too long (aaa); each transition must have a read property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, read, {too_long_alphabet_character, "aaa"}}})).
+format_error_transitions_read_property_is_missing_test() ->
+    ?assertMatch("transition 0 for state add does not have a read property; each transition must have a read property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, read, no_entry}})).
+format_error_transitions_write_property_of_a_transition_is_empty_test() ->
+    ?assertMatch("transition 0 for state add has its write property that is empty; each transition must have a write property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, write, empty_alphabet_character}})).
+format_error_transitions_write_property_of_a_transition_is_not_a_string_test() ->
+    ?assertMatch("transition 0 for state add has its write property that is not a string (2); each transition must have a write property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, write, {expected_bitstring, 2}}})).
+format_error_transitions_write_property_of_a_transition_is_longer_than_one_character_test() ->
+    ?assertMatch("transition 0 for state add has its write property that is too long (aaa); each transition must have a write property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, write, {too_long_alphabet_character, "aaa"}}})).
+format_error_transitions_write_property_is_missing_test() ->
+    ?assertMatch("transition 0 for state add does not have a write property; each transition must have a write property that is a string with exactly one character", parser:format_error({transitions, {"add", 0, write, no_entry}})).
+format_error_transitions_to_state_property_is_not_a_string_test() ->
+    ?assertMatch("transition 0 for state add has its to_state property that is not a string ({\"key\":2}); each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, {expected_bitstring, #{<<"key">> => 2}}}})).
+format_error_transitions_to_state_property_does_not_exist_test() ->
+    ?assertMatch("transition 0 for state add does not have a to_state property; each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, no_entry}})).
+format_error_transitions_to_state_property_is_empty_test() ->
+    ?assertMatch("transition 0 for state add has its to_state property that is empty; each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, empty_state}})).
+format_error_transitions_action_property_is_unknown_test() ->
+    ?assertMatch("transition 0 for state add has an unknown action property (\"trompinette\"); each transition must have an action property that is either \"LEFT\" OR \"RIGHT\"", parser:format_error({transitions, {"add", 0, action, {unknown_action, <<"trompinette">>}}})).
+format_error_transitions_action_property_is_missing_test() ->
+    ?assertMatch("transition 0 for state add does not have an action property; each transition must have an action property that is either \"LEFT\" OR \"RIGHT\"", parser:format_error({transitions, {"add", 0, action, no_entry}})).

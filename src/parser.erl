@@ -11,7 +11,8 @@
     parse_machine_finals/1,
     parse_machine_transitions/1,
     parse_machine_alphabet/1,
-    parse_machine/1
+    parse_machine/1,
+    format_error/1
 ]).
 -else.
 -export([parse_machine/1]).
@@ -60,6 +61,7 @@ parse_machine([{Field, ParsingFunction} | OtherParsingSteps], ParsedMachineConfi
 
 parse_machine_name(#{<<"name">> := <<"">>}) -> {error, empty};
 parse_machine_name(#{<<"name">> := Name}) when is_bitstring(Name) -> {ok, binary_to_list(Name)};
+parse_machine_name(#{<<"name">> := Name}) -> {error, {expected_bitstring, Name}};
 parse_machine_name(_) -> {error, invalid}.
 
 parse_machine_alphabet(#{<<"alphabet">> := Alphabet}) when is_list(Alphabet) ->
@@ -167,7 +169,7 @@ iterate_on_machine_states_transitions_map(Iterator, State, Transitions, ParsedTr
     ParsedTransitionsResult = iterate_on_machine_transitions_list(Transitions),
     case ParsedTransitionsResult of
         {error, CurrentTransitionIndex, Type, Error} ->
-            {error, {CurrentTransitionIndex, Type, Error}};
+            {error, {StateString, CurrentTransitionIndex, Type, Error}};
         {ok, ParsedTransitions} ->
             MapWithNewState = maps:put(
                 StateString, ParsedTransitions, ParsedTransitionMap
@@ -261,13 +263,67 @@ parse_transition(RawTransition) ->
             end
     end.
 
-with_quotes(String) -> "\"" ++ String ++ "\"".
+% Transforms a value returned by jsone:decode into a pretty string.
+% This function must NOT be used to prettify a string.
+to_pretty_value(Value) -> binary_to_list(jsone:encode(Value)).
 
-format_error(read, no_entry) ->
-    "property read not found";
-format_error(read, empty_alphabet_character) ->
-    "given read value is empty";
-format_error(read, {too_long_alphabet_character, ErrorValue}) ->
-    "given read value is longer than 1 character; received: " ++ with_quotes(ErrorValue);
-format_error(read, {expected_bitstring, ErrorValue}) ->
-    "expected read value to be a string; received: " ++ with_quotes(ErrorValue).
+get_rules_for_name_field() -> "a machine must have a name of at least one character".
+
+get_rules_for_alphabet_field() -> "a machine must have a non-empty alphabet, made of strings with exactly one character".
+
+get_rules_for_blank_field() -> "a machine must have a blank character exactly made of one character".
+
+get_rules_for_initial_state_field() -> "a machine must have a non-empty initial state".
+
+get_rules_for_states_field() -> "a machine must have a non-empty list of states, which must all be non-empty strings".
+
+get_rules_for_finals_field() -> "a machine must have a list of states (optionally empty), which must all be non-empty strings".
+
+get_transition_information_for_error_formatting(State, TransitionIndex) -> "transition " ++ to_pretty_value(TransitionIndex) ++ " for state " ++ State.
+
+get_rules_for_transitions_field_read_property() -> "each transition must have a read property that is a string with exactly one character".
+
+get_rules_for_transitions_field_write_property() -> "each transition must have a write property that is a string with exactly one character".
+
+get_rules_for_transitions_field_to_state_property() -> "each transition must have a to_state property that is a non-empty string".
+
+get_rules_for_transitions_field_action_property() -> "each transition must have an action property that is either \"LEFT\" OR \"RIGHT\"".
+
+format_error({name, empty}) -> "machine name is empty; " ++ get_rules_for_name_field();
+format_error({name, {expected_bitstring, Name}}) -> "machine name is not a string (received: " ++ to_pretty_value(Name) ++ "); " ++ get_rules_for_name_field();
+format_error({name, invalid}) -> "machine has no name; " ++ get_rules_for_name_field();
+format_error({alphabet, no_entry}) -> "machine has no alphabet; " ++ get_rules_for_alphabet_field();
+format_error({alphabet, empty_list}) -> "machine alphabet is empty; " ++ get_rules_for_alphabet_field();
+format_error({alphabet, empty_alphabet_character}) -> "machine alphabet contains an empty character; " ++ get_rules_for_alphabet_field();
+format_error({alphabet, {expected_bitstring, Character}}) -> "machine alphabet contains a value that is not a string (received: " ++ to_pretty_value(Character) ++ "); " ++ get_rules_for_alphabet_field();
+format_error({alphabet, {too_long_alphabet_character, Character}}) -> "machine alphabet contains a value that is too long (received: " ++ Character ++ "); " ++ get_rules_for_alphabet_field();
+format_error({blank, empty_alphabet_character}) -> "machine blank character is empty; " ++ get_rules_for_blank_field();
+format_error({blank, {expected_bitstring, Blank}}) -> "machine blank character is not a string (received: " ++ to_pretty_value(Blank) ++ "); " ++ get_rules_for_blank_field();
+format_error({blank, invalid}) -> "machine has no blank character; " ++ get_rules_for_blank_field();
+format_error({blank, {too_long_alphabet_character, Blank}}) -> "machine blank character is too long (received: " ++ Blank ++ "); " ++ get_rules_for_blank_field();
+format_error({initial, {expected_bitstring, InitialState}}) -> "machine initial state is not a string (received: " ++ to_pretty_value(InitialState) ++ "); " ++ get_rules_for_initial_state_field();
+format_error({initial, invalid}) -> "machine has no initial state; " ++ get_rules_for_initial_state_field();
+format_error({initial, empty_state}) -> "machine initial state is empty; " ++ get_rules_for_initial_state_field();
+format_error({states, {expected_bitstring, State}}) -> "machine has a state that is not a string (" ++ to_pretty_value(State) ++ "); " ++ get_rules_for_states_field();
+format_error({states, empty_state}) -> "machine has an empty state; " ++ get_rules_for_states_field();
+format_error({states, invalid}) -> "machine has no states; " ++ get_rules_for_states_field();
+format_error({states, empty_list}) -> "machine has an empty list of states; " ++ get_rules_for_states_field();
+format_error({finals, {expected_bitstring, State}}) -> "machine has a final state that is not a string (" ++ to_pretty_value(State) ++ "); " ++ get_rules_for_finals_field();
+format_error({finals, empty_state}) -> "machine has an empty final state; " ++ get_rules_for_finals_field();
+format_error({finals, invalid}) -> "machine has no final states; " ++ get_rules_for_finals_field();
+format_error({transitions, invalid}) -> "machine has an empty transitions object; a machine must contain at least one transition";
+format_error({transitions, empty_state_key}) -> "machine contains transitions for a state that is an empty string; a machine can only contain transitions for valid states, which must be non-empty strings";
+format_error({transitions, {expected_state_bitstring, State}}) -> "machine contains transitions for a state that is not a valid string (" ++ to_pretty_value(State) ++ "); a machine can only contain transitions for valid states, which must be non-empty strings";
+format_error({transitions, {State, TransitionIndex, read, empty_alphabet_character}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its read property that is empty; " ++ get_rules_for_transitions_field_read_property();
+format_error({transitions, {State, TransitionIndex, read, {expected_bitstring, ReadValue}}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its read property that is not a string (" ++ to_pretty_value(ReadValue) ++ "); " ++ get_rules_for_transitions_field_read_property();
+format_error({transitions, {State, TransitionIndex, read, {too_long_alphabet_character, ReadValue}}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its read property that is too long (" ++ ReadValue ++ "); " ++ get_rules_for_transitions_field_read_property();
+format_error({transitions, {State, TransitionIndex, read, no_entry}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " does not have a read property; " ++ get_rules_for_transitions_field_read_property();
+format_error({transitions, {State, TransitionIndex, write, empty_alphabet_character}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its write property that is empty; " ++ get_rules_for_transitions_field_write_property();
+format_error({transitions, {State, TransitionIndex, write, {expected_bitstring, ReadValue}}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its write property that is not a string (" ++ to_pretty_value(ReadValue) ++ "); " ++ get_rules_for_transitions_field_write_property();
+format_error({transitions, {State, TransitionIndex, write, {too_long_alphabet_character, ReadValue}}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its write property that is too long (" ++ ReadValue ++ "); " ++ get_rules_for_transitions_field_write_property();
+format_error({transitions, {State, TransitionIndex, write, no_entry}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " does not have a write property; " ++ get_rules_for_transitions_field_write_property();
+format_error({transitions, {State, TransitionIndex, to_state, {expected_bitstring, ToStateValue}}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its to_state property that is not a string (" ++ to_pretty_value(ToStateValue) ++ "); " ++ get_rules_for_transitions_field_to_state_property();
+format_error({transitions, {State, TransitionIndex, to_state, no_entry}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " does not have a to_state property; " ++ get_rules_for_transitions_field_to_state_property();
+format_error({transitions, {State, TransitionIndex, to_state, empty_state}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has its to_state property that is empty; " ++ get_rules_for_transitions_field_to_state_property();
+format_error({transitions, {State, TransitionIndex, action, {unknown_action, ActionValue}}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " has an unknown action property (" ++ to_pretty_value(ActionValue) ++ "); " ++ get_rules_for_transitions_field_action_property();
+format_error({transitions, {State, TransitionIndex, action, no_entry}}) -> get_transition_information_for_error_formatting(State, TransitionIndex) ++ " does not have an action property; " ++ get_rules_for_transitions_field_action_property().
