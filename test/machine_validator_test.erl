@@ -23,7 +23,7 @@ get_valid_states() ->
 
 get_valid_transitions_map() ->
     #{
-        "abs" => [
+        "scanright" => [
             #parsed_machine_config_transition{
                 read = ".",
                 to_state = "scanright",
@@ -31,27 +31,27 @@ get_valid_transitions_map() ->
                 action = right
             },
             #parsed_machine_config_transition{
-                read = "?",
-                to_state = "cocorico",
-                write = "*",
+                read = "=",
+                to_state = "skip",
+                write = "-",
                 action = left
             }
         ],
-        "add" => [
+        "eraseone" => [
             #parsed_machine_config_transition{
                 read = ".",
-                to_state = "scanright",
+                to_state = "HALT",
                 write = ".",
                 action = right
             },
             #parsed_machine_config_transition{
-                read = "?",
-                to_state = "cocorico",
-                write = "*",
+                read = "-",
+                to_state = "eraseone",
+                write = "=",
                 action = left
             }
         ],
-        "sub" => [
+        "subone" => [
             #parsed_machine_config_transition{
                 read = ".",
                 to_state = "scanright",
@@ -59,9 +59,9 @@ get_valid_transitions_map() ->
                 action = right
             },
             #parsed_machine_config_transition{
-                read = "?",
-                to_state = "cocorico",
-                write = "*",
+                read = "-",
+                to_state = "subone",
+                write = ".",
                 action = left
             }
         ]
@@ -136,9 +136,9 @@ validate_machine_transitions_test() ->
     ).
 
 validate_machine_transitions_duplicated_error_test() ->
-    {error, "sub", {duplicated_elements, ["."]}} = machine_validator:validate_machine_transitions(
+    {error, "subone", {duplicated_elements, ["."]}} = machine_validator:validate_machine_transitions(
         #{
-            "abs" => [
+            "skip" => [
                 #parsed_machine_config_transition{
                     read = ".",
                     to_state = "scanright",
@@ -146,13 +146,13 @@ validate_machine_transitions_duplicated_error_test() ->
                     action = right
                 },
                 #parsed_machine_config_transition{
-                    read = "?",
-                    to_state = "cocorico",
-                    write = "*",
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
                     action = left
                 }
             ],
-            "add" => [
+            "scanright" => [
                 #parsed_machine_config_transition{
                     read = ".",
                     to_state = "scanright",
@@ -160,13 +160,13 @@ validate_machine_transitions_duplicated_error_test() ->
                     action = right
                 },
                 #parsed_machine_config_transition{
-                    read = "?",
-                    to_state = "cocorico",
-                    write = "*",
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
                     action = left
                 }
             ],
-            "sub" => [
+            "subone" => [
                 #parsed_machine_config_transition{
                     read = ".",
                     to_state = "scanright",
@@ -180,9 +180,9 @@ validate_machine_transitions_duplicated_error_test() ->
                     action = right
                 },
                 #parsed_machine_config_transition{
-                    read = "?",
-                    to_state = "cocorico",
-                    write = "*",
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
                     action = left
                 }
             ]
@@ -192,9 +192,9 @@ validate_machine_transitions_duplicated_error_test() ->
     ).
 
 validate_machine_transitions_several_duplicated_error_test() ->
-    {error, "add", {duplicated_elements, [".", "?"]}} = machine_validator:validate_machine_transitions(
+    {error, "scanright", {duplicated_elements, [".", "-"]}} = machine_validator:validate_machine_transitions(
         #{
-            "abs" => [
+            "skip" => [
                 #parsed_machine_config_transition{
                     read = ".",
                     to_state = "scanright",
@@ -202,13 +202,13 @@ validate_machine_transitions_several_duplicated_error_test() ->
                     action = right
                 },
                 #parsed_machine_config_transition{
-                    read = "?",
-                    to_state = "cocorico",
-                    write = "*",
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
                     action = left
                 }
             ],
-            "add" => [
+            "scanright" => [
                 #parsed_machine_config_transition{
                     read = ".",
                     to_state = "scanright",
@@ -222,19 +222,19 @@ validate_machine_transitions_several_duplicated_error_test() ->
                     action = right
                 },
                 #parsed_machine_config_transition{
-                    read = "?",
-                    to_state = "cocorico",
-                    write = "*",
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
                     action = left
                 },
                 #parsed_machine_config_transition{
-                    read = "?",
-                    to_state = "cocorico",
-                    write = "*",
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
                     action = left
                 }
             ],
-            "sub" => [
+            "subone" => [
                 % Below duplcation on `"read":"."` is voluntary error, as you can see it will not achieve to validate this data as
                 % above one is already failing
                 #parsed_machine_config_transition{
@@ -250,9 +250,16 @@ validate_machine_transitions_several_duplicated_error_test() ->
                     action = right
                 },
                 #parsed_machine_config_transition{
-                    read = "?",
-                    to_state = "cocorico",
-                    write = "*",
+                    read = "-",
+                    to_state = "subone",
+                    write = "=",
+                    action = left
+                }
+            ]
+        },
+        get_valid_states(),
+        get_valid_alphabet()
+    ).
                     action = left
                 }
             ]
