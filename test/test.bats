@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "Default turing machine static input, output test" {
-    run bash -c './_build/default/bin/turing machines/unary_sub.json | cat -e' # notice `run`!
+    run bash -c './_build/default/bin/turing machines/unary_sub.json "unused_for_the_moment" | cat -e'
     assert_output 'Interpreter starting...$
 Tape: [<"1">,"1","1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
 Tape: ["1",<"1">,"1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
@@ -38,4 +38,53 @@ Tape: ["1",".",".","-",<"=">,".","."] ("scanright", "=") -> ("eraseone", ".", le
 Tape: ["1",".",".",<"-">,".",".","."] ("eraseone", "-") -> ("HALT", ".", left)$
 Tape: ["1",".",<".">,".",".",".","."] Final state reached !$
 Interpreter closing...$'
+}
+
+@test "Display usage on empty args execution" {
+    run bash -c './_build/default/bin/turing | cat -e'
+    assert_output 'usage: ft_turing [-h] jsonfile input$
+$
+positional arguments:$
+  jsonfile          json description of the machine$
+$
+  input             input of the machine$
+$
+optional arguments:$
+  -h, --help        show this help message and exit$'
+}
+
+@test "Display usage on too many args execution" {
+    run bash -c './_build/default/bin/turing abc.json "abc" --help cocorico | cat -e'
+    assert_output 'usage: ft_turing [-h] jsonfile input$
+$
+positional arguments:$
+  jsonfile          json description of the machine$
+$
+  input             input of the machine$
+$
+optional arguments:$
+  -h, --help        show this help message and exit$'
+}
+
+@test "Display usage on --help flag execution" {
+    run bash -c './_build/default/bin/turing --help abc.json "abc" cocorico | cat -e'
+    assert_output 'usage: ft_turing [-h] jsonfile input$
+$
+positional arguments:$
+  jsonfile          json description of the machine$
+$
+  input             input of the machine$
+$
+optional arguments:$
+  -h, --help        show this help message and exit$'
+}
+
+@test "Machine configuration json file not found" {
+    run bash -c './_build/default/bin/turing abc.json "abc" | cat -e'
+    assert_output 'Error while reading machine configuration json file: enoent$'
+}
+
+@test "Machine configuration json file cannot be decoded" {
+    run bash -c './_build/default/bin/turing machines/not-a-json.json "abc" | cat -e'
+    assert_output 'Error while decoding machine configuration json file: badarg$'
 }
