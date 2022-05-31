@@ -1,12 +1,15 @@
 -module(machine_validator).
 
+-include("machine.hrl").
+
 -ifdef(TEST).
 -export([
     validate_machine_alphabet/1,
     validate_machine_states/1,
     validate_machine_blank/2,
     validate_machine_finals/2,
-    validate_machine_initial/2
+    validate_machine_initial/2,
+    validate_machine_transitions/3
 ]).
 -else.
 -export([]).
@@ -73,6 +76,7 @@ validate_machine_finals(Finals, States, expected_states_step) ->
             {error, {expected_states, FinalsLessStates}}
     end.
 
+% Initial validation
 validate_machine_initial(Initial, States) ->
     InitialIsStatesMember = lists:member(Initial, States),
     if
@@ -83,3 +87,37 @@ validate_machine_initial(Initial, States) ->
                 error, {expected_states, Initial}
             }
     end.
+
+% Transitions validation
+% 1/ Search for transitions listeners duplication
+% 2/ Validate each read write occurences from alphabet
+% 3/ Validate each key states and to_state from states
+look_for_transitions_read_duplicated(TransitionsList, States) ->
+    EveryTransitionReadList = lists:map(
+        fun(Transition) -> Transition#parsed_machine_config_transition.read end, TransitionsList
+    ),
+    look_for_duplicated_in_list(EveryTransitionReadList).
+
+iterate_on_map(Iterator, FunctionToApply) ->
+    NextIteratorResult = maps:next(Iterator),
+    case NextIteratorResult of
+        none ->
+            ok;
+        {Key, Value, NextIterator} ->
+            Result = FunctionToApply(Value),
+            case Result of
+                ok ->
+                    iterate_on_map(
+                        NextIterator, FunctionToApply
+                    );
+                {error, Error} ->
+                    {error, Key, Error}
+            end
+    end.
+
+validate_machine_transitions(Transitions, States, Alphabet) ->
+    io:format("~p~n", [Transitions]),
+    Iterator = maps:iterator(Transitions),
+    iterate_on_map(Iterator, fun(TransitionList) ->
+        look_for_transitions_read_duplicated(TransitionList, States)
+    end).

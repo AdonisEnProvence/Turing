@@ -1,5 +1,7 @@
 -module(machine_validator_test).
 
+-include("../src/machine.hrl").
+
 -include_lib("eunit/include/eunit.hrl").
 
 get_valid_alphabet() ->
@@ -18,6 +20,52 @@ get_valid_states() ->
         "skip",
         "HALT"
     ].
+
+get_valid_transitions_map() ->
+    #{
+        "abs" => [
+            #parsed_machine_config_transition{
+                read = ".",
+                to_state = "scanright",
+                write = ".",
+                action = right
+            },
+            #parsed_machine_config_transition{
+                read = "?",
+                to_state = "cocorico",
+                write = "*",
+                action = left
+            }
+        ],
+        "add" => [
+            #parsed_machine_config_transition{
+                read = ".",
+                to_state = "scanright",
+                write = ".",
+                action = right
+            },
+            #parsed_machine_config_transition{
+                read = "?",
+                to_state = "cocorico",
+                write = "*",
+                action = left
+            }
+        ],
+        "sub" => [
+            #parsed_machine_config_transition{
+                read = ".",
+                to_state = "scanright",
+                write = ".",
+                action = right
+            },
+            #parsed_machine_config_transition{
+                read = "?",
+                to_state = "cocorico",
+                write = "*",
+                action = left
+            }
+        ]
+    }.
 
 % Validate Alphabet
 validate_machine_alphabet_test() ->
@@ -77,4 +125,138 @@ validate_machine_initial_test() ->
 validate_machine_initial_expected_state_error_test() ->
     {error, {expected_states, "invalid_state"}} = machine_validator:validate_machine_initial(
         "invalid_state", get_valid_states()
+    ).
+
+% Validate transitions
+validate_machine_transitions_test() ->
+    ok = machine_validator:validate_machine_transitions(
+        get_valid_transitions_map(),
+        get_valid_states(),
+        get_valid_alphabet()
+    ).
+
+validate_machine_transitions_duplicated_error_test() ->
+    {error, "sub", {duplicated_elements, ["."]}} = machine_validator:validate_machine_transitions(
+        #{
+            "abs" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ],
+            "add" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ],
+            "sub" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ]
+        },
+        get_valid_states(),
+        get_valid_alphabet()
+    ).
+
+validate_machine_transitions_several_duplicated_error_test() ->
+    {error, "add", {duplicated_elements, [".", "?"]}} = machine_validator:validate_machine_transitions(
+        #{
+            "abs" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ],
+            "add" => [
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ],
+            "sub" => [
+                % Below duplcation on `"read":"."` is voluntary error, as you can see it will not achieve to validate this data as
+                % above one is already failing
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = ".",
+                    to_state = "scanright",
+                    write = ".",
+                    action = right
+                },
+                #parsed_machine_config_transition{
+                    read = "?",
+                    to_state = "cocorico",
+                    write = "*",
+                    action = left
+                }
+            ]
+        },
+        get_valid_states(),
+        get_valid_alphabet()
     ).
