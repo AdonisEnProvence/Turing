@@ -1027,3 +1027,7 @@ format_error_transitions_to_state_property_does_not_exist_test() ->
     ?assertMatch("transition 0 for state add does not have a to_state property; each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, no_entry}})).
 format_error_transitions_to_state_property_is_empty_test() ->
     ?assertMatch("transition 0 for state add has its to_state property that is empty; each transition must have a to_state property that is a non-empty string", parser:format_error({transitions, {"add", 0, to_state, empty_state}})).
+format_error_transitions_action_property_is_unknown_test() ->
+    ?assertMatch("transition 0 for state add has an unknown action property (\"trompinette\"); each transition must have an action property that is either \"LEFT\" OR \"RIGHT\"", parser:format_error({transitions, {"add", 0, action, {unknown_action, <<"trompinette">>}}})).
+format_error_transitions_action_property_is_missing_test() ->
+    ?assertMatch("transition 0 for state add does not have an action property; each transition must have an action property that is either \"LEFT\" OR \"RIGHT\"", parser:format_error({transitions, {"add", 0, action, no_entry}})).
