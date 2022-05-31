@@ -69,3 +69,12 @@ validate_machine_finals_several_expected_states_entry_error_test() ->
     {error, {expected_states, ["invalid_state_entry_0", "invalid_state_entry_1"]}} = machine_validator:validate_machine_finals(
         ["HALT", "invalid_state_entry_0", "invalid_state_entry_1"], get_valid_states()
     ).
+
+% Validate Initial
+validate_machine_initial_test() ->
+    ok = machine_validator:validate_machine_initial("scanright", get_valid_states()).
+
+validate_machine_initial_expected_state_error_test() ->
+    {error, {expected_states, "invalid_state"}} = machine_validator:validate_machine_initial(
+        "invalid_state", get_valid_states()
+    ).

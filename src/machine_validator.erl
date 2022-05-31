@@ -5,7 +5,8 @@
     validate_machine_alphabet/1,
     validate_machine_states/1,
     validate_machine_blank/2,
-    validate_machine_finals/2
+    validate_machine_finals/2,
+    validate_machine_initial/2
 ]).
 -else.
 -export([]).
@@ -70,4 +71,15 @@ validate_machine_finals(Finals, States, expected_states_step) ->
             ok;
         EveryFinalsEntryIsStatesEntry =:= false ->
             {error, {expected_states, FinalsLessStates}}
+    end.
+
+validate_machine_initial(Initial, States) ->
+    InitialIsStatesMember = lists:member(Initial, States),
+    if
+        InitialIsStatesMember =:= true ->
+            ok;
+        InitialIsStatesMember =:= false ->
+            {
+                error, {expected_states, Initial}
+            }
     end.
