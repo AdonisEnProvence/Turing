@@ -14,7 +14,7 @@
     format_error/1
 ]).
 -else.
--export([validate_machine/1]).
+-export([validate_machine/1, format_error/1]).
 -endif.
 
 % Reminder validation step is after parser step
@@ -65,7 +65,7 @@ exectute_machine_validation_steps([{Field, ValidatingFunction} | OtherValidating
                 OtherValidatingSteps
             );
         {error, Error} ->
-            {error, Field, Error}
+            {error, {Field, Error}}
     end.
 
 % Tools

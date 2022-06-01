@@ -575,7 +575,7 @@ validate_machine_transitions_invalid_to_state_error_test() ->
                     action = left
                 }
             ],
-            "subone" => [
+            "eraseone" => [
                 #parsed_machine_config_transition{
                     read = ".",
                     to_state = "scanright",
@@ -609,7 +609,7 @@ validate_machine_success_test() ->
     }).
 
 validate_machine_initial_error_test() ->
-    {error, initial, {expected_state, "invalid_state"}} = machine_validator:validate_machine(
+    {error, {initial, {expected_state, "invalid_state"}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "invalid_state",
             blank = ".",
@@ -621,7 +621,7 @@ validate_machine_initial_error_test() ->
     ).
 
 validate_machine_blank_error_test() ->
-    {error, blank, {expected_alphabet_character, "not_alphabet_character"}} = machine_validator:validate_machine(
+    {error, {blank, {expected_alphabet_character, "not_alphabet_character"}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = "not_alphabet_character",
@@ -633,7 +633,7 @@ validate_machine_blank_error_test() ->
     ).
 
 validate_machine_states_error_test() ->
-    {error, states, {duplicated_elements, ["HALT", "scanright"]}} = machine_validator:validate_machine(
+    {error, {states, {duplicated_elements, ["HALT", "scanright"]}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
@@ -645,7 +645,7 @@ validate_machine_states_error_test() ->
     ).
 
 validate_machine_finals_error_test() ->
-    {error, finals, {expected_states, ["invalid_state", "also_invalid_state"]}} = machine_validator:validate_machine(
+    {error, {finals, {expected_states, ["invalid_state", "also_invalid_state"]}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
@@ -657,7 +657,7 @@ validate_machine_finals_error_test() ->
     ).
 
 validate_machine_alphabet_error_test() ->
-    {error, alphabet, {duplicated_elements, ["."]}} = machine_validator:validate_machine(
+    {error, {alphabet, {duplicated_elements, ["."]}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
@@ -669,7 +669,7 @@ validate_machine_alphabet_error_test() ->
     ).
 
 validate_machine_transitions_error_test() ->
-    {error, transitions, {"subone", {duplicated_elements, ["."]}}} = machine_validator:validate_machine(
+    {error, {transitions, {"subone", {duplicated_elements, ["."]}}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
