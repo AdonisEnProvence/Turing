@@ -46,5 +46,5 @@ docker rm -f turing
 To run shell tests you have to be inside the docker container
 Run
 ```sh
-./bats-core/bin/bats test/test.bats
+./bats-core/bin/bats test/
 ```

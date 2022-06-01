@@ -26,5 +26,4 @@ jobs:
       run: rebar3 escriptize
 
     - name: Run integrations tests
-      run: ./bats-core/bin/bats test/test.bats    
-
+      run: ./bats-core/bin/bats test/
