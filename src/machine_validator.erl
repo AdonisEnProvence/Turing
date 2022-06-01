@@ -264,7 +264,7 @@ validation_step_transitions_to_state_are_states(TransitionsMap, States) ->
     end),
     case Result of
         ok -> ok;
-        {error, State, Error} -> {error, State, Error}
+        {error, State, Error} -> {error, {State, Error}}
     end.
 
 validate_machine_transitions(TransitionsMap, States, Alphabet) ->

@@ -506,7 +506,7 @@ validate_machine_transitions_several_invalid_key_error_test() ->
 
 validate_machine_transitions_invalid_to_state_error_test() ->
     % Note: Erlang looks like iterating over map keys via their ascii value, then here scanright is verified first
-    {error, "scanright", {to_state, {expected_state, "invalid_to_state"}}} = machine_validator:validate_machine_transitions(
+    {error, {"scanright", {to_state, {expected_state, "invalid_to_state"}}}} = machine_validator:validate_machine_transitions(
         #{
             "subone" => [
                 #parsed_machine_config_transition{
