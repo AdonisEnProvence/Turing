@@ -10,7 +10,8 @@
     validate_machine_finals/2,
     validate_machine_initial/2,
     validate_machine_transitions/3,
-    validate_machine/1
+    validate_machine/1,
+    format_error/1
 ]).
 -else.
 -export([validate_machine/1]).
@@ -268,3 +269,26 @@ validation_step_transitions_to_state_are_states(TransitionsMap, States) ->
 
 validate_machine_transitions(TransitionsMap, States, Alphabet) ->
     validation_step_transitions_map_read_duplication(TransitionsMap, States, Alphabet).
+
+% Transforms a value returned by jsone:decode into a pretty string.
+% This function must NOT be used to prettify a string.
+pretty_list_value(List) -> lists:flatten(io_lib:format("~p", [List])).
+
+get_rule_for_finals_validation() ->
+    "Machine finals must contain unique elements listed by the machine states list".
+
+format_error({finals, {expected_states, InvalidStates}}) ->
+    "machine finals has not states listed elements (" ++ pretty_list_value(InvalidStates) ++ "); " ++
+        get_rule_for_finals_validation();
+format_error({finals, {duplicated_elements, DuplicatedElements}}) ->
+    "machine finals has duplicated elements (" ++ pretty_list_value(DuplicatedElements) ++ "); " ++
+        get_rule_for_finals_validation();
+format_error({blank, {expected_alphabet_character, Character}}) ->
+    "machine blank is not an alphabet character (received: " ++ Character ++
+        "); Machine blank must contains an alphabet character";
+format_error({states, {duplicated_elements, DuplicatedElements}}) ->
+    "machine states has duplicated elements (" ++ pretty_list_value(DuplicatedElements) ++
+        "); Machine states must contains unique elements";
+format_error({alphabet, {duplicated_elements, DuplicatedElements}}) ->
+    "machine alphabet has duplicated elements (" ++ pretty_list_value(DuplicatedElements) ++
+        "); Machine alphabet must contains unique elements".

@@ -71,32 +71,57 @@ get_valid_transitions_map() ->
 validate_machine_alphabet_test() ->
     ok = machine_validator:validate_machine_alphabet(get_valid_alphabet()).
 parse_machine_alphabet_duplicated_entry_test() ->
-    {error, {duplicated_elements, ["="]}} = machine_validator:validate_machine_alphabet(
+    ExpectedErrorContent = {duplicated_elements, ["="]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_alphabet(
         get_valid_alphabet() ++ ["="]
+    ),
+    ?assertMatch(
+        "machine alphabet has duplicated elements ([\"=\"]); Machine alphabet must contains unique elements",
+        machine_validator:format_error({alphabet, ExpectedErrorContent})
     ).
 parse_machine_alphabet_several_duplicated_entry_test() ->
-    {error, {duplicated_elements, [".", "="]}} = machine_validator:validate_machine_alphabet(
+    ExpectedErrorContent = {duplicated_elements, [".", "="]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_alphabet(
         get_valid_alphabet() ++ [".", "="]
+    ),
+    ?assertMatch(
+        "machine alphabet has duplicated elements ([\".\",\"=\"]); Machine alphabet must contains unique elements",
+        machine_validator:format_error({alphabet, ExpectedErrorContent})
     ).
 
 % Validate States
 validate_machine_states_test() ->
     ok = machine_validator:validate_machine_states(get_valid_states()).
 parse_machine_states_duplicated_entry_test() ->
-    {error, {duplicated_elements, ["HALT"]}} = machine_validator:validate_machine_states(
+    ExpectedErrorContent = {duplicated_elements, ["HALT"]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_states(
         get_valid_states() ++ ["HALT"]
+    ),
+    ?assertMatch(
+        "machine states has duplicated elements ([\"HALT\"]); Machine states must contains unique elements",
+        machine_validator:format_error({states, ExpectedErrorContent})
     ).
 parse_machine_states_several_duplicated_entry_test() ->
-    {error, {duplicated_elements, ["HALT", "scanright"]}} = machine_validator:validate_machine_states(
+    ExpectedErrorContent = {duplicated_elements, ["HALT", "scanright"]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_states(
         get_valid_states() ++ ["HALT", "scanright"]
+    ),
+    ?assertMatch(
+        "machine states has duplicated elements ([\"HALT\",\"scanright\"]); Machine states must contains unique elements",
+        machine_validator:format_error({states, ExpectedErrorContent})
     ).
 
 % Validate Blank
 validate_machine_blank_test() ->
     ok = machine_validator:validate_machine_blank(".", get_valid_alphabet()).
 validate_machine_blank_not_alphabet_character_error_test() ->
-    {error, {expected_alphabet_character, "$"}} = machine_validator:validate_machine_blank(
+    ExpectedErrorContent = {expected_alphabet_character, "$"},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_blank(
         "$", get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine blank is not an alphabet character (received: $); Machine blank must contains an alphabet character",
+        machine_validator:format_error({blank, ExpectedErrorContent})
     ).
 
 % Validate Finals
@@ -104,18 +129,33 @@ validate_machine_finals_test() ->
     ok = machine_validator:validate_machine_finals(["HALT"], get_valid_states()).
 
 validate_machine_finals_duplicated_entry_test() ->
-    {error, {duplicated_elements, ["HALT"]}} = machine_validator:validate_machine_finals(
+    ExpectedErrorContent = {duplicated_elements, ["HALT"]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_finals(
         ["HALT", "scanright", "HALT"], get_valid_states()
+    ),
+    ?assertMatch(
+        "machine finals has duplicated elements ([\"HALT\"]); Machine finals must contain unique elements listed by the machine states list",
+        machine_validator:format_error({finals, ExpectedErrorContent})
     ).
 
 validate_machine_finals_expected_states_entry_error_test() ->
+    ExpectedErrorContent = {expected_states, ["invalid_state_entry"]},
     {error, {expected_states, ["invalid_state_entry"]}} = machine_validator:validate_machine_finals(
         ["HALT", "invalid_state_entry"], get_valid_states()
+    ),
+    ?assertMatch(
+        "machine finals has not states listed elements ([\"invalid_state_entry\"]); Machine finals must contain unique elements listed by the machine states list",
+        machine_validator:format_error({finals, ExpectedErrorContent})
     ).
 
 validate_machine_finals_several_expected_states_entry_error_test() ->
-    {error, {expected_states, ["invalid_state_entry_0", "invalid_state_entry_1"]}} = machine_validator:validate_machine_finals(
+    ExpectedErrorContent = {expected_states, ["invalid_state_entry_0", "invalid_state_entry_1"]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_finals(
         ["HALT", "invalid_state_entry_0", "invalid_state_entry_1"], get_valid_states()
+    ),
+    ?assertMatch(
+        "machine finals has not states listed elements ([\"invalid_state_entry_0\",\"invalid_state_entry_1\"]); Machine finals must contain unique elements listed by the machine states list",
+        machine_validator:format_error({finals, ExpectedErrorContent})
     ).
 
 % Validate Initial
