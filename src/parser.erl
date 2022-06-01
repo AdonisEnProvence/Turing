@@ -15,7 +15,7 @@
     format_error/1
 ]).
 -else.
--export([parse_machine/1]).
+-export([parse_machine/1, format_error/1]).
 -endif.
 
 parse_machine(MachineConfiguration) ->
@@ -56,7 +56,7 @@ parse_machine([{Field, ParsingFunction} | OtherParsingSteps], ParsedMachineConfi
                 maps:put(Field, Value, ParsedMachineConfiguration)
             );
         {error, Error} ->
-            {error, Field, Error}
+            {error, {Field, Error}}
     end.
 
 parse_machine_name(#{<<"name">> := <<"">>}) -> {error, empty};

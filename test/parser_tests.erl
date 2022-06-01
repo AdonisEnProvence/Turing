@@ -893,27 +893,27 @@ parse_machine_parses_valid_machine_test() ->
 
 parse_machine_name_error_test() ->
     RawMachineConfig = maps:update(<<"name">>, <<"">>, get_raw_machine_config()),
-    {error, name, empty} = parser:parse_machine(RawMachineConfig).
+    {error, {name, empty}} = parser:parse_machine(RawMachineConfig).
 
 parse_machine_blank_error_test() ->
     RawMachineConfig = maps:update(<<"blank">>, <<"wwww">>, get_raw_machine_config()),
-    {error, blank, {too_long_alphabet_character, "wwww"}} = parser:parse_machine(RawMachineConfig).
+    {error, {blank, {too_long_alphabet_character, "wwww"}}} = parser:parse_machine(RawMachineConfig).
 
 parse_machine_initial_error_test() ->
     RawMachineConfig = maps:remove(<<"initial">>, get_raw_machine_config()),
-    {error, initial, invalid} = parser:parse_machine(RawMachineConfig).
+    {error, {initial, invalid}} = parser:parse_machine(RawMachineConfig).
 
 parse_machine_alphabet_error_test() ->
     RawMachineConfig = maps:update(<<"alphabet">>, [], get_raw_machine_config()),
-    {error, alphabet, empty_list} = parser:parse_machine(RawMachineConfig).
+    {error, {alphabet, empty_list}} = parser:parse_machine(RawMachineConfig).
 
 parse_machine_states_error_test() ->
     RawMachineConfig = maps:update(<<"states">>, [<<"word">>, 42, <<"cocorico">>], get_raw_machine_config()),
-    {error, states, {expected_bitstring, 42}} = parser:parse_machine(RawMachineConfig).
+    {error, {states, {expected_bitstring, 42}}} = parser:parse_machine(RawMachineConfig).
 
 parse_machine_finals_error_test() ->
     RawMachineConfig = maps:update(<<"finals">>, [atom], get_raw_machine_config()),
-    {error, finals, {expected_bitstring, atom}} = parser:parse_machine(RawMachineConfig).
+    {error, {finals, {expected_bitstring, atom}}} = parser:parse_machine(RawMachineConfig).
 
 parse_machine_transitions_error_test() ->
     RawMachineConfig = maps:update(<<"transitions">>, #{
@@ -960,7 +960,7 @@ parse_machine_transitions_error_test() ->
                 }
             ]
         }, get_raw_machine_config()),
-    {error, transitions, {expected_state_bitstring, "abs"}} = parser:parse_machine(RawMachineConfig).
+    {error, {transitions, {expected_state_bitstring, "abs"}}} = parser:parse_machine(RawMachineConfig).
 
 format_error_name_is_empty_test() ->
     ?assertMatch("machine name is empty; a machine must have a name of at least one character", parser:format_error({name, empty})).

@@ -106,3 +106,10 @@ Interpreter closing...$'
     run bash -c '_build/default/bin/turing machines/basic-machine.json "." | cat -e'
     assert_output 'Blank character is forbidden in input$'
 }
+
+@test "Log machine configuration parsing error" {
+    run bash -c '_build/default/bin/turing machines/machine-failing-parsing.json "." | cat -e'
+    assert_output 'Error occured during machine configuration parsing:$
+$
+machine alphabet is empty; a machine must have a non-empty alphabet, made of strings with exactly one character$'
+}
