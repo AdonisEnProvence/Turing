@@ -113,3 +113,17 @@ Interpreter closing...$'
 $
 machine alphabet is empty; a machine must have a non-empty alphabet, made of strings with exactly one character$'
 }
+
+@test "Log machine validation on transition read error" {
+    run bash -c '_build/default/bin/turing machines/invalid-machine-transition.json "11-1=" | cat -e'
+    assert_output 'Error occured during machine configuration validation:$
+$
+machine transition "skip" has duplicated read operation (["."]); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target$'
+}
+
+@test "Log machine validation on states error" {
+    run bash -c '_build/default/bin/turing machines/invalid-machine-states.json "11-1=" | cat -e'
+    assert_output 'Error occured during machine configuration validation:$
+$
+machine states has duplicated elements (["subone"]); machine states must contains unique elements$'
+}
