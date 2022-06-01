@@ -136,7 +136,7 @@ validate_machine_transitions_test() ->
     ).
 
 validate_machine_transitions_duplicated_error_test() ->
-    {error, "subone", {duplicated_elements, ["."]}} = machine_validator:validate_machine_transitions(
+    {error, {"subone", {duplicated_elements, ["."]}}} = machine_validator:validate_machine_transitions(
         #{
             "skip" => [
                 #parsed_machine_config_transition{
@@ -192,7 +192,7 @@ validate_machine_transitions_duplicated_error_test() ->
     ).
 
 validate_machine_transitions_several_duplicated_error_test() ->
-    {error, "scanright", {duplicated_elements, [".", "-"]}} = machine_validator:validate_machine_transitions(
+    {error, {"scanright", {duplicated_elements, [".", "-"]}}} = machine_validator:validate_machine_transitions(
         #{
             "skip" => [
                 #parsed_machine_config_transition{
@@ -513,4 +513,129 @@ validate_machine_transitions_invalid_to_state_error_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ).
+
+validate_machine_success_test() ->
+    ok = machine_validator:validate_machine(#parsed_machine_config{
+        initial = "subone",
+        blank = ".",
+        states = get_valid_states(),
+        finals = ["HALT"],
+        alphabet = get_valid_alphabet(),
+        transitions = get_valid_transitions_map()
+    }).
+
+validate_machine_initial_error_test() ->
+    {error, initial, {expected_state, "invalid_state"}} = machine_validator:validate_machine(
+        #parsed_machine_config{
+            initial = "invalid_state",
+            blank = ".",
+            states = get_valid_states(),
+            finals = ["HALT"],
+            alphabet = get_valid_alphabet(),
+            transitions = get_valid_transitions_map()
+        }
+    ).
+
+validate_machine_blank_error_test() ->
+    {error, blank, {expected_alphabet_character, "not_alphabet_character"}} = machine_validator:validate_machine(
+        #parsed_machine_config{
+            initial = "subone",
+            blank = "not_alphabet_character",
+            states = get_valid_states(),
+            finals = ["HALT"],
+            alphabet = get_valid_alphabet(),
+            transitions = get_valid_transitions_map()
+        }
+    ).
+
+validate_machine_states_error_test() ->
+    {error, states, {duplicated_elements, ["HALT", "scanright"]}} = machine_validator:validate_machine(
+        #parsed_machine_config{
+            initial = "subone",
+            blank = ".",
+            states = get_valid_states() ++ ["HALT", "scanright"],
+            finals = ["HALT"],
+            alphabet = get_valid_alphabet(),
+            transitions = get_valid_transitions_map()
+        }
+    ).
+
+validate_machine_finals_error_test() ->
+    {error, finals, {expected_states, ["invalid_state", "also_invalid_state"]}} = machine_validator:validate_machine(
+        #parsed_machine_config{
+            initial = "subone",
+            blank = ".",
+            states = get_valid_states(),
+            finals = ["invalid_state", "also_invalid_state"],
+            alphabet = get_valid_alphabet(),
+            transitions = get_valid_transitions_map()
+        }
+    ).
+
+validate_machine_alphabet_error_test() ->
+    {error, alphabet, {duplicated_elements, ["."]}} = machine_validator:validate_machine(
+        #parsed_machine_config{
+            initial = "subone",
+            blank = ".",
+            states = get_valid_states(),
+            finals = ["HALT"],
+            alphabet = get_valid_alphabet() ++ ["."],
+            transitions = get_valid_transitions_map()
+        }
+    ).
+
+validate_machine_transitions_error_test() ->
+    {error, transitions, {"subone", {duplicated_elements, ["."]}}} = machine_validator:validate_machine(
+        #parsed_machine_config{
+            initial = "subone",
+            blank = ".",
+            states = get_valid_states(),
+            finals = ["HALT"],
+            alphabet = get_valid_alphabet(),
+            transitions = #{
+                "subone" => [
+                    #parsed_machine_config_transition{
+                        read = ".",
+                        to_state = "scanright",
+                        write = ".",
+                        action = right
+                    },
+                    #parsed_machine_config_transition{
+                        read = "-",
+                        to_state = "subone",
+                        write = "=",
+                        action = left
+                    }
+                ],
+                "scanright" => [
+                    #parsed_machine_config_transition{
+                        read = ".",
+                        to_state = "scanright",
+                        write = "=",
+                        action = right
+                    },
+                    #parsed_machine_config_transition{
+                        read = "=",
+                        to_state = "subone",
+                        write = ".",
+                        action = left
+                    }
+                ],
+                "subone" => [
+                    #parsed_machine_config_transition{
+                        read = ".",
+                        to_state = "scanright",
+                        write = ".",
+                        action = right
+                    },
+                    #parsed_machine_config_transition{
+                        read = ".",
+                        to_state = "subone",
+                        write = "=",
+                        action = left
+                    }
+                ]
+            }
+        }
     ).
