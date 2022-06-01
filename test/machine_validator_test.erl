@@ -302,7 +302,7 @@ validate_machine_transitions_several_duplicated_error_test() ->
     ).
 
 validate_machine_transitions_not_alphabet_read_test() ->
-    {error, "skip", {read, {expected_alphabet_character, "not_alphabet_character"}}} = machine_validator:validate_machine_transitions(
+    {error, {"skip", {read, {expected_alphabet_character, "not_alphabet_character"}}}} = machine_validator:validate_machine_transitions(
         #{
             "scanright" => [
                 #parsed_machine_config_transition{
@@ -354,7 +354,7 @@ validate_machine_transitions_not_alphabet_read_test() ->
     ).
 
 validate_machine_transitions_not_alphabet_write_test() ->
-    {error, "scanright", {write, {expected_alphabet_character, "not_alphabet_character"}}} = machine_validator:validate_machine_transitions(
+    {error, {"scanright", {write, {expected_alphabet_character, "not_alphabet_character"}}}} = machine_validator:validate_machine_transitions(
         #{
             "skip" => [
                 #parsed_machine_config_transition{

@@ -215,7 +215,7 @@ validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alph
     end),
     case Result of
         ok -> validation_step_transitions_map_keys_are_states(TransitionsMap, States);
-        {error, State, Error} -> {error, State, Error}
+        {error, State, Error} -> {error, {State, Error}}
     end.
 
 % 3/ Validate every Transitions map keys are valid states
