@@ -76,6 +76,21 @@ parse_decoded_machine_config(DecodedMachineConfig, Input) ->
                 [FormattedError]
             );
         {ok, ParsedMachineConfig} ->
+            validate_parsed_machine_config(ParsedMachineConfig, Input)
+    end.
+
+validate_parsed_machine_config(ParsedMachineConfig, Input) ->
+    ParsedMachineResult = machine_validator:validate_machine(ParsedMachineConfig),
+    case ParsedMachineResult of
+        {error, Error} ->
+            FormattedError = machine_validator:format_error(Error),
+            io:format(
+                "Error occured during machine configuration validation:\n"
+                "\n"
+                "~s~n",
+                [FormattedError]
+            );
+        ok ->
             parse_input(ParsedMachineConfig, Input)
     end.
 
