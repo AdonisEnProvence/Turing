@@ -145,6 +145,8 @@ parse_alphabet_character(Character) when is_bitstring(Character) ->
 parse_alphabet_character(UnknownCharacter) ->
     {error, {expected_bitstring, UnknownCharacter}}.
 
+parse_machine_transitions(#{<<"transitions">> := Transitions}) when map_size(Transitions) =:= 0 ->
+    {error, empty_map};
 parse_machine_transitions(#{<<"transitions">> := Transitions}) when is_map(Transitions) ->
     Iterator = maps:iterator(Transitions),
     Result = iterate_on_machine_states_transitions_map(Iterator),
@@ -352,6 +354,8 @@ format_error({finals, empty_state}) ->
 format_error({finals, invalid}) ->
     "machine has no final states; " ++ get_rules_for_finals_field();
 format_error({transitions, invalid}) ->
+    "machine has no transition property; a machine must have a dictionary of transitions, indexed by state";
+format_error({transitions, empty_map}) ->
     "machine has an empty transitions object; a machine must contain at least one transition";
 format_error({transitions, empty_state_key}) ->
     "machine contains transitions for a state that is an empty string; a machine can only contain transitions for valid states, which must be non-empty strings";

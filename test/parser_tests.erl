@@ -252,6 +252,9 @@ parse_machine_transitions_test() ->
         <<"transitions">> => RawTransitions
     }).
 
+parse_machine_transitions_map_is_empty_test() ->
+    {error, empty_map} = parser:parse_machine_transitions(#{ <<"transitions">> => #{} }).
+
 % Read transition prop tests
 
 parse_machine_transitions_state_is_not_bitstring_test() ->
@@ -1009,9 +1012,10 @@ format_error_finals_a_state_is_empty_test() ->
 format_error_finals_does_not_exist_test() ->
     ?assertMatch("machine has no final states; a machine must have a list of states (optionally empty), which must all be non-empty strings", parser:format_error({finals, invalid})).
 
+format_error_transitions_is_missing_test() ->
+    ?assertMatch("machine has no transition property; a machine must have a dictionary of transitions, indexed by state", parser:format_error({transitions, invalid})).
 format_error_transitions_is_empty_test() ->
-    % The message is not accurate.
-    ?assertMatch("machine has an empty transitions object; a machine must contain at least one transition", parser:format_error({transitions, invalid})).
+    ?assertMatch("machine has an empty transitions object; a machine must contain at least one transition", parser:format_error({transitions, empty_map})).
 format_error_transitions_a_state_is_not_a_string_test() ->
     ?assertMatch("machine contains transitions for a state that is not a valid string ({\"key\":2}); a machine can only contain transitions for valid states, which must be non-empty strings", parser:format_error({transitions, {expected_state_bitstring, #{<<"key">> => 2}}})).
 format_error_transitions_a_state_is_an_empty_string_test() ->
