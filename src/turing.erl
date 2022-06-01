@@ -46,37 +46,42 @@ parse_optionnal_first_flag_arg(_) ->
     format_program_usage(),
     {error, too_many_args}.
 
-get_raw_machine_config([FilePath, _Input]) ->
+get_raw_machine_config([FilePath, Input]) ->
     ReadFileResult = file:read_file(FilePath),
     case ReadFileResult of
         {error, Reason} ->
             format_read_file_error(Reason);
         {ok, BinaryFile} ->
-            decode_raw_machine_config(BinaryFile)
+            decode_raw_machine_config(BinaryFile, Input)
     end.
 
-decode_raw_machine_config(BinaryFile) ->
+decode_raw_machine_config(BinaryFile, Input) ->
     TryDecodeBinaryFileResult = jsone:try_decode(BinaryFile),
     case TryDecodeBinaryFileResult of
         {ok, DecodedBinaryFile, _} ->
-            parse_decoded_machine_config(DecodedBinaryFile);
+            parse_decoded_machine_config(DecodedBinaryFile, Input);
         {error, Error} ->
             format_try_decode_error(Error)
     end.
 
-parse_decoded_machine_config(DecodedMachineConfig) ->
+parse_decoded_machine_config(DecodedMachineConfig, Input) ->
     ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
     case ParsedMachineResult of
         {error, Error} ->
             parser:format_error(error, Error);
         {ok, ParsedMachineConfig} ->
-            % Will change in the future
-            start_machine(ParsedMachineConfig)
+            parse_input(ParsedMachineConfig, Input)
     end.
-% validate_parsed_machine_config(ParsedMachineConfig)->
-% parse_and_validate_word( DecodedMachineConfig) ->
-start_machine(ParsedMachineConfig) ->
-    interpreter:start(ParsedMachineConfig, ["1", "1", "1", "-", "1", "1", "="]).
+
+parse_input(ParsedMachineConfig, Input) ->
+    InputParsingResult = input_parser:parse(ParsedMachineConfig, Input),
+    case InputParsingResult of
+        {ok, ParsedInput} -> start_machine(ParsedMachineConfig, ParsedInput);
+        error -> error
+    end.
+
+start_machine(ParsedMachineConfig, Input) ->
+    interpreter:start(ParsedMachineConfig, Input).
 
 main(Args) ->
     %We could handle any logs below

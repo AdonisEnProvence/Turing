@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "Default turing machine static input, output test" {
-    run bash -c './_build/default/bin/turing machines/unary_sub.json "unused_for_the_moment" | cat -e'
+    run bash -c './_build/default/bin/turing machines/unary_sub.json "111-11=" | cat -e'
     assert_output 'Interpreter starting...$
 Tape: [<"1">,"1","1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
 Tape: ["1",<"1">,"1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
@@ -87,4 +87,22 @@ optional arguments:$
 @test "Machine configuration json file cannot be decoded" {
     run bash -c './_build/default/bin/turing machines/not-a-json.json "abc" | cat -e'
     assert_output 'Error while decoding machine configuration json file: badarg$'
+}
+
+@test "Transform empty input into an array with a blank character" {
+    run bash -c '_build/default/bin/turing machines/basic-machine.json "" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<".">] ("IDLE", ".") -> ("HALT", ".", left)$
+Tape: [<".">,"."] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Prevent unknown character in input" {
+    run bash -c '_build/default/bin/turing machines/basic-machine.json "z" | cat -e'
+    assert_output 'Character "z" is not in the alphabet$'
+}
+
+@test "Prevent blank character in input" {
+    run bash -c '_build/default/bin/turing machines/basic-machine.json "." | cat -e'
+    assert_output 'Blank character is forbidden in input$'
 }
