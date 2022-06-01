@@ -1,24 +1,66 @@
 {
     "name": "unary_add",
-    "alphabet": ["1", "+", "."],
+    "alphabet": [
+        "1",
+        "+",
+        "."
+    ],
     "blank": ".",
-    "states": ["find_+", "find_next_1_and_replace_with_+", "replace_+_with_1", "clear_+"],
+    "states": [
+        "find_+",
+        "find_next_1_and_replace_with_+",
+        "replace_+_with_1",
+        "clear_+",
+        "HALT"
+    ],
     "initial": "find_+",
-    "finals": ["HALT"],
+    "finals": [
+        "HALT"
+    ],
     "transitions": {
         "find_+": [
-            { "read": "1", "write": "1", "to_state": "find_+", "action": "RIGHT" },
-            { "read": "+", "write": "+", "to_state": "find_next_1_and_replace_with_+", "action": "RIGHT" }
+            {
+                "read": "1",
+                "write": "1",
+                "to_state": "find_+",
+                "action": "RIGHT"
+            },
+            {
+                "read": "+",
+                "write": "+",
+                "to_state": "find_next_1_and_replace_with_+",
+                "action": "RIGHT"
+            }
         ],
         "find_next_1_and_replace_with_+": [
-            { "read": "1", "write": "+", "to_state": "replace_+_with_1", "action": "LEFT" },
-            { "read": ".", "write": ".", "to_state": "clear_+", "action": "LEFT" }
+            {
+                "read": "1",
+                "write": "+",
+                "to_state": "replace_+_with_1",
+                "action": "LEFT"
+            },
+            {
+                "read": ".",
+                "write": ".",
+                "to_state": "clear_+",
+                "action": "LEFT"
+            }
         ],
         "replace_+_with_1": [
-            { "read": "+", "write": "1", "to_state": "find_+", "action": "RIGHT" }
+            {
+                "read": "+",
+                "write": "1",
+                "to_state": "find_+",
+                "action": "RIGHT"
+            }
         ],
         "clear_+": [
-            { "read": "+", "write": ".", "to_state": "HALT", "action": "LEFT" }
+            {
+                "read": "+",
+                "write": ".",
+                "to_state": "HALT",
+                "action": "LEFT"
+            }
         ]
     }
 }
