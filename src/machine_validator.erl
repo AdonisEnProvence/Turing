@@ -9,15 +9,65 @@
     validate_machine_blank/2,
     validate_machine_finals/2,
     validate_machine_initial/2,
-    validate_machine_transitions/3
+    validate_machine_transitions/3,
+    validate_machine/1
 ]).
 -else.
--export([]).
+-export([validate_machine/1]).
 -endif.
 
 % Reminder validation step is after parser step
 % We then assume that the received data is already parsed
 
+validate_machine(MachineConfiguration) ->
+    ValidatingSteps = [
+        {alphabet, fun() ->
+            validate_machine_alphabet(MachineConfiguration#parsed_machine_config.alphabet)
+        end},
+        {states, fun() ->
+            validate_machine_states(MachineConfiguration#parsed_machine_config.states)
+        end},
+        {blank, fun() ->
+            validate_machine_blank(
+                MachineConfiguration#parsed_machine_config.blank,
+                MachineConfiguration#parsed_machine_config.alphabet
+            )
+        end},
+        {finals, fun() ->
+            validate_machine_finals(
+                MachineConfiguration#parsed_machine_config.finals,
+                MachineConfiguration#parsed_machine_config.states
+            )
+        end},
+        {initial, fun() ->
+            validate_machine_initial(
+                MachineConfiguration#parsed_machine_config.initial,
+                MachineConfiguration#parsed_machine_config.states
+            )
+        end},
+        {transitions, fun() ->
+            validate_machine_transitions(
+                MachineConfiguration#parsed_machine_config.transitions,
+                MachineConfiguration#parsed_machine_config.states,
+                MachineConfiguration#parsed_machine_config.alphabet
+            )
+        end}
+    ],
+    exectute_machine_validation_steps(ValidatingSteps).
+
+exectute_machine_validation_steps([]) ->
+    ok;
+exectute_machine_validation_steps([{Field, ValidatingFunction} | OtherValidatingSteps]) ->
+    case ValidatingFunction() of
+        ok ->
+            exectute_machine_validation_steps(
+                OtherValidatingSteps
+            );
+        {error, Error} ->
+            {error, Field, Error}
+    end.
+
+% Tools
 look_for_duplicated_in_list(List) ->
     ListLength = erlang:length(List),
     ListSet = sets:from_list(List),
@@ -76,10 +126,8 @@ validate_machine_finals(Finals, States, duplicated_step) ->
 validate_machine_finals(Finals, States, expected_states_step) ->
     FinalsLessStates = Finals -- States,
     FinalLessStatesLength = length(FinalsLessStates),
-    io:format("FinalsLessStates ~p;~n", [FinalsLessStates]),
     ExpectedFinalsLessStatesLength = 0,
     EveryFinalsEntryIsStatesEntry = FinalLessStatesLength =:= ExpectedFinalsLessStatesLength,
-    io:format("Expected= ~p; Actual= ~p;~n", [ExpectedFinalsLessStatesLength, FinalLessStatesLength]),
     if
         EveryFinalsEntryIsStatesEntry =:= true ->
             ok;
@@ -124,7 +172,7 @@ iterate_and_apply_on_list([FirstElement | Rest], FunctionToApply) ->
     end.
 
 % 1/ Search for transitions read listeners duplication
-look_for_transitions_entry_read_duplicated(TransitionsList, States) ->
+look_for_transitions_entry_read_duplicated(TransitionsList) ->
     EveryTransitionReadList = lists:map(
         fun(Transition) -> Transition#parsed_machine_config_transition.read end, TransitionsList
     ),
@@ -132,11 +180,11 @@ look_for_transitions_entry_read_duplicated(TransitionsList, States) ->
 
 validation_step_transitions_map_read_duplication(TransitionsMap, States, Alphabet) ->
     Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
-        look_for_transitions_entry_read_duplicated(TransitionList, States)
+        look_for_transitions_entry_read_duplicated(TransitionList)
     end),
     case Result of
         ok -> validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alphabet);
-        {error, State, Error} -> {error, State, Error}
+        {error, State, Error} -> {error, {State, Error}}
     end.
 
 % 2/ Validate every read write occurences are valid alphabet characters
@@ -165,7 +213,7 @@ validation_step_not_alphabet_read_write_transitions(TransitionsMap, States, Alph
         look_for_transitions_entry_read_write_not_alphabet(TransitionList, Alphabet)
     end),
     case Result of
-        ok -> validation_step_transitions_map_keys_are_states(TransitionsMap, States, Alphabet);
+        ok -> validation_step_transitions_map_keys_are_states(TransitionsMap, States);
         {error, State, Error} -> {error, State, Error}
     end.
 
@@ -198,18 +246,18 @@ look_for_transitions_map_invalid_state_key(TransitionsMap, States) ->
             {error, {expected_states, TransitionsMapKeysLessStates}}
     end.
 
-validation_step_transitions_map_keys_are_states(TransitionsMap, States, Alphabet) ->
+validation_step_transitions_map_keys_are_states(TransitionsMap, States) ->
     MapKeysResult = look_for_transitions_map_invalid_state_key(TransitionsMap, States),
     case MapKeysResult of
         ok ->
-            validation_step_transitions_to_state_are_states(TransitionsMap, States, Alphabet);
+            validation_step_transitions_to_state_are_states(TransitionsMap, States);
         {error, Error} ->
             {error, Error}
     end.
 
 % 4/ Validate every Transition to_state are valid states
 
-validation_step_transitions_to_state_are_states(TransitionsMap, States, Alphabet) ->
+validation_step_transitions_to_state_are_states(TransitionsMap, States) ->
     Result = iterate_and_apply_on_map(maps:iterator(TransitionsMap), fun(TransitionList) ->
         look_for_transitions_entry_invalid_to_state(TransitionList, States)
     end),
