@@ -68,7 +68,13 @@ parse_decoded_machine_config(DecodedMachineConfig, Input) ->
     ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
     case ParsedMachineResult of
         {error, Error} ->
-            parser:format_error(error, Error);
+            FormattedError = parser:format_error(Error),
+            io:format(
+                "Error occured during machine configuration parsing:\n"
+                "\n"
+                "~s~n",
+                [FormattedError]
+            );
         {ok, ParsedMachineConfig} ->
             parse_input(ParsedMachineConfig, Input)
     end.

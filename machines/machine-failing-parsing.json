@@ -1,0 +1,9 @@
+{
+    "name": "unary_add",
+    "alphabet": [],
+    "blank": ".",
+    "states": [],
+    "initial": "",
+    "finals": [],
+    "transitions": {}
+}
