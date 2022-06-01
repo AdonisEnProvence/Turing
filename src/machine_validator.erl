@@ -14,7 +14,7 @@
     format_error/1
 ]).
 -else.
--export([validate_machine/1]).
+-export([validate_machine/1, format_error/1]).
 -endif.
 
 % Reminder validation step is after parser step
@@ -65,7 +65,7 @@ exectute_machine_validation_steps([{Field, ValidatingFunction} | OtherValidating
                 OtherValidatingSteps
             );
         {error, Error} ->
-            {error, Field, Error}
+            {error, {Field, Error}}
     end.
 
 % Tools
@@ -280,10 +280,10 @@ validate_machine_transitions(TransitionsMap, States, Alphabet) ->
 pretty_value(List) -> lists:flatten(io_lib:format("~p", [List])).
 
 get_rule_for_finals_validation() ->
-    "Machine finals must contain unique elements listed by the machine states list".
+    "machine finals must contain unique elements listed by the machine states list".
 
 get_rule_for_transitions_validation() ->
-    "Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target".
+    "machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target".
 
 format_error({transitions, {State, {TransitionIndex, {to_state, {expected_state, InvalidState}}}}}) ->
     "machine transition " ++ pretty_value(TransitionIndex) ++ " of \"" ++ State ++
@@ -314,7 +314,7 @@ format_error({transitions, {State, {duplicated_elements, DuplicatedElements}}}) 
         "); " ++ get_rule_for_transitions_validation();
 format_error({initial, {expected_state, InvalidState}}) ->
     "machine initial is not listed by states elements (received: " ++ InvalidState ++
-        "); Machine initial must be listed by the machine states";
+        "); machine initial must be listed by the machine states";
 format_error({finals, {expected_states, InvalidStates}}) ->
     "machine finals has not states listed elements (" ++ pretty_value(InvalidStates) ++ "); " ++
         get_rule_for_finals_validation();
@@ -323,10 +323,10 @@ format_error({finals, {duplicated_elements, DuplicatedElements}}) ->
         get_rule_for_finals_validation();
 format_error({blank, {expected_alphabet_character, Character}}) ->
     "machine blank is not an alphabet character (received: " ++ Character ++
-        "); Machine blank must contains an alphabet character";
+        "); machine blank must contains an alphabet character";
 format_error({states, {duplicated_elements, DuplicatedElements}}) ->
     "machine states has duplicated elements (" ++ pretty_value(DuplicatedElements) ++
-        "); Machine states must contains unique elements";
+        "); machine states must contains unique elements";
 format_error({alphabet, {duplicated_elements, DuplicatedElements}}) ->
     "machine alphabet has duplicated elements (" ++ pretty_value(DuplicatedElements) ++
-        "); Machine alphabet must contains unique elements".
+        "); machine alphabet must contains unique elements".

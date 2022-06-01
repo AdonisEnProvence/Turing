@@ -76,7 +76,7 @@ parse_machine_alphabet_duplicated_entry_test() ->
         get_valid_alphabet() ++ ["="]
     ),
     ?assertMatch(
-        "machine alphabet has duplicated elements ([\"=\"]); Machine alphabet must contains unique elements",
+        "machine alphabet has duplicated elements ([\"=\"]); machine alphabet must contains unique elements",
         machine_validator:format_error({alphabet, ExpectedErrorContent})
     ).
 parse_machine_alphabet_several_duplicated_entry_test() ->
@@ -85,7 +85,7 @@ parse_machine_alphabet_several_duplicated_entry_test() ->
         get_valid_alphabet() ++ [".", "="]
     ),
     ?assertMatch(
-        "machine alphabet has duplicated elements ([\".\",\"=\"]); Machine alphabet must contains unique elements",
+        "machine alphabet has duplicated elements ([\".\",\"=\"]); machine alphabet must contains unique elements",
         machine_validator:format_error({alphabet, ExpectedErrorContent})
     ).
 
@@ -98,7 +98,7 @@ parse_machine_states_duplicated_entry_test() ->
         get_valid_states() ++ ["HALT"]
     ),
     ?assertMatch(
-        "machine states has duplicated elements ([\"HALT\"]); Machine states must contains unique elements",
+        "machine states has duplicated elements ([\"HALT\"]); machine states must contains unique elements",
         machine_validator:format_error({states, ExpectedErrorContent})
     ).
 parse_machine_states_several_duplicated_entry_test() ->
@@ -107,7 +107,7 @@ parse_machine_states_several_duplicated_entry_test() ->
         get_valid_states() ++ ["HALT", "scanright"]
     ),
     ?assertMatch(
-        "machine states has duplicated elements ([\"HALT\",\"scanright\"]); Machine states must contains unique elements",
+        "machine states has duplicated elements ([\"HALT\",\"scanright\"]); machine states must contains unique elements",
         machine_validator:format_error({states, ExpectedErrorContent})
     ).
 
@@ -120,7 +120,7 @@ validate_machine_blank_not_alphabet_character_error_test() ->
         "$", get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine blank is not an alphabet character (received: $); Machine blank must contains an alphabet character",
+        "machine blank is not an alphabet character (received: $); machine blank must contains an alphabet character",
         machine_validator:format_error({blank, ExpectedErrorContent})
     ).
 
@@ -134,7 +134,7 @@ validate_machine_finals_duplicated_entry_test() ->
         ["HALT", "scanright", "HALT"], get_valid_states()
     ),
     ?assertMatch(
-        "machine finals has duplicated elements ([\"HALT\"]); Machine finals must contain unique elements listed by the machine states list",
+        "machine finals has duplicated elements ([\"HALT\"]); machine finals must contain unique elements listed by the machine states list",
         machine_validator:format_error({finals, ExpectedErrorContent})
     ).
 
@@ -144,7 +144,7 @@ validate_machine_finals_expected_states_entry_error_test() ->
         ["HALT", "invalid_state_entry"], get_valid_states()
     ),
     ?assertMatch(
-        "machine finals has not states listed elements ([\"invalid_state_entry\"]); Machine finals must contain unique elements listed by the machine states list",
+        "machine finals has not states listed elements ([\"invalid_state_entry\"]); machine finals must contain unique elements listed by the machine states list",
         machine_validator:format_error({finals, ExpectedErrorContent})
     ).
 
@@ -154,7 +154,7 @@ validate_machine_finals_several_expected_states_entry_error_test() ->
         ["HALT", "invalid_state_entry_0", "invalid_state_entry_1"], get_valid_states()
     ),
     ?assertMatch(
-        "machine finals has not states listed elements ([\"invalid_state_entry_0\",\"invalid_state_entry_1\"]); Machine finals must contain unique elements listed by the machine states list",
+        "machine finals has not states listed elements ([\"invalid_state_entry_0\",\"invalid_state_entry_1\"]); machine finals must contain unique elements listed by the machine states list",
         machine_validator:format_error({finals, ExpectedErrorContent})
     ).
 
@@ -168,7 +168,7 @@ validate_machine_initial_expected_state_error_test() ->
         "invalid_state", get_valid_states()
     ),
     ?assertMatch(
-        "machine initial is not listed by states elements (received: invalid_state); Machine initial must be listed by the machine states",
+        "machine initial is not listed by states elements (received: invalid_state); machine initial must be listed by the machine states",
         machine_validator:format_error({initial, ExpectedErrorContent})
     ).
 
@@ -237,7 +237,7 @@ validate_machine_transitions_duplicated_error_test() ->
         get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine transition \"subone\" has duplicated read operation ([\".\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        "machine transition \"subone\" has duplicated read operation ([\".\"]); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
         machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
@@ -312,7 +312,7 @@ validate_machine_transitions_several_duplicated_error_test() ->
         get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine transition \"scanright\" has duplicated read operation ([\".\",\"-\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        "machine transition \"scanright\" has duplicated read operation ([\".\",\"-\"]); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
         machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
@@ -370,7 +370,7 @@ validate_machine_transitions_not_alphabet_read_test() ->
         get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine transition 0 of \"skip\" has not alphabet character read operation target (received: not_alphabet_character); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        "machine transition 0 of \"skip\" has not alphabet character read operation target (received: not_alphabet_character); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
         machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
@@ -426,7 +426,7 @@ validate_machine_transitions_not_alphabet_write_test() ->
         get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine transition 1 of \"scanright\" has not alphabet character write operation target (received: not_alphabet_character); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        "machine transition 1 of \"scanright\" has not alphabet character write operation target (received: not_alphabet_character); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
         machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
@@ -481,7 +481,7 @@ validate_machine_transitions_invalid_key_error_test() ->
         get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine transitions have not listed scoped states ([\"invalid_state_transition_key\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        "machine transitions have not listed scoped states ([\"invalid_state_transition_key\"]); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
         machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
@@ -537,7 +537,7 @@ validate_machine_transitions_several_invalid_key_error_test() ->
         get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine transitions have not listed scoped states ([\"also_invalid_state_transition_key\",\"invalid_state_transition_key\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        "machine transitions have not listed scoped states ([\"also_invalid_state_transition_key\",\"invalid_state_transition_key\"]); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
         machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
@@ -575,7 +575,7 @@ validate_machine_transitions_invalid_to_state_error_test() ->
                     action = left
                 }
             ],
-            "subone" => [
+            "eraseone" => [
                 #parsed_machine_config_transition{
                     read = ".",
                     to_state = "scanright",
@@ -594,7 +594,7 @@ validate_machine_transitions_invalid_to_state_error_test() ->
         get_valid_alphabet()
     ),
     ?assertMatch(
-        "machine transition 1 of \"scanright\" has a not states listed to_state operation target (received: invalid_to_state); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        "machine transition 1 of \"scanright\" has a not states listed to_state operation target (received: invalid_to_state); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
         machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
@@ -609,7 +609,7 @@ validate_machine_success_test() ->
     }).
 
 validate_machine_initial_error_test() ->
-    {error, initial, {expected_state, "invalid_state"}} = machine_validator:validate_machine(
+    {error, {initial, {expected_state, "invalid_state"}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "invalid_state",
             blank = ".",
@@ -621,7 +621,7 @@ validate_machine_initial_error_test() ->
     ).
 
 validate_machine_blank_error_test() ->
-    {error, blank, {expected_alphabet_character, "not_alphabet_character"}} = machine_validator:validate_machine(
+    {error, {blank, {expected_alphabet_character, "not_alphabet_character"}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = "not_alphabet_character",
@@ -633,7 +633,7 @@ validate_machine_blank_error_test() ->
     ).
 
 validate_machine_states_error_test() ->
-    {error, states, {duplicated_elements, ["HALT", "scanright"]}} = machine_validator:validate_machine(
+    {error, {states, {duplicated_elements, ["HALT", "scanright"]}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
@@ -645,7 +645,7 @@ validate_machine_states_error_test() ->
     ).
 
 validate_machine_finals_error_test() ->
-    {error, finals, {expected_states, ["invalid_state", "also_invalid_state"]}} = machine_validator:validate_machine(
+    {error, {finals, {expected_states, ["invalid_state", "also_invalid_state"]}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
@@ -657,7 +657,7 @@ validate_machine_finals_error_test() ->
     ).
 
 validate_machine_alphabet_error_test() ->
-    {error, alphabet, {duplicated_elements, ["."]}} = machine_validator:validate_machine(
+    {error, {alphabet, {duplicated_elements, ["."]}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
@@ -669,7 +669,7 @@ validate_machine_alphabet_error_test() ->
     ).
 
 validate_machine_transitions_error_test() ->
-    {error, transitions, {"subone", {duplicated_elements, ["."]}}} = machine_validator:validate_machine(
+    {error, {transitions, {"subone", {duplicated_elements, ["."]}}}} = machine_validator:validate_machine(
         #parsed_machine_config{
             initial = "subone",
             blank = ".",
