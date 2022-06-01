@@ -277,6 +277,35 @@ pretty_list_value(List) -> lists:flatten(io_lib:format("~p", [List])).
 get_rule_for_finals_validation() ->
     "Machine finals must contain unique elements listed by the machine states list".
 
+get_rule_for_transitions_validation() ->
+    "Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target".
+
+format_error({transitions, {State, {to_state, {expected_state, InvalidState}}}}) ->
+    "machine transition \"" ++ State ++
+        "\" has a not states listed to_state operation target (received: " ++
+        InvalidState ++
+        "); " ++ get_rule_for_transitions_validation();
+format_error({transitions, {expected_states, InvalidStatesElements}}) ->
+    "machine transitions have not listed scoped states (" ++
+        pretty_list_value(InvalidStatesElements) ++
+        "); " ++ get_rule_for_transitions_validation();
+format_error({transitions, {State, {read, {expected_alphabet_character, Character}}}}) ->
+    "machine transition \"" ++ State ++
+        "\" has not alphabet character read operation target (received: " ++
+        Character ++
+        "); " ++ get_rule_for_transitions_validation();
+format_error({transitions, {State, {write, {expected_alphabet_character, Character}}}}) ->
+    "machine transition \"" ++ State ++
+        "\" has not alphabet character write operation target (received: " ++
+        Character ++
+        "); " ++ get_rule_for_transitions_validation();
+format_error({transitions, {State, {duplicated_elements, DuplicatedElements}}}) ->
+    "machine transition \"" ++ State ++ "\" has duplicated read operation (" ++
+        pretty_list_value(DuplicatedElements) ++
+        "); " ++ get_rule_for_transitions_validation();
+format_error({initial, {expected_state, InvalidState}}) ->
+    "machine initial is not listed by states elements (received: " ++ InvalidState ++
+        "); Machine initial must be listed by the machine states";
 format_error({finals, {expected_states, InvalidStates}}) ->
     "machine finals has not states listed elements (" ++ pretty_list_value(InvalidStates) ++ "); " ++
         get_rule_for_finals_validation();

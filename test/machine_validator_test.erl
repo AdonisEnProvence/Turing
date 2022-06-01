@@ -163,8 +163,13 @@ validate_machine_initial_test() ->
     ok = machine_validator:validate_machine_initial("scanright", get_valid_states()).
 
 validate_machine_initial_expected_state_error_test() ->
-    {error, {expected_state, "invalid_state"}} = machine_validator:validate_machine_initial(
+    ExpectedErrorContent = {expected_state, "invalid_state"},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_initial(
         "invalid_state", get_valid_states()
+    ),
+    ?assertMatch(
+        "machine initial is not listed by states elements (received: invalid_state); Machine initial must be listed by the machine states",
+        machine_validator:format_error({initial, ExpectedErrorContent})
     ).
 
 % Validate transitions
@@ -176,7 +181,8 @@ validate_machine_transitions_test() ->
     ).
 
 validate_machine_transitions_duplicated_error_test() ->
-    {error, {"subone", {duplicated_elements, ["."]}}} = machine_validator:validate_machine_transitions(
+    ExpectedErrorContent = {"subone", {duplicated_elements, ["."]}},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_transitions(
         #{
             "skip" => [
                 #parsed_machine_config_transition{
@@ -229,10 +235,15 @@ validate_machine_transitions_duplicated_error_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine transition \"subone\" has duplicated read operation ([\".\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
 validate_machine_transitions_several_duplicated_error_test() ->
-    {error, {"scanright", {duplicated_elements, [".", "-"]}}} = machine_validator:validate_machine_transitions(
+    ExpectedErrorContent = {"scanright", {duplicated_elements, [".", "-"]}},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_transitions(
         #{
             "skip" => [
                 #parsed_machine_config_transition{
@@ -299,10 +310,16 @@ validate_machine_transitions_several_duplicated_error_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine transition \"scanright\" has duplicated read operation ([\".\",\"-\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
 validate_machine_transitions_not_alphabet_read_test() ->
-    {error, {"skip", {read, {expected_alphabet_character, "not_alphabet_character"}}}} = machine_validator:validate_machine_transitions(
+    ExpectedErrorContent =
+        {"skip", {read, {expected_alphabet_character, "not_alphabet_character"}}},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_transitions(
         #{
             "scanright" => [
                 #parsed_machine_config_transition{
@@ -351,10 +368,16 @@ validate_machine_transitions_not_alphabet_read_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine transition \"skip\" has not alphabet character read operation target (received: not_alphabet_character); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
 validate_machine_transitions_not_alphabet_write_test() ->
-    {error, {"scanright", {write, {expected_alphabet_character, "not_alphabet_character"}}}} = machine_validator:validate_machine_transitions(
+    ExpectedErrorContent =
+        {"scanright", {write, {expected_alphabet_character, "not_alphabet_character"}}},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_transitions(
         #{
             "skip" => [
                 #parsed_machine_config_transition{
@@ -401,10 +424,15 @@ validate_machine_transitions_not_alphabet_write_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine transition \"scanright\" has not alphabet character write operation target (received: not_alphabet_character); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
 validate_machine_transitions_invalid_key_error_test() ->
-    {error, {expected_states, ["invalid_state_transition_key"]}} = machine_validator:validate_machine_transitions(
+    ExpectedErrorContent = {expected_states, ["invalid_state_transition_key"]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_transitions(
         #{
             "subone" => [
                 #parsed_machine_config_transition{
@@ -451,11 +479,16 @@ validate_machine_transitions_invalid_key_error_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine transitions have not listed scoped states ([\"invalid_state_transition_key\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
 validate_machine_transitions_several_invalid_key_error_test() ->
-    {error,
-        {expected_states, ["also_invalid_state_transition_key", "invalid_state_transition_key"]}} = machine_validator:validate_machine_transitions(
+    ExpectedErrorContent =
+        {expected_states, ["also_invalid_state_transition_key", "invalid_state_transition_key"]},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_transitions(
         #{
             "also_invalid_state_transition_key" => [
                 #parsed_machine_config_transition{
@@ -502,11 +535,17 @@ validate_machine_transitions_several_invalid_key_error_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine transitions have not listed scoped states ([\"also_invalid_state_transition_key\",\"invalid_state_transition_key\"]); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
 validate_machine_transitions_invalid_to_state_error_test() ->
     % Note: Erlang looks like iterating over map keys via their ascii value, then here scanright is verified first
-    {error, {"scanright", {to_state, {expected_state, "invalid_to_state"}}}} = machine_validator:validate_machine_transitions(
+    ExpectedErrorContent =
+        {"scanright", {to_state, {expected_state, "invalid_to_state"}}},
+    {error, ExpectedErrorContent} = machine_validator:validate_machine_transitions(
         #{
             "subone" => [
                 #parsed_machine_config_transition{
@@ -553,6 +592,10 @@ validate_machine_transitions_invalid_to_state_error_test() ->
         },
         get_valid_states(),
         get_valid_alphabet()
+    ),
+    ?assertMatch(
+        "machine transition \"scanright\" has a not states listed to_state operation target (received: invalid_to_state); Machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target",
+        machine_validator:format_error({transitions, ExpectedErrorContent})
     ).
 
 validate_machine_success_test() ->
