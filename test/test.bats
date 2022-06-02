@@ -81,12 +81,17 @@ optional arguments:$
 
 @test "Machine configuration json file not found" {
     run bash -c './_build/default/bin/turing abc.json "abc" | cat -e'
-    assert_output 'Error while reading machine configuration json file: enoent$'
+    assert_output 'Error while reading machine configuration: no such file or directory$'
+}
+
+@test "Try to read a directory" {
+    run bash -c './_build/default/bin/turing machines "abc" | cat -e'
+    assert_output 'Error while reading machine configuration: illegal operation on a directory$'
 }
 
 @test "Machine configuration json file cannot be decoded" {
     run bash -c './_build/default/bin/turing machines/not-a-json.json "abc" | cat -e'
-    assert_output 'Error while decoding machine configuration json file: badarg$'
+    assert_output 'Error while decoding machine configuration: can not decode invalid json file$'
 }
 
 @test "Transform empty input into an array with a blank character" {
