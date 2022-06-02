@@ -66,13 +66,13 @@ move_index_on_tape({Index, Tape, BlankChar, right}) ->
 print_transition_details(CurrentState, #parsed_machine_config_transition{
     to_state = ToState, read = Read, action = Action, write = Write
 }) ->
-    io:format("(~p, ~p) -> (~p, ~p, ~p)~n", [CurrentState, Read, ToState, Write, Action]).
+    io:format("(~s, ~s) -> (~s, ~s, ~s)~n", [CurrentState, Read, ToState, Write, Action]).
 
 print_blocked_transition_details(CurrentState, TapeCurrentValue) ->
-    io:format("(~p, ~p) -> BLOCKED~n", [CurrentState, TapeCurrentValue]).
+    io:format("(~s, ~s) -> BLOCKED~n", [CurrentState, TapeCurrentValue]).
 
 print_tape_and_head_on_tape(IndexOnTape, Tape) ->
-    io:format("Tape: ["),
+    io:format("["),
     print_head_index_value_on_tape(IndexOnTape, Tape, 1),
     io:format("] ").
 
@@ -83,15 +83,14 @@ print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
 
     if
         IndexOnTapeIsCurrentIndex ->
-            io:format("<~p>", [TapeCurrentValue]);
+            io:format("<~s>", [TapeCurrentValue]);
         true ->
-            io:format("~p", [TapeCurrentValue])
+            io:format("~s", [TapeCurrentValue])
     end,
     if
         CurrentIndexOnTapeIsLastIndex ->
             ok;
         true ->
-            io:format(","),
             print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape + 1)
     end.
 

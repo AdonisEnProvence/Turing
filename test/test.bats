@@ -14,29 +14,29 @@ setup() {
 @test "Default turing machine static input, output test" {
     run bash -c './_build/default/bin/turing machines/unary_sub.json "111-11=" | cat -e'
     assert_output 'Interpreter starting...$
-Tape: [<"1">,"1","1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
-Tape: ["1",<"1">,"1","-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
-Tape: ["1","1",<"1">,"-","1","1","="] ("scanright", "1") -> ("scanright", "1", right)$
-Tape: ["1","1","1",<"-">,"1","1","="] ("scanright", "-") -> ("scanright", "-", right)$
-Tape: ["1","1","1","-",<"1">,"1","="] ("scanright", "1") -> ("scanright", "1", right)$
-Tape: ["1","1","1","-","1",<"1">,"="] ("scanright", "1") -> ("scanright", "1", right)$
-Tape: ["1","1","1","-","1","1",<"=">] ("scanright", "=") -> ("eraseone", ".", left)$
-Tape: ["1","1","1","-","1",<"1">,"."] ("eraseone", "1") -> ("subone", "=", left)$
-Tape: ["1","1","1","-",<"1">,"=","."] ("subone", "1") -> ("subone", "1", left)$
-Tape: ["1","1","1",<"-">,"1","=","."] ("subone", "-") -> ("skip", "-", left)$
-Tape: ["1","1",<"1">,"-","1","=","."] ("skip", "1") -> ("scanright", ".", right)$
-Tape: ["1","1",".",<"-">,"1","=","."] ("scanright", "-") -> ("scanright", "-", right)$
-Tape: ["1","1",".","-",<"1">,"=","."] ("scanright", "1") -> ("scanright", "1", right)$
-Tape: ["1","1",".","-","1",<"=">,"."] ("scanright", "=") -> ("eraseone", ".", left)$
-Tape: ["1","1",".","-",<"1">,".","."] ("eraseone", "1") -> ("subone", "=", left)$
-Tape: ["1","1",".",<"-">,"=",".","."] ("subone", "-") -> ("skip", "-", left)$
-Tape: ["1","1",<".">,"-","=",".","."] ("skip", ".") -> ("skip", ".", left)$
-Tape: ["1",<"1">,".","-","=",".","."] ("skip", "1") -> ("scanright", ".", right)$
-Tape: ["1",".",<".">,"-","=",".","."] ("scanright", ".") -> ("scanright", ".", right)$
-Tape: ["1",".",".",<"-">,"=",".","."] ("scanright", "-") -> ("scanright", "-", right)$
-Tape: ["1",".",".","-",<"=">,".","."] ("scanright", "=") -> ("eraseone", ".", left)$
-Tape: ["1",".",".",<"-">,".",".","."] ("eraseone", "-") -> ("HALT", ".", left)$
-Tape: ["1",".",<".">,".",".",".","."] Final state reached !$
+[<1>11-11=] (scanright, 1) -> (scanright, 1, right)$
+[1<1>1-11=] (scanright, 1) -> (scanright, 1, right)$
+[11<1>-11=] (scanright, 1) -> (scanright, 1, right)$
+[111<->11=] (scanright, -) -> (scanright, -, right)$
+[111-<1>1=] (scanright, 1) -> (scanright, 1, right)$
+[111-1<1>=] (scanright, 1) -> (scanright, 1, right)$
+[111-11<=>] (scanright, =) -> (eraseone, ., left)$
+[111-1<1>.] (eraseone, 1) -> (subone, =, left)$
+[111-<1>=.] (subone, 1) -> (subone, 1, left)$
+[111<->1=.] (subone, -) -> (skip, -, left)$
+[11<1>-1=.] (skip, 1) -> (scanright, ., right)$
+[11.<->1=.] (scanright, -) -> (scanright, -, right)$
+[11.-<1>=.] (scanright, 1) -> (scanright, 1, right)$
+[11.-1<=>.] (scanright, =) -> (eraseone, ., left)$
+[11.-<1>..] (eraseone, 1) -> (subone, =, left)$
+[11.<->=..] (subone, -) -> (skip, -, left)$
+[11<.>-=..] (skip, .) -> (skip, ., left)$
+[1<1>.-=..] (skip, 1) -> (scanright, ., right)$
+[1.<.>-=..] (scanright, .) -> (scanright, ., right)$
+[1..<->=..] (scanright, -) -> (scanright, -, right)$
+[1..-<=>..] (scanright, =) -> (eraseone, ., left)$
+[1..<->...] (eraseone, -) -> (HALT, ., left)$
+[1.<.>....] Final state reached !$
 Interpreter closing...$'
 }
 
@@ -97,8 +97,8 @@ optional arguments:$
 @test "Transform empty input into an array with a blank character" {
     run bash -c '_build/default/bin/turing machines/basic-machine.json "" | cat -e'
     assert_output 'Interpreter starting...$
-Tape: [<".">] ("IDLE", ".") -> ("HALT", ".", left)$
-Tape: [<".">,"."] Final state reached !$
+[<.>] (IDLE, .) -> (HALT, ., left)$
+[<.>.] Final state reached !$
 Interpreter closing...$'
 }
 
