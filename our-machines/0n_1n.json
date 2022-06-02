@@ -1,0 +1,251 @@
+{
+    "name": "0n_1n",
+    "alphabet": [
+        "0",
+        "1",
+        "y",
+        "n",
+        "."
+    ],
+    "blank": ".",
+    "states": [
+        "replace_0_to_blank",
+        "replace_1_to_blank",
+        "scanright_to_end_of_tape_blank",
+        "scanleft_to_begin_of_tape_blank",
+        "search_for_success_or_continue",
+        "write_y_at_the_end_tape_and_halt",
+        "write_n_at_the_end_tape_and_halt",
+        "HALT"
+    ],
+    "initial": "replace_0_to_blank",
+    "finals": [
+        "HALT"
+    ],
+    "transitions": {
+        "replace_0_to_blank": [
+            {
+                "read": "0",
+                "write": ".",
+                "to_state": "scanright_to_end_of_tape_blank",
+                "action": "RIGHT"
+            },
+            {
+                "read": "1",
+                "write": "1",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": ".",
+                "write": ".",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "y",
+                "write": "y",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "n",
+                "write": "n",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            }
+        ],
+        "scanright_to_end_of_tape_blank": [
+            {
+                "read": "0",
+                "write": "0",
+                "to_state": "scanright_to_end_of_tape_blank",
+                "action": "RIGHT"
+            },
+            {
+                "read": "1",
+                "write": "1",
+                "to_state": "scanright_to_end_of_tape_blank",
+                "action": "RIGHT"
+            },
+            {
+                "read": ".",
+                "write": ".",
+                "to_state": "replace_1_to_blank",
+                "action": "LEFT"
+            },
+            {
+                "read": "y",
+                "write": "y",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "n",
+                "write": "n",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            }
+        ],
+        "replace_1_to_blank": [
+            {
+                "read": "0",
+                "write": "0",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "1",
+                "write": ".",
+                "to_state": "search_for_success_or_continue",
+                "action": "LEFT"
+            },
+            {
+                "read": ".",
+                "write": ".",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "y",
+                "write": "y",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "n",
+                "write": "n",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            }
+        ],
+        "scanleft_to_begin_of_tape_blank": [
+            {
+                "read": "0",
+                "write": "0",
+                "to_state": "scanleft_to_begin_of_tape_blank",
+                "action": "LEFT"
+            },
+            {
+                "read": "1",
+                "write": "1",
+                "to_state": "scanleft_to_begin_of_tape_blank",
+                "action": "LEFT"
+            },
+            {
+                "read": ".",
+                "write": ".",
+                "to_state": "replace_0_to_blank",
+                "action": "RIGHT"
+            },
+            {
+                "read": "y",
+                "write": "y",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "n",
+                "write": "n",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            }
+        ],
+        "search_for_success_or_continue": [
+            {
+                "read": "0",
+                "write": "0",
+                "to_state": "scanleft_to_begin_of_tape_blank",
+                "action": "LEFT"
+            },
+            {
+                "read": "1",
+                "write": "1",
+                "to_state": "scanleft_to_begin_of_tape_blank",
+                "action": "LEFT"
+            },
+            {
+                "read": ".",
+                "write": ".",
+                "to_state": "write_y_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "y",
+                "write": "n",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "n",
+                "write": "n",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            }
+        ],
+        "write_y_at_the_end_tape_and_halt": [
+            {
+                "read": "0",
+                "write": "0",
+                "to_state": "write_y_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "1",
+                "write": "1",
+                "to_state": "write_y_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": ".",
+                "write": "y",
+                "to_state": "HALT",
+                "action": "RIGHT"
+            },
+            {
+                "read": "y",
+                "write": "y",
+                "to_state": "write_y_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "n",
+                "write": "n",
+                "to_state": "write_y_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            }
+        ],
+        "write_n_at_the_end_tape_and_halt": [
+            {
+                "read": "0",
+                "write": "0",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "1",
+                "write": "1",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": ".",
+                "write": "n",
+                "to_state": "HALT",
+                "action": "RIGHT"
+            },
+            {
+                "read": "y",
+                "write": "y",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            },
+            {
+                "read": "n",
+                "write": "n",
+                "to_state": "write_n_at_the_end_tape_and_halt",
+                "action": "RIGHT"
+            }
+        ]
+    }
+}
