@@ -200,7 +200,7 @@
                 "read": ".",
                 "write": "y",
                 "to_state": "HALT",
-                "action": "RIGHT"
+                "action": "LEFT"
             },
             {
                 "read": "y",
@@ -232,7 +232,7 @@
                 "read": ".",
                 "write": "n",
                 "to_state": "HALT",
-                "action": "RIGHT"
+                "action": "LEFT"
             },
             {
                 "read": "y",
