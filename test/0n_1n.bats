@@ -143,6 +143,241 @@ Tape: [".","0","y","1",<"1">,"n"] Final state reached !$
 Interpreter closing...$'
 }
 
+@test "Fail on input 0" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "0" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"0">] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",<".">] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [<".">,"."] ("replace_1_to_blank", ".") -> ("write_n_at_the_end_tape_and_halt", ".", right)$
+Tape: [".",<".">] ("write_n_at_the_end_tape_and_halt", ".") -> ("HALT", "n", left)$
+Tape: [<".">,"n"] Final state reached !$
+Interpreter closing...$'
+}
 
+@test "Fail on input 1" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "1" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"1">] ("replace_0_to_blank", "1") -> ("write_n_at_the_end_tape_and_halt", "1", right)$
+Tape: ["1",<".">] ("write_n_at_the_end_tape_and_halt", ".") -> ("HALT", "n", left)$
+Tape: [<"1">,"n"] Final state reached !$
+Interpreter closing...$'
+}
 
+@test "Fail on input 001" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "001" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"0">,"0","1"] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",<"0">,"1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0",<"1">] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","1",<".">] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".","0",<"1">,"."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",<"0">,".","."] ("search_for_success_or_continue", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [<".">,"0",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",<"0">,".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",<".">,"."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",<".">,".","."] ("replace_1_to_blank", ".") -> ("write_n_at_the_end_tape_and_halt", ".", right)$
+Tape: [".",".",<".">,"."] ("write_n_at_the_end_tape_and_halt", ".") -> ("HALT", "n", left)$
+Tape: [".",<".">,"n","."] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Fail on input 011" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "011" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"0">,"1","1"] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",<"1">,"1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","1",<"1">] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","1","1",<".">] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".","1",<"1">,"."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",<"1">,".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [<".">,"1",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",<"1">,".","."] ("replace_0_to_blank", "1") -> ("write_n_at_the_end_tape_and_halt", "1", right)$
+Tape: [".","1",<".">,"."] ("write_n_at_the_end_tape_and_halt", ".") -> ("HALT", "n", left)$
+Tape: [".",<"1">,"n","."] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Fail on input 000000011111" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "000000011111" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"0">,"0","0","0","0","0","0","1","1","1","1","1"] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",<"0">,"0","0","0","0","0","1","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0",<"0">,"0","0","0","0","1","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0","0",<"0">,"0","0","0","1","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0","0","0",<"0">,"0","0","1","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0","0","0","0",<"0">,"0","1","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0","0","0","0","0",<"0">,"1","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0","0","0","0","0","0",<"1">,"1","1","1","1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","0","0","0","1",<"1">,"1","1","1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","0","0","0","1","1",<"1">,"1","1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","0","0","0","1","1","1",<"1">,"1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","0","0","0","1","1","1","1",<"1">] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","0","0","0","1","1","1","1","1",<".">] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".","0","0","0","0","0","0","1","1","1","1",<"1">,"."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".","0","0","0","0","0","0","1","1","1",<"1">,".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".","0","0","0","0","0","0","1","1",<"1">,"1",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".","0","0","0","0","0","0","1",<"1">,"1","1",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".","0","0","0","0","0","0",<"1">,"1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".","0","0","0","0","0",<"0">,"1","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".","0","0","0","0",<"0">,"0","1","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".","0","0","0",<"0">,"0","0","1","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".","0","0",<"0">,"0","0","0","1","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".","0",<"0">,"0","0","0","0","1","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",<"0">,"0","0","0","0","0","1","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [<".">,"0","0","0","0","0","0","1","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",<"0">,"0","0","0","0","0","1","1","1","1",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",<"0">,"0","0","0","0","1","1","1","1",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".","0",<"0">,"0","0","0","1","1","1","1",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".","0","0",<"0">,"0","0","1","1","1","1",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".","0","0","0",<"0">,"0","1","1","1","1",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".","0","0","0","0",<"0">,"1","1","1","1",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".","0","0","0","0","0",<"1">,"1","1","1",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","0","0","0","0","0","1",<"1">,"1","1",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","0","0","0","0","0","1","1",<"1">,"1",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","0","0","0","0","0","1","1","1",<"1">,".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","0","0","0","0","0","1","1","1","1",<".">,"."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".","0","0","0","0","0","1","1","1",<"1">,".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",".","0","0","0","0","0","1","1",<"1">,".",".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".","0","0","0","0","0","1",<"1">,"1",".",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".","0","0","0","0","0",<"1">,"1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".","0","0","0","0",<"0">,"1","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".","0","0","0",<"0">,"0","1","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".","0","0",<"0">,"0","0","1","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".","0",<"0">,"0","0","0","1","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",<"0">,"0","0","0","0","1","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",<".">,"0","0","0","0","0","1","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",".",<"0">,"0","0","0","0","1","1","1",".",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",".",<"0">,"0","0","0","1","1","1",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".","0",<"0">,"0","0","1","1","1",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".","0","0",<"0">,"0","1","1","1",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".","0","0","0",<"0">,"1","1","1",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".","0","0","0","0",<"1">,"1","1",".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".","0","0","0","0","1",<"1">,"1",".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".","0","0","0","0","1","1",<"1">,".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".","0","0","0","0","1","1","1",<".">,".","."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".",".","0","0","0","0","1","1",<"1">,".",".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",".",".","0","0","0","0","1",<"1">,".",".",".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".",".","0","0","0","0",<"1">,"1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".",".","0","0","0",<"0">,"1","1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".","0","0",<"0">,"0","1","1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".","0",<"0">,"0","0","1","1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".",<"0">,"0","0","0","1","1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",<".">,"0","0","0","0","1","1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",".",".",<"0">,"0","0","0","1","1",".",".",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",".",".",<"0">,"0","0","1","1",".",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".",".","0",<"0">,"0","1","1",".",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".",".","0","0",<"0">,"1","1",".",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".",".","0","0","0",<"1">,"1",".",".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".",".","0","0","0","1",<"1">,".",".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".",".","0","0","0","1","1",<".">,".",".","."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".",".",".","0","0","0","1",<"1">,".",".",".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",".",".",".","0","0","0",<"1">,".",".",".",".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".",".",".","0","0",<"0">,"1",".",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".",".","0",<"0">,"0","1",".",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".",".",<"0">,"0","0","1",".",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".",<".">,"0","0","0","1",".",".",".",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",".",".",".",<"0">,"0","0","1",".",".",".",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",".",".",".",<"0">,"0","1",".",".",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".",".",".","0",<"0">,"1",".",".",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".",".",".","0","0",<"1">,".",".",".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".",".",".","0","0","1",<".">,".",".",".","."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".",".",".",".","0","0",<"1">,".",".",".",".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",".",".",".",".","0",<"0">,".",".",".",".",".","."] ("search_for_success_or_continue", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".",".",".",<"0">,"0",".",".",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",".",".",<".">,"0","0",".",".",".",".",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",".",".",".",".",<"0">,"0",".",".",".",".",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",".",".",".",".",<"0">,".",".",".",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".",".",".",".","0",<".">,".",".",".",".","."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".",".",".",".",".",<"0">,".",".",".",".",".","."] ("replace_1_to_blank", "0") -> ("write_n_at_the_end_tape_and_halt", "0", right)$
+Tape: [".",".",".",".",".",".","0",<".">,".",".",".",".","."] ("write_n_at_the_end_tape_and_halt", ".") -> ("HALT", "n", left)$
+Tape: [".",".",".",".",".",".",<"0">,"n",".",".",".",".","."] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Success on input 0011" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "0011" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"0">,"0","1","1"] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",<"0">,"1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0",<"1">,"1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","1",<"1">] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","1","1",<".">] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".","0","1",<"1">,"."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".","0",<"1">,".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",<"0">,"1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [<".">,"0","1",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",<"0">,"1",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",<"1">,".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","1",<".">,"."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".",<"1">,".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",<".">,".",".","."] ("search_for_success_or_continue", ".") -> ("write_y_at_the_end_tape_and_halt", ".", right)$
+Tape: [".",".",<".">,".","."] ("write_y_at_the_end_tape_and_halt", ".") -> ("HALT", "y", left)$
+Tape: [".",<".">,"y",".","."] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Success on input 01" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "01" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"0">,"1"] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",<"1">] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","1",<".">] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",<"1">,"."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [<".">,".","."] ("search_for_success_or_continue", ".") -> ("write_y_at_the_end_tape_and_halt", ".", right)$
+Tape: [".",<".">,"."] ("write_y_at_the_end_tape_and_halt", ".") -> ("HALT", "y", left)$
+Tape: [<".">,"y","."] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Success on input 00001111" {
+    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "00001111" | cat -e'
+    assert_output 'Interpreter starting...$
+Tape: [<"0">,"0","0","0","1","1","1","1"] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",<"0">,"0","0","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0",<"0">,"0","1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0","0",<"0">,"1","1","1","1"] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".","0","0","0",<"1">,"1","1","1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","1",<"1">,"1","1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","1","1",<"1">,"1"] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","1","1","1",<"1">] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".","0","0","0","1","1","1","1",<".">] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".","0","0","0","1","1","1",<"1">,"."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".","0","0","0","1","1",<"1">,".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".","0","0","0","1",<"1">,"1",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".","0","0","0",<"1">,"1","1",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".","0","0",<"0">,"1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".","0",<"0">,"0","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",<"0">,"0","0","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [<".">,"0","0","0","1","1","1",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",<"0">,"0","0","1","1","1",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",<"0">,"0","1","1","1",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".","0",<"0">,"1","1","1",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".","0","0",<"1">,"1","1",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","0","0","1",<"1">,"1",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","0","0","1","1",<"1">,".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".","0","0","1","1","1",<".">,"."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".","0","0","1","1",<"1">,".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",".","0","0","1",<"1">,".",".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".","0","0",<"1">,"1",".",".","."] ("scanleft_to_begin_of_tape_blank", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".","0",<"0">,"1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",<"0">,"0","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",<".">,"0","0","1","1",".",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",".",<"0">,"0","1","1",".",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",".",<"0">,"1","1",".",".","."] ("scanright_to_end_of_tape_blank", "0") -> ("scanright_to_end_of_tape_blank", "0", right)$
+Tape: [".",".",".","0",<"1">,"1",".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".","0","1",<"1">,".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".","0","1","1",<".">,".","."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".",".","0","1",<"1">,".",".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",".",".","0",<"1">,".",".",".","."] ("search_for_success_or_continue", "1") -> ("scanleft_to_begin_of_tape_blank", "1", left)$
+Tape: [".",".",".",<"0">,"1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", "0") -> ("scanleft_to_begin_of_tape_blank", "0", left)$
+Tape: [".",".",<".">,"0","1",".",".",".","."] ("scanleft_to_begin_of_tape_blank", ".") -> ("replace_0_to_blank", ".", right)$
+Tape: [".",".",".",<"0">,"1",".",".",".","."] ("replace_0_to_blank", "0") -> ("scanright_to_end_of_tape_blank", ".", right)$
+Tape: [".",".",".",".",<"1">,".",".",".","."] ("scanright_to_end_of_tape_blank", "1") -> ("scanright_to_end_of_tape_blank", "1", right)$
+Tape: [".",".",".",".","1",<".">,".",".","."] ("scanright_to_end_of_tape_blank", ".") -> ("replace_1_to_blank", ".", left)$
+Tape: [".",".",".",".",<"1">,".",".",".","."] ("replace_1_to_blank", "1") -> ("search_for_success_or_continue", ".", left)$
+Tape: [".",".",".",<".">,".",".",".",".","."] ("search_for_success_or_continue", ".") -> ("write_y_at_the_end_tape_and_halt", ".", right)$
+Tape: [".",".",".",".",<".">,".",".",".","."] ("write_y_at_the_end_tape_and_halt", ".") -> ("HALT", "y", left)$
+Tape: [".",".",".",<".">,"y",".",".",".","."] Final state reached !$
+Interpreter closing...$'
+}
 
