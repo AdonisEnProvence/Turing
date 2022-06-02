@@ -1,0 +1,221 @@
+{
+  "name": "palindrome",
+  "alphabet": ["a", "b", "c", ".", "y", "n"],
+  "blank": ".",
+  "states": [
+    "pick_character",
+    "go_to_end_and_find_a",
+    "is_a",
+    "go_to_end_and_find_b",
+    "is_b",
+    "go_to_end_and_find_c",
+    "is_c",
+    "go_to_beginning",
+    "write_is_palindrome",
+    "write_is_not_palindrome",
+    "HALT"
+  ],
+  "initial": "pick_character",
+  "finals": ["HALT"],
+  "transitions": {
+    "pick_character": [
+      {
+        "read": "a",
+        "write": ".",
+        "to_state": "go_to_end_and_find_a",
+        "action": "RIGHT"
+      },
+      {
+        "read": "b",
+        "write": ".",
+        "to_state": "go_to_end_and_find_b",
+        "action": "RIGHT"
+      },
+      {
+        "read": "c",
+        "write": ".",
+        "to_state": "go_to_end_and_find_c",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "write": ".",
+        "to_state": "write_is_palindrome",
+        "action": "RIGHT"
+      }
+    ],
+    "go_to_end_and_find_a": [
+      {
+        "read": "a",
+        "write": "a",
+        "to_state": "go_to_end_and_find_a",
+        "action": "RIGHT"
+      },
+      {
+        "read": "b",
+        "write": "b",
+        "to_state": "go_to_end_and_find_a",
+        "action": "RIGHT"
+      },
+      {
+        "read": "c",
+        "write": "c",
+        "to_state": "go_to_end_and_find_a",
+        "action": "RIGHT"
+      },
+      { "read": ".", "write": ".", "to_state": "is_a", "action": "LEFT" }
+    ],
+    "go_to_end_and_find_b": [
+      {
+        "read": "a",
+        "write": "a",
+        "to_state": "go_to_end_and_find_b",
+        "action": "RIGHT"
+      },
+      {
+        "read": "b",
+        "write": "b",
+        "to_state": "go_to_end_and_find_b",
+        "action": "RIGHT"
+      },
+      {
+        "read": "c",
+        "write": "c",
+        "to_state": "go_to_end_and_find_b",
+        "action": "RIGHT"
+      },
+      { "read": ".", "write": ".", "to_state": "is_b", "action": "LEFT" }
+    ],
+    "go_to_end_and_find_c": [
+      {
+        "read": "a",
+        "write": "a",
+        "to_state": "go_to_end_and_find_c",
+        "action": "RIGHT"
+      },
+      {
+        "read": "b",
+        "write": "b",
+        "to_state": "go_to_end_and_find_c",
+        "action": "RIGHT"
+      },
+      {
+        "read": "c",
+        "write": "c",
+        "to_state": "go_to_end_and_find_c",
+        "action": "RIGHT"
+      },
+      { "read": ".", "write": ".", "to_state": "is_c", "action": "LEFT" }
+    ],
+    "is_a": [
+      {
+        "read": "a",
+        "write": ".",
+        "to_state": "go_to_beginning",
+        "action": "LEFT"
+      },
+      {
+        "read": "b",
+        "write": "b",
+        "to_state": "write_is_not_palindrome",
+        "action": "RIGHT"
+      },
+      {
+        "read": "c",
+        "write": "c",
+        "to_state": "write_is_not_palindrome",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "write": ".",
+        "to_state": "write_is_palindrome",
+        "action": "RIGHT"
+      }
+    ],
+    "is_b": [
+      {
+        "read": "a",
+        "write": "a",
+        "to_state": "write_is_not_palindrome",
+        "action": "RIGHT"
+      },
+      {
+        "read": "b",
+        "write": ".",
+        "to_state": "go_to_beginning",
+        "action": "LEFT"
+      },
+      {
+        "read": "c",
+        "write": "c",
+        "to_state": "write_is_not_palindrome",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "write": ".",
+        "to_state": "write_is_palindrome",
+        "action": "RIGHT"
+      }
+    ],
+    "is_c": [
+      {
+        "read": "a",
+        "write": "a",
+        "to_state": "write_is_not_palindrome",
+        "action": "RIGHT"
+      },
+      {
+        "read": "b",
+        "write": "b",
+        "to_state": "write_is_not_palindrome",
+        "action": "RIGHT"
+      },
+      {
+        "read": "c",
+        "write": ".",
+        "to_state": "go_to_beginning",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "write": ".",
+        "to_state": "write_is_palindrome",
+        "action": "RIGHT"
+      }
+    ],
+    "go_to_beginning": [
+      {
+        "read": "a",
+        "write": "a",
+        "to_state": "go_to_beginning",
+        "action": "LEFT"
+      },
+      {
+        "read": "b",
+        "write": "b",
+        "to_state": "go_to_beginning",
+        "action": "LEFT"
+      },
+      {
+        "read": "c",
+        "write": "c",
+        "to_state": "go_to_beginning",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "write": ".",
+        "to_state": "pick_character",
+        "action": "RIGHT"
+      }
+    ],
+    "write_is_not_palindrome": [
+      { "read": ".", "write": "n", "to_state": "HALT", "action": "RIGHT" }
+    ],
+    "write_is_palindrome": [
+      { "read": ".", "write": "y", "to_state": "HALT", "action": "RIGHT" }
+    ]
+  }
+}
