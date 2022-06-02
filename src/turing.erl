@@ -26,10 +26,10 @@ format_program_usage() ->
     ).
 
 format_read_file_error(Reason) ->
-    io:format("Error while reading machine configuration json file: ~p~n", [Reason]).
+    io:format("Error while reading machine configuration: ~s~n", [file:format_error(Reason)]).
 
-format_try_decode_error({Reason, _Stack}) ->
-    io:format("Error while decoding machine configuration json file: ~p~n", [Reason]).
+format_try_decode_error() ->
+    io:format("Error while decoding machine configuration: can not decode invalid json file~n").
 
 %% escript Entry point
 parse_optionnal_first_flag_arg([]) ->
@@ -60,8 +60,8 @@ decode_raw_machine_config(BinaryFile, Input) ->
     case TryDecodeBinaryFileResult of
         {ok, DecodedBinaryFile, _} ->
             parse_decoded_machine_config(DecodedBinaryFile, Input);
-        {error, Error} ->
-            format_try_decode_error(Error)
+        {error, _Error} ->
+            format_try_decode_error()
     end.
 
 parse_decoded_machine_config(DecodedMachineConfig, Input) ->
