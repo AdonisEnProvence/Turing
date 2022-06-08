@@ -9,8 +9,7 @@
     "states": [
         "find_+",
         "find_next_1_and_replace_with_+",
-        "replace_+_with_1",
-        "clear_+",
+        "replace_pivot_with_1",
         "HALT"
     ],
     "initial": "find_+",
@@ -27,7 +26,7 @@
             },
             {
                 "read": "+",
-                "write": "+",
+                "write": ".",
                 "to_state": "find_next_1_and_replace_with_+",
                 "action": "RIGHT"
             }
@@ -36,30 +35,22 @@
             {
                 "read": "1",
                 "write": "+",
-                "to_state": "replace_+_with_1",
+                "to_state": "replace_pivot_with_1",
                 "action": "LEFT"
             },
             {
                 "read": ".",
                 "write": ".",
-                "to_state": "clear_+",
+                "to_state": "HALT",
                 "action": "LEFT"
             }
         ],
-        "replace_+_with_1": [
+        "replace_pivot_with_1": [
             {
-                "read": "+",
+                "read": ".",
                 "write": "1",
                 "to_state": "find_+",
                 "action": "RIGHT"
-            }
-        ],
-        "clear_+": [
-            {
-                "read": "+",
-                "write": ".",
-                "to_state": "HALT",
-                "action": "LEFT"
             }
         ]
     }
