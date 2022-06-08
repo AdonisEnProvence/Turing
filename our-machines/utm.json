@@ -5,6 +5,7 @@
         "0",
         "~",
         "S",
+        "H",
         "{",
         "}",
         "[",
@@ -14,7 +15,6 @@
         ".",
         "^",
         "&",
-        "C",
         "\\"
     ],
     "blank": "\\",
@@ -81,6 +81,12 @@
                 "to_state": "go-to-input-start-for_S",
                 "action": "RIGHT",
                 "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "H"
             },
             {
                 "read": "{",
@@ -171,6 +177,12 @@
                 "write": "S"
             },
             {
+                "read": "H",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "H"
+            },
+            {
                 "read": "{",
                 "to_state": "scanleft-to-states-decleration-for_S(1)",
                 "action": "LEFT",
@@ -245,6 +257,12 @@
                 "write": "S"
             },
             {
+                "read": "H",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "H"
+            },
+            {
                 "read": "{",
                 "to_state": "scanleft-to-states-decleration-for_S(0)",
                 "action": "LEFT",
@@ -299,12 +317,6 @@
                 "to_state": "find-state-transition-for_S(1)",
                 "action": "RIGHT",
                 "write": "S"
-            },
-            {
-                "read": "C",
-                "to_state": "scanright-to-next-state-definition_S(1)",
-                "action": "RIGHT",
-                "write": "C"
             }
         ],
         "find-state_S(0)": [
@@ -313,12 +325,6 @@
                 "to_state": "find-state-transition-for_S(0)",
                 "action": "RIGHT",
                 "write": "S"
-            },
-            {
-                "read": "C",
-                "to_state": "scanright-to-next-state-definition_S(0)",
-                "action": "RIGHT",
-                "write": "C"
             }
         ],
         "scanright-to-next-state-definition_S(0)": [
@@ -365,10 +371,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "scanright-to-next-state-definition_S(0)",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             }
         ],
         "scanright-to-next-state-definition_S(1)": [
@@ -415,10 +421,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "scanright-to-next-state-definition_S(1)",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             }
         ],
         "find-state-transition-for_S(0)": [
@@ -511,10 +517,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "go-to-next-state-transition_S(0)",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
@@ -567,10 +573,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "go-to-next-state-transition_S(1)",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
@@ -591,6 +597,12 @@
                 "to_state": "retrieve-transition-S_action",
                 "action": "RIGHT",
                 "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "HALT",
+                "action": "RIGHT",
+                "write": "H"
             }
         ],
         "retrieve-transition-S_action": [
@@ -709,10 +721,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "execute-transition-S_>_0",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
@@ -789,10 +801,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "execute-transition-S_>_1",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
@@ -869,10 +881,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "execute-transition-S_>_.",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
@@ -949,10 +961,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "execute-transition-S_<_0",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
@@ -1029,10 +1041,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "execute-transition-S_<_1",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
@@ -1109,10 +1121,10 @@
                 "write": "<"
             },
             {
-                "read": "C",
+                "read": "H",
                 "to_state": "execute-transition-S_<_.",
                 "action": "RIGHT",
-                "write": "C"
+                "write": "H"
             },
             {
                 "read": "S",
