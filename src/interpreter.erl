@@ -83,7 +83,7 @@ print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
 
     if
         IndexOnTapeIsCurrentIndex ->
-            io:format("<~s>", [TapeCurrentValue]);
+            io:format("\033[0;101m~s\033[0m", [TapeCurrentValue]);
         true ->
             io:format("~s", [TapeCurrentValue])
     end,
