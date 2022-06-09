@@ -17,6 +17,9 @@ const CURRENT_READ_CHARACTER = "^";
 
 const FINDABLE_ACTIONS_VALUES = [ACTION_LEFT, ACTION_RIGHT];
 
+const FORMATTED_ACTION_LEFT = "LEFT";
+const FORMATTED_ACTION_RIGHT = "RIGHT";
+
 // Transitions prefix
 const GO_TO_INPUT_START_FOR_PREFIX = "go-to-input-start-for_";
 const READ_TAPE_FOR_PREFIX = "read-tape-for_";
@@ -42,6 +45,22 @@ const getFormattedExecuteTranstion = ({ toState, write, action }) =>
     write: write === INPUT_BLANK_ALIAS ? BLANK : write,
   });
 
+const getFormattedAction = (action) => {
+  switch (action) {
+    case ACTION_LEFT: {
+      return "LEFT";
+    }
+    case ACTION_RIGHT: {
+      return "RIGHT";
+    }
+    default: {
+      throw new Error(
+        "encountered unkown action value inside GET_FORMATTED_ACTION " + action
+      );
+    }
+  }
+};
+
 const STATIC_ALPHABET = [
   STATE_DECLERATION_START,
   STATE_DECLERATION_END,
@@ -61,7 +80,6 @@ function init() {
   const generatorConfigFile = process.argv[2];
   const rawdata = fs.readFileSync(generatorConfigFile);
   const parsedConfig = JSON.parse(rawdata);
-  console.log(parsedConfig);
 
   const configReadWrite = parsedConfig.writeRead;
   const configStates = parsedConfig.states;
@@ -107,8 +125,6 @@ function init() {
     INPUT_BLANK_ALIAS,
   ];
 
-  console.log(finalAlphabet);
-
   const result = {
     name: "utm_machine",
     alphabet: finalAlphabet,
@@ -129,7 +145,7 @@ function init() {
         read: state,
         to_state: FINAL_STATE_NAME,
         write: state,
-        action: ACTION_RIGHT,
+        action: FORMATTED_ACTION_RIGHT,
       });
       return;
     }
@@ -138,7 +154,7 @@ function init() {
       read: state,
       to_state: GO_TO_INPUT_START_FOR_PREFIX + state,
       write: state,
-      action: ACTION_RIGHT,
+      action: FORMATTED_ACTION_RIGHT,
     });
   });
 
@@ -154,7 +170,7 @@ function init() {
           read: character,
           to_state: READ_TAPE_FOR_PREFIX + configState,
           write: character,
-          action: ACTION_RIGHT,
+          action: FORMATTED_ACTION_RIGHT,
         });
         return;
       }
@@ -163,7 +179,7 @@ function init() {
         read: character,
         to_state: newState,
         write: character,
-        action: ACTION_RIGHT,
+        action: FORMATTED_ACTION_RIGHT,
       });
     });
   });
@@ -179,7 +195,7 @@ function init() {
         read: inputCharacter,
         to_state: `${SCANLEFT_TO_STATES_DECLERATION_FOR}${configState}(${inputCharacter})`,
         write: CURRENT_READ_CHARACTER,
-        action: ACTION_LEFT,
+        action: FORMATTED_ACTION_LEFT,
       });
     }
   }
@@ -198,7 +214,7 @@ function init() {
               read: INITIAL_STATE_DECLERATION_END,
               to_state: `${FIND_STATE_PREFIX}${state}(${inputCharacter})`,
               write: INITIAL_STATE_DECLERATION_END,
-              action: ACTION_RIGHT,
+              action: FORMATTED_ACTION_RIGHT,
             });
             break;
           }
@@ -207,7 +223,7 @@ function init() {
               read: alphabetCharacter,
               to_state: newState,
               write: alphabetCharacter,
-              action: ACTION_LEFT,
+              action: FORMATTED_ACTION_LEFT,
             });
           }
         }
@@ -229,14 +245,14 @@ function init() {
             read: readstate,
             to_state: `${FIND_STATE_TRANSITION_PREFIX}${configState}(${inputCharacter})`,
             write: readstate,
-            action: ACTION_RIGHT,
+            action: FORMATTED_ACTION_RIGHT,
           });
         } else {
           result.transitions[newState].push({
             read: readstate,
             to_state: `${SCANRIGHT_TO_NEXT_STATE_DEFINITION_PREFIX}${configState}(${inputCharacter})`,
             write: readstate,
-            action: ACTION_RIGHT,
+            action: FORMATTED_ACTION_RIGHT,
           });
         }
       }
@@ -257,7 +273,7 @@ function init() {
               read: character,
               to_state: `${FIND_STATE_PREFIX}${configState}(${inputCharacter})`,
               write: character,
-              action: ACTION_RIGHT,
+              action: FORMATTED_ACTION_RIGHT,
             });
             break;
           }
@@ -266,7 +282,7 @@ function init() {
               read: character,
               to_state: newState,
               write: character,
-              action: ACTION_RIGHT,
+              action: FORMATTED_ACTION_RIGHT,
             });
           }
         }
@@ -290,7 +306,7 @@ function init() {
           read: charToSkip,
           to_state: newState,
           write: charToSkip,
-          action: ACTION_RIGHT,
+          action: FORMATTED_ACTION_RIGHT,
         });
       }
 
@@ -303,7 +319,7 @@ function init() {
             read: transitionReadCharacter,
             to_state: RETRIEVE_TRANSITION_TO_STATE,
             write: transitionReadCharacter,
-            action: ACTION_RIGHT,
+            action: FORMATTED_ACTION_RIGHT,
           });
 
           continue;
@@ -318,7 +334,7 @@ function init() {
             read: transitionReadCharacter,
             to_state: RETRIEVE_TRANSITION_TO_STATE,
             write: transitionReadCharacter,
-            action: ACTION_RIGHT,
+            action: FORMATTED_ACTION_RIGHT,
           });
 
           continue;
@@ -328,7 +344,7 @@ function init() {
           read: transitionReadCharacter,
           to_state: `${SCANRIGHT_TO_NEXT_TRANSITION}${configState}(${inputCharacter})`,
           write: transitionReadCharacter,
-          action: ACTION_RIGHT,
+          action: FORMATTED_ACTION_RIGHT,
         });
       }
     }
@@ -348,7 +364,7 @@ function init() {
               read: betweenTransitionsDefinitionChar,
               to_state: `${FIND_STATE_TRANSITION_PREFIX}${configState}(${inputCharacter})`,
               write: betweenTransitionsDefinitionChar,
-              action: ACTION_RIGHT,
+              action: FORMATTED_ACTION_RIGHT,
             });
             break;
           }
@@ -357,7 +373,7 @@ function init() {
               read: betweenTransitionsDefinitionChar,
               to_state: newState,
               write: betweenTransitionsDefinitionChar,
-              action: ACTION_RIGHT,
+              action: FORMATTED_ACTION_RIGHT,
             });
           }
         }
@@ -373,7 +389,7 @@ function init() {
       read: toStateTarget,
       to_state: RETRIEVE_TRANSITION_ACTION(toStateTarget),
       write: toStateTarget,
-      action: ACTION_RIGHT,
+      action: FORMATTED_ACTION_RIGHT,
     });
   }
 
@@ -388,7 +404,7 @@ function init() {
         read: action,
         to_state: RETRIEVE_TRANSITION_WRITE({ toState: toStateTarget, action }),
         write: action,
-        action: ACTION_RIGHT,
+        action: FORMATTED_ACTION_RIGHT,
       });
     }
   }
@@ -412,7 +428,7 @@ function init() {
             write: transitionWriteCharacter,
           }),
           write: transitionWriteCharacter,
-          action: ACTION_RIGHT,
+          action: FORMATTED_ACTION_RIGHT,
         });
       }
     }
@@ -442,7 +458,7 @@ function init() {
                 read: alphabetCharacter,
                 to_state: toStateOnCurrentReadCharacter,
                 write: transitionWriteCharacter,
-                action: action,
+                action: getFormattedAction(action),
               });
               break;
             }
@@ -451,7 +467,7 @@ function init() {
                 read: alphabetCharacter,
                 to_state: newState,
                 write: alphabetCharacter,
-                action: ACTION_RIGHT,
+                action: FORMATTED_ACTION_RIGHT,
               });
             }
           }
