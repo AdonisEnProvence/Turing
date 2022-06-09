@@ -81,7 +81,7 @@ function init() {
   const rawdata = fs.readFileSync(generatorConfigFile);
   const parsedConfig = JSON.parse(rawdata);
 
-  const configReadWrite = parsedConfig.writeRead;
+  const configInputCharacters = parsedConfig.inputCharacters;
   const configStates = parsedConfig.states;
 
   const StatesDuplicationReservedError = configStates.every(
@@ -92,7 +92,7 @@ function init() {
     return 1;
   }
 
-  const readWriteDuplicationReservedError = configReadWrite.every(
+  const readWriteDuplicationReservedError = configInputCharacters.every(
     (character) => STATIC_ALPHABET.includes(character) === false
   );
   if (!readWriteDuplicationReservedError) {
@@ -100,9 +100,12 @@ function init() {
     return 1;
   }
 
-  const dynamicAlphabet = [...configStates, ...configReadWrite];
+  const dynamicAlphabet = [...configStates, ...configInputCharacters];
   const finalAlphabet = [...STATIC_ALPHABET, ...dynamicAlphabet];
-  const customConfigInputFindableCharCollection = [BLANK, ...configReadWrite]; //after the &
+  const customConfigInputFindableCharCollection = [
+    BLANK,
+    ...configInputCharacters,
+  ]; //after the &
   const customConfigStatesWithHalt = [HALT_STATE, ...configStates];
   const customConfigStates = configStates;
 
@@ -121,7 +124,7 @@ function init() {
     STATE_DECLERATION_END,
   ];
   const transitionReadWriteFindableCharacters = [
-    ...configReadWrite,
+    ...configInputCharacters,
     INPUT_BLANK_ALIAS,
   ];
 
