@@ -1,6 +1,4 @@
 import fs from "fs";
-import { config } from "process";
-import util from "util";
 
 const STATE_DECLERATION_START = "{";
 const STATE_DECLERATION_END = "}";
@@ -10,12 +8,14 @@ const INITIAL_STATE_DECLERATION_END = "~";
 const INPUT_DECLERATION_START = "&";
 const HALT_STATE = "H";
 
-const FINAL_STATE = "HALT";
+const FINAL_STATE_NAME = "HALT";
 const ACTION_RIGHT = ">";
 const ACTION_LEFT = "<";
 const BLANK = ".";
 const INPUT_BLANK_ALIAS = "_";
 const CURRENT_READ_CHARACTER = "^";
+
+const FINDABLE_ACTIONS_VALUES = [ACTION_LEFT, ACTION_RIGHT];
 
 // Transitions prefix
 const GO_TO_INPUT_START_FOR_PREFIX = "go-to-input-start-for_";
@@ -26,6 +26,21 @@ const FIND_STATE_PREFIX = "find-state_";
 const FIND_STATE_TRANSITION_PREFIX = "find-state-transition-for_";
 const SCANRIGHT_TO_NEXT_STATE_DEFINITION_PREFIX = `scanright-to-next-state-definition_`;
 const SCANRIGHT_TO_NEXT_TRANSITION = `scanright-to-next-state-transition_`;
+const RETRIEVE_INITIAL_STATE_NAME = "retrieve_initial_state";
+const RETRIEVE_TRANSITION_TO_STATE = "retrieve-transition-to_state";
+const RETRIEVE_TRANSITION_ACTION = (toState) =>
+  `retrieve-transition-${toState}_action`;
+const RETRIEVE_TRANSITION_WRITE = ({ toState, action }) =>
+  `retrieve-transition-${toState}_${action}_write`;
+const EXECUTE_TRANSITION_TO_STATE_ACTION_WRITE = ({ toState, action, write }) =>
+  `execute-transition-${toState}_${action}_${write}`;
+
+const getFormattedExecuteTranstion = ({ toState, write, action }) =>
+  EXECUTE_TRANSITION_TO_STATE_ACTION_WRITE({
+    toState,
+    action,
+    write: write === INPUT_BLANK_ALIAS ? BLANK : write,
+  });
 
 const STATIC_ALPHABET = [
   STATE_DECLERATION_START,
@@ -39,6 +54,7 @@ const STATIC_ALPHABET = [
   ACTION_RIGHT,
   ACTION_LEFT,
   BLANK,
+  CURRENT_READ_CHARACTER,
 ];
 
 function init() {
@@ -86,7 +102,7 @@ function init() {
     STATE_DECLERATION_START,
     STATE_DECLERATION_END,
   ];
-  const transitionReadFindableCharacters = [
+  const transitionReadWriteFindableCharacters = [
     ...configReadWrite,
     INPUT_BLANK_ALIAS,
   ];
@@ -97,29 +113,28 @@ function init() {
     name: "utm_machine",
     alphabet: finalAlphabet,
     blank: BLANK,
-    finals: [FINAL_STATE],
-    states: [FINAL_STATE],
+    finals: [FINAL_STATE_NAME],
+    states: [FINAL_STATE_NAME],
     transitions: {},
   };
   // First build "retrieve_initial_state",
 
-  const retrieveInitialStateName = "retrieve-initial-state";
-  result.initial = retrieveInitialStateName;
-  result.states.push(retrieveInitialStateName);
-  result.transitions[retrieveInitialStateName] = [];
+  result.initial = RETRIEVE_INITIAL_STATE_NAME;
+  result.states.push(RETRIEVE_INITIAL_STATE_NAME);
+  result.transitions[RETRIEVE_INITIAL_STATE_NAME] = [];
   customConfigStatesWithHalt.forEach((state) => {
     // If initial state is the final state then we exit
     if (state === HALT_STATE) {
-      result.transitions[retrieveInitialStateName].push({
+      result.transitions[RETRIEVE_INITIAL_STATE_NAME].push({
         read: state,
-        to_state: FINAL_STATE,
+        to_state: FINAL_STATE_NAME,
         write: state,
         action: ACTION_RIGHT,
       });
       return;
     }
 
-    result.transitions[retrieveInitialStateName].push({
+    result.transitions[RETRIEVE_INITIAL_STATE_NAME].push({
       read: state,
       to_state: GO_TO_INPUT_START_FOR_PREFIX + state,
       write: state,
@@ -279,14 +294,14 @@ function init() {
         });
       }
 
-      for (const transitionReadCharacter of transitionReadFindableCharacters) {
+      for (const transitionReadCharacter of transitionReadWriteFindableCharacters) {
         const inputCharacterIsTransitionCharacter =
           inputCharacter === transitionReadCharacter;
 
         if (inputCharacterIsTransitionCharacter) {
           result.transitions[newState].push({
             read: transitionReadCharacter,
-            to_state: `retrieve-transition-to_state`,
+            to_state: RETRIEVE_TRANSITION_TO_STATE,
             write: transitionReadCharacter,
             action: ACTION_RIGHT,
           });
@@ -301,7 +316,7 @@ function init() {
         if (transitionReadCharacterIsBlankAlias) {
           result.transitions[newState].push({
             read: transitionReadCharacter,
-            to_state: `retrieve-transition-to_state`,
+            to_state: RETRIEVE_TRANSITION_TO_STATE,
             write: transitionReadCharacter,
             action: ACTION_RIGHT,
           });
@@ -350,7 +365,102 @@ function init() {
     }
   }
 
-  console.log(util.inspect(result, false, null, true /* enable colors */));
+  // Then build "retrieve-transition-to_state"
+  result.states.push(RETRIEVE_TRANSITION_TO_STATE);
+  result.transitions[RETRIEVE_TRANSITION_TO_STATE] = [];
+  for (const toStateTarget of customConfigStatesWithHalt) {
+    result.transitions[RETRIEVE_TRANSITION_TO_STATE].push({
+      read: toStateTarget,
+      to_state: RETRIEVE_TRANSITION_ACTION(toStateTarget),
+      write: toStateTarget,
+      action: ACTION_RIGHT,
+    });
+  }
+
+  //Then build "retrieve-transition-S_action"
+  for (const toStateTarget of customConfigStatesWithHalt) {
+    const newState = RETRIEVE_TRANSITION_ACTION(toStateTarget);
+    result.states.push(newState);
+    result.transitions[newState] = [];
+
+    for (const action of FINDABLE_ACTIONS_VALUES) {
+      result.transitions[newState].push({
+        read: action,
+        to_state: RETRIEVE_TRANSITION_WRITE({ toState: toStateTarget, action }),
+        write: action,
+        action: ACTION_RIGHT,
+      });
+    }
+  }
+
+  // Then build "retrieve-transition-H_>_write"
+  for (const toStateTarget of customConfigStatesWithHalt) {
+    for (const action of FINDABLE_ACTIONS_VALUES) {
+      const newState = RETRIEVE_TRANSITION_WRITE({
+        toState: toStateTarget,
+        action,
+      });
+      result.states.push(newState);
+      result.transitions[newState] = [];
+
+      for (const transitionWriteCharacter of transitionReadWriteFindableCharacters) {
+        result.transitions[newState].push({
+          read: transitionWriteCharacter,
+          to_state: getFormattedExecuteTranstion({
+            toState: toStateTarget,
+            action,
+            write: transitionWriteCharacter,
+          }),
+          write: transitionWriteCharacter,
+          action: ACTION_RIGHT,
+        });
+      }
+    }
+  }
+
+  // Then build "execute-transition-S_>_."
+  for (const toStateTarget of customConfigStatesWithHalt) {
+    for (const action of FINDABLE_ACTIONS_VALUES) {
+      for (const transitionWriteCharacter of transitionReadWriteFindableCharacters) {
+        const newState = getFormattedExecuteTranstion({
+          toState: toStateTarget,
+          action,
+          write: transitionWriteCharacter,
+        });
+        result.states.push(newState);
+        result.transitions[newState] = [];
+
+        for (const alphabetCharacter of finalAlphabet) {
+          switch (alphabetCharacter) {
+            case CURRENT_READ_CHARACTER: {
+              const toStateOnCurrentReadCharacter =
+                toStateTarget === HALT_STATE
+                  ? FINAL_STATE_NAME
+                  : READ_TAPE_FOR_PREFIX + toStateTarget;
+
+              result.transitions[newState].push({
+                read: alphabetCharacter,
+                to_state: toStateOnCurrentReadCharacter,
+                write: transitionWriteCharacter,
+                action: action,
+              });
+              break;
+            }
+            default: {
+              result.transitions[newState].push({
+                read: alphabetCharacter,
+                to_state: newState,
+                write: alphabetCharacter,
+                action: ACTION_RIGHT,
+              });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  fs.writeFileSync("./data.json", JSON.stringify(result, null, 2), "utf-8");
 }
 
 process.exit(init());
