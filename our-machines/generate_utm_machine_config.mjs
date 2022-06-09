@@ -25,6 +25,7 @@ const SCANLEFT_TO_STATES_DECLERATION_FOR =
 const FIND_STATE_PREFIX = "find-state_";
 const FIND_STATE_TRANSITION_PREFIX = "find-state-transition-for_";
 const SCANRIGHT_TO_NEXT_STATE_DEFINITION_PREFIX = `scanright-to-next-state-definition_`;
+const SCANRIGHT_TO_NEXT_TRANSITION = `scanright-to-next-state-transition_`;
 
 const STATIC_ALPHABET = [
   STATE_DECLERATION_START,
@@ -84,6 +85,10 @@ function init() {
     ...betweenTransitionsDeclerationFindableCharacters,
     STATE_DECLERATION_START,
     STATE_DECLERATION_END,
+  ];
+  const transitionReadFindableCharacters = [
+    ...configReadWrite,
+    INPUT_BLANK_ALIAS,
   ];
 
   console.log(finalAlphabet);
@@ -246,6 +251,97 @@ function init() {
               read: character,
               to_state: newState,
               write: character,
+              action: ACTION_RIGHT,
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // Then buil "find-state-transition-for_S(0)"
+  for (const configState of customConfigStates) {
+    for (const inputCharacter of customConfigInputFindableCharCollection) {
+      const newState = `${FIND_STATE_TRANSITION_PREFIX}${configState}(${inputCharacter})`;
+      result.states.push(newState);
+      result.transitions[newState] = [];
+
+      const charToSkipCollection = [
+        TRANSITION_DECLERATION_START,
+        STATE_DECLERATION_START,
+      ];
+      for (const charToSkip of charToSkipCollection) {
+        result.transitions[newState].push({
+          read: charToSkip,
+          to_state: newState,
+          write: charToSkip,
+          action: ACTION_RIGHT,
+        });
+      }
+
+      for (const transitionReadCharacter of transitionReadFindableCharacters) {
+        const inputCharacterIsTransitionCharacter =
+          inputCharacter === transitionReadCharacter;
+
+        if (inputCharacterIsTransitionCharacter) {
+          result.transitions[newState].push({
+            read: transitionReadCharacter,
+            to_state: `retrieve-transition-to_state`,
+            write: transitionReadCharacter,
+            action: ACTION_RIGHT,
+          });
+
+          continue;
+        }
+
+        const transitionReadCharacterIsBlankAlias =
+          inputCharacter === BLANK &&
+          transitionReadCharacter === INPUT_BLANK_ALIAS;
+
+        if (transitionReadCharacterIsBlankAlias) {
+          result.transitions[newState].push({
+            read: transitionReadCharacter,
+            to_state: `retrieve-transition-to_state`,
+            write: transitionReadCharacter,
+            action: ACTION_RIGHT,
+          });
+
+          continue;
+        }
+
+        result.transitions[newState].push({
+          read: transitionReadCharacter,
+          to_state: `${SCANRIGHT_TO_NEXT_TRANSITION}${configState}(${inputCharacter})`,
+          write: transitionReadCharacter,
+          action: ACTION_RIGHT,
+        });
+      }
+    }
+  }
+
+  // Then build "go-to-next-state-transition_S(1)"
+  for (const configState of customConfigStates) {
+    for (const inputCharacter of customConfigInputFindableCharCollection) {
+      const newState = `${SCANRIGHT_TO_NEXT_TRANSITION}${configState}(${inputCharacter})`;
+      result.states.push(newState);
+      result.transitions[newState] = [];
+
+      for (const betweenTransitionsDefinitionChar of betweenTransitionsDeclerationFindableCharacters) {
+        switch (betweenTransitionsDefinitionChar) {
+          case TRANSITION_DECLERATION_END: {
+            result.transitions[newState].push({
+              read: betweenTransitionsDefinitionChar,
+              to_state: `${FIND_STATE_TRANSITION_PREFIX}${configState}(${inputCharacter})`,
+              write: betweenTransitionsDefinitionChar,
+              action: ACTION_RIGHT,
+            });
+            break;
+          }
+          default: {
+            result.transitions[newState].push({
+              read: betweenTransitionsDefinitionChar,
+              to_state: newState,
+              write: betweenTransitionsDefinitionChar,
               action: ACTION_RIGHT,
             });
           }
