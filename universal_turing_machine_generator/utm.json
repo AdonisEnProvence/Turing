@@ -1205,7 +1205,7 @@
         "execute-transition-H_>_0": [
             {
                 "read": "^",
-                "to_state": "execute-transition-H_>_0",
+                "to_state": "HALT",
                 "action": "RIGHT",
                 "write": "0"
             },
