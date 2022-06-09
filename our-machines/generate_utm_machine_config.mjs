@@ -22,6 +22,8 @@ const READ_TAPE_FOR_PREFIX = "read-tape-for_";
 const SCANLEFT_TO_STATES_DECLERATION_FOR =
   "scanleft-to-states-decleration-for_"; // scanleft-to-states-decleration-for_S(0)
 const FIND_STATE_PREFIX = "find-state_";
+const FIND_STATE_TRANSITION_PREFIX = "find-state-transition-for_";
+const SCANRIGHT_TO_NEXT_STATE_DEFINITION_PREFIX = `scanright-to-next-state-definition_`;
 
 const STATIC_ALPHABET = [
   STATE_DECLERATION_START,
@@ -175,4 +177,31 @@ for (const state of customConfigStates) {
   }
 }
 
+// Then build "find-state_S(1)"
+for (const configState of customConfigStates) {
+  for (const inputCharacter of customConfigInputFindableCharCollection) {
+    const newState = `${FIND_STATE_PREFIX}${configState}(${inputCharacter})`;
+    result.states.push(newState);
+    result.transitions[newState] = [];
+
+    for (const readstate of customConfigStates) {
+      const readStateIsSearchedState = readstate === configState;
+      if (readStateIsSearchedState === true) {
+        result.transitions[newState].push({
+          read: configState,
+          to_state: `${FIND_STATE_TRANSITION_PREFIX}${configState}(${inputCharacter})`,
+          write: configState,
+          action: ACTION_RIGHT,
+        });
+      } else {
+        result.transitions[newState].push({
+          read: configState,
+          to_state: `scanright-to-next-state-definition_S(0)`,
+          write: alphabetCharacter,
+          action: ACTION_RIGHT,
+        });
+      }
+    }
+  }
+}
 console.log(util.inspect(result, false, null, true /* enable colors */));
