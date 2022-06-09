@@ -1,4 +1,5 @@
 import fs from "fs";
+import { config } from "process";
 import util from "util";
 
 const STATE_DECLERATION_START = "{";
@@ -65,15 +66,31 @@ function init() {
   }
 
   const dynamicAlphabet = [...configStates, ...configReadWrite];
-  const updatedAlphabet = [...STATIC_ALPHABET, ...dynamicAlphabet];
-  const customConfigInputFindableCharCollection = [BLANK, ...configReadWrite];
+  const finalAlphabet = [...STATIC_ALPHABET, ...dynamicAlphabet];
+  const customConfigInputFindableCharCollection = [BLANK, ...configReadWrite]; //after the &
   const customConfigStatesWithHalt = [HALT_STATE, ...configStates];
   const customConfigStates = configStates;
-  console.log(updatedAlphabet);
+
+  const betweenTransitionsDeclerationFindableCharacters = [
+    ...dynamicAlphabet,
+    HALT_STATE,
+    TRANSITION_DECLERATION_START,
+    TRANSITION_DECLERATION_END,
+    ACTION_LEFT,
+    ACTION_RIGHT,
+    INPUT_BLANK_ALIAS,
+  ];
+  const betweenStatesDeclerationFindableCharacters = [
+    ...betweenTransitionsDeclerationFindableCharacters,
+    STATE_DECLERATION_START,
+    STATE_DECLERATION_END,
+  ];
+
+  console.log(finalAlphabet);
 
   const result = {
     name: "utm_machine",
-    alphabet: updatedAlphabet,
+    alphabet: finalAlphabet,
     blank: BLANK,
     finals: [FINAL_STATE],
     states: [FINAL_STATE],
@@ -111,7 +128,7 @@ function init() {
     result.states.push(newState);
     result.transitions[newState] = [];
 
-    updatedAlphabet.forEach((character) => {
+    finalAlphabet.forEach((character) => {
       if (character === INPUT_DECLERATION_START) {
         result.transitions[newState].push({
           read: character,
@@ -154,7 +171,7 @@ function init() {
       result.states.push(newState);
       result.transitions[newState] = [];
 
-      for (const alphabetCharacter of updatedAlphabet) {
+      for (const alphabetCharacter of finalAlphabet) {
         switch (alphabetCharacter) {
           case INITIAL_STATE_DECLERATION_END: {
             result.transitions[newState].push({
@@ -189,18 +206,49 @@ function init() {
         const readStateIsSearchedState = readstate === configState;
         if (readStateIsSearchedState === true) {
           result.transitions[newState].push({
-            read: configState,
+            read: readstate,
             to_state: `${FIND_STATE_TRANSITION_PREFIX}${configState}(${inputCharacter})`,
-            write: configState,
+            write: readstate,
             action: ACTION_RIGHT,
           });
         } else {
           result.transitions[newState].push({
-            read: configState,
-            to_state: `scanright-to-next-state-definition_S(0)`,
-            write: alphabetCharacter,
+            read: readstate,
+            to_state: `${SCANRIGHT_TO_NEXT_STATE_DEFINITION_PREFIX}${configState}(${inputCharacter})`,
+            write: readstate,
             action: ACTION_RIGHT,
           });
+        }
+      }
+    }
+  }
+
+  // Then build scanright-to-next-state-definition_S(0)
+  for (const configState of customConfigStates) {
+    for (const inputCharacter of customConfigInputFindableCharCollection) {
+      const newState = `${SCANRIGHT_TO_NEXT_STATE_DEFINITION_PREFIX}${configState}(${inputCharacter})`;
+      result.states.push(newState);
+      result.transitions[newState] = [];
+
+      for (const character of betweenStatesDeclerationFindableCharacters) {
+        switch (character) {
+          case STATE_DECLERATION_END: {
+            result.transitions[newState].push({
+              read: character,
+              to_state: `${FIND_STATE_PREFIX}${configState}(${inputCharacter})`,
+              write: character,
+              action: ACTION_RIGHT,
+            });
+            break;
+          }
+          default: {
+            result.transitions[newState].push({
+              read: character,
+              to_state: newState,
+              write: character,
+              action: ACTION_RIGHT,
+            });
+          }
         }
       }
     }
