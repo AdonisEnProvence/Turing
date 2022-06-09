@@ -454,10 +454,15 @@ function init() {
                   ? FINAL_STATE_NAME
                   : READ_TAPE_FOR_PREFIX + toStateTarget;
 
+              const write =
+                transitionWriteCharacter === INPUT_BLANK_ALIAS
+                  ? BLANK
+                  : transitionWriteCharacter;
+
               result.transitions[newState].push({
                 read: alphabetCharacter,
                 to_state: toStateOnCurrentReadCharacter,
-                write: transitionWriteCharacter,
+                write,
                 action: getFormattedAction(action),
               });
               break;
