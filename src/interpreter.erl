@@ -2,31 +2,38 @@
 -include("machine.hrl").
 
 -ifdef(TEST).
--export([start/2, read_and_exec/5]).
+-export([start/3, read_and_exec/5]).
 -else.
--export([start/2]).
+-export([start/3]).
 -endif.
 
--spec start(#parsed_machine_config{}, list(string())) -> no_return().
+-spec start(#parsed_machine_config{}, list(string()), #program_options{}) -> no_return().
 
-start(MachineConfig, Input) ->
+start(MachineConfig, Input, ProgramOptions) ->
     io:format("Interpreter starting...~n"),
     Tape = Input,
     IndexOnTape = 1,
-    loop(IndexOnTape, Tape, MachineConfig, MachineConfig#parsed_machine_config.initial),
+    loop(
+        IndexOnTape,
+        Tape,
+        MachineConfig,
+        MachineConfig#parsed_machine_config.initial,
+        ProgramOptions
+    ),
     io:format("Interpreter closing...~n").
 
-loop(IndexOnTape, Tape, MachineConfig, CurrentState) ->
+loop(IndexOnTape, Tape, MachineConfig, CurrentState, ProgramOptions) ->
     CurrentStateIsFinalState = lists:member(
         CurrentState, MachineConfig#parsed_machine_config.finals
     ),
+    PrintHeadWithColor = ProgramOptions#program_options.print_head_with_color,
 
     if
         CurrentStateIsFinalState =:= true ->
-            print_tape_and_head_on_tape(IndexOnTape, Tape),
+            print_tape_and_head_on_tape(IndexOnTape, Tape, PrintHeadWithColor),
             io:format("Final state reached !~n");
         true ->
-            print_tape_and_head_on_tape(IndexOnTape, Tape),
+            print_tape_and_head_on_tape(IndexOnTape, Tape, PrintHeadWithColor),
             AvailableTransitions = maps:get(
                 CurrentState, MachineConfig#parsed_machine_config.transitions, []
             ),
@@ -39,7 +46,7 @@ loop(IndexOnTape, Tape, MachineConfig, CurrentState) ->
             ),
             case ReadResult of
                 {continue, NewTape, NewIndexOnTape, NewState} ->
-                    loop(NewIndexOnTape, NewTape, MachineConfig, NewState);
+                    loop(NewIndexOnTape, NewTape, MachineConfig, NewState, ProgramOptions);
                 {blocked, _NewTape, _NewIndexOnTape} ->
                     io:format("Machine is blocked no more transitions available~n")
             end
@@ -71,19 +78,22 @@ print_transition_details(CurrentState, #parsed_machine_config_transition{
 print_blocked_transition_details(CurrentState, TapeCurrentValue) ->
     io:format("(~s, ~s) -> BLOCKED~n", [CurrentState, TapeCurrentValue]).
 
-print_tape_and_head_on_tape(IndexOnTape, Tape) ->
+print_tape_and_head_on_tape(IndexOnTape, Tape, PrintHeadWithColor) ->
     io:format("["),
-    print_head_index_value_on_tape(IndexOnTape, Tape, 1),
+    print_head_index_value_on_tape(IndexOnTape, Tape, 1, PrintHeadWithColor),
     io:format("] ").
 
-print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
+print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape, PrintHeadWithColor) ->
     IndexOnTapeIsCurrentIndex = IndexOnTape =:= CurrentIndexOnTape,
     TapeCurrentValue = lists:nth(CurrentIndexOnTape, Tape),
     CurrentIndexOnTapeIsLastIndex = CurrentIndexOnTape =:= length(Tape),
 
     if
         IndexOnTapeIsCurrentIndex ->
-            io:format("<~s>", [TapeCurrentValue]);
+            case PrintHeadWithColor of
+                true -> io:format("\033[0;101m~s\033[0m", [TapeCurrentValue]);
+                false -> io:format("<~s>", [TapeCurrentValue])
+            end;
         true ->
             io:format("~s", [TapeCurrentValue])
     end,
@@ -91,7 +101,9 @@ print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape) ->
         CurrentIndexOnTapeIsLastIndex ->
             ok;
         true ->
-            print_head_index_value_on_tape(IndexOnTape, Tape, CurrentIndexOnTape + 1)
+            print_head_index_value_on_tape(
+                IndexOnTape, Tape, CurrentIndexOnTape + 1, PrintHeadWithColor
+            )
     end.
 
 retrieve_transition_to_perform(_, []) ->

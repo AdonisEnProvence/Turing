@@ -6,6 +6,7 @@
 option_spec_list() ->
     [
         {help, $h, "help", undefined, ""},
+        {color, $c, "color", {boolean, false}, ""},
         {jsonfile, undefined, undefined, string, ""},
         {input, undefined, undefined, string, ""}
     ].
@@ -20,6 +21,7 @@ print_usage() ->
         "  input             input of the machine\n"
         "\n"
         "optional arguments:\n"
+        "  -c, --color       output head position with color\n"
         "  -h, --help        show this help message and exit~n"
     ).
 
@@ -43,7 +45,7 @@ extract_arg(ArgName, Args) ->
         false -> undefined
     end.
 
-get_raw_machine_config(ParsedArgs) ->
+get_raw_machine_config(ParsedArgs, ProgramOptions) ->
     case extract_arg(jsonfile, ParsedArgs) of
         {ok, FilePath} ->
             case extract_arg(input, ParsedArgs) of
@@ -53,7 +55,7 @@ get_raw_machine_config(ParsedArgs) ->
                         {error, Reason} ->
                             print_read_file_error(Reason);
                         {ok, BinaryFile} ->
-                            decode_raw_machine_config(BinaryFile, Input)
+                            decode_raw_machine_config(BinaryFile, Input, ProgramOptions)
                     end;
                 undefined ->
                     io:format("Error: missing input argument~n"),
@@ -64,16 +66,16 @@ get_raw_machine_config(ParsedArgs) ->
             print_usage()
     end.
 
-decode_raw_machine_config(BinaryFile, Input) ->
+decode_raw_machine_config(BinaryFile, Input, ProgramOptions) ->
     TryDecodeBinaryFileResult = jsone:try_decode(BinaryFile),
     case TryDecodeBinaryFileResult of
         {ok, DecodedBinaryFile, _} ->
-            parse_decoded_machine_config(DecodedBinaryFile, Input);
+            parse_decoded_machine_config(DecodedBinaryFile, Input, ProgramOptions);
         {error, _Error} ->
             print_json_decode_error()
     end.
 
-parse_decoded_machine_config(DecodedMachineConfig, Input) ->
+parse_decoded_machine_config(DecodedMachineConfig, Input, ProgramOptions) ->
     ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
     case ParsedMachineResult of
         {error, Error} ->
@@ -85,10 +87,10 @@ parse_decoded_machine_config(DecodedMachineConfig, Input) ->
                 [FormattedError]
             );
         {ok, ParsedMachineConfig} ->
-            validate_parsed_machine_config(ParsedMachineConfig, Input)
+            validate_parsed_machine_config(ParsedMachineConfig, Input, ProgramOptions)
     end.
 
-validate_parsed_machine_config(ParsedMachineConfig, Input) ->
+validate_parsed_machine_config(ParsedMachineConfig, Input, ProgramOptions) ->
     ParsedMachineResult = machine_validator:validate_machine(ParsedMachineConfig),
     case ParsedMachineResult of
         {error, Error} ->
@@ -100,18 +102,18 @@ validate_parsed_machine_config(ParsedMachineConfig, Input) ->
                 [FormattedError]
             );
         ok ->
-            parse_input(ParsedMachineConfig, Input)
+            parse_input(ParsedMachineConfig, Input, ProgramOptions)
     end.
 
-parse_input(ParsedMachineConfig, Input) ->
+parse_input(ParsedMachineConfig, Input, ProgramOptions) ->
     InputParsingResult = input_parser:parse(ParsedMachineConfig, Input),
     case InputParsingResult of
-        {ok, ParsedInput} -> start_machine(ParsedMachineConfig, ParsedInput);
+        {ok, ParsedInput} -> start_machine(ParsedMachineConfig, ParsedInput, ProgramOptions);
         error -> error
     end.
 
-start_machine(ParsedMachineConfig, Input) ->
-    interpreter:start(ParsedMachineConfig, Input).
+start_machine(ParsedMachineConfig, Input, ProgramOptions) ->
+    interpreter:start(ParsedMachineConfig, Input, ProgramOptions).
 
 main(Args) ->
     case getopt:parse(option_spec_list(), Args) of
@@ -121,7 +123,15 @@ main(Args) ->
                 true ->
                     print_usage();
                 false ->
-                    get_raw_machine_config(ParsedArgs)
+                    PrintHeadWithColor =
+                        case extract_arg(color, ParsedArgs) of
+                            {ok, Value} -> Value;
+                            undefined -> false
+                        end,
+                    ProgramOptions = #program_options{
+                        print_head_with_color = PrintHeadWithColor
+                    },
+                    get_raw_machine_config(ParsedArgs, ProgramOptions)
             end;
         _ ->
             io:format("Error during arguments parsing~n")
