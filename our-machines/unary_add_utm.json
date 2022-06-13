@@ -1,0 +1,5975 @@
+{
+  "name": "utm_machine",
+  "alphabet": [
+    "{",
+    "}",
+    "[",
+    "]",
+    "_",
+    "~",
+    "&",
+    "H",
+    ">",
+    "<",
+    ".",
+    "^",
+    "C",
+    "S",
+    "P",
+    "1",
+    "+"
+  ],
+  "blank": ".",
+  "finals": [
+    "HALT"
+  ],
+  "states": [
+    "HALT",
+    "retrieve_initial_state",
+    "go-to-input-start-for_C",
+    "go-to-input-start-for_S",
+    "go-to-input-start-for_P",
+    "read-tape-for_C",
+    "read-tape-for_S",
+    "read-tape-for_P",
+    "scanleft-to-states-decleration-for_C(.)",
+    "scanleft-to-states-decleration-for_C(1)",
+    "scanleft-to-states-decleration-for_C(+)",
+    "scanleft-to-states-decleration-for_S(.)",
+    "scanleft-to-states-decleration-for_S(1)",
+    "scanleft-to-states-decleration-for_S(+)",
+    "scanleft-to-states-decleration-for_P(.)",
+    "scanleft-to-states-decleration-for_P(1)",
+    "scanleft-to-states-decleration-for_P(+)",
+    "find-state_C(.)",
+    "find-state_C(1)",
+    "find-state_C(+)",
+    "find-state_S(.)",
+    "find-state_S(1)",
+    "find-state_S(+)",
+    "find-state_P(.)",
+    "find-state_P(1)",
+    "find-state_P(+)",
+    "scanright-to-next-state-definition_C(.)",
+    "scanright-to-next-state-definition_C(1)",
+    "scanright-to-next-state-definition_C(+)",
+    "scanright-to-next-state-definition_S(.)",
+    "scanright-to-next-state-definition_S(1)",
+    "scanright-to-next-state-definition_S(+)",
+    "scanright-to-next-state-definition_P(.)",
+    "scanright-to-next-state-definition_P(1)",
+    "scanright-to-next-state-definition_P(+)",
+    "find-state-transition-for_C(.)",
+    "find-state-transition-for_C(1)",
+    "find-state-transition-for_C(+)",
+    "find-state-transition-for_S(.)",
+    "find-state-transition-for_S(1)",
+    "find-state-transition-for_S(+)",
+    "find-state-transition-for_P(.)",
+    "find-state-transition-for_P(1)",
+    "find-state-transition-for_P(+)",
+    "scanright-to-next-state-transition_C(.)",
+    "scanright-to-next-state-transition_C(1)",
+    "scanright-to-next-state-transition_C(+)",
+    "scanright-to-next-state-transition_S(.)",
+    "scanright-to-next-state-transition_S(1)",
+    "scanright-to-next-state-transition_S(+)",
+    "scanright-to-next-state-transition_P(.)",
+    "scanright-to-next-state-transition_P(1)",
+    "scanright-to-next-state-transition_P(+)",
+    "retrieve-transition-to_state",
+    "retrieve-transition-H_action",
+    "retrieve-transition-C_action",
+    "retrieve-transition-S_action",
+    "retrieve-transition-P_action",
+    "retrieve-transition-H_<_write",
+    "retrieve-transition-H_>_write",
+    "retrieve-transition-C_<_write",
+    "retrieve-transition-C_>_write",
+    "retrieve-transition-S_<_write",
+    "retrieve-transition-S_>_write",
+    "retrieve-transition-P_<_write",
+    "retrieve-transition-P_>_write",
+    "execute-transition-H_<_1",
+    "execute-transition-H_<_+",
+    "execute-transition-H_<_.",
+    "execute-transition-H_>_1",
+    "execute-transition-H_>_+",
+    "execute-transition-H_>_.",
+    "execute-transition-C_<_1",
+    "execute-transition-C_<_+",
+    "execute-transition-C_<_.",
+    "execute-transition-C_>_1",
+    "execute-transition-C_>_+",
+    "execute-transition-C_>_.",
+    "execute-transition-S_<_1",
+    "execute-transition-S_<_+",
+    "execute-transition-S_<_.",
+    "execute-transition-S_>_1",
+    "execute-transition-S_>_+",
+    "execute-transition-S_>_.",
+    "execute-transition-P_<_1",
+    "execute-transition-P_<_+",
+    "execute-transition-P_<_.",
+    "execute-transition-P_>_1",
+    "execute-transition-P_>_+",
+    "execute-transition-P_>_."
+  ],
+  "transitions": {
+    "retrieve_initial_state": [
+      {
+        "read": "H",
+        "to_state": "HALT",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "go-to-input-start-for_C",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "go-to-input-start-for_S",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "go-to-input-start-for_P",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "go-to-input-start-for_C": [
+      {
+        "read": "{",
+        "to_state": "go-to-input-start-for_C",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "go-to-input-start-for_C",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "go-to-input-start-for_C",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "go-to-input-start-for_C",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "go-to-input-start-for_C",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "go-to-input-start-for_C",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "read-tape-for_C",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "go-to-input-start-for_C",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "go-to-input-start-for_C",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "go-to-input-start-for_C",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "go-to-input-start-for_C",
+        "write": "^",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "go-to-input-start-for_C",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "go-to-input-start-for_C",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "go-to-input-start-for_C",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "go-to-input-start-for_C",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "go-to-input-start-for_C",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "go-to-input-start-for_S": [
+      {
+        "read": "{",
+        "to_state": "go-to-input-start-for_S",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "go-to-input-start-for_S",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "go-to-input-start-for_S",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "go-to-input-start-for_S",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "go-to-input-start-for_S",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "go-to-input-start-for_S",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "read-tape-for_S",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "go-to-input-start-for_S",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "go-to-input-start-for_S",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "go-to-input-start-for_S",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "go-to-input-start-for_S",
+        "write": "^",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "go-to-input-start-for_S",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "go-to-input-start-for_S",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "go-to-input-start-for_S",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "go-to-input-start-for_S",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "go-to-input-start-for_S",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "go-to-input-start-for_P": [
+      {
+        "read": "{",
+        "to_state": "go-to-input-start-for_P",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "go-to-input-start-for_P",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "go-to-input-start-for_P",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "go-to-input-start-for_P",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "go-to-input-start-for_P",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "go-to-input-start-for_P",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "read-tape-for_P",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "go-to-input-start-for_P",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "go-to-input-start-for_P",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "go-to-input-start-for_P",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "go-to-input-start-for_P",
+        "write": "^",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "go-to-input-start-for_P",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "go-to-input-start-for_P",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "go-to-input-start-for_P",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "go-to-input-start-for_P",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "go-to-input-start-for_P",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "read-tape-for_C": [
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "^",
+        "action": "LEFT"
+      }
+    ],
+    "read-tape-for_S": [
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "^",
+        "action": "LEFT"
+      }
+    ],
+    "read-tape-for_P": [
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "^",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_C(.)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_C(.)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_C(.)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_C(1)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_C(1)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_C(1)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_C(+)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_C(+)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_C(+)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_S(.)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_S(.)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_S(1)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_S(1)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_S(+)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_S(+)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_S(+)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_P(.)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_P(.)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_P(.)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_P(1)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_P(1)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_P(1)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "scanleft-to-states-decleration-for_P(+)": [
+      {
+        "read": "{",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "{",
+        "action": "LEFT"
+      },
+      {
+        "read": "}",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "}",
+        "action": "LEFT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "[",
+        "action": "LEFT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "]",
+        "action": "LEFT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "_",
+        "action": "LEFT"
+      },
+      {
+        "read": "~",
+        "to_state": "find-state_P(+)",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "&",
+        "action": "LEFT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "H",
+        "action": "LEFT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": ">",
+        "action": "LEFT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "<",
+        "action": "LEFT"
+      },
+      {
+        "read": ".",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "^",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "^",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "C",
+        "action": "LEFT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "S",
+        "action": "LEFT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "P",
+        "action": "LEFT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanleft-to-states-decleration-for_P(+)",
+        "write": "+",
+        "action": "LEFT"
+      }
+    ],
+    "find-state_C(.)": [
+      {
+        "read": "C",
+        "to_state": "find-state-transition-for_C(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_C(1)": [
+      {
+        "read": "C",
+        "to_state": "find-state-transition-for_C(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_C(+)": [
+      {
+        "read": "C",
+        "to_state": "find-state-transition-for_C(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_S(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "find-state-transition-for_S(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_S(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "find-state-transition-for_S(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_S(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "find-state-transition-for_S(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_P(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "find-state-transition-for_P(.)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_P(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "find-state-transition-for_P(1)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state_P(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "find-state-transition-for_P(+)",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_C(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_C(.)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_C(.)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_C(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_C(1)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_C(1)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_C(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_C(+)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_C(+)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_S(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_S(.)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_S(.)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_S(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_S(1)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_S(1)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_S(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_S(+)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_S(+)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_P(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_P(.)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_P(.)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_P(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_P(1)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_P(1)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-definition_P(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "scanright-to-next-state-definition_P(+)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "find-state_P(+)",
+        "write": "}",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_C(.)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_C(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_C(.)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "retrieve-transition-to_state",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_C(1)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_C(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_C(1)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "retrieve-transition-to_state",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_C(+)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_C(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_C(+)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "retrieve-transition-to_state",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_S(.)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_S(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_S(.)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "retrieve-transition-to_state",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_S(1)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_S(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_S(1)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "retrieve-transition-to_state",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_S(+)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_S(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_S(+)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "retrieve-transition-to_state",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_P(.)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_P(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_P(.)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "retrieve-transition-to_state",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_P(1)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_P(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_P(1)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "retrieve-transition-to_state",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "find-state-transition-for_P(+)": [
+      {
+        "read": "[",
+        "to_state": "find-state-transition-for_P(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "{",
+        "to_state": "find-state-transition-for_P(+)",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "retrieve-transition-to_state",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_C(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_C(.)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_C(.)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_C(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_C(1)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_C(1)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_C(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_C(+)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_C(+)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_S(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_S(.)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_S(.)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_S(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_S(1)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_S(1)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_S(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_S(+)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_S(+)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_P(.)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_P(.)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_P(.)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_P(1)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_P(1)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_P(1)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "scanright-to-next-state-transition_P(+)": [
+      {
+        "read": "C",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "find-state-transition-for_P(+)",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "scanright-to-next-state-transition_P(+)",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-to_state": [
+      {
+        "read": "H",
+        "to_state": "retrieve-transition-H_action",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "retrieve-transition-C_action",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "retrieve-transition-S_action",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "retrieve-transition-P_action",
+        "write": "P",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-H_action": [
+      {
+        "read": "<",
+        "to_state": "retrieve-transition-H_<_write",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "retrieve-transition-H_>_write",
+        "write": ">",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-C_action": [
+      {
+        "read": "<",
+        "to_state": "retrieve-transition-C_<_write",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "retrieve-transition-C_>_write",
+        "write": ">",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-S_action": [
+      {
+        "read": "<",
+        "to_state": "retrieve-transition-S_<_write",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "retrieve-transition-S_>_write",
+        "write": ">",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-P_action": [
+      {
+        "read": "<",
+        "to_state": "retrieve-transition-P_<_write",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "retrieve-transition-P_>_write",
+        "write": ">",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-H_<_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-H_>_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-C_<_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-C_>_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-S_<_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-S_>_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-P_<_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "retrieve-transition-P_>_write": [
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-H_<_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-H_<_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-H_<_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-H_<_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-H_<_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_<_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-H_<_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-H_<_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-H_<_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-H_<_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-H_<_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-H_<_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "HALT",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-H_<_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-H_<_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-H_<_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_<_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-H_<_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-H_<_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-H_<_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-H_<_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-H_<_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_<_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-H_<_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-H_<_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-H_<_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-H_<_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-H_<_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-H_<_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "HALT",
+        "write": "+",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-H_<_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-H_<_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-H_<_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_<_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-H_<_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-H_<_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-H_<_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-H_<_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-H_<_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-H_<_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-H_<_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-H_<_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-H_<_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-H_<_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-H_<_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "HALT",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-H_<_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-H_<_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-H_<_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_<_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_<_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-H_>_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-H_>_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-H_>_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-H_>_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-H_>_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_>_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-H_>_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-H_>_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-H_>_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-H_>_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-H_>_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-H_>_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "HALT",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-H_>_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-H_>_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-H_>_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_>_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-H_>_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-H_>_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-H_>_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-H_>_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-H_>_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_>_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-H_>_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-H_>_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-H_>_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-H_>_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-H_>_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-H_>_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "HALT",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-H_>_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-H_>_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-H_>_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_>_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-H_>_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-H_>_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-H_>_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-H_>_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-H_>_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-H_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-H_>_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-H_>_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-H_>_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-H_>_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-H_>_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-H_>_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "HALT",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-H_>_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-H_>_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-H_>_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-H_>_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-H_>_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-C_<_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-C_<_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-C_<_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-C_<_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-C_<_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_<_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-C_<_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-C_<_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-C_<_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-C_<_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-C_<_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-C_<_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_C",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-C_<_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-C_<_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-C_<_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_<_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-C_<_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-C_<_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-C_<_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-C_<_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-C_<_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_<_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-C_<_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-C_<_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-C_<_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-C_<_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-C_<_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-C_<_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_C",
+        "write": "+",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-C_<_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-C_<_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-C_<_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_<_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-C_<_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-C_<_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-C_<_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-C_<_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-C_<_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-C_<_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-C_<_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-C_<_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-C_<_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-C_<_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-C_<_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_C",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-C_<_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-C_<_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-C_<_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_<_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_<_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-C_>_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-C_>_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-C_>_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-C_>_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-C_>_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_>_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-C_>_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-C_>_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-C_>_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-C_>_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-C_>_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-C_>_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_C",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-C_>_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-C_>_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-C_>_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_>_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-C_>_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-C_>_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-C_>_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-C_>_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-C_>_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_>_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-C_>_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-C_>_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-C_>_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-C_>_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-C_>_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-C_>_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_C",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-C_>_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-C_>_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-C_>_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_>_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-C_>_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-C_>_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-C_>_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-C_>_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-C_>_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-C_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-C_>_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-C_>_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-C_>_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-C_>_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-C_>_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-C_>_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_C",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-C_>_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-C_>_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-C_>_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-C_>_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-C_>_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-S_<_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-S_<_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-S_<_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-S_<_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-S_<_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_<_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-S_<_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-S_<_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-S_<_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-S_<_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-S_<_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-S_<_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_S",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-S_<_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-S_<_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-S_<_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_<_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-S_<_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-S_<_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-S_<_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-S_<_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-S_<_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_<_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-S_<_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-S_<_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-S_<_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-S_<_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-S_<_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-S_<_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_S",
+        "write": "+",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-S_<_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-S_<_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-S_<_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_<_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-S_<_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-S_<_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-S_<_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-S_<_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-S_<_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-S_<_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-S_<_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-S_<_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-S_<_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-S_<_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-S_<_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_S",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-S_<_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-S_<_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-S_<_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_<_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_<_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-S_>_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-S_>_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-S_>_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-S_>_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-S_>_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_>_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-S_>_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-S_>_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-S_>_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-S_>_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-S_>_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-S_>_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_S",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-S_>_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-S_>_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-S_>_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_>_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-S_>_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-S_>_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-S_>_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-S_>_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-S_>_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_>_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-S_>_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-S_>_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-S_>_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-S_>_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-S_>_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-S_>_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_S",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-S_>_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-S_>_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-S_>_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_>_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-S_>_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-S_>_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-S_>_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-S_>_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-S_>_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-S_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-S_>_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-S_>_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-S_>_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-S_>_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-S_>_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-S_>_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_S",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-S_>_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-S_>_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-S_>_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-S_>_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-S_>_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-P_<_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-P_<_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-P_<_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-P_<_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-P_<_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_<_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-P_<_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-P_<_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-P_<_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-P_<_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-P_<_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-P_<_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_P",
+        "write": "1",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-P_<_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-P_<_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-P_<_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_<_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_<_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-P_<_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-P_<_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-P_<_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-P_<_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-P_<_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_<_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-P_<_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-P_<_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-P_<_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-P_<_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-P_<_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-P_<_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_P",
+        "write": "+",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-P_<_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-P_<_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-P_<_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_<_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_<_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-P_<_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-P_<_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-P_<_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-P_<_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-P_<_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_<_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-P_<_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-P_<_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-P_<_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-P_<_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-P_<_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-P_<_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_P",
+        "write": ".",
+        "action": "LEFT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-P_<_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-P_<_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-P_<_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_<_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_<_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-P_>_1": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-P_>_1",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-P_>_1",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-P_>_1",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-P_>_1",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_>_1",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-P_>_1",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-P_>_1",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-P_>_1",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-P_>_1",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-P_>_1",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-P_>_1",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_P",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-P_>_1",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-P_>_1",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-P_>_1",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_>_1",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_>_1",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-P_>_+": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-P_>_+",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-P_>_+",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-P_>_+",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-P_>_+",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_>_+",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-P_>_+",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-P_>_+",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-P_>_+",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-P_>_+",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-P_>_+",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-P_>_+",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_P",
+        "write": "+",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-P_>_+",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-P_>_+",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-P_>_+",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_>_+",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_>_+",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ],
+    "execute-transition-P_>_.": [
+      {
+        "read": "{",
+        "to_state": "execute-transition-P_>_.",
+        "write": "{",
+        "action": "RIGHT"
+      },
+      {
+        "read": "}",
+        "to_state": "execute-transition-P_>_.",
+        "write": "}",
+        "action": "RIGHT"
+      },
+      {
+        "read": "[",
+        "to_state": "execute-transition-P_>_.",
+        "write": "[",
+        "action": "RIGHT"
+      },
+      {
+        "read": "]",
+        "to_state": "execute-transition-P_>_.",
+        "write": "]",
+        "action": "RIGHT"
+      },
+      {
+        "read": "_",
+        "to_state": "execute-transition-P_>_.",
+        "write": "_",
+        "action": "RIGHT"
+      },
+      {
+        "read": "~",
+        "to_state": "execute-transition-P_>_.",
+        "write": "~",
+        "action": "RIGHT"
+      },
+      {
+        "read": "&",
+        "to_state": "execute-transition-P_>_.",
+        "write": "&",
+        "action": "RIGHT"
+      },
+      {
+        "read": "H",
+        "to_state": "execute-transition-P_>_.",
+        "write": "H",
+        "action": "RIGHT"
+      },
+      {
+        "read": ">",
+        "to_state": "execute-transition-P_>_.",
+        "write": ">",
+        "action": "RIGHT"
+      },
+      {
+        "read": "<",
+        "to_state": "execute-transition-P_>_.",
+        "write": "<",
+        "action": "RIGHT"
+      },
+      {
+        "read": ".",
+        "to_state": "execute-transition-P_>_.",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "^",
+        "to_state": "read-tape-for_P",
+        "write": ".",
+        "action": "RIGHT"
+      },
+      {
+        "read": "C",
+        "to_state": "execute-transition-P_>_.",
+        "write": "C",
+        "action": "RIGHT"
+      },
+      {
+        "read": "S",
+        "to_state": "execute-transition-P_>_.",
+        "write": "S",
+        "action": "RIGHT"
+      },
+      {
+        "read": "P",
+        "to_state": "execute-transition-P_>_.",
+        "write": "P",
+        "action": "RIGHT"
+      },
+      {
+        "read": "1",
+        "to_state": "execute-transition-P_>_.",
+        "write": "1",
+        "action": "RIGHT"
+      },
+      {
+        "read": "+",
+        "to_state": "execute-transition-P_>_.",
+        "write": "+",
+        "action": "RIGHT"
+      }
+    ]
+  },
+  "initial": "retrieve_initial_state"
+}

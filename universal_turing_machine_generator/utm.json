@@ -1,0 +1,1686 @@
+{
+    "name": "unary_add",
+    "alphabet": [
+        "1",
+        "0",
+        "~",
+        "S",
+        "H",
+        "{",
+        "}",
+        "[",
+        "]",
+        ">",
+        "<",
+        ".",
+        "^",
+        "&",
+        "\\"
+    ],
+    "blank": "\\",
+    "states": [
+        "retrieve_initial_state",
+        "go-to-input-start-for_S",
+        "read-tape-for_S",
+        "scanleft-to-states-decleration-for_S(1)",
+        "scanleft-to-states-decleration-for_S(0)",
+        "find-state_S(1)",
+        "find-state_S(0)",
+        "scanright-to-next-state-definition_S(0)",
+        "scanright-to-next-state-definition_S(1)",
+        "find-state-transition-for_S(0)",
+        "find-state-transition-for_S(1)",
+        "go-to-next-state-transition_S(0)",
+        "go-to-next-state-transition_S(1)",
+        "retrieve-transition-to_state",
+        "retrieve-transition-S_action",
+        "retrieve-transition-S_>_write",
+        "retrieve-transition-S_<_write",
+        "execute-transition-S_<_1",
+        "execute-transition-S_<_0",
+        "execute-transition-S_<_.",
+        "execute-transition-S_>_1",
+        "execute-transition-S_>_0",
+        "execute-transition-S_>_.",
+        "retrieve-transition-H_action",
+        "retrieve-transition-H_>_write",
+        "retrieve-transition-H_<_write",
+        "execute-transition-H_<_1",
+        "execute-transition-H_<_0",
+        "execute-transition-H_<_.",
+        "execute-transition-H_>_1",
+        "execute-transition-H_>_0",
+        "execute-transition-H_>_.",
+        "HALT"
+    ],
+    "initial": "retrieve_initial_state",
+    "finals": [
+        "HALT"
+    ],
+    "transitions": {
+        "retrieve_initial_state": [
+            {
+                "read": "S",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "S"
+            }
+        ],
+        "go-to-input-start-for_S": [
+            {
+                "read": "1",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "~",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "~"
+            },
+            {
+                "read": "S",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "{",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": "}",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "[",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "]",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": ">",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": ".",
+                "to_state": "go-to-input-start-for_S",
+                "action": "RIGHT",
+                "write": "."
+            },
+            {
+                "read": "&",
+                "to_state": "read-tape-for_S",
+                "action": "RIGHT",
+                "write": "&"
+            }
+        ],
+        "read-tape-for_S": [
+            {
+                "read": "0",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "write": "^",
+                "action": "LEFT"
+            },
+            {
+                "read": "1",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "write": "^",
+                "action": "LEFT"
+            }
+        ],
+        "scanleft-to-states-decleration-for_S(1)": [
+            {
+                "read": "1",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "0"
+            },
+            {
+                "read": "~",
+                "to_state": "find-state_S(1)",
+                "action": "RIGHT",
+                "write": "~"
+            },
+            {
+                "read": "S",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "H"
+            },
+            {
+                "read": "{",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "{"
+            },
+            {
+                "read": "}",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "}"
+            },
+            {
+                "read": "[",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "["
+            },
+            {
+                "read": "]",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "]"
+            },
+            {
+                "read": ">",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "<"
+            },
+            {
+                "read": ".",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "."
+            },
+            {
+                "read": "&",
+                "to_state": "scanleft-to-states-decleration-for_S(1)",
+                "action": "LEFT",
+                "write": "&"
+            }
+        ],
+        "scanleft-to-states-decleration-for_S(0)": [
+            {
+                "read": "1",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "0"
+            },
+            {
+                "read": "~",
+                "to_state": "find-state_S(0)",
+                "action": "RIGHT",
+                "write": "~"
+            },
+            {
+                "read": "S",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "H"
+            },
+            {
+                "read": "{",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "{"
+            },
+            {
+                "read": "}",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "}"
+            },
+            {
+                "read": "[",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "["
+            },
+            {
+                "read": "]",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "]"
+            },
+            {
+                "read": ">",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "<"
+            },
+            {
+                "read": ".",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "."
+            },
+            {
+                "read": "&",
+                "to_state": "scanleft-to-states-decleration-for_S(0)",
+                "action": "LEFT",
+                "write": "&"
+            }
+        ],
+        "find-state_S(1)": [
+            {
+                "read": "S",
+                "to_state": "find-state-transition-for_S(1)",
+                "action": "RIGHT",
+                "write": "S"
+            }
+        ],
+        "find-state_S(0)": [
+            {
+                "read": "S",
+                "to_state": "find-state-transition-for_S(0)",
+                "action": "RIGHT",
+                "write": "S"
+            }
+        ],
+        "scanright-to-next-state-definition_S(0)": [
+            {
+                "read": "}",
+                "to_state": "find-state_S(0)",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "[",
+                "to_state": "scanright-to-next-state-definition_S(0)",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "]",
+                "to_state": "scanright-to-next-state-definition_S(0)",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "0",
+                "to_state": "scanright-to-next-state-definition_S(0)",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "scanright-to-next-state-definition_S(0)",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": ">",
+                "to_state": "scanright-to-next-state-definition_S(0)",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "scanright-to-next-state-definition_S(0)",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "scanright-to-next-state-definition_S(0)",
+                "action": "RIGHT",
+                "write": "H"
+            }
+        ],
+        "scanright-to-next-state-definition_S(1)": [
+            {
+                "read": "}",
+                "to_state": "find-state_S(1)",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "[",
+                "to_state": "scanright-to-next-state-definition_S(1)",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "]",
+                "to_state": "scanright-to-next-state-definition_S(1)",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "0",
+                "to_state": "scanright-to-next-state-definition_S(1)",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "scanright-to-next-state-definition_S(1)",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": ">",
+                "to_state": "scanright-to-next-state-definition_S(1)",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "scanright-to-next-state-definition_S(1)",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "scanright-to-next-state-definition_S(1)",
+                "action": "RIGHT",
+                "write": "H"
+            }
+        ],
+        "find-state-transition-for_S(0)": [
+            {
+                "read": "0",
+                "to_state": "retrieve-transition-to_state",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "{",
+                "to_state": "find-state-transition-for_S(0)",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": "[",
+                "to_state": "find-state-transition-for_S(0)",
+                "action": "RIGHT",
+                "write": "["
+            }
+        ],
+        "find-state-transition-for_S(1)": [
+            {
+                "read": "0",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "retrieve-transition-to_state",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "{",
+                "to_state": "find-state-transition-for_S(1)",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": "[",
+                "to_state": "find-state-transition-for_S(1)",
+                "action": "RIGHT",
+                "write": "["
+            }
+        ],
+        "go-to-next-state-transition_S(0)": [
+            {
+                "read": "]",
+                "to_state": "find-state-transition-for_S(0)",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "1",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": ">",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "go-to-next-state-transition_S(0)",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "go-to-next-state-transition_S(1)": [
+            {
+                "read": "]",
+                "to_state": "find-state-transition-for_S(1)",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "1",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": ">",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "go-to-next-state-transition_S(1)",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "retrieve-transition-to_state": [
+            {
+                "read": "S",
+                "to_state": "retrieve-transition-S_action",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "retrieve-transition-H_action",
+                "action": "RIGHT",
+                "write": "H"
+            }
+        ],
+        "retrieve-transition-S_action": [
+            {
+                "read": ">",
+                "to_state": "retrieve-transition-S_>_write",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "retrieve-transition-S_<_write",
+                "action": "RIGHT",
+                "write": "<"
+            }
+        ],
+        "retrieve-transition-S_>_write": [
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "retrieve-transition-S_<_write": [
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-S_>_0": [
+            {
+                "read": "^",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_>_0",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-S_>_1": [
+            {
+                "read": "^",
+                "to_state": "read-tape-for_S",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_>_1",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-S_>_.": [
+            {
+                "read": "^",
+                "to_state": "read-tape-for_S",
+                "action": "RIGHT",
+                "write": "."
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_>_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-S_<_0": [
+            {
+                "read": "^",
+                "to_state": "read-tape-for_S",
+                "action": "LEFT",
+                "write": "0"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_<_0",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-S_<_1": [
+            {
+                "read": "^",
+                "to_state": "read-tape-for_S",
+                "action": "LEFT",
+                "write": "1"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_<_1",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-S_<_.": [
+            {
+                "read": "^",
+                "to_state": "read-tape-for_S",
+                "action": "LEFT",
+                "write": "."
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-S_<_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "retrieve-transition-H_action": [
+            {
+                "read": ">",
+                "to_state": "retrieve-transition-H_>_write",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "retrieve-transition-H_<_write",
+                "action": "RIGHT",
+                "write": "<"
+            }
+        ],
+        "retrieve-transition-H_>_write": [
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "retrieve-transition-H_<_write": [
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-H_>_0": [
+            {
+                "read": "^",
+                "to_state": "HALT",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_>_0",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-H_>_1": [
+            {
+                "read": "^",
+                "to_state": "HALT",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_>_1",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-H_>_.": [
+            {
+                "read": "^",
+                "to_state": "HALT",
+                "action": "RIGHT",
+                "write": "."
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_>_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-H_<_0": [
+            {
+                "read": "^",
+                "to_state": "HALT",
+                "action": "LEFT",
+                "write": "0"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_<_0",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-H_<_1": [
+            {
+                "read": "^",
+                "to_state": "HALT",
+                "action": "LEFT",
+                "write": "1"
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_<_1",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ],
+        "execute-transition-H_<_.": [
+            {
+                "read": "^",
+                "to_state": "HALT",
+                "action": "LEFT",
+                "write": "."
+            },
+            {
+                "read": "&",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "&"
+            },
+            {
+                "read": "]",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "]"
+            },
+            {
+                "read": "[",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "["
+            },
+            {
+                "read": "1",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "1"
+            },
+            {
+                "read": "0",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "0"
+            },
+            {
+                "read": "}",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "}"
+            },
+            {
+                "read": "{",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "{"
+            },
+            {
+                "read": ">",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": ">"
+            },
+            {
+                "read": "<",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "<"
+            },
+            {
+                "read": "S",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "S"
+            },
+            {
+                "read": "H",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "H"
+            },
+            {
+                "read": ".",
+                "to_state": "execute-transition-H_<_.",
+                "action": "RIGHT",
+                "write": "."
+            }
+        ]
+    }
+}

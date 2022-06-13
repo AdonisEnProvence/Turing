@@ -1,0 +1,7 @@
+{
+  "name": "universal_turing_machine_generator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module"
+}

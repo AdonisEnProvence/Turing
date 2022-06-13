@@ -1,0 +1,11 @@
+{
+    "inputCharacters": [
+        "1",
+        "+"
+    ],
+    "states": [
+        "C",
+        "S",
+        "P"
+    ]
+}
