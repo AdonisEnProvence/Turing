@@ -75,7 +75,7 @@ To manually translate a classic machine config into an utm input can be quite fa
 The script then takes a classic machine config json file as only argument:
 
 ```bash
-node universal_turing_machine_generator/machine_to_input_decleration.js our-machines/02n.json
+node universal_turing_machine_generator/machine_to_input_declaration.js our-machines/02n.json
 # "one~one{[0two>0][_HALT<y]}two{[0one>0][_HALT<n]}&YOUR_INPUT"
 ```
 

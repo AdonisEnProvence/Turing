@@ -1,11 +1,11 @@
 import fs from "fs";
 
-const STATE_DECLERATION_START = "{";
-const STATE_DECLERATION_END = "}";
-const TRANSITION_DECLERATION_START = "[";
-const TRANSITION_DECLERATION_END = "]";
-const INITIAL_STATE_DECLERATION_END = "~";
-const INPUT_DECLERATION_START = "&";
+const STATE_DECLARATION_START = "{";
+const STATE_DECLARATION_END = "}";
+const TRANSITION_DECLARATION_START = "[";
+const TRANSITION_DECLARATION_END = "]";
+const INITIAL_STATE_DECLARATION_END = "~";
+const INPUT_DECLARATION_START = "&";
 const HALT_STATE = "H";
 
 const FINAL_STATE_NAME = "HALT";
@@ -23,8 +23,8 @@ const FORMATTED_ACTION_RIGHT = "RIGHT";
 // Transitions prefix
 const GO_TO_INPUT_START_FOR_PREFIX = "go-to-input-start-for_";
 const READ_TAPE_FOR_PREFIX = "read-tape-for_";
-const SCANLEFT_TO_STATES_DECLERATION_FOR =
-  "scanleft-to-states-decleration-for_"; // scanleft-to-states-decleration-for_S(0)
+const SCANLEFT_TO_STATES_DECLARATION_FOR =
+  "scanleft-to-states-declaration-for_"; // scanleft-to-states-declaration-for_S(0)
 const FIND_STATE_PREFIX = "find-state_";
 const FIND_STATE_TRANSITION_PREFIX = "find-state-transition-for_";
 const SCANRIGHT_TO_NEXT_STATE_DEFINITION_PREFIX = `scanright-to-next-state-definition_`;
@@ -62,13 +62,13 @@ const getFormattedAction = (action) => {
 };
 
 const STATIC_ALPHABET = [
-  STATE_DECLERATION_START,
-  STATE_DECLERATION_END,
-  TRANSITION_DECLERATION_START,
-  TRANSITION_DECLERATION_END,
+  STATE_DECLARATION_START,
+  STATE_DECLARATION_END,
+  TRANSITION_DECLARATION_START,
+  TRANSITION_DECLARATION_END,
   INPUT_BLANK_ALIAS,
-  INITIAL_STATE_DECLERATION_END,
-  INPUT_DECLERATION_START,
+  INITIAL_STATE_DECLARATION_END,
+  INPUT_DECLARATION_START,
   HALT_STATE,
   ACTION_RIGHT,
   ACTION_LEFT,
@@ -109,19 +109,19 @@ function init() {
   const customConfigStatesWithHalt = [HALT_STATE, ...configStates];
   const customConfigStates = configStates;
 
-  const betweenTransitionsDeclerationFindableCharacters = [
+  const betweenTransitionsDeclarationFindableCharacters = [
     ...dynamicAlphabet,
     HALT_STATE,
-    TRANSITION_DECLERATION_START,
-    TRANSITION_DECLERATION_END,
+    TRANSITION_DECLARATION_START,
+    TRANSITION_DECLARATION_END,
     ACTION_LEFT,
     ACTION_RIGHT,
     INPUT_BLANK_ALIAS,
   ];
-  const betweenStatesDeclerationFindableCharacters = [
-    ...betweenTransitionsDeclerationFindableCharacters,
-    STATE_DECLERATION_START,
-    STATE_DECLERATION_END,
+  const betweenStatesDeclarationFindableCharacters = [
+    ...betweenTransitionsDeclarationFindableCharacters,
+    STATE_DECLARATION_START,
+    STATE_DECLARATION_END,
   ];
   const transitionReadWriteFindableCharacters = [
     ...configInputCharacters,
@@ -169,7 +169,7 @@ function init() {
 
     finalAlphabet.forEach((character) => {
       switch (character) {
-        case INPUT_DECLERATION_START: {
+        case INPUT_DECLARATION_START: {
           result.transitions[newState].push({
             read: character,
             to_state: READ_TAPE_FOR_PREFIX + configState,
@@ -179,7 +179,7 @@ function init() {
           break;
         }
         case BLANK: {
-          // We should not be finding any blank character inside the machine config decleration
+          // We should not be finding any blank character inside the machine config declaration
           // thanks to the BLANK_ALIAS usage
           break;
         }
@@ -204,27 +204,27 @@ function init() {
     for (const inputCharacter of customConfigInputFindableCharCollection) {
       result.transitions[newState].push({
         read: inputCharacter,
-        to_state: `${SCANLEFT_TO_STATES_DECLERATION_FOR}${configState}(${inputCharacter})`,
+        to_state: `${SCANLEFT_TO_STATES_DECLARATION_FOR}${configState}(${inputCharacter})`,
         write: CURRENT_READ_CHARACTER,
         action: FORMATTED_ACTION_LEFT,
       });
     }
   }
 
-  // Then build "scanleft-to-states-decleration-for_S(0)"
+  // Then build "scanleft-to-states-declaration-for_S(0)"
   for (const state of customConfigStates) {
     for (const inputCharacter of customConfigInputFindableCharCollection) {
-      const newState = `${SCANLEFT_TO_STATES_DECLERATION_FOR}${state}(${inputCharacter})`;
+      const newState = `${SCANLEFT_TO_STATES_DECLARATION_FOR}${state}(${inputCharacter})`;
       result.states.push(newState);
       result.transitions[newState] = [];
 
       for (const alphabetCharacter of finalAlphabet) {
         switch (alphabetCharacter) {
-          case INITIAL_STATE_DECLERATION_END: {
+          case INITIAL_STATE_DECLARATION_END: {
             result.transitions[newState].push({
-              read: INITIAL_STATE_DECLERATION_END,
+              read: INITIAL_STATE_DECLARATION_END,
               to_state: `${FIND_STATE_PREFIX}${state}(${inputCharacter})`,
-              write: INITIAL_STATE_DECLERATION_END,
+              write: INITIAL_STATE_DECLARATION_END,
               action: FORMATTED_ACTION_RIGHT,
             });
             break;
@@ -277,9 +277,9 @@ function init() {
       result.states.push(newState);
       result.transitions[newState] = [];
 
-      for (const character of betweenStatesDeclerationFindableCharacters) {
+      for (const character of betweenStatesDeclarationFindableCharacters) {
         switch (character) {
-          case STATE_DECLERATION_END: {
+          case STATE_DECLARATION_END: {
             result.transitions[newState].push({
               read: character,
               to_state: `${FIND_STATE_PREFIX}${configState}(${inputCharacter})`,
@@ -309,8 +309,8 @@ function init() {
       result.transitions[newState] = [];
 
       const charToSkipCollection = [
-        TRANSITION_DECLERATION_START,
-        STATE_DECLERATION_START,
+        TRANSITION_DECLARATION_START,
+        STATE_DECLARATION_START,
       ];
       for (const charToSkip of charToSkipCollection) {
         result.transitions[newState].push({
@@ -368,9 +368,9 @@ function init() {
       result.states.push(newState);
       result.transitions[newState] = [];
 
-      for (const betweenTransitionsDefinitionChar of betweenTransitionsDeclerationFindableCharacters) {
+      for (const betweenTransitionsDefinitionChar of betweenTransitionsDeclarationFindableCharacters) {
         switch (betweenTransitionsDefinitionChar) {
-          case TRANSITION_DECLERATION_END: {
+          case TRANSITION_DECLARATION_END: {
             result.transitions[newState].push({
               read: betweenTransitionsDefinitionChar,
               to_state: `${FIND_STATE_TRANSITION_PREFIX}${configState}(${inputCharacter})`,
