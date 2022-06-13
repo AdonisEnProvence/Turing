@@ -32,13 +32,12 @@ Interpreter closing...$'
     run bash -c './_build/default/bin/turing our-machines/unary_add.json "1+1" | cat -e'
     assert_output 'Interpreter starting...$
 [<1>+1] (find_+, 1) -> (find_+, 1, right)$
-[1<+>1] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[1+<1>] (find_next_1_and_replace_with_+, 1) -> (replace_+_with_1, +, left)$
-[1<+>+] (replace_+_with_1, +) -> (find_+, 1, right)$
-[11<+>] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[11+<.>] (find_next_1_and_replace_with_+, .) -> (clear_+, ., left)$
-[11<+>.] (clear_+, +) -> (HALT, ., left)$
-[1<1>..] Final state reached !$
+[1<+>1] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[1.<1>] (find_next_1_and_replace_with_+, 1) -> (replace_pivot_with_1, +, left)$
+[1<.>+] (replace_pivot_with_1, .) -> (find_+, 1, right)$
+[11<+>] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[11.<.>] (find_next_1_and_replace_with_+, .) -> (HALT, ., left)$
+[11<.>.] Final state reached !$
 Interpreter closing...$'
 }
 
@@ -49,19 +48,18 @@ Interpreter closing...$'
 [1<1>11+111] (find_+, 1) -> (find_+, 1, right)$
 [11<1>1+111] (find_+, 1) -> (find_+, 1, right)$
 [111<1>+111] (find_+, 1) -> (find_+, 1, right)$
-[1111<+>111] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[1111+<1>11] (find_next_1_and_replace_with_+, 1) -> (replace_+_with_1, +, left)$
-[1111<+>+11] (replace_+_with_1, +) -> (find_+, 1, right)$
-[11111<+>11] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[11111+<1>1] (find_next_1_and_replace_with_+, 1) -> (replace_+_with_1, +, left)$
-[11111<+>+1] (replace_+_with_1, +) -> (find_+, 1, right)$
-[111111<+>1] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[111111+<1>] (find_next_1_and_replace_with_+, 1) -> (replace_+_with_1, +, left)$
-[111111<+>+] (replace_+_with_1, +) -> (find_+, 1, right)$
-[1111111<+>] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[1111111+<.>] (find_next_1_and_replace_with_+, .) -> (clear_+, ., left)$
-[1111111<+>.] (clear_+, +) -> (HALT, ., left)$
-[111111<1>..] Final state reached !$
+[1111<+>111] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[1111.<1>11] (find_next_1_and_replace_with_+, 1) -> (replace_pivot_with_1, +, left)$
+[1111<.>+11] (replace_pivot_with_1, .) -> (find_+, 1, right)$
+[11111<+>11] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[11111.<1>1] (find_next_1_and_replace_with_+, 1) -> (replace_pivot_with_1, +, left)$
+[11111<.>+1] (replace_pivot_with_1, .) -> (find_+, 1, right)$
+[111111<+>1] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[111111.<1>] (find_next_1_and_replace_with_+, 1) -> (replace_pivot_with_1, +, left)$
+[111111<.>+] (replace_pivot_with_1, .) -> (find_+, 1, right)$
+[1111111<+>] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[1111111.<.>] (find_next_1_and_replace_with_+, .) -> (HALT, ., left)$
+[1111111<.>.] Final state reached !$
 Interpreter closing...$'
 }
 
@@ -69,18 +67,17 @@ Interpreter closing...$'
     run bash -c './_build/default/bin/turing our-machines/unary_add.json "1+111" | cat -e'
     assert_output 'Interpreter starting...$
 [<1>+111] (find_+, 1) -> (find_+, 1, right)$
-[1<+>111] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[1+<1>11] (find_next_1_and_replace_with_+, 1) -> (replace_+_with_1, +, left)$
-[1<+>+11] (replace_+_with_1, +) -> (find_+, 1, right)$
-[11<+>11] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[11+<1>1] (find_next_1_and_replace_with_+, 1) -> (replace_+_with_1, +, left)$
-[11<+>+1] (replace_+_with_1, +) -> (find_+, 1, right)$
-[111<+>1] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[111+<1>] (find_next_1_and_replace_with_+, 1) -> (replace_+_with_1, +, left)$
-[111<+>+] (replace_+_with_1, +) -> (find_+, 1, right)$
-[1111<+>] (find_+, +) -> (find_next_1_and_replace_with_+, +, right)$
-[1111+<.>] (find_next_1_and_replace_with_+, .) -> (clear_+, ., left)$
-[1111<+>.] (clear_+, +) -> (HALT, ., left)$
-[111<1>..] Final state reached !$
+[1<+>111] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[1.<1>11] (find_next_1_and_replace_with_+, 1) -> (replace_pivot_with_1, +, left)$
+[1<.>+11] (replace_pivot_with_1, .) -> (find_+, 1, right)$
+[11<+>11] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[11.<1>1] (find_next_1_and_replace_with_+, 1) -> (replace_pivot_with_1, +, left)$
+[11<.>+1] (replace_pivot_with_1, .) -> (find_+, 1, right)$
+[111<+>1] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[111.<1>] (find_next_1_and_replace_with_+, 1) -> (replace_pivot_with_1, +, left)$
+[111<.>+] (replace_pivot_with_1, .) -> (find_+, 1, right)$
+[1111<+>] (find_+, +) -> (find_next_1_and_replace_with_+, ., right)$
+[1111.<.>] (find_next_1_and_replace_with_+, .) -> (HALT, ., left)$
+[1111<.>.] Final state reached !$
 Interpreter closing...$'
 }
