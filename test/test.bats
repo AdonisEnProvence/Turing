@@ -51,6 +51,7 @@ $
   input             input of the machine$
 $
 optional arguments:$
+  -c, --color       output head position with color$
   -h, --help        show this help message and exit$'
 }
 
@@ -65,6 +66,7 @@ $
   input             input of the machine$
 $
 optional arguments:$
+  -c, --color       output head position with color$
   -h, --help        show this help message and exit$'
 }
 
@@ -83,6 +85,7 @@ $
   input             input of the machine$
 $
 optional arguments:$
+  -c, --color       output head position with color$
   -h, --help        show this help message and exit$'
 }
 
@@ -96,6 +99,7 @@ $
   input             input of the machine$
 $
 optional arguments:$
+  -c, --color       output head position with color$
   -h, --help        show this help message and exit$'
 }
 
@@ -109,6 +113,7 @@ $
   input             input of the machine$
 $
 optional arguments:$
+  -c, --color       output head position with color$
   -h, --help        show this help message and exit$'
 }
 
@@ -164,4 +169,72 @@ machine transition "skip" has duplicated read operation (["."]); machine transit
     assert_output 'Error occured during machine configuration validation:$
 $
 machine states has duplicated elements (["subone"]); machine states must contains unique elements$'
+}
+
+@test "Color mode is disabled by default" {
+    run bash -c '_build/default/bin/turing machines/unary_sub.json "1-1=" | cat -e'
+    assert_output 'Interpreter starting...$
+[<1>-1=] (scanright, 1) -> (scanright, 1, right)$
+[1<->1=] (scanright, -) -> (scanright, -, right)$
+[1-<1>=] (scanright, 1) -> (scanright, 1, right)$
+[1-1<=>] (scanright, =) -> (eraseone, ., left)$
+[1-<1>.] (eraseone, 1) -> (subone, =, left)$
+[1<->=.] (subone, -) -> (skip, -, left)$
+[<1>-=.] (skip, 1) -> (scanright, ., right)$
+[.<->=.] (scanright, -) -> (scanright, -, right)$
+[.-<=>.] (scanright, =) -> (eraseone, ., left)$
+[.<->..] (eraseone, -) -> (HALT, ., left)$
+[<.>...] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Output head with color when color flag is set" {
+    run bash -c '_build/default/bin/turing machines/unary_sub.json "1-1=" --color | cat -e'
+    assert_output 'Interpreter starting...$
+[^[[0;101m1^[[0m-1=] (scanright, 1) -> (scanright, 1, right)$
+[1^[[0;101m-^[[0m1=] (scanright, -) -> (scanright, -, right)$
+[1-^[[0;101m1^[[0m=] (scanright, 1) -> (scanright, 1, right)$
+[1-1^[[0;101m=^[[0m] (scanright, =) -> (eraseone, ., left)$
+[1-^[[0;101m1^[[0m.] (eraseone, 1) -> (subone, =, left)$
+[1^[[0;101m-^[[0m=.] (subone, -) -> (skip, -, left)$
+[^[[0;101m1^[[0m-=.] (skip, 1) -> (scanright, ., right)$
+[.^[[0;101m-^[[0m=.] (scanright, -) -> (scanright, -, right)$
+[.-^[[0;101m=^[[0m.] (scanright, =) -> (eraseone, ., left)$
+[.^[[0;101m-^[[0m..] (eraseone, -) -> (HALT, ., left)$
+[^[[0;101m.^[[0m...] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Output head with color when short color flag is set" {
+    run bash -c '_build/default/bin/turing machines/unary_sub.json "1-1=" -c | cat -e'
+    assert_output 'Interpreter starting...$
+[^[[0;101m1^[[0m-1=] (scanright, 1) -> (scanright, 1, right)$
+[1^[[0;101m-^[[0m1=] (scanright, -) -> (scanright, -, right)$
+[1-^[[0;101m1^[[0m=] (scanright, 1) -> (scanright, 1, right)$
+[1-1^[[0;101m=^[[0m] (scanright, =) -> (eraseone, ., left)$
+[1-^[[0;101m1^[[0m.] (eraseone, 1) -> (subone, =, left)$
+[1^[[0;101m-^[[0m=.] (subone, -) -> (skip, -, left)$
+[^[[0;101m1^[[0m-=.] (skip, 1) -> (scanright, ., right)$
+[.^[[0;101m-^[[0m=.] (scanright, -) -> (scanright, -, right)$
+[.-^[[0;101m=^[[0m.] (scanright, =) -> (eraseone, ., left)$
+[.^[[0;101m-^[[0m..] (eraseone, -) -> (HALT, ., left)$
+[^[[0;101m.^[[0m...] Final state reached !$
+Interpreter closing...$'
+}
+
+@test "Color flag can be explicitly disabled" {
+    run bash -c '_build/default/bin/turing machines/unary_sub.json "1-1=" --color=false | cat -e'
+    assert_output 'Interpreter starting...$
+[<1>-1=] (scanright, 1) -> (scanright, 1, right)$
+[1<->1=] (scanright, -) -> (scanright, -, right)$
+[1-<1>=] (scanright, 1) -> (scanright, 1, right)$
+[1-1<=>] (scanright, =) -> (eraseone, ., left)$
+[1-<1>.] (eraseone, 1) -> (subone, =, left)$
+[1<->=.] (subone, -) -> (skip, -, left)$
+[<1>-=.] (skip, 1) -> (scanright, ., right)$
+[.<->=.] (scanright, -) -> (scanright, -, right)$
+[.-<=>.] (scanright, =) -> (eraseone, ., left)$
+[.<->..] (eraseone, -) -> (HALT, ., left)$
+[<.>...] Final state reached !$
+Interpreter closing...$'
 }

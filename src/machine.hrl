@@ -14,3 +14,7 @@
     finals :: list(string()),
     transitions :: #{string() := list(#parsed_machine_config_transition{})}
 }).
+
+-record(program_options, {
+    print_head_with_color :: boolean()
+}).
