@@ -1,18 +1,16 @@
 -module(turing).
 -include("machine.hrl").
 
-%% API exports
--ifdef(TEST).
--export([parse_optionnal_first_flag_arg/1]).
--else.
 -export([main/1]).
--endif.
 
-%%====================================================================
-%% API functions
-%%====================================================================
+option_spec_list() ->
+    [
+        {help, $h, "help", undefined, ""},
+        {jsonfile, undefined, undefined, string, ""},
+        {input, undefined, undefined, string, ""}
+    ].
 
-format_program_usage() ->
+print_usage() ->
     io:format(
         "usage: ft_turing [-h] jsonfile input\n"
         "\n"
@@ -25,34 +23,45 @@ format_program_usage() ->
         "  -h, --help        show this help message and exit~n"
     ).
 
-format_read_file_error(Reason) ->
+print_read_file_error(Reason) ->
     io:format("Error while reading machine configuration: ~s~n", [file:format_error(Reason)]).
 
-format_try_decode_error() ->
+print_json_decode_error() ->
     io:format("Error while decoding machine configuration: can not decode invalid json file~n").
 
-%% escript Entry point
-parse_optionnal_first_flag_arg([]) ->
-    format_program_usage(),
-    {error, empty_args};
-parse_optionnal_first_flag_arg([FirstArg | _OtherArgs]) when
-    FirstArg =:= "--help"; FirstArg =:= "-h"
-->
-    format_program_usage(),
-    exit;
-parse_optionnal_first_flag_arg(Args) when length(Args) =:= 2 ->
-    get_raw_machine_config(Args);
-parse_optionnal_first_flag_arg(_) ->
-    format_program_usage(),
-    {error, too_many_args}.
+is_arg(ArgName) ->
+    fun(Arg) ->
+        case Arg of
+            {ArgName, _} -> true;
+            _ -> false
+        end
+    end.
 
-get_raw_machine_config([FilePath, Input]) ->
-    ReadFileResult = file:read_file(FilePath),
-    case ReadFileResult of
-        {error, Reason} ->
-            format_read_file_error(Reason);
-        {ok, BinaryFile} ->
-            decode_raw_machine_config(BinaryFile, Input)
+extract_arg(ArgName, Args) ->
+    case lists:search(is_arg(ArgName), Args) of
+        {value, {ArgName, Value}} -> {ok, Value};
+        false -> undefined
+    end.
+
+get_raw_machine_config(ParsedArgs) ->
+    case extract_arg(jsonfile, ParsedArgs) of
+        {ok, FilePath} ->
+            case extract_arg(input, ParsedArgs) of
+                {ok, Input} ->
+                    ReadFileResult = file:read_file(FilePath),
+                    case ReadFileResult of
+                        {error, Reason} ->
+                            print_read_file_error(Reason);
+                        {ok, BinaryFile} ->
+                            decode_raw_machine_config(BinaryFile, Input)
+                    end;
+                undefined ->
+                    io:format("Error: missing input argument~n"),
+                    print_usage()
+            end;
+        undefined ->
+            io:format("Error: missing jsonfile argument~n"),
+            print_usage()
     end.
 
 decode_raw_machine_config(BinaryFile, Input) ->
@@ -61,7 +70,7 @@ decode_raw_machine_config(BinaryFile, Input) ->
         {ok, DecodedBinaryFile, _} ->
             parse_decoded_machine_config(DecodedBinaryFile, Input);
         {error, _Error} ->
-            format_try_decode_error()
+            print_json_decode_error()
     end.
 
 parse_decoded_machine_config(DecodedMachineConfig, Input) ->
@@ -105,10 +114,16 @@ start_machine(ParsedMachineConfig, Input) ->
     interpreter:start(ParsedMachineConfig, Input).
 
 main(Args) ->
-    %We could handle any logs below
-    parse_optionnal_first_flag_arg(Args),
+    case getopt:parse(option_spec_list(), Args) of
+        {ok, {ParsedArgs, _UnknownArgs}} ->
+            ShowUsage = lists:member(help, ParsedArgs),
+            case ShowUsage of
+                true ->
+                    print_usage();
+                false ->
+                    get_raw_machine_config(ParsedArgs)
+            end;
+        _ ->
+            io:format("Error during arguments parsing~n")
+    end,
     erlang:halt(0).
-
-%%====================================================================
-%% Internal functions
-%%====================================================================
