@@ -40,9 +40,10 @@ setup() {
 Interpreter closing...$'
 }
 
-@test "Display usage on empty args execution" {
+@test "Display usage on empty args execution and say that jsonfile argument is required" {
     run bash -c './_build/default/bin/turing | cat -e'
-    assert_output 'usage: ft_turing [-h] jsonfile input$
+    assert_output 'Error: missing jsonfile argument$
+usage: ft_turing [-h] jsonfile input$
 $
 positional arguments:$
   jsonfile          json description of the machine$
@@ -53,9 +54,10 @@ optional arguments:$
   -h, --help        show this help message and exit$'
 }
 
-@test "Display usage on too many args execution" {
-    run bash -c './_build/default/bin/turing abc.json "abc" --help cocorico | cat -e'
-    assert_output 'usage: ft_turing [-h] jsonfile input$
+@test "Display usage when input is not provided and say that input argument is required" {
+    run bash -c './_build/default/bin/turing abc.json | cat -e'
+    assert_output 'Error: missing input argument$
+usage: ft_turing [-h] jsonfile input$
 $
 positional arguments:$
   jsonfile          json description of the machine$
@@ -64,10 +66,41 @@ $
 $
 optional arguments:$
   -h, --help        show this help message and exit$'
+}
+
+@test "Does nothing on too many args execution" {
+    run bash -c './_build/default/bin/turing abc.json "abc" cocorico | cat -e'
+    assert_output 'Error while reading machine configuration: no such file or directory$'
 }
 
 @test "Display usage on --help flag execution" {
     run bash -c './_build/default/bin/turing --help abc.json "abc" cocorico | cat -e'
+    assert_output 'usage: ft_turing [-h] jsonfile input$
+$
+positional arguments:$
+  jsonfile          json description of the machine$
+$
+  input             input of the machine$
+$
+optional arguments:$
+  -h, --help        show this help message and exit$'
+}
+
+@test "Display usage on -h flag execution" {
+    run bash -c './_build/default/bin/turing -h abc.json "abc" | cat -e'
+    assert_output 'usage: ft_turing [-h] jsonfile input$
+$
+positional arguments:$
+  jsonfile          json description of the machine$
+$
+  input             input of the machine$
+$
+optional arguments:$
+  -h, --help        show this help message and exit$'
+}
+
+@test "Help flag is taken into account wherever it is in the arguments" {
+    run bash -c './_build/default/bin/turing abc.json -h "abc" | cat -e'
     assert_output 'usage: ft_turing [-h] jsonfile input$
 $
 positional arguments:$
