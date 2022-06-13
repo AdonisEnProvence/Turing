@@ -168,22 +168,30 @@ function init() {
     result.transitions[newState] = [];
 
     finalAlphabet.forEach((character) => {
-      if (character === INPUT_DECLERATION_START) {
-        result.transitions[newState].push({
-          read: character,
-          to_state: READ_TAPE_FOR_PREFIX + configState,
-          write: character,
-          action: FORMATTED_ACTION_RIGHT,
-        });
-        return;
+      switch (character) {
+        case INPUT_DECLERATION_START: {
+          result.transitions[newState].push({
+            read: character,
+            to_state: READ_TAPE_FOR_PREFIX + configState,
+            write: character,
+            action: FORMATTED_ACTION_RIGHT,
+          });
+          break;
+        }
+        case BLANK: {
+          // We should not be finding any blank character inside the machine config decleration
+          // thanks to the BLANK_ALIAS usage
+          break;
+        }
+        default: {
+          result.transitions[newState].push({
+            read: character,
+            to_state: newState,
+            write: character,
+            action: FORMATTED_ACTION_RIGHT,
+          });
+        }
       }
-
-      result.transitions[newState].push({
-        read: character,
-        to_state: newState,
-        write: character,
-        action: FORMATTED_ACTION_RIGHT,
-      });
     });
   });
 

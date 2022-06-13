@@ -204,12 +204,6 @@
         "action": "RIGHT"
       },
       {
-        "read": ".",
-        "to_state": "go-to-input-start-for_C",
-        "write": ".",
-        "action": "RIGHT"
-      },
-      {
         "read": "^",
         "to_state": "go-to-input-start-for_C",
         "write": "^",
@@ -308,12 +302,6 @@
         "action": "RIGHT"
       },
       {
-        "read": ".",
-        "to_state": "go-to-input-start-for_S",
-        "write": ".",
-        "action": "RIGHT"
-      },
-      {
         "read": "^",
         "to_state": "go-to-input-start-for_S",
         "write": "^",
@@ -409,12 +397,6 @@
         "read": "<",
         "to_state": "go-to-input-start-for_P",
         "write": "<",
-        "action": "RIGHT"
-      },
-      {
-        "read": ".",
-        "to_state": "go-to-input-start-for_P",
-        "write": ".",
         "action": "RIGHT"
       },
       {
