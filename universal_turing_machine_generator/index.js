@@ -48,10 +48,10 @@ const getFormattedExecuteTranstion = ({ toState, write, action }) =>
 const getFormattedAction = (action) => {
   switch (action) {
     case ACTION_LEFT: {
-      return "LEFT";
+      return FORMATTED_ACTION_LEFT;
     }
     case ACTION_RIGHT: {
-      return "RIGHT";
+      return FORMATTED_ACTION_RIGHT;
     }
     default: {
       throw new Error(
