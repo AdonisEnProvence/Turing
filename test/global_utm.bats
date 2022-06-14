@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "Invalid states declaration" {
-    run bash -c './_build/default/bin/turing our-machines/unary_add_utm.json  "A~C{[_A>1]A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/unary_add_utm.json  "A~C{[_A>1]A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~C{[_A>1]A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>C{[_A>1]A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$
@@ -140,7 +140,7 @@ Interpreter closing...$'
 }
 
 @test "Invalid transitions declaration" {
-    run bash -c './_build/default/bin/turing our-machines/unary_add_utm.json  "A~C{[_A>1]}A{[1A>1[+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/unary_add_utm.json  "A~C{[_A>1]}A{[1A>1[+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~C{[_A>1]}A{[1A>1[+B>_]}B{[1C<+][_H<_]}&11+1] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>C{[_A>1]}A{[1A>1[+B>_]}B{[1C<+][_H<_]}&11+1] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$
@@ -418,7 +418,7 @@ Interpreter closing...$'
 }
 
 @test "Invalid initial state declaration" {
-    run bash -c './_build/default/bin/turing our-machines/unary_add_utm.json  "~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/unary_add_utm.json  "~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
     assert_output 'Interpreter starting...$
 [<~>C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1] (retrieve_initial_state, ~) -> BLOCKED$
 Machine is blocked no more transitions available$
@@ -426,7 +426,7 @@ Interpreter closing...$'
 }
 
 @test "Invalid input start declaration" {
-    run bash -c './_build/default/bin/turing our-machines/unary_add_utm.json  "C~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}11+1" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/unary_add_utm.json  "C~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}11+1" | cat -e'
     assert_output 'Interpreter starting...$
 [<C>~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}11+1] (retrieve_initial_state, C) -> (go-to-input-start-for_C, C, right)$
 [C<~>C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}11+1] (go-to-input-start-for_C, ~) -> (go-to-input-start-for_C, ~, right)$
@@ -479,7 +479,7 @@ Interpreter closing...$'
 }
 
 @test "Initial state is H" {
-    run bash -c './_build/default/bin/turing our-machines/unary_add_utm.json  "H~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/unary_add_utm.json  "H~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1" | cat -e'
     assert_output 'Interpreter starting...$
 [<H>~C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1] (retrieve_initial_state, H) -> (HALT, H, right)$
 [H<~>C{[_A>1]}A{[1A>1][+B>_]}B{[1C<+][_H<_]}&11+1] Final state reached !$

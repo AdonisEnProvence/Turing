@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "'aa' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome_utm.json "A~A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&aa" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome_utm.json "A~A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&aa" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&aa] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&aa] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$
@@ -3581,7 +3581,7 @@ Interpreter closing...$'
 }
 
 @test "'ab' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome_utm.json "A~A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&ab" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome_utm.json "A~A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&ab" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&ab] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&ab] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$

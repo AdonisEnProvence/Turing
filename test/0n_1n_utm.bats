@@ -14,7 +14,7 @@ setup() {
 
 
 @test "Success on input 0011" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n_utm.json "A~A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&01" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n_utm.json "A~A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&01" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&01] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&01] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$
@@ -3068,7 +3068,7 @@ Interpreter closing...$'
 
 
 @test "Fail on input 1" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n_utm.json "A~A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&1" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n_utm.json "A~A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&1" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&1] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&1] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$

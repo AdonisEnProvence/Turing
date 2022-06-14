@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "Blocks on empty input" {
-    run bash -c './_build/default/bin/turing \our-machines/unary_add_utm.json  "A~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&" | cat -e'
+    run bash -c './_build/default/bin/turing run \our-machines/unary_add_utm.json  "A~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$
@@ -118,7 +118,7 @@ Interpreter closing...$'
 }
 
 @test "1 is 1" {
-    run bash -c './_build/default/bin/turing \our-machines/unary_add_utm.json  "A~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1" | cat -e'
+    run bash -c './_build/default/bin/turing run \our-machines/unary_add_utm.json  "A~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$
@@ -308,7 +308,7 @@ Interpreter closing...$'
 }
 
 @test "Blocks on 1+1 is 11" {
-    run bash -c './_build/default/bin/turing \our-machines/unary_add_utm.json  "A~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1+1" | cat -e'
+    run bash -c './_build/default/bin/turing run \our-machines/unary_add_utm.json  "A~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1+1" | cat -e'
     assert_output 'Interpreter starting...$
 [<A>~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1+1] (retrieve_initial_state, A) -> (go-to-input-start-for_A, A, right)$
 [A<~>A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&1+1] (go-to-input-start-for_A, ~) -> (go-to-input-start-for_A, ~, right)$
