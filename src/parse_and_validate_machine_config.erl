@@ -2,10 +2,10 @@
 -include("machine.hrl").
 
 -export([
-    parse_decoded_machine_config/3
+    parse_and_validate_then_start_decoded_machine/3
 ]).
 
-parse_decoded_machine_config(DecodedMachineConfig, Input, ProgramOptions) ->
+parse_and_validate_then_start_decoded_machine(DecodedMachineConfig, Input, ProgramOptions) ->
     ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
     case ParsedMachineResult of
         {error, Error} ->

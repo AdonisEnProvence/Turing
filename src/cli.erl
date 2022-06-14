@@ -62,7 +62,7 @@ decode_raw_machine_config(BinaryFile, Input, ProgramOptions) ->
     TryDecodeBinaryFileResult = jsone:try_decode(BinaryFile),
     case TryDecodeBinaryFileResult of
         {ok, DecodedBinaryFile, _} ->
-            parse_and_validate_machine_config:parse_decoded_machine_config(
+            parse_and_validate_machine_config:parse_and_validate_then_start_decoded_machine(
                 DecodedBinaryFile, Input, ProgramOptions
             );
         {error, _Error} ->
