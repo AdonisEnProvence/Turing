@@ -46,41 +46,41 @@
     "read-tape-for_S",
     "read-tape-for_Y",
     "read-tape-for_N",
-    "scanleft-to-states-decleration-for_A(.)",
-    "scanleft-to-states-decleration-for_A(0)",
-    "scanleft-to-states-decleration-for_A(1)",
-    "scanleft-to-states-decleration-for_A(y)",
-    "scanleft-to-states-decleration-for_A(n)",
-    "scanleft-to-states-decleration-for_B(.)",
-    "scanleft-to-states-decleration-for_B(0)",
-    "scanleft-to-states-decleration-for_B(1)",
-    "scanleft-to-states-decleration-for_B(y)",
-    "scanleft-to-states-decleration-for_B(n)",
-    "scanleft-to-states-decleration-for_R(.)",
-    "scanleft-to-states-decleration-for_R(0)",
-    "scanleft-to-states-decleration-for_R(1)",
-    "scanleft-to-states-decleration-for_R(y)",
-    "scanleft-to-states-decleration-for_R(n)",
-    "scanleft-to-states-decleration-for_L(.)",
-    "scanleft-to-states-decleration-for_L(0)",
-    "scanleft-to-states-decleration-for_L(1)",
-    "scanleft-to-states-decleration-for_L(y)",
-    "scanleft-to-states-decleration-for_L(n)",
-    "scanleft-to-states-decleration-for_S(.)",
-    "scanleft-to-states-decleration-for_S(0)",
-    "scanleft-to-states-decleration-for_S(1)",
-    "scanleft-to-states-decleration-for_S(y)",
-    "scanleft-to-states-decleration-for_S(n)",
-    "scanleft-to-states-decleration-for_Y(.)",
-    "scanleft-to-states-decleration-for_Y(0)",
-    "scanleft-to-states-decleration-for_Y(1)",
-    "scanleft-to-states-decleration-for_Y(y)",
-    "scanleft-to-states-decleration-for_Y(n)",
-    "scanleft-to-states-decleration-for_N(.)",
-    "scanleft-to-states-decleration-for_N(0)",
-    "scanleft-to-states-decleration-for_N(1)",
-    "scanleft-to-states-decleration-for_N(y)",
-    "scanleft-to-states-decleration-for_N(n)",
+    "scanleft-to-states-declaration-for_A(.)",
+    "scanleft-to-states-declaration-for_A(0)",
+    "scanleft-to-states-declaration-for_A(1)",
+    "scanleft-to-states-declaration-for_A(y)",
+    "scanleft-to-states-declaration-for_A(n)",
+    "scanleft-to-states-declaration-for_B(.)",
+    "scanleft-to-states-declaration-for_B(0)",
+    "scanleft-to-states-declaration-for_B(1)",
+    "scanleft-to-states-declaration-for_B(y)",
+    "scanleft-to-states-declaration-for_B(n)",
+    "scanleft-to-states-declaration-for_R(.)",
+    "scanleft-to-states-declaration-for_R(0)",
+    "scanleft-to-states-declaration-for_R(1)",
+    "scanleft-to-states-declaration-for_R(y)",
+    "scanleft-to-states-declaration-for_R(n)",
+    "scanleft-to-states-declaration-for_L(.)",
+    "scanleft-to-states-declaration-for_L(0)",
+    "scanleft-to-states-declaration-for_L(1)",
+    "scanleft-to-states-declaration-for_L(y)",
+    "scanleft-to-states-declaration-for_L(n)",
+    "scanleft-to-states-declaration-for_S(.)",
+    "scanleft-to-states-declaration-for_S(0)",
+    "scanleft-to-states-declaration-for_S(1)",
+    "scanleft-to-states-declaration-for_S(y)",
+    "scanleft-to-states-declaration-for_S(n)",
+    "scanleft-to-states-declaration-for_Y(.)",
+    "scanleft-to-states-declaration-for_Y(0)",
+    "scanleft-to-states-declaration-for_Y(1)",
+    "scanleft-to-states-declaration-for_Y(y)",
+    "scanleft-to-states-declaration-for_Y(n)",
+    "scanleft-to-states-declaration-for_N(.)",
+    "scanleft-to-states-declaration-for_N(0)",
+    "scanleft-to-states-declaration-for_N(1)",
+    "scanleft-to-states-declaration-for_N(y)",
+    "scanleft-to-states-declaration-for_N(n)",
     "find-state_A(.)",
     "find-state_A(0)",
     "find-state_A(1)",
@@ -1319,31 +1319,31 @@
     "read-tape-for_A": [
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "^",
         "action": "LEFT"
       }
@@ -1351,31 +1351,31 @@
     "read-tape-for_B": [
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "^",
         "action": "LEFT"
       }
@@ -1383,31 +1383,31 @@
     "read-tape-for_R": [
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "^",
         "action": "LEFT"
       }
@@ -1415,31 +1415,31 @@
     "read-tape-for_L": [
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "^",
         "action": "LEFT"
       }
@@ -1447,31 +1447,31 @@
     "read-tape-for_S": [
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "^",
         "action": "LEFT"
       }
@@ -1479,31 +1479,31 @@
     "read-tape-for_Y": [
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "^",
         "action": "LEFT"
       }
@@ -1511,63 +1511,63 @@
     "read-tape-for_N": [
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "^",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_A(.)": [
+    "scanleft-to-states-declaration-for_A(.)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "_",
         "action": "LEFT"
       },
@@ -1579,135 +1579,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_A(.)",
+        "to_state": "scanleft-to-states-declaration-for_A(.)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_A(0)": [
+    "scanleft-to-states-declaration-for_A(0)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "_",
         "action": "LEFT"
       },
@@ -1719,135 +1719,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_A(0)",
+        "to_state": "scanleft-to-states-declaration-for_A(0)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_A(1)": [
+    "scanleft-to-states-declaration-for_A(1)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "_",
         "action": "LEFT"
       },
@@ -1859,135 +1859,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_A(1)",
+        "to_state": "scanleft-to-states-declaration-for_A(1)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_A(y)": [
+    "scanleft-to-states-declaration-for_A(y)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "_",
         "action": "LEFT"
       },
@@ -1999,135 +1999,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_A(y)",
+        "to_state": "scanleft-to-states-declaration-for_A(y)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_A(n)": [
+    "scanleft-to-states-declaration-for_A(n)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "_",
         "action": "LEFT"
       },
@@ -2139,135 +2139,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_A(n)",
+        "to_state": "scanleft-to-states-declaration-for_A(n)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_B(.)": [
+    "scanleft-to-states-declaration-for_B(.)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "_",
         "action": "LEFT"
       },
@@ -2279,135 +2279,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_B(.)",
+        "to_state": "scanleft-to-states-declaration-for_B(.)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_B(0)": [
+    "scanleft-to-states-declaration-for_B(0)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "_",
         "action": "LEFT"
       },
@@ -2419,135 +2419,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_B(0)",
+        "to_state": "scanleft-to-states-declaration-for_B(0)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_B(1)": [
+    "scanleft-to-states-declaration-for_B(1)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "_",
         "action": "LEFT"
       },
@@ -2559,135 +2559,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_B(1)",
+        "to_state": "scanleft-to-states-declaration-for_B(1)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_B(y)": [
+    "scanleft-to-states-declaration-for_B(y)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "_",
         "action": "LEFT"
       },
@@ -2699,135 +2699,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_B(y)",
+        "to_state": "scanleft-to-states-declaration-for_B(y)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_B(n)": [
+    "scanleft-to-states-declaration-for_B(n)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "_",
         "action": "LEFT"
       },
@@ -2839,135 +2839,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_B(n)",
+        "to_state": "scanleft-to-states-declaration-for_B(n)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_R(.)": [
+    "scanleft-to-states-declaration-for_R(.)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "_",
         "action": "LEFT"
       },
@@ -2979,135 +2979,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_R(.)",
+        "to_state": "scanleft-to-states-declaration-for_R(.)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_R(0)": [
+    "scanleft-to-states-declaration-for_R(0)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "_",
         "action": "LEFT"
       },
@@ -3119,135 +3119,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_R(0)",
+        "to_state": "scanleft-to-states-declaration-for_R(0)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_R(1)": [
+    "scanleft-to-states-declaration-for_R(1)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "_",
         "action": "LEFT"
       },
@@ -3259,135 +3259,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_R(1)",
+        "to_state": "scanleft-to-states-declaration-for_R(1)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_R(y)": [
+    "scanleft-to-states-declaration-for_R(y)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "_",
         "action": "LEFT"
       },
@@ -3399,135 +3399,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_R(y)",
+        "to_state": "scanleft-to-states-declaration-for_R(y)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_R(n)": [
+    "scanleft-to-states-declaration-for_R(n)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "_",
         "action": "LEFT"
       },
@@ -3539,135 +3539,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_R(n)",
+        "to_state": "scanleft-to-states-declaration-for_R(n)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_L(.)": [
+    "scanleft-to-states-declaration-for_L(.)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "_",
         "action": "LEFT"
       },
@@ -3679,135 +3679,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_L(.)",
+        "to_state": "scanleft-to-states-declaration-for_L(.)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_L(0)": [
+    "scanleft-to-states-declaration-for_L(0)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "_",
         "action": "LEFT"
       },
@@ -3819,135 +3819,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_L(0)",
+        "to_state": "scanleft-to-states-declaration-for_L(0)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_L(1)": [
+    "scanleft-to-states-declaration-for_L(1)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "_",
         "action": "LEFT"
       },
@@ -3959,135 +3959,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_L(1)",
+        "to_state": "scanleft-to-states-declaration-for_L(1)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_L(y)": [
+    "scanleft-to-states-declaration-for_L(y)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "_",
         "action": "LEFT"
       },
@@ -4099,135 +4099,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_L(y)",
+        "to_state": "scanleft-to-states-declaration-for_L(y)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_L(n)": [
+    "scanleft-to-states-declaration-for_L(n)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "_",
         "action": "LEFT"
       },
@@ -4239,135 +4239,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_L(n)",
+        "to_state": "scanleft-to-states-declaration-for_L(n)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_S(.)": [
+    "scanleft-to-states-declaration-for_S(.)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "_",
         "action": "LEFT"
       },
@@ -4379,135 +4379,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_S(.)",
+        "to_state": "scanleft-to-states-declaration-for_S(.)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_S(0)": [
+    "scanleft-to-states-declaration-for_S(0)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "_",
         "action": "LEFT"
       },
@@ -4519,135 +4519,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_S(0)",
+        "to_state": "scanleft-to-states-declaration-for_S(0)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_S(1)": [
+    "scanleft-to-states-declaration-for_S(1)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "_",
         "action": "LEFT"
       },
@@ -4659,135 +4659,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_S(1)",
+        "to_state": "scanleft-to-states-declaration-for_S(1)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_S(y)": [
+    "scanleft-to-states-declaration-for_S(y)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "_",
         "action": "LEFT"
       },
@@ -4799,135 +4799,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_S(y)",
+        "to_state": "scanleft-to-states-declaration-for_S(y)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_S(n)": [
+    "scanleft-to-states-declaration-for_S(n)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "_",
         "action": "LEFT"
       },
@@ -4939,135 +4939,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_S(n)",
+        "to_state": "scanleft-to-states-declaration-for_S(n)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_Y(.)": [
+    "scanleft-to-states-declaration-for_Y(.)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "_",
         "action": "LEFT"
       },
@@ -5079,135 +5079,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_Y(.)",
+        "to_state": "scanleft-to-states-declaration-for_Y(.)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_Y(0)": [
+    "scanleft-to-states-declaration-for_Y(0)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "_",
         "action": "LEFT"
       },
@@ -5219,135 +5219,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_Y(0)",
+        "to_state": "scanleft-to-states-declaration-for_Y(0)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_Y(1)": [
+    "scanleft-to-states-declaration-for_Y(1)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "_",
         "action": "LEFT"
       },
@@ -5359,135 +5359,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_Y(1)",
+        "to_state": "scanleft-to-states-declaration-for_Y(1)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_Y(y)": [
+    "scanleft-to-states-declaration-for_Y(y)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "_",
         "action": "LEFT"
       },
@@ -5499,135 +5499,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_Y(y)",
+        "to_state": "scanleft-to-states-declaration-for_Y(y)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_Y(n)": [
+    "scanleft-to-states-declaration-for_Y(n)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "_",
         "action": "LEFT"
       },
@@ -5639,135 +5639,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_Y(n)",
+        "to_state": "scanleft-to-states-declaration-for_Y(n)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_N(.)": [
+    "scanleft-to-states-declaration-for_N(.)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "_",
         "action": "LEFT"
       },
@@ -5779,135 +5779,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_N(.)",
+        "to_state": "scanleft-to-states-declaration-for_N(.)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_N(0)": [
+    "scanleft-to-states-declaration-for_N(0)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "_",
         "action": "LEFT"
       },
@@ -5919,135 +5919,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_N(0)",
+        "to_state": "scanleft-to-states-declaration-for_N(0)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_N(1)": [
+    "scanleft-to-states-declaration-for_N(1)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "_",
         "action": "LEFT"
       },
@@ -6059,135 +6059,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_N(1)",
+        "to_state": "scanleft-to-states-declaration-for_N(1)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_N(y)": [
+    "scanleft-to-states-declaration-for_N(y)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "_",
         "action": "LEFT"
       },
@@ -6199,135 +6199,135 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_N(y)",
+        "to_state": "scanleft-to-states-declaration-for_N(y)",
         "write": "n",
         "action": "LEFT"
       }
     ],
-    "scanleft-to-states-decleration-for_N(n)": [
+    "scanleft-to-states-declaration-for_N(n)": [
       {
         "read": "{",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "{",
         "action": "LEFT"
       },
       {
         "read": "}",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "}",
         "action": "LEFT"
       },
       {
         "read": "[",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "[",
         "action": "LEFT"
       },
       {
         "read": "]",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "]",
         "action": "LEFT"
       },
       {
         "read": "_",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "_",
         "action": "LEFT"
       },
@@ -6339,103 +6339,103 @@
       },
       {
         "read": "&",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "&",
         "action": "LEFT"
       },
       {
         "read": "H",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "H",
         "action": "LEFT"
       },
       {
         "read": ">",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": ">",
         "action": "LEFT"
       },
       {
         "read": "<",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "<",
         "action": "LEFT"
       },
       {
         "read": ".",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": ".",
         "action": "LEFT"
       },
       {
         "read": "^",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "^",
         "action": "LEFT"
       },
       {
         "read": "A",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "A",
         "action": "LEFT"
       },
       {
         "read": "B",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "B",
         "action": "LEFT"
       },
       {
         "read": "R",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "R",
         "action": "LEFT"
       },
       {
         "read": "L",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "L",
         "action": "LEFT"
       },
       {
         "read": "S",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "S",
         "action": "LEFT"
       },
       {
         "read": "Y",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "Y",
         "action": "LEFT"
       },
       {
         "read": "N",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "N",
         "action": "LEFT"
       },
       {
         "read": "0",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "0",
         "action": "LEFT"
       },
       {
         "read": "1",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "1",
         "action": "LEFT"
       },
       {
         "read": "y",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "y",
         "action": "LEFT"
       },
       {
         "read": "n",
-        "to_state": "scanleft-to-states-decleration-for_N(n)",
+        "to_state": "scanleft-to-states-declaration-for_N(n)",
         "write": "n",
         "action": "LEFT"
       }

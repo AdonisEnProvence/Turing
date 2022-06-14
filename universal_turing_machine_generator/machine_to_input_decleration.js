@@ -1,11 +1,11 @@
 import fs from "fs";
 
-const STATE_DECLERATION_START = "{";
-const STATE_DECLERATION_END = "}";
-const TRANSITION_DECLERATION_START = "[";
-const TRANSITION_DECLERATION_END = "]";
-const INITIAL_STATE_DECLERATION_END = "~";
-const INPUT_DECLERATION_START = "&";
+const STATE_DECLARATION_START = "{";
+const STATE_DECLARATION_END = "}";
+const TRANSITION_DECLARATION_START = "[";
+const TRANSITION_DECLARATION_END = "]";
+const INITIAL_STATE_DECLARATION_END = "~";
+const INPUT_DECLARATION_START = "&";
 
 const ACTION_RIGHT = ">";
 const ACTION_LEFT = "<";
@@ -56,7 +56,7 @@ function init() {
   let result = "";
 
   // first initial state
-  result += initialState + INITIAL_STATE_DECLERATION_END;
+  result += initialState + INITIAL_STATE_DECLARATION_END;
 
   //Iterate for each states
   for (const state of stateCollection) {
@@ -66,7 +66,7 @@ function init() {
       continue;
     }
 
-    result += state + STATE_DECLERATION_START;
+    result += state + STATE_DECLARATION_START;
 
     for (const {
       read,
@@ -74,17 +74,17 @@ function init() {
       to_state: toState,
       action,
     } of stateTransitionCollection) {
-      result += `${TRANSITION_DECLERATION_START}${getFormattedReadWrite(
+      result += `${TRANSITION_DECLARATION_START}${getFormattedReadWrite(
         read
       )}${toState}${getFormattedAction(action)}${getFormattedReadWrite(
         write
-      )}${TRANSITION_DECLERATION_END}`;
+      )}${TRANSITION_DECLARATION_END}`;
     }
 
-    result += STATE_DECLERATION_END;
+    result += STATE_DECLARATION_END;
   }
 
-  result += INPUT_DECLERATION_START + DEFAULT_INPUT_LABEL;
+  result += INPUT_DECLARATION_START + DEFAULT_INPUT_LABEL;
   console.log(JSON.stringify(result));
 }
 
