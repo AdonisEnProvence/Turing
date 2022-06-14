@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "'' does not match" {
-    run bash -c './_build/default/bin/turing our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&" | cat -e'
     assert_output 'Interpreter starting...$
 [<E>~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&] (retrieve_initial_state, E) -> (go-to-input-start-for_E, E, right)$
 [E<~>E{[0P>0][_H<y]}P{[0E>0][_H<n]}&] (go-to-input-start-for_E, ~) -> (go-to-input-start-for_E, ~, right)$
@@ -118,7 +118,7 @@ Interpreter closing...$'
 
 
 @test "'0' does not match" {
-    run bash -c './_build/default/bin/turing our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&0" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&0" | cat -e'
     assert_output 'Interpreter starting...$
 [<E>~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&0] (retrieve_initial_state, E) -> (go-to-input-start-for_E, E, right)$
 [E<~>E{[0P>0][_H<y]}P{[0E>0][_H<n]}&0] (go-to-input-start-for_E, ~) -> (go-to-input-start-for_E, ~, right)$
@@ -290,7 +290,7 @@ Interpreter closing...$'
 }
 
 @test "'00' does match" {
-    run bash -c './_build/default/bin/turing our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00" | cat -e'
     assert_output 'Interpreter starting...$
 [<E>~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00] (retrieve_initial_state, E) -> (go-to-input-start-for_E, E, right)$
 [E<~>E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00] (go-to-input-start-for_E, ~) -> (go-to-input-start-for_E, ~, right)$

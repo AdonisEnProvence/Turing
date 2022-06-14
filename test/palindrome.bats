@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "'' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "" | cat -e'
     assert_output 'Interpreter starting...$
 [<.>] (pick_character, .) -> (write_is_palindrome, ., right)$
 [.<.>] (write_is_palindrome, .) -> (HALT, y, right)$
@@ -21,7 +21,7 @@ Interpreter closing...$'
 }
 
 @test "'a' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "a" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "a" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<.>] (go_to_end_and_find_a, .) -> (is_a, ., left)$
@@ -32,7 +32,7 @@ Interpreter closing...$'
 }
 
 @test "'aa' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "aa" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "aa" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>a] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<a>] (go_to_end_and_find_a, a) -> (go_to_end_and_find_a, a, right)$
@@ -46,7 +46,7 @@ Interpreter closing...$'
 }
 
 @test "'aba' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "aba" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "aba" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>ba] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<b>a] (go_to_end_and_find_a, b) -> (go_to_end_and_find_a, b, right)$
@@ -64,7 +64,7 @@ Interpreter closing...$'
 }
 
 @test "'abba' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "abba" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "abba" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>bba] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<b>ba] (go_to_end_and_find_a, b) -> (go_to_end_and_find_a, b, right)$
@@ -87,7 +87,7 @@ Interpreter closing...$'
 }
 
 @test "'aca' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "aca" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "aca" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>ca] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<c>a] (go_to_end_and_find_a, c) -> (go_to_end_and_find_a, c, right)$
@@ -105,7 +105,7 @@ Interpreter closing...$'
 }
 
 @test "'acca' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "acca" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "acca" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>cca] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<c>ca] (go_to_end_and_find_a, c) -> (go_to_end_and_find_a, c, right)$
@@ -128,7 +128,7 @@ Interpreter closing...$'
 }
 
 @test "'abcba' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "abcba" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "abcba" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>bcba] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<b>cba] (go_to_end_and_find_a, b) -> (go_to_end_and_find_a, b, right)$
@@ -157,7 +157,7 @@ Interpreter closing...$'
 }
 
 @test "'b' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "b" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "b" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<.>] (go_to_end_and_find_b, .) -> (is_b, ., left)$
@@ -168,7 +168,7 @@ Interpreter closing...$'
 }
 
 @test "'bb' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "bb" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "bb" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>b] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<b>] (go_to_end_and_find_b, b) -> (go_to_end_and_find_b, b, right)$
@@ -182,7 +182,7 @@ Interpreter closing...$'
 }
 
 @test "'bab' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "bab" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "bab" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>ab] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<a>b] (go_to_end_and_find_b, a) -> (go_to_end_and_find_b, a, right)$
@@ -200,7 +200,7 @@ Interpreter closing...$'
 }
 
 @test "'baab' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "baab" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "baab" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>aab] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<a>ab] (go_to_end_and_find_b, a) -> (go_to_end_and_find_b, a, right)$
@@ -223,7 +223,7 @@ Interpreter closing...$'
 }
 
 @test "'bcb' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "bcb" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "bcb" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>cb] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<c>b] (go_to_end_and_find_b, c) -> (go_to_end_and_find_b, c, right)$
@@ -241,7 +241,7 @@ Interpreter closing...$'
 }
 
 @test "'bccb' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "bccb" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "bccb" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>ccb] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<c>cb] (go_to_end_and_find_b, c) -> (go_to_end_and_find_b, c, right)$
@@ -264,7 +264,7 @@ Interpreter closing...$'
 }
 
 @test "'bcacb' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "bcacb" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "bcacb" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>cacb] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<c>acb] (go_to_end_and_find_b, c) -> (go_to_end_and_find_b, c, right)$
@@ -293,7 +293,7 @@ Interpreter closing...$'
 }
 
 @test "'c' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "c" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "c" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<.>] (go_to_end_and_find_c, .) -> (is_c, ., left)$
@@ -304,7 +304,7 @@ Interpreter closing...$'
 }
 
 @test "'cc' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "cc" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "cc" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>c] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<c>] (go_to_end_and_find_c, c) -> (go_to_end_and_find_c, c, right)$
@@ -318,7 +318,7 @@ Interpreter closing...$'
 }
 
 @test "'cac' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "cac" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "cac" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>ac] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<a>c] (go_to_end_and_find_c, a) -> (go_to_end_and_find_c, a, right)$
@@ -336,7 +336,7 @@ Interpreter closing...$'
 }
 
 @test "'caac' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "caac" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "caac" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>aac] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<a>ac] (go_to_end_and_find_c, a) -> (go_to_end_and_find_c, a, right)$
@@ -359,7 +359,7 @@ Interpreter closing...$'
 }
 
 @test "'cbc' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "cbc" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "cbc" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>bc] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<b>c] (go_to_end_and_find_c, b) -> (go_to_end_and_find_c, b, right)$
@@ -377,7 +377,7 @@ Interpreter closing...$'
 }
 
 @test "'cbbc' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "cbbc" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "cbbc" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>bbc] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<b>bc] (go_to_end_and_find_c, b) -> (go_to_end_and_find_c, b, right)$
@@ -400,7 +400,7 @@ Interpreter closing...$'
 }
 
 @test "'cabac' is palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "cabac" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "cabac" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>abac] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<a>bac] (go_to_end_and_find_c, a) -> (go_to_end_and_find_c, a, right)$
@@ -429,7 +429,7 @@ Interpreter closing...$'
 }
 
 @test "'ab' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "ab" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "ab" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>b] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<b>] (go_to_end_and_find_a, b) -> (go_to_end_and_find_a, b, right)$
@@ -441,7 +441,7 @@ Interpreter closing...$'
 }
 
 @test "'ac' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "ac" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "ac" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>c] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<c>] (go_to_end_and_find_a, c) -> (go_to_end_and_find_a, c, right)$
@@ -453,7 +453,7 @@ Interpreter closing...$'
 }
 
 @test "'ba' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "ba" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "ba" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>a] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<a>] (go_to_end_and_find_b, a) -> (go_to_end_and_find_b, a, right)$
@@ -465,7 +465,7 @@ Interpreter closing...$'
 }
 
 @test "'bc' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "bc" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "bc" | cat -e'
     assert_output 'Interpreter starting...$
 [<b>c] (pick_character, b) -> (go_to_end_and_find_b, ., right)$
 [.<c>] (go_to_end_and_find_b, c) -> (go_to_end_and_find_b, c, right)$
@@ -477,7 +477,7 @@ Interpreter closing...$'
 }
 
 @test "'ca' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "ca" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "ca" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>a] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<a>] (go_to_end_and_find_c, a) -> (go_to_end_and_find_c, a, right)$
@@ -489,7 +489,7 @@ Interpreter closing...$'
 }
 
 @test "'cb' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "cb" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "cb" | cat -e'
     assert_output 'Interpreter starting...$
 [<c>b] (pick_character, c) -> (go_to_end_and_find_c, ., right)$
 [.<b>] (go_to_end_and_find_c, b) -> (go_to_end_and_find_c, b, right)$
@@ -501,7 +501,7 @@ Interpreter closing...$'
 }
 
 @test "'acab' is not palindrome" {
-    run bash -c './_build/default/bin/turing our-machines/palindrome.json "acab" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/palindrome.json "acab" | cat -e'
     assert_output 'Interpreter starting...$
 [<a>cab] (pick_character, a) -> (go_to_end_and_find_a, ., right)$
 [.<c>ab] (go_to_end_and_find_a, c) -> (go_to_end_and_find_a, c, right)$

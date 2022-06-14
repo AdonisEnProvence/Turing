@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "Fail on empty input" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "" | cat -e'
     assert_output 'Interpreter starting...$
 [<.>] (replace_0_to_blank, .) -> (write_n_at_the_end_tape_and_halt, ., right)$
 [.<.>] (write_n_at_the_end_tape_and_halt, .) -> (HALT, n, left)$
@@ -22,7 +22,7 @@ Interpreter closing...$'
 
 
 @test "Fail on input 11111" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "11111" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "11111" | cat -e'
     assert_output 'Interpreter starting...$
 [<1>1111] (replace_0_to_blank, 1) -> (write_n_at_the_end_tape_and_halt, 1, right)$
 [1<1>111] (write_n_at_the_end_tape_and_halt, 1) -> (write_n_at_the_end_tape_and_halt, 1, right)$
@@ -35,7 +35,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 10011" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "10011" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "10011" | cat -e'
     assert_output 'Interpreter starting...$
 [<1>0011] (replace_0_to_blank, 1) -> (write_n_at_the_end_tape_and_halt, 1, right)$
 [1<0>011] (write_n_at_the_end_tape_and_halt, 0) -> (write_n_at_the_end_tape_and_halt, 0, right)$
@@ -48,7 +48,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input y0011" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "y0011" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "y0011" | cat -e'
     assert_output 'Interpreter starting...$
 [<y>0011] (replace_0_to_blank, y) -> (write_n_at_the_end_tape_and_halt, y, right)$
 [y<0>011] (write_n_at_the_end_tape_and_halt, 0) -> (write_n_at_the_end_tape_and_halt, 0, right)$
@@ -61,7 +61,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input n0011" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "n0011" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "n0011" | cat -e'
     assert_output 'Interpreter starting...$
 [<n>0011] (replace_0_to_blank, n) -> (write_n_at_the_end_tape_and_halt, n, right)$
 [n<0>011] (write_n_at_the_end_tape_and_halt, 0) -> (write_n_at_the_end_tape_and_halt, 0, right)$
@@ -74,7 +74,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 00000" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "00000" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "00000" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>0000] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>000] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -89,7 +89,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 0011n" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "0011n" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "0011n" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>011n] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>11n] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -103,7 +103,7 @@ Interpreter closing...$'
 
 
 @test "Fail on input 0011y" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "0011y" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "0011y" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>011y] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>11y] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -116,7 +116,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 00110" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "00110" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "00110" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>0110] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>110] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -131,7 +131,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 00y11" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "00y11" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "00y11" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>0y11] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>y11] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -144,7 +144,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 0" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "0" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "0" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<.>] (scanright_to_end_of_tape_blank, .) -> (replace_1_to_blank, ., left)$
@@ -155,7 +155,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 1" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "1" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "1" | cat -e'
     assert_output 'Interpreter starting...$
 [<1>] (replace_0_to_blank, 1) -> (write_n_at_the_end_tape_and_halt, 1, right)$
 [1<.>] (write_n_at_the_end_tape_and_halt, .) -> (HALT, n, left)$
@@ -164,7 +164,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 001" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "001" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "001" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>01] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>1] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -182,7 +182,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 011" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "011" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "011" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>11] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<1>1] (scanright_to_end_of_tape_blank, 1) -> (scanright_to_end_of_tape_blank, 1, right)$
@@ -198,7 +198,7 @@ Interpreter closing...$'
 }
 
 @test "Fail on input 000000011111" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "000000011111" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "000000011111" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>00000011111] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>0000011111] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -295,7 +295,7 @@ Interpreter closing...$'
 }
 
 @test "Success on input 0011" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "0011" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "0011" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>011] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>11] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$
@@ -317,7 +317,7 @@ Interpreter closing...$'
 }
 
 @test "Success on input 01" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "01" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "01" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>1] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<1>] (scanright_to_end_of_tape_blank, 1) -> (scanright_to_end_of_tape_blank, 1, right)$
@@ -330,7 +330,7 @@ Interpreter closing...$'
 }
 
 @test "Success on input 00001111" {
-    run bash -c './_build/default/bin/turing our-machines/0n_1n.json "00001111" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/0n_1n.json "00001111" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>0001111] (replace_0_to_blank, 0) -> (scanright_to_end_of_tape_blank, ., right)$
 [.<0>001111] (scanright_to_end_of_tape_blank, 0) -> (scanright_to_end_of_tape_blank, 0, right)$

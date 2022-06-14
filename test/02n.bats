@@ -12,7 +12,7 @@ setup() {
 }
 
 @test "'' does not match" {
-    run bash -c './_build/default/bin/turing our-machines/02n.json "" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n.json "" | cat -e'
     assert_output 'Interpreter starting...$
 [<.>] (one, .) -> (HALT, y, left)$
 [<.>y] Final state reached !$
@@ -21,7 +21,7 @@ Interpreter closing...$'
 
 
 @test "'0' does not match" {
-    run bash -c './_build/default/bin/turing our-machines/02n.json "0" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n.json "0" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>] (one, 0) -> (two, 0, right)$
 [0<.>] (two, .) -> (HALT, n, left)$
@@ -30,7 +30,7 @@ Interpreter closing...$'
 }
 
 @test "'00' does match" {
-    run bash -c './_build/default/bin/turing our-machines/02n.json "00" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n.json "00" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>0] (one, 0) -> (two, 0, right)$
 [0<0>] (two, 0) -> (one, 0, right)$
@@ -40,7 +40,7 @@ Interpreter closing...$'
 }
 
 @test "'000' does not match" {
-    run bash -c './_build/default/bin/turing our-machines/02n.json "000" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n.json "000" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>00] (one, 0) -> (two, 0, right)$
 [0<0>0] (two, 0) -> (one, 0, right)$
@@ -51,7 +51,7 @@ Interpreter closing...$'
 }
 
 @test "'0000' does match" {
-    run bash -c './_build/default/bin/turing our-machines/02n.json "0000" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n.json "0000" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>000] (one, 0) -> (two, 0, right)$
 [0<0>00] (two, 0) -> (one, 0, right)$
@@ -63,7 +63,7 @@ Interpreter closing...$'
 }
 
 @test "'00000000000' does not match" {
-    run bash -c './_build/default/bin/turing our-machines/02n.json "00000000000" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n.json "00000000000" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>0000000000] (one, 0) -> (two, 0, right)$
 [0<0>000000000] (two, 0) -> (one, 0, right)$
@@ -82,7 +82,7 @@ Interpreter closing...$'
 }
 
 @test "'000000000000' does match" {
-    run bash -c './_build/default/bin/turing our-machines/02n.json "000000000000" | cat -e'
+    run bash -c './_build/default/bin/turing run our-machines/02n.json "000000000000" | cat -e'
     assert_output 'Interpreter starting...$
 [<0>00000000000] (one, 0) -> (two, 0, right)$
 [0<0>0000000000] (two, 0) -> (one, 0, right)$
