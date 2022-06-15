@@ -116,7 +116,7 @@ cli_logs(PrintHeadWithColor, {Tape, _CurrentState, IndexOnTape, final, _Transiti
     io:format("Final state reached !~n").
 
 parse_and_validate_then_start(DecodedBinaryFile, Input, ProgramOptions) ->
-    ParserValidatorResult = parse_and_validate_machine_config:parse_and_validate_decoded_machine(
+    ParserValidatorResult = parse_and_validate_machine_config:parse_and_validate_decoded_machine_and_input(
         DecodedBinaryFile, Input
     ),
     PrintHeadWithColor = ProgramOptions#program_options.print_head_with_color,
