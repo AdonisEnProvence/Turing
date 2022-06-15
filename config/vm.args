@@ -1,0 +1,6 @@
+-sname ping_server
+
+-setcookie ping_server_cookie
+
++K true
++A30

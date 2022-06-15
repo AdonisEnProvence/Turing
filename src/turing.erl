@@ -19,7 +19,7 @@ main([SubCommand | SubCommandArgs]) ->
         "run" ->
             cli:run_cli_command(SubCommandArgs);
         "serve" ->
-            io:format("Server starting~n");
+            ping_server_app:start(undefined, undefined);
         _ ->
             print_usage()
     end,
