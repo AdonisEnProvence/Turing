@@ -30,8 +30,7 @@ main([SubCommand | SubCommandArgs]) ->
                 [{port, 8080}],
                 #{env => #{dispatch => Dispatch}}
             ),
-            {ok, Pid} = ping_server_sup:start_link(),
-            io:format("Server starting pid = ~p ~n", [Pid]),
+            io:format("Server starting pid"),
             receive
                 quit ->
                     ok = cowboy:stop_listener(http)
