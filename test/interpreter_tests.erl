@@ -15,6 +15,9 @@ get_available_transitions() ->
         },
         #parsed_machine_config_transition{
             read = "1", to_state = "IDLE", write = "0", action = right
+        },
+        #parsed_machine_config_transition{
+            read = "$", to_state = "HALT", write = "0", action = right
         }
     ].
 
@@ -150,5 +153,18 @@ exec_transition_that_extends_right_the_tape_with_blank_char_test() ->
         "*",
         get_default_current_state(),
         [],
+        fun(_) -> no_return end
+    ).
+
+exec_transition_that_extends_right_the_tape_with_blank_char_and_halt_test() ->
+    InitialTape = ["0", "0", "$"],
+    InitialIndexOnTape = 3,
+    {final, ["0", "0", "0", "."], 4, "HALT"} = interpreter:read_and_exec(
+        InitialIndexOnTape,
+        InitialTape,
+        get_available_transitions(),
+        ".",
+        get_default_current_state(),
+        ["HALT"],
         fun(_) -> no_return end
     ).
