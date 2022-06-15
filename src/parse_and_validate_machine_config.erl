@@ -2,45 +2,47 @@
 -include("machine.hrl").
 
 -export([
-    parse_and_validate_then_start_decoded_machine/3
+    parse_and_validate_decoded_machine_and_input/2
 ]).
 
-parse_and_validate_then_start_decoded_machine(DecodedMachineConfig, Input, ProgramOptions) ->
+parse_and_validate_decoded_machine_and_input(
+    DecodedMachineConfig, Input
+) ->
     ParsedMachineResult = parser:parse_machine(DecodedMachineConfig),
     case ParsedMachineResult of
         {error, Error} ->
-            FormattedError = parser:format_error(Error),
-            io:format(
-                "Error occured during machine configuration parsing:\n"
-                "\n"
-                "~s~n",
-                [FormattedError]
-            );
+            FormattedError =
+                "Error occured during machine configuration parsing:\n\n" ++
+                    parser:format_error(Error) ++ "\n",
+            {
+                error,
+                FormattedError
+            };
         {ok, ParsedMachineConfig} ->
-            validate_parsed_machine_config(ParsedMachineConfig, Input, ProgramOptions)
+            validate_parsed_machine_config(ParsedMachineConfig, Input)
     end.
 
-validate_parsed_machine_config(ParsedMachineConfig, Input, ProgramOptions) ->
+validate_parsed_machine_config(ParsedMachineConfig, Input) ->
     ParsedMachineResult = machine_validator:validate_machine(ParsedMachineConfig),
     case ParsedMachineResult of
         {error, Error} ->
-            FormattedError = machine_validator:format_error(Error),
-            io:format(
-                "Error occured during machine configuration validation:\n"
-                "\n"
-                "~s~n",
-                [FormattedError]
-            );
+            FormattedError =
+                "Error occured during machine configuration validation:\n\n" ++
+                    machine_validator:format_error(Error) ++ "\n",
+            {
+                error,
+                FormattedError
+            };
         ok ->
-            parse_input(ParsedMachineConfig, Input, ProgramOptions)
+            parse_input(ParsedMachineConfig, Input)
     end.
 
-parse_input(ParsedMachineConfig, Input, ProgramOptions) ->
+parse_input(ParsedMachineConfig, Input) ->
     InputParsingResult = input_parser:parse(ParsedMachineConfig, Input),
     case InputParsingResult of
-        {ok, ParsedInput} -> start_machine(ParsedMachineConfig, ParsedInput, ProgramOptions);
-        error -> error
+        {ok, ParsedInput} ->
+            {ok, ParsedMachineConfig, ParsedInput};
+        {error, Error} ->
+            FormattedError = input_parser:format_error(Error),
+            {error, FormattedError}
     end.
-
-start_machine(ParsedMachineConfig, Input, ProgramOptions) ->
-    interpreter:start(ParsedMachineConfig, Input, ProgramOptions).
