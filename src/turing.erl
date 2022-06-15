@@ -19,7 +19,23 @@ main([SubCommand | SubCommandArgs]) ->
         "run" ->
             cli:run_cli_command(SubCommandArgs);
         "serve" ->
-            ping_server_app:start(undefined, undefined);
+            {ok, _} = application:ensure_all_started(cowboy),
+
+            Dispatch = cowboy_router:compile([
+                {<<"localhost">>, [{<<"/ping">>, ping_handler, []}]}
+            ]),
+
+            {ok, _} = cowboy:start_clear(
+                ping_listener,
+                [{port, 8080}],
+                #{env => #{dispatch => Dispatch}}
+            ),
+            {ok, Pid} = ping_server_sup:start_link(),
+            io:format("Server starting pid = ~p ~n", [Pid]),
+            receive
+                quit ->
+                    ok = cowboy:stop_listener(http)
+            end;
         _ ->
             print_usage()
     end,
