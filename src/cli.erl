@@ -62,11 +62,20 @@ decode_raw_machine_config(BinaryFile, Input, ProgramOptions) ->
     TryDecodeBinaryFileResult = jsone:try_decode(BinaryFile),
     case TryDecodeBinaryFileResult of
         {ok, DecodedBinaryFile, _} ->
-            parse_and_validate_machine_config:parse_and_validate_then_start_decoded_machine(
-                DecodedBinaryFile, Input, ProgramOptions
-            );
+            parse_and_validate_then_start(DecodedBinaryFile, Input, ProgramOptions);
         {error, _Error} ->
             print_json_decode_error()
+    end.
+
+parse_and_validate_then_start(DecodedBinaryFile, Input, ProgramOptions) ->
+    ParserValidatorResult = parse_and_validate_machine_config:parse_and_validate_decoded_machine(
+        DecodedBinaryFile, Input
+    ),
+    case ParserValidatorResult of
+        {ok, ParsedMachineConfig, ParsedInput} ->
+            interpreter:start(ParsedMachineConfig, ParsedInput, ProgramOptions);
+        {error, FormattedError} ->
+            io:format(FormattedError)
     end.
 
 option_spec_list() ->
