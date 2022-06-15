@@ -28,7 +28,7 @@ exec_transition_that_continues_and_goes_to_left_by_reusing_square_test() ->
         get_base_blank_char(),
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ),
     ?assertEqual(1, NewIndex),
     ?assertMatch(["0", "."], NewTape).
@@ -43,7 +43,7 @@ exec_transition_that_continues_and_goes_to_left_by_expanding_test() ->
         get_base_blank_char(),
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ),
     ?assertEqual(1, NewIndex),
     ?assertMatch([".", ".", "1"], NewTape).
@@ -58,7 +58,7 @@ exec_transition_that_continues_and_goes_to_right_by_reusing_square_test() ->
         get_base_blank_char(),
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ),
     ?assertEqual(2, NewIndex),
     ?assertMatch(["0", "0"], NewTape).
@@ -73,7 +73,7 @@ exec_transition_that_continues_and_goes_to_right_by_expanding_test() ->
         get_base_blank_char(),
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ),
     ?assertEqual(3, NewIndex),
     ?assertMatch(["0", "0", "."], NewTape).
@@ -88,7 +88,7 @@ exec_transition_that_continues_and_move_on_the_middle_of_a_large_tape_test() ->
         get_base_blank_char(),
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ),
     ?assertEqual(5, NewIndex),
     ?assertMatch(["0", "0", "0", "0", "0", "0"], NewTape).
@@ -103,7 +103,7 @@ exec_transition_that_blocks_test() ->
         get_base_blank_char(),
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ).
 
 exec_transition_to_state_test() ->
@@ -124,7 +124,7 @@ exec_transition_to_state_test() ->
         get_base_blank_char(),
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ).
 
 exec_transition_that_extends_left_the_tape_with_blank_char_test() ->
@@ -137,7 +137,7 @@ exec_transition_that_extends_left_the_tape_with_blank_char_test() ->
         "$",
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ).
 
 exec_transition_that_extends_right_the_tape_with_blank_char_test() ->
@@ -150,5 +150,5 @@ exec_transition_that_extends_right_the_tape_with_blank_char_test() ->
         "*",
         get_default_current_state(),
         [],
-        fun(_, _, _, _, _) -> no_return end
+        fun(_) -> no_return end
     ).
