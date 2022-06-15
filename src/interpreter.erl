@@ -2,14 +2,16 @@
 -include("machine.hrl").
 
 -ifdef(TEST).
--export([start/3, read_and_exec/5]).
+-export([start/4, read_and_exec/7]).
 -else.
--export([start/3]).
+-export([start/4]).
 -endif.
 
--spec start(#parsed_machine_config{}, list(string()), #program_options{}) -> no_return().
+-spec start(#parsed_machine_config{}, list(string()), #program_options{}, fun(
+    (list(string()), string(), number(), atom(), #parsed_machine_config_transition{}) -> no_return()
+)) -> no_return().
 
-start(MachineConfig, Input, ProgramOptions) ->
+start(MachineConfig, Input, ProgramOptions, FunToExecuteOnEveryLoop) ->
     io:format("Interpreter starting...~n"),
     Tape = Input,
     IndexOnTape = 1,
@@ -18,38 +20,42 @@ start(MachineConfig, Input, ProgramOptions) ->
         Tape,
         MachineConfig,
         MachineConfig#parsed_machine_config.initial,
-        ProgramOptions
+        ProgramOptions,
+        FunToExecuteOnEveryLoop
     ),
     io:format("Interpreter closing...~n").
 
-loop(IndexOnTape, Tape, MachineConfig, CurrentState, ProgramOptions) ->
-    CurrentStateIsFinalState = lists:member(
-        CurrentState, MachineConfig#parsed_machine_config.finals
-    ),
+loop(IndexOnTape, Tape, MachineConfig, CurrentState, ProgramOptions, FunToExecuteOnEveryLoop) ->
     PrintHeadWithColor = ProgramOptions#program_options.print_head_with_color,
 
-    if
-        CurrentStateIsFinalState =:= true ->
-            print_tape_and_head_on_tape(IndexOnTape, Tape, PrintHeadWithColor),
+    print_tape_and_head_on_tape(IndexOnTape, Tape, PrintHeadWithColor),
+    AvailableTransitions = maps:get(
+        CurrentState, MachineConfig#parsed_machine_config.transitions, []
+    ),
+    ReadResult = read_and_exec(
+        IndexOnTape,
+        Tape,
+        AvailableTransitions,
+        MachineConfig#parsed_machine_config.blank,
+        CurrentState,
+        MachineConfig#parsed_machine_config.finals,
+        FunToExecuteOnEveryLoop
+    ),
+    case ReadResult of
+        {final, NewTape, NewIndexOnTape, _} ->
+            print_tape_and_head_on_tape(NewIndexOnTape, NewTape, PrintHeadWithColor),
             io:format("Final state reached !~n");
-        true ->
-            print_tape_and_head_on_tape(IndexOnTape, Tape, PrintHeadWithColor),
-            AvailableTransitions = maps:get(
-                CurrentState, MachineConfig#parsed_machine_config.transitions, []
-            ),
-            ReadResult = read_and_exec(
-                IndexOnTape,
-                Tape,
-                AvailableTransitions,
-                MachineConfig#parsed_machine_config.blank,
-                CurrentState
-            ),
-            case ReadResult of
-                {continue, NewTape, NewIndexOnTape, NewState} ->
-                    loop(NewIndexOnTape, NewTape, MachineConfig, NewState, ProgramOptions);
-                {blocked, _NewTape, _NewIndexOnTape} ->
-                    io:format("Machine is blocked no more transitions available~n")
-            end
+        {continue, NewTape, NewIndexOnTape, NewState} ->
+            loop(
+                NewIndexOnTape,
+                NewTape,
+                MachineConfig,
+                NewState,
+                ProgramOptions,
+                FunToExecuteOnEveryLoop
+            );
+        {blocked, _NewTape, _NewIndexOnTape} ->
+            io:format("Machine is blocked no more transitions available~n")
     end.
 
 move_index_on_tape({Index, Tape, BlankChar, left}) ->
@@ -115,15 +121,29 @@ retrieve_transition_to_perform(TapeCurrentValue, [
 retrieve_transition_to_perform(TapeCurrentValue, [_Transition | AvailableTransitions]) ->
     retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions).
 
-read_and_exec(IndexOnTape, Tape, AvailableTransitions, BlankChar, CurrentState) ->
+read_and_exec(
+    IndexOnTape,
+    Tape,
+    AvailableTransitions,
+    BlankChar,
+    CurrentState,
+    Finals,
+    FunToExecuteOnEveryLoop
+) ->
     TapeCurrentValue = lists:nth(IndexOnTape, Tape),
 
     RawTransition = retrieve_transition_to_perform(TapeCurrentValue, AvailableTransitions),
     case RawTransition of
         error ->
             print_blocked_transition_details(CurrentState, TapeCurrentValue),
+            FunToExecuteOnEveryLoop(Tape, CurrentState, IndexOnTape, blocked, undefined),
             {blocked, Tape, IndexOnTape};
         {ok, Transition} ->
+            NextState = Transition#parsed_machine_config_transition.to_state,
+            NextStateIsFinalState = lists:member(
+                NextState, Finals
+            ),
+
             print_transition_details(CurrentState, Transition),
             RewrittenTape = replace_character_on_square(
                 Tape, IndexOnTape, Transition#parsed_machine_config_transition.write
@@ -132,7 +152,17 @@ read_and_exec(IndexOnTape, Tape, AvailableTransitions, BlankChar, CurrentState) 
                 {IndexOnTape, RewrittenTape, BlankChar,
                     Transition#parsed_machine_config_transition.action}
             ),
-            {continue, ExtentedTape, NewIndex, Transition#parsed_machine_config_transition.to_state}
+
+            if
+                NextStateIsFinalState =:= true ->
+                    FunToExecuteOnEveryLoop(Tape, CurrentState, IndexOnTape, final, Transition),
+                    {final, ExtentedTape, NewIndex,
+                        Transition#parsed_machine_config_transition.to_state};
+                NextStateIsFinalState =:= false ->
+                    FunToExecuteOnEveryLoop(Tape, CurrentState, IndexOnTape, continue, Transition),
+                    {continue, ExtentedTape, NewIndex,
+                        Transition#parsed_machine_config_transition.to_state}
+            end
     end.
 
 replace_character_on_square(Tape, 1 = IndexOnTape, CharacterToWrite) ->

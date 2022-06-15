@@ -73,7 +73,11 @@ parse_and_validate_then_start(DecodedBinaryFile, Input, ProgramOptions) ->
     ),
     case ParserValidatorResult of
         {ok, ParsedMachineConfig, ParsedInput} ->
-            interpreter:start(ParsedMachineConfig, ParsedInput, ProgramOptions);
+            interpreter:start(ParsedMachineConfig, ParsedInput, ProgramOptions, fun(
+                Tape, CurrentState, IndexOntape, Status, _Transition
+            ) ->
+                Tmp = "tmp"
+            end);
         {error, FormattedError} ->
             io:format(FormattedError)
     end.
