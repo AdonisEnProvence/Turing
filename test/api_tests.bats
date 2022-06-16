@@ -25,7 +25,7 @@ teardown() {
 }
 
 @test "Success on valid machine config and input" {
-    run zsh -c 'curl --header "Content-Type: application/json" \
+    run bash -c 'curl --header "Content-Type: application/json" \
   --request POST \
   http://localhost:8080/execute-machine \
   --data @- << EOF 2> /dev/null
@@ -60,7 +60,7 @@ EOF'
 
 
 @test "Failure on machine config parser" {
-    run zsh -c 'curl --header "Content-Type: application/json" \
+    run bash -c 'curl --header "Content-Type: application/json" \
   --request POST \
   http://localhost:8080/execute-machine \
   --data @- << EOF 2> /dev/null
@@ -96,7 +96,7 @@ machine has no initial state; a machine must have a non-empty initial state'
 
 
 @test "Failure on machine config validation" {
-    run zsh -c 'curl --header "Content-Type: application/json" \
+    run bash -c 'curl --header "Content-Type: application/json" \
   --request POST \
   http://localhost:8080/execute-machine \
   --data @- << EOF 2> /dev/null
@@ -132,7 +132,7 @@ machine transition 0 of "one" has not alphabet character read operation target (
 }
 
 @test "Failure halting problem infinite machine" {
-    run zsh -c 'curl --header "Content-Type: application/json" \
+    run bash -c 'curl --header "Content-Type: application/json" \
   --request POST \
   http://localhost:8080/execute-machine \
   --data @- << EOF 2> /dev/null
@@ -166,7 +166,7 @@ EOF'
 }
 
 @test "Failure Body is invalid" {
-    run zsh -c 'curl --header "Content-Type: application/json" \
+    run bash -c 'curl --header "Content-Type: application/json" \
   --request POST \
   http://localhost:8080/execute-machine \
   --data @- << EOF 2> /dev/null
@@ -200,7 +200,7 @@ EOF'
 }
 
 @test "Failure input is invalid" {
-    run zsh -c 'curl --header "Content-Type: application/json" \
+    run bash -c 'curl --header "Content-Type: application/json" \
   --request POST \
   http://localhost:8080/execute-machine \
   --data @- << EOF 2> /dev/null
