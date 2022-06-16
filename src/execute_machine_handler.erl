@@ -24,6 +24,42 @@ decode_body(RawBody) ->
             io:format("failure decoding the body~n"),
             io:format("~p~n", [Error]),
             {error, invalid_body}
+tape_history_accumulator_process(From, Accumulator) ->
+    receive
+        {push, ElementToPush} ->
+            tape_history_accumulator_process(From, Accumulator ++ ElementToPush);
+        get ->
+            From ! {result, Accumulator}
+    end.
+tape_history_accumulator_process(From) ->
+    tape_history_accumulator_process(From, []).
+
+execute_machine(ParsedMachineConfig, ParsedInput) ->
+    From = self(),
+    AccumulatorPid = spawn(?MODULE, tape_history_accumulator_process, [From]),
+
+    interpreter:start(ParsedMachineConfig, ParsedInput, fun(
+        {Tape, CurrentState, IndexOnTape, Status, _Transition}
+    ) ->
+        AccumulatorPid !
+            {push, [
+                #tape_history_element{
+                    tape = Tape,
+                    currentState = CurrentState,
+                    indexOnTape = IndexOnTape,
+                    status = Status
+                }
+            ]}
+    end),
+
+    AccumulatorPid ! get,
+    receive
+        {result, Result} ->
+            ResponseBodyRecord = #execute_machine_response{
+                blank = ParsedMachineConfig#parsed_machine_config.blank,
+                tapeHistory = Result
+            },
+            {ok, ResponseBodyRecord}
     end.
 
 parse_validate_and_execute(RawMachineConfig, RawInput) ->
@@ -34,14 +70,7 @@ parse_validate_and_execute(RawMachineConfig, RawInput) ->
 
     case ParserValidatorResult of
         {ok, ParsedMachineConfig, ParsedInput} ->
-            io:format("Interpreter starting...~n"),
-            interpreter:start(ParsedMachineConfig, ParsedInput, fun(
-                {Tape, _CurrentState, _IndexOnTape, _Status, _Transition}
-            ) ->
-                io:format("~p~n", [Tape])
-            end),
-            io:format("Interpreter closing...~n"),
-            {ok, "cocorico"};
+            execute_machine(ParsedMachineConfig, ParsedInput);
         {error, FormattedError} ->
             {error, FormattedError}
     end.
@@ -54,6 +83,34 @@ reply_error(Req0, Message) ->
         Req0
     ),
     Req.
+
+encode_response_body(ResponseBodyRecord) ->
+    TapeHistoryRecordList = ResponseBodyRecord#execute_machine_response.tapeHistory,
+    TapeHistoryBitString = lists:map(
+        fun(TapeHistoryElement) ->
+            #{
+                <<"tape">> => lists:map(
+                    fun(TapeCharacter) -> list_to_binary(TapeCharacter) end,
+                    TapeHistoryElement#tape_history_element.tape
+                ),
+                <<"currentState">> => list_to_binary(
+                    TapeHistoryElement#tape_history_element.currentState
+                ),
+                <<"indexOnTape">> =>
+                    TapeHistoryElement#tape_history_element.indexOnTape,
+
+                <<"status">> => list_to_binary(
+                    atom_to_list(TapeHistoryElement#tape_history_element.status)
+                )
+            }
+        end,
+        TapeHistoryRecordList
+    ),
+    ResponseBodyBitstring = #{
+        <<"blank">> => list_to_binary(ResponseBodyRecord#execute_machine_response.blank),
+        <<"tapeHistory">> => TapeHistoryBitString
+    },
+    jsone:try_encode(ResponseBodyBitstring).
 
 reply_success(Req0, Data) ->
     Req = cowboy_req:reply(
@@ -73,9 +130,16 @@ init(Req0, State) ->
                 maps:get(list_to_binary("input"), DecodedReqBody)
             ),
             case ParseValidateExecMachineResult of
-                {ok, Data} ->
-                    Req = reply_success(Req0, Data),
-                    {ok, Req, State};
+                {ok, ResponseBodyRecord} ->
+                    EncodeResult = encode_response_body(ResponseBodyRecord),
+                    case EncodeResult of
+                        {ok, EncodedResponseBody} ->
+                            Req = reply_success(Req0, EncodedResponseBody),
+                            {ok, Req, State};
+                        {error, _Error} ->
+                            Req = reply_error(Req0, "Response encode failure"),
+                            {ok, Req, State}
+                    end;
                 {error, FormattedError} ->
                     Req = reply_error(Req0, FormattedError),
                     {ok, Req, State}
