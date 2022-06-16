@@ -25,5 +25,11 @@ jobs:
       - name: Build
         run: rebar3 escriptize
 
+      - name: Apt-get udpate
+        run: apt-get update
+
+      - name: Install lsof
+        run: apt-get -y install lsof
+
       - name: Run integrations tests
-        run: ./bats-core/bin/bats test/
+        run: ./bats-core/bin/bats test
