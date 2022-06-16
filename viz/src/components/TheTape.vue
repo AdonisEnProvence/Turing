@@ -50,7 +50,7 @@ interface TapeSquareWithKey {
   value: string;
 }
 
-interface TapeStepWithKeyForEachSquare extends Omit<TapeStep, 'tape'> {
+interface TapeStepWithKeyForEachSquare extends Omit<TapeStep, "tape"> {
   tape: TapeSquareWithKey[];
 }
 
@@ -81,7 +81,7 @@ function computeTapeListWithFixedKeys() {
           } as TapeSquareWithKey)
       ),
       indexOnTape,
-      ...props
+      ...props,
     });
   }
 
@@ -92,10 +92,12 @@ function computeTapeListWithFixedKeys() {
 
 const tapeListWithKeyAndBlanks = computeTapeListWithFixedKeys();
 
-const tape = computed(() => tapeListWithKeyAndBlanks[props.indexOnStepList].tape);
-const headIndexOnTape = computed(
-  () => tapeListWithKeyAndBlanks[props.indexOnStepList].indexOnTape
+const currentStep = computed(
+  () => tapeListWithKeyAndBlanks[props.indexOnStepList]
 );
+const tape = computed(() => currentStep.value.tape);
+const headIndexOnTape = computed(() => currentStep.value.indexOnTape);
+const currentState = computed(() => currentStep.value.currentState);
 
 const displayedTape = computed(() => {
   return tape.value.slice(
@@ -109,6 +111,7 @@ const displayedTape = computed(() => {
   <div>
     <p>Index on tape: {{ headIndexOnTape }}</p>
     <p>Step: {{ indexOnStepList }}</p>
+    <p>Current state: {{ currentState }}</p>
 
     <div>
       <div
