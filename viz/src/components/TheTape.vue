@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { AutomaticPlayingDelayMode, TapeStep, StatusOfExecution } from "../types";
+import {
+  AutomaticPlayingDelayMode,
+  TapeStep,
+  StatusOfExecution,
+} from "../types";
+import AppBadge, { AppBadgeStatus } from "./AppBadge.vue";
 
 const props = defineProps<{
   blankCharacter: string;
@@ -16,7 +21,7 @@ const props = defineProps<{
 const blankCharacter = computed(() => props.blankCharacter);
 
 // Must be an odd number.
-const displayedTapeLength = 13;
+const displayedTapeLength = 17;
 const squaresAmountOnOneSideOfHead = Math.floor(displayedTapeLength / 2);
 const addedBlankSpace = squaresAmountOnOneSideOfHead;
 
@@ -99,12 +104,21 @@ const tape = computed(() => currentStep.value.tape);
 const headIndexOnTape = computed(() => currentStep.value.indexOnTape);
 const currentState = computed(() => currentStep.value.currentState);
 const stateOfExecution = computed(() => currentStep.value.status);
+const stateOfExecutionBadgeStatus = computed(() => {
+  const badgeStatus: Record<StatusOfExecution, AppBadgeStatus> = {
+    continue: "pending",
+    blocked: "error",
+    final: "success",
+  };
+
+  return badgeStatus[stateOfExecution.value];
+});
 const prettyStateOfExecution = computed(() => {
   const prettyNames: Record<StatusOfExecution, string> = {
-    'continue': 'Running',
-    blocked: 'Blocked',
-    final: 'Reached final state'
-  }
+    continue: "Running",
+    blocked: "Blocked",
+    final: "Reached final state",
+  };
 
   return prettyNames[stateOfExecution.value];
 });
@@ -118,67 +132,74 @@ const displayedTape = computed(() => {
 </script>
 
 <template>
-  <div>
-    <p>Index on tape: {{ headIndexOnTape }}</p>
-    <p>Step: {{ indexOnStepList }}</p>
-    <p>Current state: {{ currentState }}</p>
-    <p>State of execution: {{ prettyStateOfExecution }}</p>
+  <div class="flex justify-center">
+    <div class="space-y-8">
+      <div class="flex items-center justify-between">
+        <p>State: <code>{{ currentState }}</code></p>
 
-    <div class="mt-4">
-      <div
-        class="overflow-hidden"
-        :style="{
-          width: `calc(${displayedTapeLength} * 2.5rem - (2.5rem / 6 * 5 * 2))`,
-        }"
-      >
+        <AppBadge :status="stateOfExecutionBadgeStatus" size="medium">
+          {{ prettyStateOfExecution }}
+        </AppBadge>
+      </div>
+
+      <div>
         <div
-          class="relative inline-flex"
-          :style="{ marginLeft: 'calc(-1 * 2.5rem / 6 * 5)' }"
+          class="overflow-hidden"
+          :style="{
+            width: `calc(${displayedTapeLength} * 3.5rem - (3.5rem / 6 * 5 * 2))`,
+          }"
         >
-          <TransitionGroup
-            leave-from-class="opacity-0"
-            leave-active-class="absolute transition-all duration-[0s]"
-            leave-to-class="opacity-0"
-            move-class="transition-all duration-200"
+          <div
+            class="relative inline-flex"
+            :style="{ marginLeft: 'calc(-1 * 3.5rem / 6 * 5)' }"
           >
-            <div
-              v-for="{ key, value } in displayedTape"
-              :id="key"
-              :key="key"
-              class="flex items-center justify-center w-10 h-10 text-center border border-gray-100"
+            <TransitionGroup
+              leave-from-class="opacity-0"
+              leave-active-class="absolute transition-all duration-[0s]"
+              leave-to-class="opacity-0"
+              move-class="transition-all duration-200"
             >
-              <Transition
-                mode="out-in"
-                enter-from-class="opacity-0"
-                enter-active-class="transition-opacity duration-100"
-                leave-to-class="opacity-0"
-                leave-active-class="transition-opacity duration-100"
+              <div
+                v-for="{ key, value } in displayedTape"
+                :id="key"
+                :key="key"
+                class="flex items-center justify-center text-center border border-gray-100 w-14 h-14"
               >
-                <p :key="value">{{ value }}</p>
-              </Transition>
-            </div>
-          </TransitionGroup>
+                <Transition
+                  mode="out-in"
+                  enter-from-class="opacity-0"
+                  enter-active-class="transition-opacity duration-200"
+                  leave-to-class="opacity-0"
+                  leave-active-class="transition-opacity duration-200"
+                >
+                  <p :key="value">{{ value }}</p>
+                </Transition>
+              </div>
+            </TransitionGroup>
 
-          <div class="absolute inset-x-0 flex justify-center">
-            <div class="w-10 h-10 bg-yellow-100 opacity-50" />
+            <div class="absolute inset-x-0 flex justify-center">
+              <div class="bg-yellow-100 opacity-50 w-14 h-14" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="flex mt-4 space-x-6">
-      <button @click="props.onPlay">Play</button>
-      <button @click="props.onPause">Pause</button>
-      <button @click="props.onNextStep">Next step</button>
+      <div class="flex space-x-6">
+        <button @click="props.onPlay">Play</button>
+        <button @click="props.onPause">Pause</button>
+        <button @click="props.onNextStep">Next step</button>
 
-      <div class="space-x-2">
-        <button @click="onChangeAutomaticPlayingDelayMode('MEDIUM')">
-          Medium
-        </button>
-        <button @click="onChangeAutomaticPlayingDelayMode('FAST')">Fast</button>
+        <div class="space-x-2">
+          <button @click="onChangeAutomaticPlayingDelayMode('MEDIUM')">
+            Medium
+          </button>
+          <button @click="onChangeAutomaticPlayingDelayMode('FAST')">
+            Fast
+          </button>
+        </div>
+
+        <button @click="props.onResetSteps">Reset</button>
       </div>
-
-      <button @click="props.onResetSteps">Reset</button>
     </div>
   </div>
 </template>
