@@ -164,3 +164,71 @@ machine transition 0 of "one" has not alphabet character read operation target (
 EOF'
     assert_output 'Machine too long to be executed, autokill.'
 }
+
+@test "Failure Body is invalid" {
+    run zsh -c 'curl --header "Content-Type: application/json" \
+  --request POST \
+  http://localhost:8080/execute-machine \
+  --data @- << EOF 2> /dev/null
+{"machineConfig": {
+ "name": "02n",
+ "alphabet": [
+     "0",
+     ".",
+     "y",
+     "n"
+ ],
+ "blank": ".",
+ "states": ["one", "two", "HALT"],
+ "initial": "one",
+ "finals": [
+     "HALT"
+ ],
+ "transitions": {
+     "one": [
+         { "read": "0", "write": "0", "to_state": "two", "action": "RIGHT" },
+         { "read": ".", "write": "y", "to_state": "HALT", "action": "RIGHT" }
+     ],
+     "two": [
+         { "read": "0", "write": "0", "to_state": "one", "action": "RIGHT" },
+         { "read": ".", "write": "n", "to_state": "two", "action": "RIGHT" }
+     ]
+ }
+}}
+EOF'
+    assert_output 'Body is invalid'
+}
+
+@test "Failure input is invalid" {
+    run zsh -c 'curl --header "Content-Type: application/json" \
+  --request POST \
+  http://localhost:8080/execute-machine \
+  --data @- << EOF 2> /dev/null
+{"machineConfig": {
+ "name": "02n",
+ "alphabet": [
+     "0",
+     ".",
+     "y",
+     "n"
+ ],
+ "blank": ".",
+ "states": ["one", "two", "HALT"],
+ "initial": "one",
+ "finals": [
+     "HALT"
+ ],
+ "transitions": {
+     "one": [
+         { "read": "0", "write": "0", "to_state": "two", "action": "RIGHT" },
+         { "read": ".", "write": "y", "to_state": "HALT", "action": "RIGHT" }
+     ],
+     "two": [
+         { "read": "0", "write": "0", "to_state": "one", "action": "RIGHT" },
+         { "read": ".", "write": "n", "to_state": "two", "action": "RIGHT" }
+     ]
+ }
+}, "input":"0001"}
+EOF'
+    assert_output 'Character "1" is not in the alphabet'
+}
