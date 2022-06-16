@@ -8,7 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "@xstate/vue": "^2.0.0",
+    "vue": "^3.2.25",
+    "xstate": "^4.32.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",

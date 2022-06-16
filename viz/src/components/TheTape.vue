@@ -1,32 +1,24 @@
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
+import { AutomaticPlayingDelayMode, Steps } from "../types";
+
+const props = defineProps<{
+  blankCharacter: string;
+  steps: Steps;
+  indexOnStepList: number;
+  onPlay: () => void;
+  onPause: () => void;
+  onNextStep: () => void;
+  onChangeAutomaticPlayingDelayMode: (mode: AutomaticPlayingDelayMode) => void;
+  onResetSteps: () => void;
+}>();
+
+const blankCharacter = computed(() => props.blankCharacter);
 
 // Must be an odd number.
 const displayedTapeLength = 13;
 const squaresAmountOnOneSideOfHead = Math.floor(displayedTapeLength / 2);
 const addedBlankSpace = squaresAmountOnOneSideOfHead;
-
-type Steps = [tape: string[], indexOfHead: number][];
-
-const blankCharacter = ".";
-const steps: Steps = fillStepsWithBlankSpacesOnSides([
-  [["0", "0", "1", "1"], 0],
-  [[".", "0", "1", "1"], 1],
-  [[".", "0", "1", "1"], 2],
-  [[".", "0", "1", "1"], 3],
-  [[".", "0", "1", "1", "."], 4],
-  [[".", "0", "1", "1", "."], 3],
-  [[".", "0", "1", ".", "."], 2],
-  [[".", "0", "1", ".", "."], 1],
-  [[".", "0", "1", ".", "."], 0],
-  [[".", "0", "1", ".", "."], 1],
-  [[".", ".", "1", ".", "."], 2],
-  [[".", ".", "1", ".", "."], 3],
-  [[".", ".", "1", ".", "."], 2],
-  [[".", ".", ".", ".", "."], 1],
-  [[".", ".", ".", ".", "."], 2],
-  [[".", ".", "y", ".", "."], 1],
-]);
 
 /**
  * We add enough blank squares to all steps so that
@@ -35,15 +27,23 @@ const steps: Steps = fillStepsWithBlankSpacesOnSides([
 function fillStepsWithBlankSpacesOnSides(steps: Steps): Steps {
   return steps.map(([tape, indexOfHead]) => [
     [
-      ...Array.from({ length: addedBlankSpace }).map(() => blankCharacter),
+      ...Array.from({ length: addedBlankSpace }).map(
+        () => blankCharacter.value
+      ),
       ...tape,
-      ...Array.from({ length: addedBlankSpace }).map(() => blankCharacter),
+      ...Array.from({ length: addedBlankSpace }).map(
+        () => blankCharacter.value
+      ),
     ],
     indexOfHead,
   ]);
 }
 
-const keysReference = steps[steps.length - 1][0].map((_, index) => index);
+const steps = computed(() => fillStepsWithBlankSpacesOnSides(props.steps));
+
+const keysReference = computed(() =>
+  steps.value[steps.value.length - 1][0].map((_, index) => index)
+);
 
 type TapeSquareWithKey = { key: string; value: string };
 
@@ -56,14 +56,14 @@ function computeTapeListWithFixedKeys() {
    * Start from the biggest tape to ensure
    * that keys remain the same for smaller tapes.
    */
-  for (const [tape, indexOfHead] of steps.slice().reverse()) {
-    if (tape.length !== keysReference.length) {
+  for (const [tape, indexOfHead] of steps.value.slice().reverse()) {
+    if (tape.length !== keysReference.value.length) {
       const tapeIsReducedOnLeft = indexOfHead === 0;
 
       if (tapeIsReducedOnLeft === true) {
-        keysReference.shift();
+        keysReference.value.shift();
       } else {
-        keysReference.pop();
+        keysReference.value.pop();
       }
     }
 
@@ -71,7 +71,7 @@ function computeTapeListWithFixedKeys() {
       tape.map(
         (value, index) =>
           ({
-            key: `square:${keysReference[index]}`,
+            key: `square:${keysReference.value[index]}`,
             value,
           } as TapeSquareWithKey)
       ),
@@ -84,13 +84,11 @@ function computeTapeListWithFixedKeys() {
   return tapeListWithKeyAndBlanks;
 }
 
-const indexOnStepList = ref(0);
-
 const tapeListWithKeyAndBlanks = computeTapeListWithFixedKeys();
 
-const tape = computed(() => tapeListWithKeyAndBlanks[indexOnStepList.value][0]);
+const tape = computed(() => tapeListWithKeyAndBlanks[props.indexOnStepList][0]);
 const headIndexOnTape = computed(
-  () => tapeListWithKeyAndBlanks[indexOnStepList.value][1]
+  () => tapeListWithKeyAndBlanks[props.indexOnStepList][1]
 );
 
 const displayedTape = computed(() => {
@@ -99,18 +97,6 @@ const displayedTape = computed(() => {
     displayedTapeLength + headIndexOnTape.value
   );
 });
-
-function goToPreviousIteration() {
-  if (indexOnStepList.value > 0) {
-    indexOnStepList.value--;
-  }
-}
-
-function goToNextIteration() {
-  if (indexOnStepList.value < steps.length - 1) {
-    indexOnStepList.value++;
-  }
-}
 </script>
 
 <template>
@@ -160,9 +146,19 @@ function goToNextIteration() {
       </div>
     </div>
 
-    <div class="flex space-x-2">
-      <button @click="goToPreviousIteration">Go left</button>
-      <button @click="goToNextIteration">Go right</button>
+    <div class="flex mt-4 space-x-6">
+      <button @click="props.onPlay">Play</button>
+      <button @click="props.onPause">Pause</button>
+      <button @click="props.onNextStep">Next step</button>
+
+      <div class="space-x-2">
+        <button @click="onChangeAutomaticPlayingDelayMode('MEDIUM')">
+          Medium
+        </button>
+        <button @click="onChangeAutomaticPlayingDelayMode('FAST')">Fast</button>
+      </div>
+
+      <button @click="props.onResetSteps">Reset</button>
     </div>
   </div>
 </template>
