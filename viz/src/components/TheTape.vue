@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { AutomaticPlayingDelayMode, Steps } from "../types";
+import { AutomaticPlayingDelayMode, TapeStep } from "../types";
 
 const props = defineProps<{
   blankCharacter: string;
-  steps: Steps;
+  steps: TapeStep[];
   indexOnStepList: number;
   onPlay: () => void;
   onPause: () => void;
@@ -24,9 +24,9 @@ const addedBlankSpace = squaresAmountOnOneSideOfHead;
  * We add enough blank squares to all steps so that
  * there will always be the same amount of squares on the tape.
  */
-function fillStepsWithBlankSpacesOnSides(steps: Steps): Steps {
-  return steps.map(([tape, indexOfHead]) => [
-    [
+function fillStepsWithBlankSpacesOnSides(steps: TapeStep[]): TapeStep[] {
+  return steps.map(({ tape, ...props }) => ({
+    tape: [
       ...Array.from({ length: addedBlankSpace }).map(
         () => blankCharacter.value
       ),
@@ -35,30 +35,35 @@ function fillStepsWithBlankSpacesOnSides(steps: Steps): Steps {
         () => blankCharacter.value
       ),
     ],
-    indexOfHead,
-  ]);
+    ...props,
+  }));
 }
 
 const steps = computed(() => fillStepsWithBlankSpacesOnSides(props.steps));
 
 const keysReference = computed(() =>
-  steps.value[steps.value.length - 1][0].map((_, index) => index)
+  steps.value[steps.value.length - 1].tape.map((_, index) => index)
 );
 
-type TapeSquareWithKey = { key: string; value: string };
+interface TapeSquareWithKey {
+  key: string;
+  value: string;
+}
 
-type StepWithKey = [tape: TapeSquareWithKey[], indexOfHead: number];
+interface TapeStepWithKeyForEachSquare extends Omit<TapeStep, 'tape'> {
+  tape: TapeSquareWithKey[];
+}
 
 function computeTapeListWithFixedKeys() {
-  const tapeListWithKeyAndBlanks: StepWithKey[] = [];
+  const tapeListWithKeyAndBlanks: TapeStepWithKeyForEachSquare[] = [];
 
   /**
    * Start from the biggest tape to ensure
    * that keys remain the same for smaller tapes.
    */
-  for (const [tape, indexOfHead] of steps.value.slice().reverse()) {
+  for (const { tape, indexOnTape, ...props } of steps.value.slice().reverse()) {
     if (tape.length !== keysReference.value.length) {
-      const tapeIsReducedOnLeft = indexOfHead === 0;
+      const tapeIsReducedOnLeft = indexOnTape === 0;
 
       if (tapeIsReducedOnLeft === true) {
         keysReference.value.shift();
@@ -67,16 +72,17 @@ function computeTapeListWithFixedKeys() {
       }
     }
 
-    tapeListWithKeyAndBlanks.push([
-      tape.map(
+    tapeListWithKeyAndBlanks.push({
+      tape: tape.map(
         (value, index) =>
           ({
             key: `square:${keysReference.value[index]}`,
             value,
           } as TapeSquareWithKey)
       ),
-      indexOfHead,
-    ]);
+      indexOnTape,
+      ...props
+    });
   }
 
   tapeListWithKeyAndBlanks.reverse();
@@ -86,9 +92,9 @@ function computeTapeListWithFixedKeys() {
 
 const tapeListWithKeyAndBlanks = computeTapeListWithFixedKeys();
 
-const tape = computed(() => tapeListWithKeyAndBlanks[props.indexOnStepList][0]);
+const tape = computed(() => tapeListWithKeyAndBlanks[props.indexOnStepList].tape);
 const headIndexOnTape = computed(
-  () => tapeListWithKeyAndBlanks[props.indexOnStepList][1]
+  () => tapeListWithKeyAndBlanks[props.indexOnStepList].indexOnTape
 );
 
 const displayedTape = computed(() => {
