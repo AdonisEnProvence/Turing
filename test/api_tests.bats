@@ -1,5 +1,5 @@
 setup() {
-    ../_build/default/bin/turing serve &
+    ./_build/default/bin/turing serve &
 
     # Run tests only after the server starts listening to requests.
     # See https://stackoverflow.com/a/21189440

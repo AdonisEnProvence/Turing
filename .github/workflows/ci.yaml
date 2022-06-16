@@ -14,16 +14,16 @@ jobs:
     container:
       image: erlang:24.2
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Compile
-      run: rebar3 compile
+      - uses: actions/checkout@v2
 
-    - name: Run unit tests
-      run: rebar3 eunit
+      - name: Compile
+        run: rebar3 compile
 
-    - name: Build
-      run: rebar3 escriptize
+      - name: Run unit tests
+        run: rebar3 eunit
 
-    - name: Run integrations tests
-      run: ./bats-core/bin/bats test/
+      - name: Build
+        run: rebar3 escriptize
+
+      - name: Run integrations tests
+        run: ./bats-core/bin/bats test/
