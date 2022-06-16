@@ -1,8 +1,8 @@
 -module(execute_machine_handler).
 -behaviour(cowboy_handler).
--export([init/2]).
+-export([init/2, tape_history_accumulator_process/1]).
 
-pretty_value(List) -> lists:flatten(io_lib:format("~p", [List])).
+-include("machine.hrl").
 
 get_decoded_body(Req0) ->
     ReadBodyResult = cowboy_req:read_body(Req0),
@@ -17,13 +17,19 @@ decode_body(RawBody) ->
     TryDecodedReq = jsone:try_decode(RawBody),
     case TryDecodedReq of
         {ok, DecodedReqBody, _} ->
-            io:format("decoded successfully the body~n"),
-            io:format("~p~n", [pretty_value(DecodedReqBody)]),
-            {ok, DecodedReqBody};
-        {error, Error} ->
-            io:format("failure decoding the body~n"),
-            io:format("~p~n", [Error]),
+            MachineConfigIsKey = maps:is_key(<<"machineConfig">>, DecodedReqBody),
+            InputIsKey = maps:is_key(<<"input">>, DecodedReqBody),
+            MachineConfigAndInputAreKeys = InputIsKey and MachineConfigIsKey,
+            if
+                MachineConfigAndInputAreKeys =:= true ->
+                    {ok, DecodedReqBody};
+                MachineConfigAndInputAreKeys =:= false ->
+                    {error, invalid_body}
+            end;
+        {error, _Error} ->
             {error, invalid_body}
+    end.
+
 tape_history_accumulator_process(From, Accumulator) ->
     receive
         {push, ElementToPush} ->
