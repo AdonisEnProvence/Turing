@@ -1,13 +1,15 @@
+export type StatusOfExecution = "continue" | "blocked" | "final";
+
 export interface TapeStep {
-    currentState: string;
-    indexOnTape: number;
-    status: "continue" | 'blocked' | 'final'
-    tape: string[]
+  currentState: string;
+  indexOnTape: number;
+  status: StatusOfExecution;
+  tape: string[];
 }
 
 export interface MachineExecution {
-    blank: string;
-    tapeHistory: TapeStep[]
+  blank: string;
+  tapeHistory: TapeStep[];
 }
 
 export type AutomaticPlayingDelayMode = "MEDIUM" | "FAST";
