@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 import { computed } from "vue";
+import { PlayIcon, PauseIcon } from "@heroicons/vue/outline";
+import {
+  ChevronDoubleRightIcon,
+  RefreshIcon,
+  FastForwardIcon,
+} from "@heroicons/vue/solid";
 import {
   AutomaticPlayingDelayMode,
   TapeStep,
   StatusOfExecution,
+  PlayingStatus,
 } from "../types";
 import AppBadge, { AppBadgeStatus } from "./AppBadge.vue";
 
@@ -11,6 +18,8 @@ const props = defineProps<{
   blankCharacter: string;
   steps: TapeStep[];
   indexOnStepList: number;
+  playingStatus: PlayingStatus;
+  automaticPlayingDelayMode: AutomaticPlayingDelayMode;
   onPlay: () => void;
   onPause: () => void;
   onNextStep: () => void;
@@ -129,11 +138,25 @@ const displayedTape = computed(() => {
     displayedTapeLength + headIndexOnTape.value
   );
 });
+
+function handlePlayPauseButtonClick() {
+  if (props.playingStatus === "playing") {
+    props.onPause();
+  } else {
+    props.onPlay();
+  }
+}
+
+function handleAutomaticPlayingDelayMode() {
+  props.onChangeAutomaticPlayingDelayMode(
+    props.automaticPlayingDelayMode === "FAST" ? "MEDIUM" : "FAST"
+  );
+}
 </script>
 
 <template>
   <div class="flex justify-center">
-    <div class="space-y-8">
+    <div class="flex flex-col space-y-8">
       <div class="flex items-center justify-between">
         <p>
           State: <code>{{ currentState }}</code>
@@ -188,21 +211,60 @@ const displayedTape = computed(() => {
         </div>
       </div>
 
-      <div class="flex space-x-6">
-        <button @click="props.onPlay">Play</button>
-        <button @click="props.onPause">Pause</button>
-        <button @click="props.onNextStep">Next step</button>
+      <div class="flex items-center mx-auto space-x-6">
+        <button
+          :disabled="playingStatus === 'disabled'"
+          :aria-label="playingStatus === 'playing' ? 'Pause' : 'Play'"
+          @click="handlePlayPauseButtonClick"
+          class="flex items-center justify-center w-8 h-8"
+        >
+          <PauseIcon
+            v-if="playingStatus === 'playing'"
+            class="w-10 h-10 text-slate-500"
+          />
+          <PlayIcon v-else class="w-10 h-10 text-slate-500" />
+        </button>
 
-        <div class="space-x-2">
-          <button @click="onChangeAutomaticPlayingDelayMode('MEDIUM')">
-            Medium
-          </button>
-          <button @click="onChangeAutomaticPlayingDelayMode('FAST')">
-            Fast
-          </button>
-        </div>
+        <button
+          aria-label="Go to next step"
+          @click="props.onNextStep"
+          class="flex items-center justify-center w-8 h-8"
+        >
+          <ChevronDoubleRightIcon class="w-6 h-6 text-slate-500" />
+        </button>
 
-        <button @click="props.onResetSteps">Reset</button>
+        <button
+          :aria-label="
+            props.automaticPlayingDelayMode === 'MEDIUM'
+              ? 'Go to fast mode'
+              : 'Go to medium mode'
+          "
+          @click="handleAutomaticPlayingDelayMode"
+          class="relative flex items-center justify-center w-8 h-8"
+        >
+          <FastForwardIcon
+            :class="[
+              'w-6 h-6',
+              props.automaticPlayingDelayMode === 'MEDIUM'
+                ? 'text-slate-500'
+                : 'text-yellow-400',
+            ]"
+          />
+
+          <div
+            v-if="props.automaticPlayingDelayMode === 'FAST'"
+            aria-hidden="true"
+            class="absolute bottom-0 w-1 h-1 -translate-x-1/2 bg-yellow-400 rounded-full left-1/2"
+          />
+        </button>
+
+        <button
+          aria-label="Restart execution"
+          @click="props.onResetSteps"
+          class="flex items-center justify-center w-8 h-8"
+        >
+          <RefreshIcon class="w-6 h-6 text-slate-500" />
+        </button>
       </div>
     </div>
   </div>

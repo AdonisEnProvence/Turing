@@ -3,7 +3,11 @@ import { useMachine } from "@xstate/vue";
 import { computed } from "vue";
 import TheTape from "./components/TheTape.vue";
 import { vizMachine } from "./machines/viz";
-import { AutomaticPlayingDelayMode, MachineExecution } from "./types";
+import {
+  AutomaticPlayingDelayMode,
+  MachineExecution,
+  PlayingStatus,
+} from "./types";
 
 const exec: MachineExecution = {
   blank: ".",
@@ -156,6 +160,20 @@ const { state, send } = useMachine(vizMachine, {
   },
 });
 const indexOnStepList = computed(() => state.value.context.stepIndex);
+const playingStatus = computed<PlayingStatus>(() => {
+  if (state.value.matches("Playing steps.Automatic playing off")) {
+    return "paused";
+  }
+
+  if (state.value.matches("Playing steps.Automatic playing on")) {
+    return "playing";
+  }
+
+  return "disabled";
+});
+const automaticPlayingDelayMode = computed(
+  () => state.value.context.automaticPlayingDelayMode
+);
 
 function handlePlay() {
   send({
@@ -213,6 +231,8 @@ function handleResetSteps() {
               :steps="exec.tapeHistory"
               :blank-character="exec.blank"
               :index-on-step-list="indexOnStepList"
+              :playing-status="playingStatus"
+              :automatic-playing-delay-mode="automaticPlayingDelayMode"
               :on-play="handlePlay"
               :on-pause="handlePause"
               :on-next-step="handleNextStep"
@@ -221,7 +241,6 @@ function handleResetSteps() {
               "
               :on-reset-steps="handleResetSteps"
             />
-            <p>Controls</p>
           </div>
         </div>
       </main>

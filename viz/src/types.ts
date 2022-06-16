@@ -13,3 +13,5 @@ export interface MachineExecution {
 }
 
 export type AutomaticPlayingDelayMode = "MEDIUM" | "FAST";
+
+export type PlayingStatus = "playing" | "paused" | "disabled";
