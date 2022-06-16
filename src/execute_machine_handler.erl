@@ -33,9 +33,9 @@ decode_body(RawBody) ->
 tape_history_accumulator_process(From, Accumulator) ->
     receive
         {push, ElementToPush} ->
-            tape_history_accumulator_process(From, Accumulator ++ ElementToPush);
+            tape_history_accumulator_process(From, [ElementToPush | Accumulator]);
         get ->
-            From ! {result, Accumulator}
+            From ! {result, lists:reverse(Accumulator)}
     end.
 tape_history_accumulator_process(From) ->
     tape_history_accumulator_process(From, []).
@@ -48,14 +48,12 @@ execute_machine(ParsedMachineConfig, ParsedInput) ->
         {Tape, CurrentState, IndexOnTape, Status, _Transition}
     ) ->
         AccumulatorPid !
-            {push, [
-                #tape_history_element{
-                    tape = Tape,
-                    currentState = CurrentState,
-                    indexOnTape = IndexOnTape,
-                    status = Status
-                }
-            ]}
+            {push, #tape_history_element{
+                tape = Tape,
+                currentState = CurrentState,
+                indexOnTape = IndexOnTape,
+                status = Status
+            }}
     end),
 
     AccumulatorPid ! get,
@@ -137,8 +135,8 @@ init(Req0, State) ->
             ),
             case ParseValidateExecMachineResult of
                 {ok, ResponseBodyRecord} ->
-                    EncodeResult = encode_response_body(ResponseBodyRecord),
-                    case EncodeResult of
+                    EncodedResult = encode_response_body(ResponseBodyRecord),
+                    case EncodedResult of
                         {ok, EncodedResponseBody} ->
                             Req = reply_success(Req0, EncodedResponseBody),
                             {ok, Req, State};
