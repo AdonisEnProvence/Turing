@@ -44,26 +44,34 @@ execute_machine(ParsedMachineConfig, ParsedInput) ->
     From = self(),
     AccumulatorPid = spawn(?MODULE, tape_history_accumulator_process, [From]),
 
-    interpreter:start(ParsedMachineConfig, ParsedInput, fun(
-        {Tape, CurrentState, IndexOnTape, Status, _Transition}
-    ) ->
-        AccumulatorPid !
-            {push, #tape_history_element{
-                tape = Tape,
-                currentState = CurrentState,
-                indexOnTape = IndexOnTape,
-                status = Status
-            }}
+    spawn(fun() ->
+        interpreter:start(ParsedMachineConfig, ParsedInput, fun(
+            {Tape, CurrentState, IndexOnTape, Status, _Transition}
+        ) ->
+            AccumulatorPid !
+                {push, #tape_history_element{
+                    tape = Tape,
+                    currentState = CurrentState,
+                    indexOnTape = IndexOnTape,
+                    status = Status
+                }}
+        end),
+        From ! finished
     end),
 
-    AccumulatorPid ! get,
     receive
-        {result, Result} ->
-            ResponseBodyRecord = #execute_machine_response{
-                blank = ParsedMachineConfig#parsed_machine_config.blank,
-                tapeHistory = Result
-            },
-            {ok, ResponseBodyRecord}
+        finished ->
+            AccumulatorPid ! get,
+            receive
+                {result, Result} ->
+                    ResponseBodyRecord = #execute_machine_response{
+                        blank = ParsedMachineConfig#parsed_machine_config.blank,
+                        tapeHistory = Result
+                    },
+                    {ok, ResponseBodyRecord}
+            end
+    after 3000 ->
+        {error, halting_issue}
     end.
 
 parse_validate_and_execute(RawMachineConfig, RawInput) ->
@@ -144,6 +152,9 @@ init(Req0, State) ->
                             Req = reply_error(Req0, "Response encode failure"),
                             {ok, Req, State}
                     end;
+                {error, halting_issue} ->
+                    Req = reply_error(Req0, "Machine too long to be executed, autokill.\n"),
+                    {ok, Req, State};
                 {error, FormattedError} ->
                     Req = reply_error(Req0, FormattedError),
                     {ok, Req, State}
