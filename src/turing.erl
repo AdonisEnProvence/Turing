@@ -32,7 +32,7 @@ main([SubCommand | SubCommandArgs]) ->
                 [{port, 8080}],
                 #{env => #{dispatch => Dispatch}}
             ),
-            io:format("Server starting pid~n"),
+            io:format("Server starting~n"),
             receive
                 quit ->
                     ok = cowboy:stop_listener(http)
