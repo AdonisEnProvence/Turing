@@ -135,7 +135,9 @@ const displayedTape = computed(() => {
   <div class="flex justify-center">
     <div class="space-y-8">
       <div class="flex items-center justify-between">
-        <p>State: <code>{{ currentState }}</code></p>
+        <p>
+          State: <code>{{ currentState }}</code>
+        </p>
 
         <AppBadge :status="stateOfExecutionBadgeStatus" size="medium">
           {{ prettyStateOfExecution }}
@@ -172,7 +174,9 @@ const displayedTape = computed(() => {
                   leave-to-class="opacity-0"
                   leave-active-class="transition-opacity duration-200"
                 >
-                  <p :key="value">{{ value }}</p>
+                  <p :key="value">
+                    <code>{{ value }}</code>
+                  </p>
                 </Transition>
               </div>
             </TransitionGroup>
