@@ -22,7 +22,9 @@ main([SubCommand | SubCommandArgs]) ->
             {ok, _} = application:ensure_all_started(cowboy),
 
             Dispatch = cowboy_router:compile([
-                {<<"localhost">>, [{<<"/ping">>, ping_handler, []}]}
+                {<<"localhost">>, [
+                    {<<"/execute-machine">>, execute_machine_handler, []}
+                ]}
             ]),
 
             {ok, _} = cowboy:start_clear(
@@ -30,7 +32,7 @@ main([SubCommand | SubCommandArgs]) ->
                 [{port, 8080}],
                 #{env => #{dispatch => Dispatch}}
             ),
-            io:format("Server starting pid"),
+            io:format("Server starting pid~n"),
             receive
                 quit ->
                     ok = cowboy:stop_listener(http)
