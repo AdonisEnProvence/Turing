@@ -79,14 +79,11 @@ parse_validate_and_execute(RawMachineConfig, RawInput, PoolWorkerMasterPid) ->
     ParserValidatorResult = parse_and_validate_machine_config:parse_and_validate_decoded_machine_and_input(
         RawMachineConfig, StringInput
     ),
-    MyPid = self(),
 
-    io:format("ACTORREQ = ~p MASTER_WORKER= ~p ~n", [MyPid, PoolWorkerMasterPid]),
     case ParserValidatorResult of
         {ok, ParsedMachineConfig, ParsedInput} ->
-            PoolWorkerMasterPid ! {coco},
-            % PoolWorkerMasterPid !
-            %     {execute_machine_request, {"COCO", {ParsedMachineConfig, ParsedInput}}},
+            PoolWorkerMasterPid !
+                {execute_machine_request, {self(), {ParsedMachineConfig, ParsedInput}}},
             receive
                 {result, MachineExecutionResponse} ->
                     MachineExecutionResponse;
@@ -159,7 +156,7 @@ reply_success(Req0, Data) ->
     Req.
 
 init(Req0, State) ->
-    PoolWorkerMasterPid = State,
+    [PoolWorkerMasterPid] = State,
     io:format("PoolWorkerMasterPid= ~p~n", [PoolWorkerMasterPid]),
     GetBodyResult = get_decoded_body(Req0),
     case GetBodyResult of

@@ -35,8 +35,6 @@ init_pool_worker_master() ->
 init_pool_worker_master(0, WorkerPidList) ->
     io:format("LISTENING TO MESSAGES\n"),
     receive
-        {coco} ->
-            io:format("pong\n");
         {execute_machine_request, {ReqActorPid, MachineConfigToExecute}} ->
             io:format("received execute_machine_request"),
             % below function should be async ?? spawn this ?
@@ -44,10 +42,15 @@ init_pool_worker_master(0, WorkerPidList) ->
                 ?WORKER_NUMBER, 0, WorkerPidList, MachineConfigToExecute, ReqActorPid
             );
         {finished_machine_execution, {ReqActorPid, MachineExecutionResponse}} ->
+            io:format(
+                "POOL_MASTER RECEIVED = finished_machine_execution proxy to reqActorPID = ~p~n", [
+                    ReqActorPid
+                ]
+            ),
             ReqActorPid ! {result, MachineExecutionResponse}
     end,
-    io:format("Init pool worker master and workers finished ~p~n", [WorkerPidList]);
+    init_pool_worker_master(0, WorkerPidList);
 init_pool_worker_master(Index, WorkerPidList) ->
     PoolMasterWorkerPid = self(),
     NewWorkerPid = spawn(pool_worker, init_pool_worker, [PoolMasterWorkerPid]),
-    init_pool_worker_master(Index - 1, [NewWorkerPid, WorkerPidList]).
+    init_pool_worker_master(Index - 1, [NewWorkerPid | WorkerPidList]).
