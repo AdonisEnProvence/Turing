@@ -33,6 +33,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@tailwindcss/forms@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.2.tgz#4ef45f9916dcb37838cbe7fecdcc4ba7a7c2ab59"
+  integrity sha512-pSrFeJB6Bg1Mrg9CdQW3+hqZXAKsBrSG9MAfFLKy1pVA4Mb4W7C0k7mEhlmS2Dfo/otxrQOET7NJiJ9RrS563w==
+  dependencies:
+    mini-svg-data-uri "^1.2.3"
+
 "@vitejs/plugin-vue@^2.3.3":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-2.3.3.tgz#fbf80cc039b82ac21a1acb0f0478de8f61fbf600"
@@ -166,6 +173,11 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@xstate/vue/-/vue-2.0.0.tgz#bb95f91600c5fad2e8a72f872cb8f69b3b154e10"
   integrity sha512-JlrJ3d+I6rZCcFBuu3O4GP+mGJfd11O9o69wRedzPMqZ+hxcMRBsih9L5kKnJHcU9CTmdJTT172oxTaYF7thzA==
+
+ace-builds@^1.4.13:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/ace-builds/-/ace-builds-1.6.0.tgz#4e1652a0e33c4ae262dc841b1254dd2ad0beb5da"
+  integrity sha512-qdkx965G/TA12IK7Zk+iCVDtA9wvhxIGivGc2rsID4UYbY2Bpatwep3ZrBZwj1IB2miU6FodDMqM9Kc1lqDlLg==
 
 acorn-node@^1.8.2:
   version "1.8.2"
@@ -556,6 +568,11 @@ micromatch@^4.0.4:
     braces "^3.0.2"
     picomatch "^2.3.1"
 
+mini-svg-data-uri@^1.2.3:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz#8ab0aabcdf8c29ad5693ca595af19dd2ead09939"
+  integrity sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==
+
 minimist@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
@@ -683,6 +700,11 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
+
 resolve@^1.1.7, resolve@^1.22.0:
   version "1.22.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.0.tgz#5e0b8c67c15df57a89bdbabe603a002f21731198"
@@ -795,7 +817,16 @@ vue-tsc@^0.34.7:
   dependencies:
     "@volar/vue-typescript" "0.34.17"
 
-vue@^3.2.25:
+vue3-ace-editor@^2.2.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/vue3-ace-editor/-/vue3-ace-editor-2.2.2.tgz#7fd694df2f556e8859edd2322703e039461c9ecc"
+  integrity sha512-fZ6OWosbU+odLrtrcGC/536QjCigujYJB0Hf6/tBp+ef/ohTadwQAqyBlVzOmvrmzZyubphpV9zkaZcx5Fuivw==
+  dependencies:
+    ace-builds "^1.4.13"
+    resize-observer-polyfill "^1.5.1"
+    vue "^3.2.26"
+
+vue@^3.2.25, vue@^3.2.26:
   version "3.2.37"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.37.tgz#da220ccb618d78579d25b06c7c21498ca4e5452e"
   integrity sha512-bOKEZxrm8Eh+fveCqS1/NkG/n6aMidsI6hahas7pa0w/l7jkbssJVsRhVDs07IdDq7h9KHswZOgItnwJAgtVtQ==

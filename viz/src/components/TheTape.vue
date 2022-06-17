@@ -14,9 +14,26 @@ import {
 } from "../types";
 import AppBadge, { AppBadgeStatus } from "./AppBadge.vue";
 
+interface TapeSquareWithKey {
+  key: string;
+  value: string;
+}
+
+interface TapeStepWithKeyForEachSquare extends Omit<TapeStep, "tape"> {
+  tape: TapeSquareWithKey[];
+}
+
+const EMPTY_STEP: TapeStep = {
+  currentState: "None",
+  indexOnTape: 0,
+  status: "blocked",
+  tape: ["🤫"],
+};
+
 const props = defineProps<{
-  blankCharacter: string;
-  steps: TapeStep[];
+  isTapeDisabled: boolean;
+  blankCharacter: string | undefined;
+  steps: TapeStep[] | undefined;
   indexOnStepList: number;
   playingStatus: PlayingStatus;
   automaticPlayingDelayMode: AutomaticPlayingDelayMode;
@@ -27,7 +44,9 @@ const props = defineProps<{
   onResetSteps: () => void;
 }>();
 
-const blankCharacter = computed(() => props.blankCharacter);
+const isMachineNotLoaded = computed(
+  () => props.blankCharacter === undefined || props.steps === undefined
+);
 
 // Must be an odd number.
 const displayedTapeLength = 17;
@@ -39,50 +58,39 @@ const addedBlankSpace = squaresAmountOnOneSideOfHead;
  * there will always be the same amount of squares on the tape.
  */
 function fillStepsWithBlankSpacesOnSides(steps: TapeStep[]): TapeStep[] {
+  const blank = props.blankCharacter ?? "🥸";
+
   return steps.map(({ tape, ...props }) => ({
     tape: [
-      ...Array.from({ length: addedBlankSpace }).map(
-        () => blankCharacter.value
-      ),
+      ...Array.from({ length: addedBlankSpace }).map(() => blank),
       ...tape,
-      ...Array.from({ length: addedBlankSpace }).map(
-        () => blankCharacter.value
-      ),
+      ...Array.from({ length: addedBlankSpace }).map(() => blank),
     ],
     ...props,
   }));
 }
 
-const steps = computed(() => fillStepsWithBlankSpacesOnSides(props.steps));
-
-const keysReference = computed(() =>
-  steps.value[steps.value.length - 1].tape.map((_, index) => index)
+const steps = computed(() =>
+  fillStepsWithBlankSpacesOnSides(props.steps ?? [EMPTY_STEP])
 );
 
-interface TapeSquareWithKey {
-  key: string;
-  value: string;
-}
-
-interface TapeStepWithKeyForEachSquare extends Omit<TapeStep, "tape"> {
-  tape: TapeSquareWithKey[];
-}
-
-function computeTapeListWithFixedKeys() {
+function computeTapeListWithFixedKeys(steps: TapeStep[]) {
   const tapeListWithKeyAndBlanks: TapeStepWithKeyForEachSquare[] = [];
+
+  const keysReference = steps[steps.length - 1].tape.map((_, index) => index);
 
   /**
    * Start from the biggest tape to ensure
    * that keys remain the same for smaller tapes.
    */
-  for (const { tape, indexOnTape, ...props } of steps.value.slice().reverse()) {
-    if (tape.length !== keysReference.value.length) {
+  for (const { tape, indexOnTape, ...props } of steps.slice().reverse()) {
+    if (tape.length !== keysReference.length) {
       const tapeIsReducedOnLeft = indexOnTape === 0;
 
       if (tapeIsReducedOnLeft === true) {
-        keysReference.value.shift();
+        keysReference.shift();
       } else {
-        keysReference.value.pop();
+        keysReference.pop();
       }
     }
 
@@ -90,7 +98,7 @@ function computeTapeListWithFixedKeys() {
       tape: tape.map(
         (value, index) =>
           ({
-            key: `square:${keysReference.value[index]}`,
+            key: `square:${keysReference[index]}`,
             value,
           } as TapeSquareWithKey)
       ),
@@ -104,10 +112,11 @@ function computeTapeListWithFixedKeys() {
   return tapeListWithKeyAndBlanks;
 }
 
-const tapeListWithKeyAndBlanks = computeTapeListWithFixedKeys();
-
+const tapeListWithKeyAndBlanks = computed(() =>
+  computeTapeListWithFixedKeys(steps.value)
+);
 const currentStep = computed(
-  () => tapeListWithKeyAndBlanks[props.indexOnStepList]
+  () => tapeListWithKeyAndBlanks.value[props.indexOnStepList]
 );
 const tape = computed(() => currentStep.value.tape);
 const headIndexOnTape = computed(() => currentStep.value.indexOnTape);
@@ -155,7 +164,7 @@ function handleAutomaticPlayingDelayMode() {
 </script>
 
 <template>
-  <div class="flex justify-center">
+  <div class="relative flex justify-center">
     <div class="flex flex-col space-y-8">
       <div class="flex items-center justify-between">
         <p>
@@ -192,10 +201,12 @@ function handleAutomaticPlayingDelayMode() {
               >
                 <Transition
                   mode="out-in"
+                  enter-active-class="duration-300 ease-out"
                   enter-from-class="opacity-0"
-                  enter-active-class="transition-opacity duration-200"
+                  enter-to-class="opacity-100"
+                  leave-active-class="duration-200 ease-in"
+                  leave-from-class="opacity-100"
                   leave-to-class="opacity-0"
-                  leave-active-class="transition-opacity duration-200"
                 >
                   <p :key="value">
                     <code>{{ value }}</code>
@@ -216,7 +227,7 @@ function handleAutomaticPlayingDelayMode() {
           :disabled="playingStatus === 'disabled'"
           :aria-label="playingStatus === 'playing' ? 'Pause' : 'Play'"
           @click="handlePlayPauseButtonClick"
-          class="flex items-center justify-center w-8 h-8"
+          class="flex items-center justify-center w-10 h-10 rounded-full"
         >
           <PauseIcon
             v-if="playingStatus === 'playing'"
@@ -228,7 +239,7 @@ function handleAutomaticPlayingDelayMode() {
         <button
           aria-label="Go to next step"
           @click="props.onNextStep"
-          class="flex items-center justify-center w-8 h-8"
+          class="flex items-center justify-center w-8 h-8 rounded-full"
         >
           <ChevronDoubleRightIcon class="w-6 h-6 text-slate-500" />
         </button>
@@ -240,7 +251,7 @@ function handleAutomaticPlayingDelayMode() {
               : 'Go to medium mode'
           "
           @click="handleAutomaticPlayingDelayMode"
-          class="relative flex items-center justify-center w-8 h-8"
+          class="relative flex items-center justify-center w-8 h-8 rounded-full"
         >
           <FastForwardIcon
             :class="[
@@ -261,11 +272,25 @@ function handleAutomaticPlayingDelayMode() {
         <button
           aria-label="Restart execution"
           @click="props.onResetSteps"
-          class="flex items-center justify-center w-8 h-8"
+          class="flex items-center justify-center w-8 h-8 rounded-full"
         >
           <RefreshIcon class="w-6 h-6 text-slate-500" />
         </button>
       </div>
     </div>
+
+    <Transition
+      enter-active-class="transition-opacity duration-300 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-200 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="isTapeDisabled"
+        class="absolute inset-0 bg-white bg-opacity-75"
+      />
+    </Transition>
   </div>
 </template>
