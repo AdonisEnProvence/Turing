@@ -157,7 +157,6 @@ reply_success(Req0, Data) ->
 
 init(Req0, State) ->
     [PoolWorkerMasterPid] = State,
-    io:format("PoolWorkerMasterPid= ~p~n", [PoolWorkerMasterPid]),
     GetBodyResult = get_decoded_body(Req0),
     case GetBodyResult of
         {ok, DecodedReqBody} ->

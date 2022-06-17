@@ -36,16 +36,10 @@ init_pool_worker_master() ->
 init_pool_worker_master(0, WorkerPidList) ->
     receive
         {execute_machine_request, {ReqActorPid, MachineConfigToExecute}} ->
-            io:format("received execute_machine_request"),
             spawn(?MODULE, find_worker_for_machine_execution, [
                 ?WORKER_NUMBER, 0, WorkerPidList, MachineConfigToExecute, ReqActorPid
             ]);
         {finished_machine_execution, {ReqActorPid, MachineExecutionResponse}} ->
-            io:format(
-                "POOL_MASTER RECEIVED = finished_machine_execution proxy to reqActorPID = ~p~n", [
-                    ReqActorPid
-                ]
-            ),
             ReqActorPid ! {result, MachineExecutionResponse}
     end,
     init_pool_worker_master(0, WorkerPidList);
