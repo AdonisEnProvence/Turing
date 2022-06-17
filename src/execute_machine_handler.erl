@@ -1,6 +1,6 @@
 -module(execute_machine_handler).
 -behaviour(cowboy_handler).
--export([init/2, tape_history_accumulator_process/1]).
+-export([init/2, tape_history_accumulator_process/1, execute_machine/2]).
 
 -include("machine.hrl").
 
@@ -74,15 +74,25 @@ execute_machine(ParsedMachineConfig, ParsedInput) ->
         {error, halting_issue}
     end.
 
-parse_validate_and_execute(RawMachineConfig, RawInput) ->
+parse_validate_and_execute(RawMachineConfig, RawInput, PoolWorkerMasterPid) ->
     StringInput = binary_to_list(RawInput),
     ParserValidatorResult = parse_and_validate_machine_config:parse_and_validate_decoded_machine_and_input(
         RawMachineConfig, StringInput
     ),
+    MyPid = self(),
 
+    io:format("ACTORREQ = ~p MASTER_WORKER= ~p ~n", [MyPid, PoolWorkerMasterPid]),
     case ParserValidatorResult of
         {ok, ParsedMachineConfig, ParsedInput} ->
-            execute_machine(ParsedMachineConfig, ParsedInput);
+            PoolWorkerMasterPid ! {coco},
+            % PoolWorkerMasterPid !
+            %     {execute_machine_request, {"COCO", {ParsedMachineConfig, ParsedInput}}},
+            receive
+                {result, MachineExecutionResponse} ->
+                    MachineExecutionResponse;
+                {error, could_not_find_available_actor} ->
+                    {error, could_not_find_available_actor}
+            end;
         {error, FormattedError} ->
             {error, FormattedError}
     end.
@@ -149,12 +159,15 @@ reply_success(Req0, Data) ->
     Req.
 
 init(Req0, State) ->
+    PoolWorkerMasterPid = State,
+    io:format("PoolWorkerMasterPid= ~p~n", [PoolWorkerMasterPid]),
     GetBodyResult = get_decoded_body(Req0),
     case GetBodyResult of
         {ok, DecodedReqBody} ->
             ParseValidateExecMachineResult = parse_validate_and_execute(
                 maps:get(list_to_binary("machineConfig"), DecodedReqBody),
-                maps:get(list_to_binary("input"), DecodedReqBody)
+                maps:get(list_to_binary("input"), DecodedReqBody),
+                PoolWorkerMasterPid
             ),
             case ParseValidateExecMachineResult of
                 {ok, ResponseBodyRecord} ->
