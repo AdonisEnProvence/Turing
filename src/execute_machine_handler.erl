@@ -52,7 +52,7 @@ execute_machine(ParsedMachineConfig, ParsedInput) ->
                 {push, #tape_history_element{
                     tape = Tape,
                     currentState = CurrentState,
-                    indexOnTape = IndexOnTape,
+                    indexOnTape = IndexOnTape - 1,
                     status = Status
                 }}
         end),
