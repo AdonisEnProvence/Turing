@@ -1,7 +1,7 @@
 -module(pool_worker_master).
 -define(WORKER_NUMBER, 4).
 
--export([init_pool_worker_master/0]).
+-export([init_pool_worker_master/0, find_worker_for_machine_execution/5]).
 
 find_worker_for_machine_execution(0, 3, _WorkerPidList, _MachineConfigToExecute, ReqActorPid) ->
     ReqActorPid ! {error, could_not_find_available_actor};
@@ -33,14 +33,12 @@ init_pool_worker_master() ->
     init_pool_worker_master(?WORKER_NUMBER, []).
 
 init_pool_worker_master(0, WorkerPidList) ->
-    io:format("LISTENING TO MESSAGES\n"),
     receive
         {execute_machine_request, {ReqActorPid, MachineConfigToExecute}} ->
             io:format("received execute_machine_request"),
-            % below function should be async ?? spawn this ?
-            find_worker_for_machine_execution(
+            spawn(?MODULE, find_worker_for_machine_execution, [
                 ?WORKER_NUMBER, 0, WorkerPidList, MachineConfigToExecute, ReqActorPid
-            );
+            ]);
         {finished_machine_execution, {ReqActorPid, MachineExecutionResponse}} ->
             io:format(
                 "POOL_MASTER RECEIVED = finished_machine_execution proxy to reqActorPID = ~p~n", [
