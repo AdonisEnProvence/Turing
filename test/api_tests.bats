@@ -55,7 +55,7 @@ teardown() {
  }
 }, "input":"000"}
 EOF'
-    assert_output '{"blank":".","tapeHistory":[{"currentState":"one","indexOnTape":1,"status":"continue","tape":["0","0","0"]},{"currentState":"two","indexOnTape":2,"status":"continue","tape":["0","0","0"]},{"currentState":"one","indexOnTape":3,"status":"continue","tape":["0","0","0"]},{"currentState":"two","indexOnTape":4,"status":"continue","tape":["0","0","0","."]},{"currentState":"HALT","indexOnTape":3,"status":"final","tape":["0","0","0","n"]}]}'
+    assert_output '{"blank":".","tapeHistory":[{"currentState":"one","indexOnTape":0,"status":"continue","tape":["0","0","0"]},{"currentState":"two","indexOnTape":1,"status":"continue","tape":["0","0","0"]},{"currentState":"one","indexOnTape":2,"status":"continue","tape":["0","0","0"]},{"currentState":"two","indexOnTape":3,"status":"continue","tape":["0","0","0","."]},{"currentState":"HALT","indexOnTape":2,"status":"final","tape":["0","0","0","n"]}]}'
 }
 
 
