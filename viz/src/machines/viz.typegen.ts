@@ -7,20 +7,24 @@ export interface Typegen0 {
     "Increment step index":
       | "Next step"
       | "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
-    "Reset step index": "Reset steps";
+    "Reset step index":
+      | "Reset steps"
+      | "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
     "Assign input to context": "Set input";
     "Assign machine code to context": "Set machine code";
-    "Exit loading state from submit button": "xstate.after(2000)#Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
-    "Assign machine execution to context": "xstate.after(2000)#Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+    "Assign machine execution to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
+    "Exit loading state from submit button": "xstate.init";
     "Cache input and machine code into context": "Load";
-    "Allow to play execution steps": "xstate.after(2000)#Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+    "Allow to play execution steps": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
   };
   internalEvents: {
     "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on": {
       type: "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
     };
-    "xstate.after(2000)#Visualizer.Application is ready.Managing machine and input execution.Executing machine and input": {
-      type: "xstate.after(2000)#Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+    "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]": {
+      type: "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
+      data: unknown;
+      __tip: "See the XState TS docs to learn how to strongly type this.";
     };
     "": { type: "" };
     "xstate.init": { type: "xstate.init" };
@@ -36,6 +40,7 @@ export interface Typegen0 {
   };
   invokeSrcNameMap: {
     "Start submit button machine": "done.invoke.Submit button";
+    "Execute machine and input on server": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
   };
   missingImplementations: {
     actions: never;
@@ -45,6 +50,7 @@ export interface Typegen0 {
   };
   eventsCausingServices: {
     "Start submit button machine": "xstate.init";
+    "Execute machine and input on server": "Load";
   };
   eventsCausingGuards: {
     "Has reached end of steps": "";
@@ -64,6 +70,7 @@ export interface Typegen0 {
     | "Application is ready.Managing machine and input execution.Idle"
     | "Application is ready.Managing machine and input execution.Executing machine and input"
     | "Application is ready.Managing machine and input execution.Fetched machine and input execution"
+    | "Application is ready.Managing machine and input execution.Failed to execute machine and input"
     | {
         "Application is ready"?:
           | "Managing visualizer execution"
@@ -81,7 +88,8 @@ export interface Typegen0 {
               "Managing machine and input execution"?:
                 | "Idle"
                 | "Executing machine and input"
-                | "Fetched machine and input execution";
+                | "Fetched machine and input execution"
+                | "Failed to execute machine and input";
             };
       };
   tags: never;

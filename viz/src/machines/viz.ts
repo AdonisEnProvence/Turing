@@ -4,152 +4,8 @@ import { AutomaticPlayingDelayMode, MachineExecution } from "../types";
 import unaryAddMachine from "../../../our-machines/unary_add.json?raw";
 import { submitButtonMachine } from "./submit-button";
 
-const exec: MachineExecution = {
-  blank: ".",
-  tapeHistory: [
-    {
-      currentState: "pick_character",
-      indexOnTape: 0,
-      status: "continue",
-      tape: ["a", "b", "c", "b", "a"],
-    },
-    {
-      currentState: "go_to_end_and_find_a",
-      indexOnTape: 1,
-      status: "continue",
-      tape: [".", "b", "c", "b", "a"],
-    },
-    {
-      currentState: "go_to_end_and_find_a",
-      indexOnTape: 2,
-      status: "continue",
-      tape: [".", "b", "c", "b", "a"],
-    },
-    {
-      currentState: "go_to_end_and_find_a",
-      indexOnTape: 3,
-      status: "continue",
-      tape: [".", "b", "c", "b", "a"],
-    },
-    {
-      currentState: "go_to_end_and_find_a",
-      indexOnTape: 4,
-      status: "continue",
-      tape: [".", "b", "c", "b", "a"],
-    },
-    {
-      currentState: "go_to_end_and_find_a",
-      indexOnTape: 5,
-      status: "continue",
-      tape: [".", "b", "c", "b", "a", "."],
-    },
-    {
-      currentState: "is_a",
-      indexOnTape: 4,
-      status: "continue",
-      tape: [".", "b", "c", "b", "a", "."],
-    },
-    {
-      currentState: "go_to_beginning",
-      indexOnTape: 3,
-      status: "continue",
-      tape: [".", "b", "c", "b", ".", "."],
-    },
-    {
-      currentState: "go_to_beginning",
-      indexOnTape: 2,
-      status: "continue",
-      tape: [".", "b", "c", "b", ".", "."],
-    },
-    {
-      currentState: "go_to_beginning",
-      indexOnTape: 1,
-      status: "continue",
-      tape: [".", "b", "c", "b", ".", "."],
-    },
-    {
-      currentState: "go_to_beginning",
-      indexOnTape: 0,
-      status: "continue",
-      tape: [".", "b", "c", "b", ".", "."],
-    },
-    {
-      currentState: "pick_character",
-      indexOnTape: 1,
-      status: "continue",
-      tape: [".", "b", "c", "b", ".", "."],
-    },
-    {
-      currentState: "go_to_end_and_find_b",
-      indexOnTape: 2,
-      status: "continue",
-      tape: [".", ".", "c", "b", ".", "."],
-    },
-    {
-      currentState: "go_to_end_and_find_b",
-      indexOnTape: 3,
-      status: "continue",
-      tape: [".", ".", "c", "b", ".", "."],
-    },
-    {
-      currentState: "go_to_end_and_find_b",
-      indexOnTape: 4,
-      status: "continue",
-      tape: [".", ".", "c", "b", ".", "."],
-    },
-    {
-      currentState: "is_b",
-      indexOnTape: 3,
-      status: "continue",
-      tape: [".", ".", "c", "b", ".", "."],
-    },
-    {
-      currentState: "go_to_beginning",
-      indexOnTape: 2,
-      status: "continue",
-      tape: [".", ".", "c", ".", ".", "."],
-    },
-    {
-      currentState: "go_to_beginning",
-      indexOnTape: 1,
-      status: "continue",
-      tape: [".", ".", "c", ".", ".", "."],
-    },
-    {
-      currentState: "pick_character",
-      indexOnTape: 2,
-      status: "continue",
-      tape: [".", ".", "c", ".", ".", "."],
-    },
-    {
-      currentState: "go_to_end_and_find_c",
-      indexOnTape: 3,
-      status: "continue",
-      tape: [".", ".", ".", ".", ".", "."],
-    },
-    {
-      currentState: "is_c",
-      indexOnTape: 2,
-      status: "continue",
-      tape: [".", ".", ".", ".", ".", "."],
-    },
-    {
-      currentState: "write_is_palindrome",
-      indexOnTape: 3,
-      status: "continue",
-      tape: [".", ".", ".", ".", ".", "."],
-    },
-    {
-      currentState: "HALT",
-      indexOnTape: 4,
-      status: "final",
-      tape: [".", ".", ".", "y", ".", "."],
-    },
-  ],
-};
-
 export const vizMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaAEYAJgA2EniAZgBWAAZUgE54+IAOWIAWWNTUgBoQPijo+IB2EmTCrOim2sLUxuK8gF9uirRMXAJicipaO1YOWC4efiERMRdZQYViZTUNEN19Q0k2EzMLMitbRgcnXalWbywMWDAwgKCQsIiEGNrYkjz41MLo5r5QrJeIJCpVd6gpJZLKpWLpWJZdKFFHI3r9ORDRSjaj2CbsTjcXgCYSicR7ZbyYZKVTqTTMFjbZx7A7mSz0Gx2c47FzXFQmBhgEhYNymIgACluHNO9kcPL2EDAOwAlJ4BlTsZRcXQQlMZsT5mSlpjVjSNvTtD5LvtTGzjtKuXLmVdQkgQE9ggzXtUsiRonlaqlatFamk4f7wYgvu14v74dEQ20aoH0SB1ViRlrxrrCbMSQtyVJKRmzXStlaXKzYJ4AHKqeg2syPQKe1je96NRJZNq1BEldL5eKFSPvWJ5VLfZKhhM5ZJFWIJVPp0047MMvVEuakxYUk3U9ZlhlM61VzzN55et1vYoTwr5PJZO+1Z+pPJ5YeVaqpaLfaLf6IDu+sQAcUS57pqYx4jm0ybvmRq7is+60psR4AEo8DQAAWkDKCwECuG4jbmJ46H3A2Vbnq2rqgG8KQ-qCmTZAURRZLEI5wiQd4-O037ZNkY5gYhEHaviG55oaO5FuBazIRajIAJIQDgYCeAAoqIABGylOtasm6hRboei8V5RKGyRJC+vZwpkC4jjEHHxFkyRxBkvbAcGPR9Gm0mkFmUHrrmBrboWMg+QeKHXAAymADZSpyZw6S4io7JRxk0YgCZ-BZ-woskILItEdkgj+qS-LUBS5G0pVpIJGqZpBOoBTB4nBS4thYRIYBsCI+ESBQmjhXJJCKcpngADJMLwqWXul7yFKGJDPm+yZTrESYjmtvqBjUzmhnk6QtO0tUlqu-mTIFW4Fm1WAdSwXU9RwLD9Q2elHqp5qMHs7WYZ13V4Y9z2ePy9CCsKorEOK8LpOkqrLtSp2NedzVBVdX03T9d1-b1T0Da92jvYeaO3fd-19Zo01tiZCAhtG7QDrEyTpMGj61Bt7SLdk8TpD8oJwrU3bHSufmIwSyOXfBUjfb9D1ky9H1HgAYjFWE4VLmMyzjcuHtcE1TYZLZpeEUbpOZQbBn+Q6-CbeUjsCvrzaUtR1OOPw-LUgvw8LokXXBklsGrJPY89g0hJ40UNrLFPUUb7ywoUi1vukSIhjCMIbVzJAlLkdRcaUJse8Ja5I-q4t+wHWMA7j8tRTF-vo79NBMIqUftpEWQFJnzlzv681dOUn4IMk77fMxuRTkiyLu6mLBN3AYRw4XZ2iyXvshcWpoh0eFYsraRwnI6Fy8h4LdU5EdtJHxMJjq+AbjnZcQ-k5-xDnOSdvs0Bf1SJ0ErxJa9hXjRk29jC73ZPFWUh89iU38AbGaMdIh5G+M+Fo5VSp3nyM+e+wESBP3hN+fmDNgTRE-r5Bq3sxar2NEJGS1cgHyhAYcE+s0z4pAvrCK+Ltb79whJEKc6RJwJByIUAcJsfgkIRuQ3+rUEJ1VLBFRk6F0Y4TAP9dwRF4D6wvNAmOeQAJ+g6NEIe85DFNHvgOBoU4UQJERG+N84ivY-1gn-KhsjN7aBGg8TRVFW4BnMmOBm3ZkzZEKHke+2Q-QwgRA+duRQ-yFHsWQxxLVUZSWoXIuSTD4EPnqP45IgS6jBNCQPM+wJvhjm5k7Go2Q0jxASd-JqUiUl12JhXWWbiFJKU8TArR0c3iRGdg0ZoMSfgm02htBaRRshM3KtzRmWQ6lF2Xk46Rkt67q1JprdpJACYoSJhjQOld6CZL6YzL4LRXyxivsIv48QNppA5sCP4JtHwp2SAspeYkUYS2afs1pmzAEkCVvQFW+Fy4a2DoA45iB+KdwBMCZErEr5s3qNtEM75mi6IRLUryC8v6LM+aXEKYKNkQtoVC94blBkAgKCMuc-MRw1C+IGB8cS-ilDeTinyEiknEnJTEaGiQGaGOAu+No187LZB-PtFICLQQwmfCQvlAFGawu7qKvudlcjx32iGEEMyQLEN6N0IAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaAA4AJhIATgBGAFYEgGYAFnTY2IAGWIB2FKSAGhA+KNikhJJY9IA2PIaU6LyUlPTolMyAX17ytExcAmJyKlo7Vg5YLh5+IRExF1lhhWJlNQ0Q3X1DSTYTMwsyK1tGByd9qVZvLAxYMDCAoJCwiIRIpNjapMyGn5dXK5b6xcqVT5JP4kVoNbINdIpZpddJJfqDOQjRTjaj2KbsTjcXgCYSicQHVbyUZKVTqTTMFi7ZwHI7mSz0Gx2S57Fy3FQmBhgEhYNymIgACnuHPO9kcPIOEDAewAlJ4hlTsZRcXQQjM5sTFmSVpj1jStvTtD5rodTGzTtKuXLmTdQkgQC9ggz3ohYpkYaiOo0ks0MvVCuCoplatk8oUsnlMtFMvk0QMQOqsWMtZNdYT5iSluSpJTM2a6TsrS5WbBPAA5VT0G1mZ6BT2sb2fdJ5dJ1DopQoNBIJzKFJKIiOd9KFEiFX25Nr1eEpdHpk3UnE5hl6okLUnLClrxSbcsMpnW6ueFuvL1uj7-X7RBd5ArpBJxhITyL5HuFAoFBqFJkQEJoUK4ZqaG54rmsw7gWRoHms1LHtsp4AEo8DQAAWkDKCwECuG4TbmJ46GPI21ZXm2rqgB8AEpCQ6Svg03RJMxv6jhOeQwtESSzgkmQdAOSJ-OkYGHlmExQVueYGnuRYyOJZYodoACSEA4GAngAKKiAARhpTrWrSynsBRboem8t5RMxtQJK0QElIBXaDp++R+q0z6ZFCXZeX8fRpuB67ZlJ0wybuhbGohR7GRaLCeAAymAjZSpyFyGS4ip7JRlk0YgUI9CQAFeUBjFNF5n5BjCLSFHEDRFSkCLLgFimQTq0kwfmhr7sWinIbFngADJMLw2U3rlnwIn6qKIvx-a8YUA6flGXEjlOjSZH+jSxE1GJRRJ2r4tunVyS4thYRIYBsCI+ESBQmh9TsakaYNw0QKN7ZWZ8q0zjVPEAVORTlRUPqFLUxSsaicZtH5O2rntpDBW1oUdbJEUHGdmEXVdeEcCwd2NjFOxaeajDo1g50sJd124-jngQKwQoSNITAANZCoFmqSUjBIo+F8FSBjWPU7d92E6exMnmTFNUzjIv0AgTNMNzADaeQALrvdR4R5bOJAOc09SxjUI4Tr69HFAkTTRHV21FG+Ynw61h1hXB3VsILlPYzdeOiyT4t+1LmOe8LPv0J4xBEEwpBOPQbhR9YJAc-tm7I-qfNux7Mve-jD3+5LAvk0HWc05oCssMzKvq5rHZfIBiSWwk-EiVkSRxBOI5+tkbT8Xkwat90-m7RqychTzaeu-JmdeyXBN+9oABiSVYThU8hznYu3ENI3ma2OXawg34wgt+Vwi03aMe3r568U-YAd01vW6BzWO4jzu8xPp2F0Lsuh7nC9YKgDS+EOQPUuqvH+tMt5vR3teD641IjJiSCQaIltWKxDiPCZME5Og-lSBtX0XY1pPyHqWJ20Fx5dUnl-YOEDfYnluIlRsctq6fUiHZP0v08hDl4o3Rupsmi9jqkVZiHRuwO2HgjLmb8KEnUDt-bOdCTIJSSu7ahl0aBMEVCw+BCQ4h1GmtUJMgF0EpAnF0P0j5ch1SnEOEC-Q0wsE0XAMISdJEHXIbBShkUJF-0ZJWFktoThnEdFcXkHhtH70iK+eiPdVoZEtrOaIn5eI9jiMGNoXQoTRFRNEcRpDX4eOOmjHq8NfFnirIE9kqVZShIOHA90u8xr7yyMgryb5AIoI6axZJcZkHVG+N8V8yZ755IggU9qMjikKVKRvPx8pjCBIiR8BBNREgbTiUxRJS1cgzhqC0VuxVEzFFGUFKRhTUb82mT42ZJB0KFxwmAHG7giLwBgVRDs3RUmzliI1R8WQ+HA0hK0OoBDYS2OyXkXJz8JFkImZ42RJTrlz0ZE9J4by97LLiLUBqORRxpJsUkwFX4oQkEhWkAS7QkyIihSQsZZy4VFMuSWU0villRE+VVXFrdqgEs-P2ei95WIFHyAmboJzObuIZRcjOajp5yzKaitlE0aoMWSLo9BTRcUfkBUUHsZshwLTaBChI4qR7cyOtKqh0s5W-xuRLFCciaEKPoEqqJkKSC8QAgiBIPxLYNFNqkGcUZGJZAEq+UMpq3EpzHvCqZ4DnVlMXvQZe+F40z1ZeippHw0jxHqMbHyPrG5gh1SOGcJReJJmSDxf8kbYWp1jZctN8qbnzwAUAtgIDCZgNlWvTQrqijTkTBqroSYCjBnDICgESDmKMWyVGOqiDa3jPrYymV1re2z3oVrCyWaoi-niK+GocRrbdjthOP48Riivi4QCKGv4GhLvpSu4krrgzNH0WOQxHcTGflnD2ICs4WgCSKN2GlcMJGvu7FxPNOQDnGO6L+y2etkw2RA6OBoqZ+hAA */
   createMachine(
     {
       context: {
@@ -185,6 +41,11 @@ export const vizMachine =
           | { type: "Set input"; input: string }
           | { type: "Set machine code"; machineCode: string }
           | { type: "Load" },
+        services: {} as {
+          "Execute machine and input on server": {
+            data: MachineExecution;
+          };
+        },
       },
       initial: "Application is ready",
       states: {
@@ -254,6 +115,9 @@ export const vizMachine =
                 "Set automatic playing delay": {
                   actions: "Assign automatic playing delay to context",
                 },
+                Load: {
+                  target: ".Idle",
+                },
               },
             },
             "Managing machine and input execution": {
@@ -268,18 +132,34 @@ export const vizMachine =
                 },
                 "Executing machine and input": {
                   entry: "Cache input and machine code into context",
-                  after: {
-                    "2000": {
-                      actions: [
-                        "Exit loading state from submit button",
-                        "Assign machine execution to context",
-                      ],
-                      target: "Fetched machine and input execution",
-                    },
+                  exit: "Exit loading state from submit button",
+                  invoke: {
+                    src: "Execute machine and input on server",
+                    onDone: [
+                      {
+                        actions: [
+                          "Assign machine execution to context",
+                          "Reset step index",
+                        ],
+                        target: "Fetched machine and input execution",
+                      },
+                    ],
+                    onError: [
+                      {
+                        target: "Failed to execute machine and input",
+                      },
+                    ],
                   },
                 },
                 "Fetched machine and input execution": {
                   entry: "Allow to play execution steps",
+                  on: {
+                    Load: {
+                      target: "Executing machine and input",
+                    },
+                  },
+                },
+                "Failed to execute machine and input": {
                   on: {
                     Load: {
                       target: "Executing machine and input",
@@ -334,7 +214,7 @@ export const vizMachine =
           lastLoadingMachineCode: (context) => context.machineCode,
         }),
         "Assign machine execution to context": assign({
-          machineExecution: (context) => exec,
+          machineExecution: (_, { data }) => data,
         }),
       },
       delays: {
@@ -352,6 +232,24 @@ export const vizMachine =
       },
       services: {
         "Start submit button machine": submitButtonMachine,
-      }
+        "Execute machine and input on server": async ({
+          input,
+          machineCode,
+        }) => {
+          const response = await fetch(
+            "http://localhost:8080/execute-machine",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                input,
+                machineConfig: JSON.parse(machineCode),
+              }),
+            }
+          );
+          const rawResponseBody = await response.json();
+
+          return rawResponseBody as MachineExecution;
+        },
+      },
     }
   );
