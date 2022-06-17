@@ -19,7 +19,24 @@ main([SubCommand | SubCommandArgs]) ->
         "run" ->
             cli:run_cli_command(SubCommandArgs);
         "serve" ->
-            io:format("Server starting~n");
+            {ok, _} = application:ensure_all_started(cowboy),
+
+            Dispatch = cowboy_router:compile([
+                {<<"localhost">>, [
+                    {<<"/execute-machine">>, execute_machine_handler, []}
+                ]}
+            ]),
+
+            {ok, _} = cowboy:start_clear(
+                ping_listener,
+                [{port, 8080}],
+                #{env => #{dispatch => Dispatch}}
+            ),
+            io:format("Server starting~n"),
+            receive
+                quit ->
+                    ok = cowboy:stop_listener(http)
+            end;
         _ ->
             print_usage()
     end,

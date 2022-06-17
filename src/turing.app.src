@@ -6,7 +6,8 @@
         kernel,
         stdlib,
         jsone,
-        getopt
+        getopt,
+        cowboy
     ]},
     {env, []},
     {modules, []},
