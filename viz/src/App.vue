@@ -3,35 +3,177 @@ import { useMachine } from "@xstate/vue";
 import { computed } from "vue";
 import TheTape from "./components/TheTape.vue";
 import { vizMachine } from "./machines/viz";
-import { AutomaticPlayingDelayMode, Steps } from "./types";
+import {
+  AutomaticPlayingDelayMode,
+  MachineExecution,
+  PlayingStatus,
+} from "./types";
 
-const blankCharacter = ".";
-const steps: Steps = [
-  [["0", "0", "1", "1"], 0],
-  [[".", "0", "1", "1"], 1],
-  [[".", "0", "1", "1"], 2],
-  [[".", "0", "1", "1"], 3],
-  [[".", "0", "1", "1", "."], 4],
-  [[".", "0", "1", "1", "."], 3],
-  [[".", "0", "1", ".", "."], 2],
-  [[".", "0", "1", ".", "."], 1],
-  [[".", "0", "1", ".", "."], 0],
-  [[".", "0", "1", ".", "."], 1],
-  [[".", ".", "1", ".", "."], 2],
-  [[".", ".", "1", ".", "."], 3],
-  [[".", ".", "1", ".", "."], 2],
-  [[".", ".", ".", ".", "."], 1],
-  [[".", ".", ".", ".", "."], 2],
-  [[".", ".", "y", ".", "."], 1],
-];
+const exec: MachineExecution = {
+  blank: ".",
+  tapeHistory: [
+    {
+      currentState: "pick_character",
+      indexOnTape: 0,
+      status: "continue",
+      tape: ["a", "b", "c", "b", "a"],
+    },
+    {
+      currentState: "go_to_end_and_find_a",
+      indexOnTape: 1,
+      status: "continue",
+      tape: [".", "b", "c", "b", "a"],
+    },
+    {
+      currentState: "go_to_end_and_find_a",
+      indexOnTape: 2,
+      status: "continue",
+      tape: [".", "b", "c", "b", "a"],
+    },
+    {
+      currentState: "go_to_end_and_find_a",
+      indexOnTape: 3,
+      status: "continue",
+      tape: [".", "b", "c", "b", "a"],
+    },
+    {
+      currentState: "go_to_end_and_find_a",
+      indexOnTape: 4,
+      status: "continue",
+      tape: [".", "b", "c", "b", "a"],
+    },
+    {
+      currentState: "go_to_end_and_find_a",
+      indexOnTape: 5,
+      status: "continue",
+      tape: [".", "b", "c", "b", "a", "."],
+    },
+    {
+      currentState: "is_a",
+      indexOnTape: 4,
+      status: "continue",
+      tape: [".", "b", "c", "b", "a", "."],
+    },
+    {
+      currentState: "go_to_beginning",
+      indexOnTape: 3,
+      status: "continue",
+      tape: [".", "b", "c", "b", ".", "."],
+    },
+    {
+      currentState: "go_to_beginning",
+      indexOnTape: 2,
+      status: "continue",
+      tape: [".", "b", "c", "b", ".", "."],
+    },
+    {
+      currentState: "go_to_beginning",
+      indexOnTape: 1,
+      status: "continue",
+      tape: [".", "b", "c", "b", ".", "."],
+    },
+    {
+      currentState: "go_to_beginning",
+      indexOnTape: 0,
+      status: "continue",
+      tape: [".", "b", "c", "b", ".", "."],
+    },
+    {
+      currentState: "pick_character",
+      indexOnTape: 1,
+      status: "continue",
+      tape: [".", "b", "c", "b", ".", "."],
+    },
+    {
+      currentState: "go_to_end_and_find_b",
+      indexOnTape: 2,
+      status: "continue",
+      tape: [".", ".", "c", "b", ".", "."],
+    },
+    {
+      currentState: "go_to_end_and_find_b",
+      indexOnTape: 3,
+      status: "continue",
+      tape: [".", ".", "c", "b", ".", "."],
+    },
+    {
+      currentState: "go_to_end_and_find_b",
+      indexOnTape: 4,
+      status: "continue",
+      tape: [".", ".", "c", "b", ".", "."],
+    },
+    {
+      currentState: "is_b",
+      indexOnTape: 3,
+      status: "continue",
+      tape: [".", ".", "c", "b", ".", "."],
+    },
+    {
+      currentState: "go_to_beginning",
+      indexOnTape: 2,
+      status: "continue",
+      tape: [".", ".", "c", ".", ".", "."],
+    },
+    {
+      currentState: "go_to_beginning",
+      indexOnTape: 1,
+      status: "continue",
+      tape: [".", ".", "c", ".", ".", "."],
+    },
+    {
+      currentState: "pick_character",
+      indexOnTape: 2,
+      status: "continue",
+      tape: [".", ".", "c", ".", ".", "."],
+    },
+    {
+      currentState: "go_to_end_and_find_c",
+      indexOnTape: 3,
+      status: "continue",
+      tape: [".", ".", ".", ".", ".", "."],
+    },
+    {
+      currentState: "is_c",
+      indexOnTape: 2,
+      status: "continue",
+      tape: [".", ".", ".", ".", ".", "."],
+    },
+    {
+      currentState: "write_is_palindrome",
+      indexOnTape: 3,
+      status: "continue",
+      tape: [".", ".", ".", ".", ".", "."],
+    },
+    {
+      currentState: "HALT",
+      indexOnTape: 4,
+      status: "final",
+      tape: [".", ".", ".", "y", ".", "."],
+    },
+  ],
+};
 
 const { state, send } = useMachine(vizMachine, {
   guards: {
     "Has reached end of steps": (context) =>
-      context.stepIndex >= steps.length - 1,
+      context.stepIndex >= exec.tapeHistory.length - 1,
   },
 });
 const indexOnStepList = computed(() => state.value.context.stepIndex);
+const playingStatus = computed<PlayingStatus>(() => {
+  if (state.value.matches("Playing steps.Automatic playing off")) {
+    return "paused";
+  }
+
+  if (state.value.matches("Playing steps.Automatic playing on")) {
+    return "playing";
+  }
+
+  return "disabled";
+});
+const automaticPlayingDelayMode = computed(
+  () => state.value.context.automaticPlayingDelayMode
+);
 
 function handlePlay() {
   send({
@@ -86,9 +228,11 @@ function handleResetSteps() {
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="px-4 py-8 space-y-10 sm:px-0">
             <TheTape
-              :steps="steps"
-              :blank-character="blankCharacter"
+              :steps="exec.tapeHistory"
+              :blank-character="exec.blank"
               :index-on-step-list="indexOnStepList"
+              :playing-status="playingStatus"
+              :automatic-playing-delay-mode="automaticPlayingDelayMode"
               :on-play="handlePlay"
               :on-pause="handlePause"
               :on-next-step="handleNextStep"
@@ -97,7 +241,6 @@ function handleResetSteps() {
               "
               :on-reset-steps="handleResetSteps"
             />
-            <p>Controls</p>
           </div>
         </div>
       </main>
