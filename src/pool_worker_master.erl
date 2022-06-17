@@ -1,5 +1,6 @@
 -module(pool_worker_master).
--define(WORKER_NUMBER, 4).
+% using list_to_integer as command line env variable declaration looks to set string
+-define(WORKER_NUMBER, list_to_integer(os:getenv("WORKER_NUMBER", "4"))).
 
 -export([init_pool_worker_master/0, find_worker_for_machine_execution/5]).
 

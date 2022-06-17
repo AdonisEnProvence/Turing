@@ -180,6 +180,9 @@ init(Req0, State) ->
                 {error, halting_issue} ->
                     Req = reply_error(Req0, "Machine too long to be executed, autokill.\n"),
                     {ok, Req, State};
+                {error, could_not_find_available_actor} ->
+                    Req = reply_error(Req0, "Could not find available actor.\n"),
+                    {ok, Req, State};
                 {error, FormattedError} ->
                     Req = reply_error(Req0, FormattedError),
                     {ok, Req, State}
