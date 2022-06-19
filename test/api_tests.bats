@@ -89,9 +89,7 @@ EOF'
  }
 }, "input":"000"}
 EOF'
-    assert_output 'Error occured during machine configuration parsing:
-
-machine has no initial state; a machine must have a non-empty initial state'
+    assert_output '{"reason":"Error occured during machine configuration parsing:\n\nmachine has no initial state; a machine must have a non-empty initial state\n"}'
 }
 
 
@@ -126,9 +124,7 @@ machine has no initial state; a machine must have a non-empty initial state'
  }
 }, "input":"000"}
 EOF'
-    assert_output 'Error occured during machine configuration validation:
-
-machine transition 0 of "one" has not alphabet character read operation target (received: 1); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target'
+    assert_output '{"reason":"Error occured during machine configuration validation:\n\nmachine transition 0 of \"one\" has not alphabet character read operation target (received: 1); machine transitions must be scoped to a listed state, must only contain unique read character per transition and a listed to_state target\n"}'
 }
 
 @test "Failure halting problem infinite machine" {
@@ -162,7 +158,7 @@ machine transition 0 of "one" has not alphabet character read operation target (
  }
 }, "input":"000"}
 EOF'
-    assert_output 'Machine too long to be executed, autokill.'
+    assert_output '{"reason":"Machine too long to be executed, autokill.\n"}'
 }
 
 @test "Failure Body is invalid" {
@@ -196,7 +192,7 @@ EOF'
  }
 }}
 EOF'
-    assert_output 'Body is invalid'
+    assert_output '{"reason":"Body is invalid"}'
 }
 
 @test "Failure input is invalid" {
@@ -230,5 +226,5 @@ EOF'
  }
 }, "input":"0001"}
 EOF'
-    assert_output 'Character "1" is not in the alphabet'
+    assert_output '{"reason":"Character \"1\" is not in the alphabet\n"}'
 }
