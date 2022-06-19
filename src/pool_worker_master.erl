@@ -9,12 +9,10 @@ find_worker_for_machine_execution(0, 3, _WorkerPidList, _MachineConfigToExecute,
 find_worker_for_machine_execution(
     0, RetryCounter, WorkerPidList, MachineConfigToExecute, ReqActorPid
 ) ->
-    receive
-    after 1000 ->
-        find_worker_for_machine_execution(
-            ?WORKER_NUMBER, RetryCounter + 1, WorkerPidList, MachineConfigToExecute, ReqActorPid
-        )
-    end;
+    timer:sleep(1000),
+    find_worker_for_machine_execution(
+        ?WORKER_NUMBER, RetryCounter + 1, WorkerPidList, MachineConfigToExecute, ReqActorPid
+    );
 find_worker_for_machine_execution(
     WorkerIndex, RetryCounter, WorkerPidList, MachineConfigToExecute, ReqActorPid
 ) ->
@@ -31,9 +29,16 @@ find_worker_for_machine_execution(
     end.
 
 init_pool_worker_master() ->
-    init_pool_worker_master(?WORKER_NUMBER, []).
+    spawn_pool_worker(?WORKER_NUMBER, []).
 
-init_pool_worker_master(0, WorkerPidList) ->
+spawn_pool_worker(0, WorkerPidList) ->
+    pool_worker_master_loop(WorkerPidList);
+spawn_pool_worker(Index, WorkerPidList) ->
+    PoolMasterWorkerPid = self(),
+    NewWorkerPid = spawn(pool_worker, init_pool_worker, [PoolMasterWorkerPid]),
+    spawn_pool_worker(Index - 1, [NewWorkerPid | WorkerPidList]).
+
+pool_worker_master_loop(WorkerPidList) ->
     receive
         {execute_machine_request, {ReqActorPid, MachineConfigToExecute}} ->
             spawn(?MODULE, find_worker_for_machine_execution, [
@@ -42,8 +47,4 @@ init_pool_worker_master(0, WorkerPidList) ->
         {finished_machine_execution, {ReqActorPid, MachineExecutionResponse}} ->
             ReqActorPid ! {result, MachineExecutionResponse}
     end,
-    init_pool_worker_master(0, WorkerPidList);
-init_pool_worker_master(Index, WorkerPidList) ->
-    PoolMasterWorkerPid = self(),
-    NewWorkerPid = spawn(pool_worker, init_pool_worker, [PoolMasterWorkerPid]),
-    init_pool_worker_master(Index - 1, [NewWorkerPid | WorkerPidList]).
+    pool_worker_master_loop(WorkerPidList).
