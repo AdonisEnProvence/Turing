@@ -55,5 +55,6 @@ teardown() {
  }
 }, "input":"000"}
 EOF'
-    assert_output 'Could not find available actor.'
+
+    assert_output '{"reason":"Could not find available actor.\n"}'
 }
