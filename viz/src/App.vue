@@ -13,6 +13,7 @@ import { SubmitButtonActorRef } from "./machines/submit-button";
 import { AutomaticPlayingDelayMode, PlayingStatus } from "./types";
 import AppCodeEditor from "./components/AppCodeEditor.vue";
 import AppBadge from "./components/AppBadge.vue";
+import TheMachineConfiguration from "./components/TheMachineConfiguration.vue";
 
 const { state, send } = useMachine(vizMachine);
 const indexOnStepList = computed(() => state.value.context.stepIndex);
@@ -141,13 +142,17 @@ function handleResetSteps() {
   });
 }
 
+function setInput(input: string) {
+  send({
+    type: "Set input",
+    input,
+  });
+}
+
 function handleInputTextFieldChange(event: Event) {
   const target = event.target as HTMLInputElement;
 
-  send({
-    type: "Set input",
-    input: target.value,
-  });
+  setInput(target.value);
 }
 
 function handleMachineCodeChange(machineCode: string) {
@@ -297,10 +302,10 @@ const { state: submitButtonState, send: submitButtonSend } = useActor(
                 <div>
                   <p class="block text-sm font-medium text-gray-700">Machine</p>
 
-                  <AppCodeEditor
+                  <TheMachineConfiguration
                     :code="state.context.machineCode"
-                    class="mt-1 h-96"
-                    @update:code="handleMachineCodeChange"
+                    :on-code-change="handleMachineCodeChange"
+                    :on-input-change="setInput"
                   />
                 </div>
 
