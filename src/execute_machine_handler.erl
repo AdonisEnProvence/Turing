@@ -87,14 +87,29 @@ parse_validate_and_execute(RawMachineConfig, RawInput) ->
             {error, FormattedError}
     end.
 
+encode_reply_error_response_body(Message) ->
+    jsone:try_encode(#{
+        <<"reason">> => list_to_binary(Message)
+    }).
+
 reply_error(Req0, Message) ->
-    Req = cowboy_req:reply(
-        400,
-        #{<<"content-type">> => <<"text/plain">>},
-        list_to_binary(Message),
-        Req0
-    ),
-    Req.
+    EncodedResult = encode_reply_error_response_body(Message),
+    case EncodedResult of
+        {ok, EncodedResponseBody} ->
+            Req = cowboy_req:reply(
+                400,
+                #{<<"content-type">> => <<"application/json">>},
+                EncodedResponseBody,
+                Req0
+            ),
+            Req;
+        {error, _Error} ->
+            Req = cowboy_req:reply(
+                500,
+                Req0
+            ),
+            Req
+    end.
 
 encode_response_body(ResponseBodyRecord) ->
     TapeHistoryRecordList = ResponseBodyRecord#execute_machine_response.tapeHistory,
