@@ -4,9 +4,13 @@
 
     $ rebar3 escriptize
 
-## Run
+## Run CLI
 
-    $ _build/default/bin/turing
+    $ _build/default/bin/turing run machine-config.json "YOUR_INPUT"
+
+## Start server
+
+    $ _build/default/bin/turing serve
 
 ## Test
 
@@ -48,3 +52,7 @@ Run
 ```sh
 ./bats-core/bin/bats test/
 ```
+
+## Run the visualizer in local
+
+[See Visualizer setup →](/viz/README.md)

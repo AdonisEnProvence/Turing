@@ -72,9 +72,57 @@ To do so you can use the following flag:
 
 ![Turing machine execution with color flag enabled ](docs/execute-machine-with-color.png)
 
+## Universal Turing Machine
+
+> In computer science, a universal Turing machine (UTM) is a Turing machine that simulates an arbitrary Turing machine on arbitrary input.
+> [Wikipedia](https://en.wikipedia.org/wiki/Universal_Turing_machine)
+
+To say that we have to implement a machine configuration that allow the input to describe its own transitions and states.
+
+### The input
+
+An utm input will be composed as follows:  
+`Initial-state~State_1{[Read To_State Action Write][Read To_State Action Write]...}...&Input`  
+Where `{}` are state definition closure and `[]` are state transitions closure
+`~` the initial state separator and `&` the input beginning
+
+Example:
+
+```bash
+./turing utm-config.json "S~S{[0S>_][1H<1]}&001"
+```
+
+### An Universal Turing Machine config
+
+The UTM configuration must store by its definition the possible transitions that would be allowed inside the input.
+For example, you can find the UTM that allows to run the above `02n.json` here:
+
+[our-machines/02n_utm.json →](/our-machines/02n_utm.json)
+
+Finally, you can run the `02n` UTM machine as following:
+
+```bash
+./_build/default/bin/turing our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00"
+Interpreter starting...
+# ...
+[E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00<^>] (execute-transition-H_<_y, ^) -> (HALT, y, left)
+[E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&0<0>y] Final state reached !
+Interpreter closing...
+```
+
+As building UTM configuration is a pain, we've implemented tools that allow the user to generate any kind of UTM he needs.  
+The UTM generator script requires the following input to be building the `02n_utm.json`
+
+```json
+{
+  "inputCharacters": ["0", "y", "n"],
+  "states": ["E", "P"]
+}
+```
+
 ## Docs
 
-You can find more details about running the project in local and the technical details in below files:
+You can find more details about running the project in local and the technical details in files below:
 
 [See technical details →](docs/technical.md)
 

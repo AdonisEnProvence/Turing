@@ -12,23 +12,7 @@ Inside the client we're using:
 - [tailwindcss](https://tailwindcss.com/)
 - [ace](https://ace.c9.io/)
 
-## Universal Turing Machine
-
-> In computer science, a universal Turing machine (UTM) is a Turing machine that simulates an arbitrary Turing machine on arbitrary input.
-> [Wikipedia](https://en.wikipedia.org/wiki/Universal_Turing_machine)
-
-### The input
-
-An utm input will be composed as follows:
-`Initial-state~State_1{[Read To_State Action Write][Read To_State Action Write]...}...&Input`  
-Where `{}` are state definition closure and `[]` are state transitions closure
-`~` the initial state separator and `&` the input beginning
-
-Example:
-
-```bash
-./turing utm-config.json "S~S{[0S>_][1H<1]}&001"
-```
+## Universal Turing Machine tools
 
 #### Input translator script
 
@@ -42,8 +26,6 @@ node universal_turing_machine_generator/machine_to_input_declaration.js our-mach
 ```
 
 _Important note:_ the script does neither parse nor validate the arg file. We recommend passing a working classic machine config.
-
-### The machine config
 
 #### Utm generator script
 
