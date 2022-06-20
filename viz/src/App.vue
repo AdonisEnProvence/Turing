@@ -5,7 +5,7 @@ import {
   ArrowNarrowRightIcon,
   CheckIcon,
   XCircleIcon,
-  XIcon
+  XIcon,
 } from "@heroicons/vue/solid";
 import TheTape from "./components/TheTape.vue";
 import { vizMachine } from "./machines/viz";
@@ -17,6 +17,14 @@ import AppBadge from "./components/AppBadge.vue";
 const { state, send } = useMachine(vizMachine);
 const indexOnStepList = computed(() => state.value.context.stepIndex);
 const playingStatus = computed<PlayingStatus>(() => {
+  if (
+    state.value.matches(
+      "Application is ready.Managing visualizer execution.Idle"
+    )
+  ) {
+    return "not-started";
+  }
+
   if (
     state.value.matches(
       "Application is ready.Managing visualizer execution.Playing steps.Automatic playing off"
@@ -233,7 +241,9 @@ const { state: submitButtonState, send: submitButtonSend } = useActor(
 
                       <div class="mt-2 text-sm text-red-700">
                         <ul role="list" class="pl-5 space-y-1 list-disc">
-                          <li class="whitespace-pre-line">{{ errorToDisplay }}</li>
+                          <li class="whitespace-pre-line">
+                            {{ errorToDisplay }}
+                          </li>
                         </ul>
                       </div>
                     </div>
