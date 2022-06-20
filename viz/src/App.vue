@@ -1,7 +1,12 @@
 <script lang="ts" setup>
 import { useActor, useMachine } from "@xstate/vue";
 import { computed } from "vue";
-import { ArrowNarrowRightIcon, CheckIcon } from "@heroicons/vue/solid";
+import {
+  ArrowNarrowRightIcon,
+  CheckIcon,
+  XCircleIcon,
+  XIcon
+} from "@heroicons/vue/solid";
 import TheTape from "./components/TheTape.vue";
 import { vizMachine } from "./machines/viz";
 import { SubmitButtonActorRef } from "./machines/submit-button";
@@ -62,6 +67,39 @@ const blankCharacter = computed(() => {
   }
 
   return state.value.context.machineExecution?.blank;
+});
+
+const hasServerExecutionErrorOccured = computed(
+  () =>
+    state.value.matches(
+      "Application is ready.Managing machine and input execution.Failed to execute machine and input"
+    ) === true
+);
+const errorToDisplay = computed(() => {
+  const isMachineConfigurationInvalidJSON =
+    state.value.matches(
+      "Application is ready.Managing machine and input execution.Failed to execute machine and input.Invalid machine configuration"
+    ) === true;
+  if (isMachineConfigurationInvalidJSON === true) {
+    return "Machine configuration must be valid JSON";
+  }
+
+  const isUnknownServerError =
+    state.value.matches(
+      "Application is ready.Managing machine and input execution.Failed to execute machine and input.Unknown server error"
+    ) === true;
+  if (isUnknownServerError === true) {
+    return "Unknown server error";
+  }
+
+  const isKnownServerError = state.value.matches(
+    "Application is ready.Managing machine and input execution.Failed to execute machine and input.Known server error"
+  );
+  if (isKnownServerError === true) {
+    return state.value.context.serverExecutionError;
+  }
+
+  return undefined;
 });
 
 function handlePlay() {
@@ -176,6 +214,32 @@ const { state: submitButtonState, send: submitButtonSend } = useActor(
               </div>
 
               <div class="px-4 py-5 space-y-6 sm:px-6">
+                <div
+                  v-if="hasServerExecutionErrorOccured === true"
+                  class="p-4 rounded-md bg-red-50"
+                >
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <XCircleIcon
+                        class="w-5 h-5 text-red-400"
+                        aria-hidden="true"
+                      />
+                    </div>
+
+                    <div class="ml-3">
+                      <h3 class="text-sm font-medium text-red-800">
+                        An error occured during machine execution
+                      </h3>
+
+                      <div class="mt-2 text-sm text-red-700">
+                        <ul role="list" class="pl-5 space-y-1 list-disc">
+                          <li class="whitespace-pre-line">{{ errorToDisplay }}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <label
                     for="input"
@@ -215,6 +279,8 @@ const { state: submitButtonState, send: submitButtonSend } = useActor(
                       'transition-opacity inline-flex items-center px-4 py-2 text-sm font-medium border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
                       submitButtonState.matches('Success')
                         ? 'text-green-800 bg-green-100 focus:ring-green-500'
+                        : submitButtonState.matches('Error')
+                        ? 'text-red-800 bg-red-100 focus:ring-red-500'
                         : 'text-yellow-800 bg-yellow-100 hover:bg-yellow-200 focus:ring-yellow-500',
                     ]"
                     @click="submitButtonSend({ type: 'Load' })"
@@ -271,6 +337,16 @@ const { state: submitButtonState, send: submitButtonSend } = useActor(
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                           ></path>
                         </svg>
+                      </span>
+
+                      <span
+                        v-else-if="submitButtonState.matches('Error') === true"
+                        key="error"
+                        class="inline-flex items-center"
+                      >
+                        Failed
+
+                        <XIcon class="w-5 h-5 ml-3 -mr-1 text-red-500" />
                       </span>
 
                       <span

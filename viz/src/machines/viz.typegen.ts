@@ -11,9 +11,12 @@ export interface Typegen0 {
     "Assign input to context": "Set input";
     "Assign machine code to context": "Set machine code";
     "Assign machine execution to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
-    "Exit loading state from submit button": "xstate.init";
+    "Assign execution server error to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
     "Cache input and machine code into context": "Load";
+    "Reset execution server error": "Load";
     "Allow to play execution steps": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+    "Exit loading state from submit button": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+    "Enter error state from submit button": "xstate.init";
   };
   internalEvents: {
     "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on": {
@@ -52,6 +55,8 @@ export interface Typegen0 {
   };
   eventsCausingGuards: {
     "Has reached end of steps": "";
+    "Machine configuration is not valid JSON": "Load";
+    "Is valid machine execution": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
   };
   eventsCausingDelays: {
     "automatic playing delay": "xstate.init";
@@ -75,6 +80,9 @@ export interface Typegen0 {
     | "Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state.Reached end of delay"
     | "Application is ready.Managing machine and input execution.Fetched machine and input execution"
     | "Application is ready.Managing machine and input execution.Failed to execute machine and input"
+    | "Application is ready.Managing machine and input execution.Failed to execute machine and input.Known server error"
+    | "Application is ready.Managing machine and input execution.Failed to execute machine and input.Unknown server error"
+    | "Application is ready.Managing machine and input execution.Failed to execute machine and input.Invalid machine configuration"
     | {
         "Application is ready"?:
           | "Managing visualizer execution"
@@ -106,6 +114,10 @@ export interface Typegen0 {
                             | "Pending"
                             | "Reached end of delay";
                         };
+                    "Failed to execute machine and input"?:
+                      | "Known server error"
+                      | "Unknown server error"
+                      | "Invalid machine configuration";
                   };
             };
       };
