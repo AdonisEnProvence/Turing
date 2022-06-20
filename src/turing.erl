@@ -30,7 +30,13 @@ main([SubCommand | SubCommandArgs]) ->
             {ok, _} = cowboy:start_clear(
                 ping_listener,
                 [{port, 8080}],
-                #{env => #{dispatch => Dispatch}}
+                #{
+                    % cowboy_router and cowboy_handler are the default
+                    % middlewares for a cowboy application.
+                    % We need to set them when overriding middlewares list.
+                    middlewares => [cors_middleware, cowboy_router, cowboy_handler],
+                    env => #{dispatch => Dispatch}
+                }
             ),
             io:format("Server starting~n"),
             receive
