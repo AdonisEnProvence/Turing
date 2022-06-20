@@ -381,19 +381,16 @@ export const vizMachine =
           input,
           machineCode,
         }) => {
-          const response = await fetch(
-            "http://localhost:8080/execute-machine",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                input,
-                machineConfig: JSON.parse(machineCode),
-              }),
-            }
-          );
+          const response = await fetch(toApiUrl("/execute-machine"), {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              input,
+              machineConfig: JSON.parse(machineCode),
+            }),
+          });
           const rawResponseBody = await response.json();
 
           assertIsServerResponseForMachineExecution(rawResponseBody);
@@ -403,3 +400,12 @@ export const vizMachine =
       },
     }
   );
+
+function toApiUrl(route: string): string {
+  const routeDoesNotStartWithSlash = route.startsWith("/") === false;
+  if (routeDoesNotStartWithSlash === true) {
+    throw new Error('route must start with "/"');
+  }
+
+  return `${import.meta.env.VITE_APP_URL}${route}`;
+}
