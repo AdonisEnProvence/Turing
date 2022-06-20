@@ -26,7 +26,7 @@ interface TapeStepWithKeyForEachSquare extends Omit<TapeStep, "tape"> {
 const EMPTY_STEP: TapeStep = {
   currentState: "None",
   indexOnTape: 0,
-  status: "blocked",
+  status: "none",
   tape: ["-"],
 };
 
@@ -57,7 +57,10 @@ const addedBlankSpace = squaresAmountOnOneSideOfHead;
  * We add enough blank squares to all steps so that
  * there will always be the same amount of squares on the tape.
  */
-function fillStepsWithBlankSpacesOnSides(steps: TapeStep[], blank: string): TapeStep[] {
+function fillStepsWithBlankSpacesOnSides(
+  steps: TapeStep[],
+  blank: string
+): TapeStep[] {
   return steps.map(({ tape, ...props }) => ({
     tape: [
       ...Array.from({ length: addedBlankSpace }).map(() => blank),
@@ -69,7 +72,10 @@ function fillStepsWithBlankSpacesOnSides(steps: TapeStep[], blank: string): Tape
 }
 
 const steps = computed(() =>
-  fillStepsWithBlankSpacesOnSides(props.steps ?? [EMPTY_STEP], props.blankCharacter ?? "-")
+  fillStepsWithBlankSpacesOnSides(
+    props.steps ?? [EMPTY_STEP],
+    props.blankCharacter ?? "-"
+  )
 );
 
 function computeTapeListWithFixedKeys(steps: TapeStep[]) {
@@ -125,6 +131,7 @@ const stateOfExecutionBadgeStatus = computed(() => {
     continue: "pending",
     blocked: "error",
     final: "success",
+    none: "error",
   };
 
   return badgeStatus[stateOfExecution.value];
@@ -134,10 +141,16 @@ const prettyStateOfExecution = computed(() => {
     continue: "Running",
     blocked: "Blocked",
     final: "Reached final state",
+    none: "Not loaded",
   };
 
   return prettyNames[stateOfExecution.value];
 });
+const disablePlayingControls = computed(
+  () =>
+    props.playingStatus === "disabled" || props.playingStatus === "not-started"
+);
+const disableRestartControl = computed(() => props.playingStatus !== "disabled");
 
 const displayedTape = computed(() => {
   return tape.value.slice(
@@ -222,7 +235,7 @@ function handleAutomaticPlayingDelayMode() {
 
       <div class="flex items-center mx-auto space-x-6">
         <button
-          :disabled="playingStatus === 'disabled'"
+          :disabled="disablePlayingControls"
           :aria-label="playingStatus === 'playing' ? 'Pause' : 'Play'"
           @click="handlePlayPauseButtonClick"
           class="flex items-center justify-center w-10 h-10 rounded-full"
@@ -235,6 +248,7 @@ function handleAutomaticPlayingDelayMode() {
         </button>
 
         <button
+          :disabled="disablePlayingControls"
           aria-label="Go to next step"
           @click="props.onNextStep"
           class="flex items-center justify-center w-8 h-8 rounded-full"
@@ -268,6 +282,7 @@ function handleAutomaticPlayingDelayMode() {
         </button>
 
         <button
+          :disabled="disableRestartControl"
           aria-label="Restart execution"
           @click="props.onResetSteps"
           class="flex items-center justify-center w-8 h-8 rounded-full"

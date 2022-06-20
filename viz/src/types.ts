@@ -1,4 +1,4 @@
-export type StatusOfExecution = "continue" | "blocked" | "final";
+export type StatusOfExecution = "continue" | "blocked" | "final" | "none";
 
 export interface TapeStep {
   currentState: string;
@@ -14,4 +14,4 @@ export interface MachineExecution {
 
 export type AutomaticPlayingDelayMode = "MEDIUM" | "FAST";
 
-export type PlayingStatus = "playing" | "paused" | "disabled";
+export type PlayingStatus = "playing" | "paused" | "disabled" | "not-started";
