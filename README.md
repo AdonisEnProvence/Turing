@@ -22,11 +22,12 @@ You can visualize code coverage, and which lines of code are not tested, by open
 
 ## Dockerfile
 
-Follow those steps to launch a Docker container with Erlang installed.
+Follow those steps to launch a local Docker container with Erlang installed.
 
 ```sh
 # Build an image defined in the `Dockerfile` of `.` directory and name it `turing`.
-docker build -t turing .
+
+docker build -f Dockerfile.local -t turing .
 
 # Run the image named `turing`, attach local directory to /turing directory in the container, thanks to volumes.
 # If we change files on our computer, the changes will be reflected in the container.
