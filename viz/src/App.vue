@@ -43,6 +43,26 @@ const isConfigurationStale = computed(() => {
 
   return input !== lastLoadingInput || machineCode !== lastLoadingMachineCode;
 });
+const isExecutingInputAndMachine = computed(
+  () =>
+    state.value.matches(
+      "Application is ready.Managing machine and input execution.Executing machine and input"
+    ) === true
+);
+const steps = computed(() => {
+  if (isExecutingInputAndMachine.value === true) {
+    return undefined;
+  }
+
+  return state.value.context.machineExecution?.tapeHistory;
+});
+const blankCharacter = computed(() => {
+  if (isExecutingInputAndMachine.value === true) {
+    return undefined;
+  }
+
+  return state.value.context.machineExecution?.blank;
+});
 
 function handlePlay() {
   send({
@@ -117,9 +137,9 @@ const { state: submitButtonState, send: submitButtonSend } = useActor(
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="px-4 py-8 space-y-10 sm:px-0">
             <TheTape
-              :is-tape-disabled="state.matches('Application is ready.Managing machine and input execution.Executing machine and input')"
-              :steps="state.context.machineExecution?.tapeHistory"
-              :blank-character="state.context.machineExecution?.blank"
+              :is-tape-disabled="isExecutingInputAndMachine"
+              :steps="steps"
+              :blank-character="blankCharacter"
               :index-on-step-list="indexOnStepList"
               :playing-status="playingStatus"
               :automatic-playing-delay-mode="automaticPlayingDelayMode"

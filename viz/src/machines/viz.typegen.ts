@@ -7,22 +7,20 @@ export interface Typegen0 {
     "Increment step index":
       | "Next step"
       | "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
-    "Reset step index":
-      | "Reset steps"
-      | "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
+    "Reset step index": "Reset steps" | "Load";
     "Assign input to context": "Set input";
     "Assign machine code to context": "Set machine code";
-    "Assign machine execution to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
+    "Assign machine execution to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
     "Exit loading state from submit button": "xstate.init";
     "Cache input and machine code into context": "Load";
-    "Allow to play execution steps": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
+    "Allow to play execution steps": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
   };
   internalEvents: {
     "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on": {
       type: "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
     };
-    "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]": {
-      type: "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
+    "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]": {
+      type: "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
@@ -40,7 +38,7 @@ export interface Typegen0 {
   };
   invokeSrcNameMap: {
     "Start submit button machine": "done.invoke.Submit button";
-    "Execute machine and input on server": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input:invocation[0]";
+    "Execute machine and input on server": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
   };
   missingImplementations: {
     actions: never;
@@ -69,6 +67,12 @@ export interface Typegen0 {
     | "Application is ready.Managing machine and input execution"
     | "Application is ready.Managing machine and input execution.Idle"
     | "Application is ready.Managing machine and input execution.Executing machine and input"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Received response"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state.Pending"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state.Reached end of delay"
     | "Application is ready.Managing machine and input execution.Fetched machine and input execution"
     | "Application is ready.Managing machine and input execution.Failed to execute machine and input"
     | {
@@ -89,7 +93,20 @@ export interface Typegen0 {
                 | "Idle"
                 | "Executing machine and input"
                 | "Fetched machine and input execution"
-                | "Failed to execute machine and input";
+                | "Failed to execute machine and input"
+                | {
+                    "Executing machine and input"?:
+                      | "Making request to server"
+                      | "Delaying loading state"
+                      | {
+                          "Making request to server"?:
+                            | "Sending request"
+                            | "Received response";
+                          "Delaying loading state"?:
+                            | "Pending"
+                            | "Reached end of delay";
+                        };
+                  };
             };
       };
   tags: never;

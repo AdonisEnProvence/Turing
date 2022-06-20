@@ -27,7 +27,7 @@ const EMPTY_STEP: TapeStep = {
   currentState: "None",
   indexOnTape: 0,
   status: "blocked",
-  tape: ["🤫"],
+  tape: ["-"],
 };
 
 const props = defineProps<{
@@ -57,9 +57,7 @@ const addedBlankSpace = squaresAmountOnOneSideOfHead;
  * We add enough blank squares to all steps so that
  * there will always be the same amount of squares on the tape.
  */
-function fillStepsWithBlankSpacesOnSides(steps: TapeStep[]): TapeStep[] {
-  const blank = props.blankCharacter ?? "🥸";
-
+function fillStepsWithBlankSpacesOnSides(steps: TapeStep[], blank: string): TapeStep[] {
   return steps.map(({ tape, ...props }) => ({
     tape: [
       ...Array.from({ length: addedBlankSpace }).map(() => blank),
@@ -71,7 +69,7 @@ function fillStepsWithBlankSpacesOnSides(steps: TapeStep[]): TapeStep[] {
 }
 
 const steps = computed(() =>
-  fillStepsWithBlankSpacesOnSides(props.steps ?? [EMPTY_STEP])
+  fillStepsWithBlankSpacesOnSides(props.steps ?? [EMPTY_STEP], props.blankCharacter ?? "-")
 );
 
 function computeTapeListWithFixedKeys(steps: TapeStep[]) {

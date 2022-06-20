@@ -5,7 +5,7 @@ import unaryAddMachine from "../../../our-machines/unary_add.json?raw";
 import { submitButtonMachine } from "./submit-button";
 
 export const vizMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaAA4AJhIATgBGAFYEgGYAFnTY2IAGWIB2FKSAGhA+KNikhJJY9IA2PIaU6LyUlPTolMyAX17ytExcAmJyKlo7Vg5YLh5+IRExF1lhhWJlNQ0Q3X1DSTYTMwsyK1tGByd9qVZvLAxYMDCAoJCwiIRIpNjapMyGn5dXK5b6xcqVT5JP4kVoNbINdIpZpddJJfqDOQjRTjaj2KbsTjcXgCYSicQHVbyUZKVTqTTMFi7ZwHI7mSz0Gx2S57Fy3FQmBhgEhYNymIgACnuHPO9kcPIOEDAewAlJ4hlTsZRcXQQjM5sTFmSVpj1jStvTtD5rodTGzTtKuXLmTdQkgQC9ggz3ohYpkYaiOo0ks0MvVCuCoplatk8oUsnlMtFMvk0QMQOqsWMtZNdYT5iSluSpJTM2a6TsrS5WbBPAA5VT0G1mZ6BT2sb2fdJ5dJ1DopQoNBIJzKFJKIiOd9KFEiFX25Nr1eEpdHpk3UnE5hl6okLUnLClrxSbcsMpnW6ueFuvL1uj7-X7RBd5ArpBJxhITyL5HuFAoFBqFJkQEJoUK4ZqaG54rmsw7gWRoHms1LHtsp4AEo8DQAAWkDKCwECuG4TbmJ46GPI21ZXm2rqgB8AEpCQ6Svg03RJMxv6jhOeQwtESSzgkmQdAOSJ-OkYGHlmExQVueYGnuRYyOJZYodoACSEA4GAngAKKiAARhpTrWrSynsBRboem8t5RMxtQJK0QElIBXaDp++R+q0z6ZFCXZeX8fRpuB67ZlJ0wybuhbGohR7GRaLCeAAymAjZSpyFyGS4ip7JRlk0YgUI9CQAFeUBjFNF5n5BjCLSFHEDRFSkCLLgFimQTq0kwfmhr7sWinIbFngADJMLw2U3rlnwIn6qKIvx-a8YUA6flGXEjlOjSZH+jSxE1GJRRJ2r4tunVyS4thYRIYBsCI+ESBQmh9TsakaYNw0QKN7ZWZ8q0zjVPEAVORTlRUPqFLUxSsaicZtH5O2rntpDBW1oUdbJEUHGdmEXVdeEcCwd2NjFOxaeajDo1g50sJd124-jngQKwQoSNITAANZCoFmqSUjBIo+F8FSBjWPU7d92E6exMnmTFNUzjIv0AgTNMNzADaeQALrvdR4R5bOJAOc09SxjUI4Tr69HFAkTTRHV21FG+Ynw61h1hXB3VsILlPYzdeOiyT4t+1LmOe8LPv0J4xBEEwpBOPQbhR9YJAc-tm7I-qfNux7Mve-jD3+5LAvk0HWc05oCssMzKvq5rHZfIBiSWwk-EiVkSRxBOI5+tkbT8Xkwat90-m7RqychTzaeu-JmdeyXBN+9oABiSVYThU8hznYu3ENI3ma2OXawg34wgt+Vwi03aMe3r568U-YAd01vW6BzWO4jzu8xPp2F0Lsuh7nC9YKgDS+EOQPUuqvH+tMt5vR3teD641IjJiSCQaIltWKxDiPCZME5Og-lSBtX0XY1pPyHqWJ20Fx5dUnl-YOEDfYnluIlRsctq6fUiHZP0v08hDl4o3Rupsmi9jqkVZiHRuwO2HgjLmb8KEnUDt-bOdCTIJSSu7ahl0aBMEVCw+BCQ4h1GmtUJMgF0EpAnF0P0j5ch1SnEOEC-Q0wsE0XAMISdJEHXIbBShkUJF-0ZJWFktoThnEdFcXkHhtH70iK+eiPdVoZEtrOaIn5eI9jiMGNoXQoTRFRNEcRpDX4eOOmjHq8NfFnirIE9kqVZShIOHA90u8xr7yyMgryb5AIoI6axZJcZkHVG+N8V8yZ755IggU9qMjikKVKRvPx8pjCBIiR8BBNREgbTiUxRJS1cgzhqC0VuxVEzFFGUFKRhTUb82mT42ZJB0KFxwmAHG7giLwBgVRDs3RUmzliI1R8WQ+HA0hK0OoBDYS2OyXkXJz8JFkImZ42RJTrlz0ZE9J4by97LLiLUBqORRxpJsUkwFX4oQkEhWkAS7QkyIihSQsZZy4VFMuSWU0villRE+VVXFrdqgEs-P2ei95WIFHyAmboJzObuIZRcjOajp5yzKaitlE0aoMWSLo9BTRcUfkBUUHsZshwLTaBChI4qR7cyOtKqh0s5W-xuRLFCciaEKPoEqqJkKSC8QAgiBIPxLYNFNqkGcUZGJZAEq+UMpq3EpzHvCqZ4DnVlMXvQZe+F40z1ZeippHw0jxHqMbHyPrG5gh1SOGcJReJJmSDxf8kbYWp1jZctN8qbnzwAUAtgIDCZgNlWvTQrqijTkTBqroSYCjBnDICgESDmKMWyVGOqiDa3jPrYymV1re2z3oVrCyWaoi-niK+GocRrbdjthOP48Riivi4QCKGv4GhLvpSu4krrgzNH0WOQxHcTGflnD2ICs4WgCSKN2GlcMJGvu7FxPNOQDnGO6L+y2etkw2RA6OBoqZ+hAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaAA4AJhIATgBGAFYEgGYAFnTY2IAGWIB2FKSAGhA+KNikhJJY9IA2PIaU6LyUlPTolMyAX17ytExcAmJyKlo7Vg5YLh5+IRExF1lhhWJlNQ0Q3X1DSTYTMwsyK1tGByd9qVZvLAxYMDCAoJCwiIRIpNjapMyGn5dXK5b6xcqVT5JP4kVoNbINdIpZpddJJfqDOQjRTjaj2KbsTjcXgCYSicQHVbyUZKVTqTTMFi7ZwHI7mSz0Gx2S57Fy3FQmBhgEhYNymIgACnuHPO9kcPIOEDAewAlJ4hlTsZRcXQQjM5sTFmSVpj1jStvTtD5rodTGzTtKuXLmTdQkgQC9ggz3ohYpkYaiOo0ks0MvVCuCoplatk8oUsnlMtFMvk0QMQOqsWMtZNdYT5iSluSpJTM2a6TsrS5WbBPAA5VT0G1mZ6BT2sb2fdJ5dJ1DopQoNBIJzKFJKIiOd9KFEiFX25Nr1eEpdHpk3UnE5hl6okLUnLClrxSbcsMpnW6ueFuvL1uj7-X7RBd5ArpBJxhITyL5HuFAoFBqFJkQEJoUK4ZqaG54rmsw7gWRoHms1LHtsp4AEo8DQAAWkDKCwECuG4TbmJ46GPI21ZXm2rqgB8AEpCQ6Svg03RJMxv6jhOeQwtESSzgkmQdAOSJ-OkYGHlmExQVueYGnuRYyOJZYodoACSEA4GAngAKKiAARhpTrWrSynsBRboem8t5RMxtQJK0QElIBXaDp++R+q0z6ZFCXZeX8fRpuB67ZlJ0wybuhbGohR7GRaLCeAAymAjZSpyFyGS4ip7JRlk0YgUI9CQAFeUBjFNF5n5BjCLSFHEDRFSkCLLgFimQTq0kwfmhr7sWinIbFngADJMLw2U3rlnwIn6qKIvx-a8YUA6flGXEjlOjSZH+jSxE1GJRRJ2r4tunVyS4thYRIYBsCI+ESBQmh9TsakaYNw0QKN7ZWZ8KT5CQwbfc02QCcGmQTox8TJltcLdG+hQJGJe2kMFbWhR1skRQcZ2YRdV14RwLB3Y2MU7Fp5qMBjWDnSwl3XXjBOLAA1i43AAI4YHAjYcocxDSGMiV4UzYCs+zngQKwQoSNITD00KgWapJyMEqj4XwVImPYzTt33UTp4kye5OU9TuOa-QDMC0LJhsJzjxEDzpB8xAZtsyYCAS0wCsANp5AAuu91HhD6wYkLVLQdPCvHdBO31+rOiKJttY5CfDGr7ZuKP6sr3VsGrVM4zd+Na6TOuF-rWM5xr+cm8IjMHCzTsc0wXM27zYD8zXgt154xBEEwpBOPQbg99YJCyynIWK+ncGZ9nht5wTD1F3rqsU6XM+05optt+b9eN7bJD2477Muywkse97vsdpELQ9kmz6AckNUgROzENIV1SPu0DVdjkSelq1h1hZPeS09c5r0JoXbQusUIl3VkbCuJAAAiSpnRsBwK9Ks9BBS6Bbg7SQnh+QYNMMKUUxBxTBmfKqEeiN5b-yVoA06y8YGzwLieCBxcl4GxAcbBBSDrSoN4OgzBOhsFGHPp9L805UTbQ8iOYoz50gTgWn6PIyQoyxDql5bosQf4QSRjQieXUgEMLLrAue2tWGLyzkY1exsRZixIAKQhlC-7QX0SdaBximFgJYYySB9J3HWIrqI8af1o7QxqgBQccYJxeRWgBJM0Q1p2V9NooK1CXGwQMfQjh5dTHgMZAAMSSlhHCwCcnMJMi9Ea5lWw5X9ggYMAESDtF4qkDacYkjRAaE-Rir9uhIhKDxPIqQUlywOuk466N2Er04RXee2h8lYFQBpfCnMiaXVKSYzQlS3rVOvB9cakRGhcX-G5GoLRYgRwqHlIZPZWhdDSFGBILF-K7WTlQsZ7VXGTMsdkzZXiKmJUbMbIJdSvisS4g0YMxReJQ1SB+K5CBcj0TaC+TyCSapdBGaPBWR00Yqx+dMsp-z+qAoJdjGgTBFQgo+F8V8tQchQkhZE5IeRogTgSX6AE95lGJgat0foaYWCUrgGEJxujxl4sziWU0czGSVhZLaE4ZxHRXF5B4alURXz0X4iBV8TFZxsoRV8OMQdqisu7DxDpqJohYveanceGS3E9QRrKs86DjjslSrKVVBx9nuhqWNOpWQg5eRhomN8iZWKfl4tfao3xvivmTN0G1zUEbOM+Y6750qkJmLlfKYwiqNWfFDYkDaq0MgJAAhcpauQZxnKjMxaIQ4dqrjTeKjNEz8XZuinkkg6Fl44WwQRIi8BdlUQ7N0a+s41GIkfFkBI8KIRfFaHUX0s7BzPgSay216a06Zq7b1XNJAnpPDHbUmlcRaifyKB06oU4nmuShE06GAl2hJlnTu9te7O1SsPXkotMROhVRyKOOICcH1Gv7PRblb5UgDgWi2sVaSO2SsMb8zxrqT0AdnNHK1s5BINXKginI2reJDm2hc2GQFP3Ie-ahrJhK-mut8WTKZjDQEbykLXdmlsG7W13vvTedcANqOiE07aWRijToapHb4dQOmpG+mteoKbXm-y-Q6n9aHGMYaPSxhj7GuFVwPhbK23MxjoRoGAVAPN8LcFgAEFgjwi1wgkUMlRWrFwpEjlOGcCZ+wUYif2GjHy6MZ204Z2Zem2Fko8Rx4zQmeNmabkQETCR4gFE6COAL20ukIuyLUYEC1igAguQ0EL9rcXhYM3F42zGYsbM8dw-NKC0EKsEcIyQIntpBzKk0ViAJWLyIRfB7ihHoizjhL5CrY8qt0P8TM3J3iSD6YW0S5ryC+E4ILZg-txT8JDvcGwTKvgz2Bo+Ip36HSF1pCKIxbzI3GmtHG5NoCUIZs4oAZktbTHosWMaxxxBLWtsCNMCJqMvWEz9bqtUBET9+IwnI8GP4cGAQfb0fuqeVjFvlNiithr2OiUAdRC-TLkmcsyYRdUQrt2IY3KKC0dHErqs-d072wp9B9uxYCUtkyRbviQpnJC6dQ4MWJmiR0BifYvIXJu+91Nbzd2afo6z0BrqFlLJwqs0m6zCd-Ow7DGEDV8hmskRxBFLFev3wZ6OKc5WFfqdo8rlnbHatRf-Wdv1F7uxG4BAUYMZuygIr+C-GdbQpysX+EULRDudFO7mwBv49QGJxqZW+Flhql0xxIEBdpr6No8Xt2p00ifc8p8ZaxdPwZM9RFhi-ICd208dCGQK3oQA */
   createMachine(
     {
       context: {
@@ -131,24 +131,56 @@ export const vizMachine =
                   },
                 },
                 "Executing machine and input": {
-                  entry: "Cache input and machine code into context",
+                  entry: [
+                    "Cache input and machine code into context",
+                    "Reset step index",
+                  ],
                   exit: "Exit loading state from submit button",
-                  invoke: {
-                    src: "Execute machine and input on server",
-                    onDone: [
-                      {
-                        actions: [
-                          "Assign machine execution to context",
-                          "Reset step index",
-                        ],
-                        target: "Fetched machine and input execution",
+                  type: "parallel",
+                  states: {
+                    "Making request to server": {
+                      initial: "Sending request",
+                      states: {
+                        "Sending request": {
+                          invoke: {
+                            src: "Execute machine and input on server",
+                            onDone: [
+                              {
+                                actions: "Assign machine execution to context",
+                                target: "Received response",
+                              },
+                            ],
+                            onError: [
+                              {
+                                target:
+                                  "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input",
+                              },
+                            ],
+                          },
+                        },
+                        "Received response": {
+                          type: "final",
+                        },
                       },
-                    ],
-                    onError: [
-                      {
-                        target: "Failed to execute machine and input",
+                    },
+                    "Delaying loading state": {
+                      initial: "Pending",
+                      states: {
+                        Pending: {
+                          after: {
+                            "1000": {
+                              target: "Reached end of delay",
+                            },
+                          },
+                        },
+                        "Reached end of delay": {
+                          type: "final",
+                        },
                       },
-                    ],
+                    },
+                  },
+                  onDone: {
+                    target: "Fetched machine and input execution",
                   },
                 },
                 "Fetched machine and input execution": {
@@ -241,7 +273,7 @@ export const vizMachine =
             {
               method: "POST",
               headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
               },
               body: JSON.stringify({
                 input,
