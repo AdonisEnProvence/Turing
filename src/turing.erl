@@ -24,7 +24,7 @@ main([SubCommand | SubCommandArgs]) ->
 
                 PoolMasterWorkerPid = spawn(pool_worker_master, init_pool_worker_master, []),
                 Dispatch = cowboy_router:compile([
-                    {<<"localhost">>, [
+                    {'_', [
                         {<<"/execute-machine">>, execute_machine_handler, [PoolMasterWorkerPid]}
                     ]}
                 ]),
