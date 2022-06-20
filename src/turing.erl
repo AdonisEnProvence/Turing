@@ -21,9 +21,10 @@ main([SubCommand | SubCommandArgs]) ->
         "serve" ->
             {ok, _} = application:ensure_all_started(cowboy),
 
+            PoolMasterWorkerPid = spawn(pool_worker_master, init_pool_worker_master, []),
             Dispatch = cowboy_router:compile([
                 {<<"localhost">>, [
-                    {<<"/execute-machine">>, execute_machine_handler, []}
+                    {<<"/execute-machine">>, execute_machine_handler, [PoolMasterWorkerPid]}
                 ]}
             ]),
 

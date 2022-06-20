@@ -1,6 +1,6 @@
 -module(execute_machine_handler).
 -behaviour(cowboy_handler).
--export([init/2, tape_history_accumulator_process/1]).
+-export([init/2, tape_history_accumulator_process/1, execute_machine/2]).
 
 -include("machine.hrl").
 
@@ -74,7 +74,7 @@ execute_machine(ParsedMachineConfig, ParsedInput) ->
         {error, halting_issue}
     end.
 
-parse_validate_and_execute(RawMachineConfig, RawInput) ->
+parse_validate_and_execute(RawMachineConfig, RawInput, PoolWorkerMasterPid) ->
     StringInput = binary_to_list(RawInput),
     ParserValidatorResult = parse_and_validate_machine_config:parse_and_validate_decoded_machine_and_input(
         RawMachineConfig, StringInput
@@ -82,7 +82,9 @@ parse_validate_and_execute(RawMachineConfig, RawInput) ->
 
     case ParserValidatorResult of
         {ok, ParsedMachineConfig, ParsedInput} ->
-            execute_machine(ParsedMachineConfig, ParsedInput);
+            execute_machine_async_requester:request_async_execute_machine(
+                PoolWorkerMasterPid, {ParsedMachineConfig, ParsedInput}
+            );
         {error, FormattedError} ->
             {error, FormattedError}
     end.
@@ -149,12 +151,14 @@ reply_success(Req0, Data) ->
     Req.
 
 init(Req0, State) ->
+    [PoolWorkerMasterPid] = State,
     GetBodyResult = get_decoded_body(Req0),
     case GetBodyResult of
         {ok, DecodedReqBody} ->
             ParseValidateExecMachineResult = parse_validate_and_execute(
                 maps:get(list_to_binary("machineConfig"), DecodedReqBody),
-                maps:get(list_to_binary("input"), DecodedReqBody)
+                maps:get(list_to_binary("input"), DecodedReqBody),
+                PoolWorkerMasterPid
             ),
             case ParseValidateExecMachineResult of
                 {ok, ResponseBodyRecord} ->
@@ -169,6 +173,9 @@ init(Req0, State) ->
                     end;
                 {error, halting_issue} ->
                     Req = reply_error(Req0, "Machine too long to be executed, autokill.\n"),
+                    {ok, Req, State};
+                {error, could_not_find_available_actor} ->
+                    Req = reply_error(Req0, "Could not find available actor.\n"),
                     {ok, Req, State};
                 {error, FormattedError} ->
                     Req = reply_error(Req0, FormattedError),
