@@ -15,39 +15,46 @@ print_usage() ->
     ).
 
 main([SubCommand | SubCommandArgs]) ->
-    case SubCommand of
-        "run" ->
-            cli:run_cli_command(SubCommandArgs);
-        "serve" ->
-            {ok, _} = application:ensure_all_started(cowboy),
+    try
+        case SubCommand of
+            "run" ->
+                cli:run_cli_command(SubCommandArgs);
+            "serve" ->
+                {ok, _} = application:ensure_all_started(cowboy),
 
-            PoolMasterWorkerPid = spawn(pool_worker_master, init_pool_worker_master, []),
-            Dispatch = cowboy_router:compile([
-                {<<"localhost">>, [
-                    {<<"/execute-machine">>, execute_machine_handler, [PoolMasterWorkerPid]}
-                ]}
-            ]),
+                PoolMasterWorkerPid = spawn(pool_worker_master, init_pool_worker_master, []),
+                Dispatch = cowboy_router:compile([
+                    {<<"localhost">>, [
+                        {<<"/execute-machine">>, execute_machine_handler, [PoolMasterWorkerPid]}
+                    ]}
+                ]),
 
-            {ok, _} = cowboy:start_clear(
-                ping_listener,
-                [{port, 8080}],
-                #{
-                    % cowboy_router and cowboy_handler are the default
-                    % middlewares for a cowboy application.
-                    % We need to set them when overriding middlewares list.
-                    middlewares => [cors_middleware, cowboy_router, cowboy_handler],
-                    env => #{dispatch => Dispatch}
-                }
-            ),
-            io:format("Server starting~n"),
-            receive
-                quit ->
-                    ok = cowboy:stop_listener(http)
-            end;
-        _ ->
-            print_usage()
-    end,
-    erlang:halt(0);
+                {ok, _} = cowboy:start_clear(
+                    ping_listener,
+                    [{port, 8080}],
+                    #{
+                        % cowboy_router and cowboy_handler are the default
+                        % middlewares for a cowboy application.
+                        % We need to set them when overriding middlewares list.
+                        middlewares => [cors_middleware, cowboy_router, cowboy_handler],
+                        env => #{dispatch => Dispatch}
+                    }
+                ),
+                io:format("Server starting~n"),
+                receive
+                    quit ->
+                        ok = cowboy:stop_listener(http)
+                end;
+            _ ->
+                print_usage()
+        end
+    of
+        _ -> erlang:halt(0)
+    catch
+        Throw ->
+            io:format("Caught unexpected error:~n~p~n", [Throw]),
+            erlang:halt(0)
+    end;
 main(_) ->
     print_usage(),
     erlang:halt(0).
