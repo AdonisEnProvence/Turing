@@ -2,9 +2,7 @@
     "02n": "0000",
     "02n_utm": "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00",
     "0n_1n": "000111",
-    "0n_1n_utm": "A~A{[0R>_][1N>1][_N>_][yN>y][nN>n]}B{[0N>0][1S<_][_N>_][yN>y][nN>n]}R{[0R>0][1R>1][_B<_][yN>y][nN>n]}L{[0L<0][1L<1][_A>_][yN>y][nN>n]}S{[0L<0][1L<1][_Y>_][yN>y][nN>n]}Y{[0Y>0][1Y>1][_H<y][yY>y][nY>n]}N{[0N>0][1N>1][_H<n][yN>y][nN>n]}&01",
     "palindrome": "cbbabbc",
-    "palindrome_utm": "A~A{[aB>_][bD>_][cF>_][_J>_]}B{[aB>a][bB>b][cB>c][_C<_]}C{[aI<_][bK>b][cK>c][_J>_]}D{[aD>a][bD>b][cD>c][_E<_]}E{[aK>a][bI<_][cK>c][_J>_]}F{[aF>a][bF>b][cF>c][_G<_]}G{[aK>a][bK>b][cI<_][_J>_]}I{[aI<a][bI<b][cI<c][_A>_]}J{[_H>y]}K{[_H>n]}&aa",
     "unary_add": "111+1111",
     "unary_add_utm": "A~A{[1A>1][+B>_]}B{[1C<+][_H<_]}C{[_A>1]}&11+1"
 }
