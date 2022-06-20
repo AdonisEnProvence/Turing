@@ -1,0 +1,5 @@
+FROM erlang:24-alpine
+WORKDIR /turing
+ADD . /turing
+RUN rebar3 escriptize
+CMD _build/default/bin/turing serve
