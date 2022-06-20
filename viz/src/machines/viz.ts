@@ -4,8 +4,69 @@ import { AutomaticPlayingDelayMode, MachineExecution } from "../types";
 import unaryAddMachine from "../../../our-machines/unary_add.json?raw";
 import { submitButtonMachine } from "./submit-button";
 
+interface ServerErrorForMachineExecution {
+  reason: string;
+}
+
+type ServerResponseForMachineExecution =
+  | MachineExecution
+  | ServerErrorForMachineExecution;
+
+function isServerResponseForMachineExecution(
+  response: unknown
+): response is ServerResponseForMachineExecution {
+  if (typeof response !== "object") {
+    return false;
+  }
+
+  return (
+    isMachineExecution(response as ServerResponseForMachineExecution) ||
+    isServerErrorForMachineExecution(
+      response as ServerResponseForMachineExecution
+    )
+  );
+}
+
+function assertIsServerResponseForMachineExecution(
+  response: unknown
+): asserts response is ServerResponseForMachineExecution {
+  if (isServerResponseForMachineExecution(response) === false) {
+    throw new Error(
+      "Expected response to be a ServerResponseForMachineExecution"
+    );
+  }
+}
+
+function isMachineExecution(
+  response: ServerResponseForMachineExecution
+): response is MachineExecution {
+  return "blank" in response && "tapeHistory" in response;
+}
+
+function assertIsMachineExecution(
+  response: ServerResponseForMachineExecution
+): asserts response is MachineExecution {
+  if (isMachineExecution(response) === false) {
+    throw new Error("Expected response to be a MachineExecution");
+  }
+}
+
+function isServerErrorForMachineExecution(
+  response: ServerResponseForMachineExecution
+): response is ServerErrorForMachineExecution {
+  return "reason" in response;
+}
+
+function assertIsServerErrorForMachineExecution(
+  response: ServerResponseForMachineExecution
+): asserts response is ServerErrorForMachineExecution {
+  if (isServerErrorForMachineExecution(response) === false) {
+    throw new Error("Expected response to be a ServerErrorForMachineExecution");
+  }
+}
+
 export const vizMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaAA4AJhIATgBGAFYEgGYAFnTY2IAGWIB2FKSAGhA+KNikhJJY9IA2PIaU6LyUlPTolMyAX17ytExcAmJyKlo7Vg5YLh5+IRExF1lhhWJlNQ0Q3X1DSTYTMwsyK1tGByd9qVZvLAxYMDCAoJCwiIRIpNjapMyGn5dXK5b6xcqVT5JP4kVoNbINdIpZpddJJfqDOQjRTjaj2KbsTjcXgCYSicQHVbyUZKVTqTTMFi7ZwHI7mSz0Gx2S57Fy3FQmBhgEhYNymIgACnuHPO9kcPIOEDAewAlJ4hlTsZRcXQQjM5sTFmSVpj1jStvTtD5rodTGzTtKuXLmTdQkgQC9ggz3ohYpkYaiOo0ks0MvVCuCoplatk8oUsnlMtFMvk0QMQOqsWMtZNdYT5iSluSpJTM2a6TsrS5WbBPAA5VT0G1mZ6BT2sb2fdJ5dJ1DopQoNBIJzKFJKIiOd9KFEiFX25Nr1eEpdHpk3UnE5hl6okLUnLClrxSbcsMpnW6ueFuvL1uj7-X7RBd5ArpBJxhITyL5HuFAoFBqFJkQEJoUK4ZqaG54rmsw7gWRoHms1LHtsp4AEo8DQAAWkDKCwECuG4TbmJ46GPI21ZXm2rqgB8AEpCQ6Svg03RJMxv6jhOeQwtESSzgkmQdAOSJ-OkYGHlmExQVueYGnuRYyOJZYodoACSEA4GAngAKKiAARhpTrWrSynsBRboem8t5RMxtQJK0QElIBXaDp++R+q0z6ZFCXZeX8fRpuB67ZlJ0wybuhbGohR7GRaLCeAAymAjZSpyFyGS4ip7JRlk0YgUI9CQAFeUBjFNF5n5BjCLSFHEDRFSkCLLgFimQTq0kwfmhr7sWinIbFngADJMLw2U3rlnwIn6qKIvx-a8YUA6flGXEjlOjSZH+jSxE1GJRRJ2r4tunVyS4thYRIYBsCI+ESBQmh9TsakaYNw0QKN7ZWZ8KT5CQwbfc02QCcGmQTox8TJltcLdG+hQJGJe2kMFbWhR1skRQcZ2YRdV14RwLB3Y2MU7Fp5qMBjWDnSwl3XXjBOLAA1i43AAI4YHAjYcocxDSGMiV4UzYCs+zngQKwQoSNITD00KgWapJyMEqj4XwVImPYzTt33UTp4kye5OU9TuOa-QDMC0LJhsJzjxEDzpB8xAZtsyYCAS0wCsANp5AAuu91HhD6wYkLVLQdPCvHdBO31+rOiKJttY5CfDGr7ZuKP6sr3VsGrVM4zd+Na6TOuF-rWM5xr+cm8IjMHCzTsc0wXM27zYD8zXgt154xBEEwpBOPQbg99YJCyynIWK+ncGZ9nht5wTD1F3rqsU6XM+05optt+b9eN7bJD2477Muywkse97vsdpELQ9kmz6AckNUgROzENIV1SPu0DVdjkSelq1h1hZPeS09c5r0JoXbQusUIl3VkbCuJAAAiSpnRsBwK9Ks9BBS6Bbg7SQnh+QYNMMKUUxBxTBmfKqEeiN5b-yVoA06y8YGzwLieCBxcl4GxAcbBBSDrSoN4OgzBOhsFGHPp9L805UTbQ8iOYoz50gTgWn6PIyQoyxDql5bosQf4QSRjQieXUgEMLLrAue2tWGLyzkY1exsRZixIAKQhlC-7QX0SdaBximFgJYYySB9J3HWIrqI8af1o7QxqgBQccYJxeRWgBJM0Q1p2V9NooK1CXGwQMfQjh5dTHgMZAAMSSlhHCwCcnMJMi9Ea5lWw5X9ggYMAESDtF4qkDacYkjRAaE-Rir9uhIhKDxPIqQUlywOuk466N2Er04RXee2h8lYFQBpfCnMiaXVKSYzQlS3rVOvB9cakRGhcX-G5GoLRYgRwqHlIZPZWhdDSFGBILF-K7WTlQsZ7VXGTMsdkzZXiKmJUbMbIJdSvisS4g0YMxReJQ1SB+K5CBcj0TaC+TyCSapdBGaPBWR00Yqx+dMsp-z+qAoJdjGgTBFQgo+F8V8tQchQkhZE5IeRogTgSX6AE95lGJgat0foaYWCUrgGEJxujxl4sziWU0czGSVhZLaE4ZxHRXF5B4alURXz0X4iBV8TFZxsoRV8OMQdqisu7DxDpqJohYveanceGS3E9QRrKs86DjjslSrKVVBx9nuhqWNOpWQg5eRhomN8iZWKfl4tfao3xvivmTN0G1zUEbOM+Y6750qkJmLlfKYwiqNWfFDYkDaq0MgJAAhcpauQZxnKjMxaIQ4dqrjTeKjNEz8XZuinkkg6Fl44WwQRIi8BdlUQ7N0a+s41GIkfFkBI8KIRfFaHUX0s7BzPgSay216a06Zq7b1XNJAnpPDHbUmlcRaifyKB06oU4nmuShE06GAl2hJlnTu9te7O1SsPXkotMROhVRyKOOICcH1Gv7PRblb5UgDgWi2sVaSO2SsMb8zxrqT0AdnNHK1s5BINXKginI2reJDm2hc2GQFP3Ie-ahrJhK-mut8WTKZjDQEbykLXdmlsG7W13vvTedcANqOiE07aWRijToapHb4dQOmpG+mteoKbXm-y-Q6n9aHGMYaPSxhj7GuFVwPhbK23MxjoRoGAVAPN8LcFgAEFgjwi1wgkUMlRWrFwpEjlOGcCZ+wUYif2GjHy6MZ204Z2Zem2Fko8Rx4zQmeNmabkQETCR4gFE6COAL20ukIuyLUYEC1igAguQ0EL9rcXhYM3F42zGYsbM8dw-NKC0EKsEcIyQIntpBzKk0ViAJWLyIRfB7ihHoizjhL5CrY8qt0P8TM3J3iSD6YW0S5ryC+E4ILZg-txT8JDvcGwTKvgz2Bo+Ip36HSF1pCKIxbzI3GmtHG5NoCUIZs4oAZktbTHosWMaxxxBLWtsCNMCJqMvWEz9bqtUBET9+IwnI8GP4cGAQfb0fuqeVjFvlNiithr2OiUAdRC-TLkmcsyYRdUQrt2IY3KKC0dHErqs-d072wp9B9uxYCUtkyRbviQpnJC6dQ4MWJmiR0BifYvIXJu+91Nbzd2afo6z0BrqFlLJwqs0m6zCd-Ow7DGEDV8hmskRxBFLFev3wZ6OKc5WFfqdo8rlnbHatRf-Wdv1F7uxG4BAUYMZuygIr+C-GdbQpysX+EULRDudFO7mwBv49QGJxqZW+Flhql0xxIEBdpr6No8Xt2p00ifc8p8ZaxdPwZM9RFhi-ICd208dCGQK3oQA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaACYAVgAOEgBOeIA2AEYAFmiABgBmTPSk9PSAGhA+KOz0klSkgHZ6rLz62Jy6gF8O8rRMXAJicipaO1YOWC4efiERMRdZPoViZTUNEN19Q0k2EzMLMitbRgcnLalWbywMWDAwgKCQsIiESLyc2JJo9NS29NiCvLxTJpcqVF55dL1Eg5YE5IFJXLfeLxLo9OT9RRDaj2UbsTjcXgCYSicTbBbyAZKVTqTTMFgbZzbXbmSz0Gx2E6bFwXFQmBhgEhYNymIgACiubKO9kcXO2EDAmwAlJ5ehTMZRsXQQuNJoSZiT5uillTVrTtD4zjtTCyDpKOTLGedQkgQPdgnSnlE-jV-mlYoUcll6vl6qConEavEEYDohl6kk2rFYqiQKqMYMNSNtfipkTZqSpOT0yaaesLS5mbBPAA5VT0K1mO6Bd2sT0vTLxkh5OL1IEZVKpApJVJhl7+nIkdLxBL1H4I4f1FNp41YrN0nUE6bEuZko2UlalukMy2VzxNh4el3PaJJPKTyHxdLRCFT9I5aKhipVdqTwepVoQnkt6xOkeRLnu6rDDi2YTJueYGruiz7tSaxHgASjwNAABaQMoLAQK4bgNuYngYTc9aVueLbOqAzyZEkSSfHUHb1JksQ-JkeSxKOMSBiQ8TxsUxSgbO-rROBSGQZquIbrm+o7oWEHLChZr0gAkhAOBgJ4ACiogAEZaQ6loqdqlEum6jxXlEaSpNC0R+g5aQdu0PGZDkUIwkiw4MUkhRJBJaoZlBWrrjmerbgWMhKSWqEXAAymA9YSuyxzGS48qbFRVm0YgJT+rUrFZJxeSpF5PGlT6Py9rG-5sYOybdKmMWrtBYWwXJkWGpJymmiEngADJMLw2WXrlLyPhOgKAu+DlAYUZRfi8dTRMkXGAvRTTsf+gXFq1oVjOFW75i4tjYRIYBsCIBESBQmgHnF9I6X1p1YOdLCXddHAsHd9AzAA1i43AAI4YHA9ZsjsxDSIMiX4UDYCg+DngQKwAoSNITD-QKy6UvtMlHfBClsGdWEXVd+Hfb9D2qSQz2HtspPk19t2aADCNIyYbCQzcRAw6QcMQBzYMmAgGNMAdLAANo5AAuqNrbWQgAKTtk9F5G8A4Dh+o6zlC8QfjeXE-O8w67SumZtYdHURSdjNvWTH0UzdP33aZR706h9vvZ9lOs39wiA9sIMixDTBQ3zsNgPDweI6HnjEEQTCkE49BuMn1gkLjUlrtburHQhUhM07LOu-W7vaJ7tLe47vsu797Ox5zYcR-zJCC8L4NiywmOSzL8sWc2OXhFE-p2R2XE5HCqTqzrS3-okhS5E0U85A0Xzm3jluS7JtuFyTDvM37Zc0+sVeMDXR-12zAAiCqOmwODDULTL0PyujRy-UCeLyb+mIKwpiCijfFPZU2dgrSRgvnImUVi51ypm7F6lcXqXxLsfBud9ZRSCfrwCsf8BQ6E-kYBWNER7K1vJOVi+RSq5DSFxbiS0Eh3nci0AosR4zsX+JvHOVs8Q2wLsTOBzsEHlyQU9FBRdD5oOvvQFGaMSB8n-uA0g28Cb8Jga9H2wj-anw9hIg+WjS6-RIW2EoHYSD0VAsVL47RvijhnoxeEM9BwsNNtwiBuc+HQPkrAqR8CdEVxYJ4RK9Z-YmKVpELIaQSD1HWvkKe3poiZFHD2Wo3YITAjMakeIXF3EqJCmo7xXVUH+JPoE4JSUDG1zYDQJg8pwnjUiSBTIlCnEazfKVXWTQSBtD8mxL4cQUiZDyfjKBcEfGaOqUYxBh4LhDRGoPC8itGnZMSHUIE7EGJJINkkUckJGIQhvBkP4sY-gNC6E1FgdS4BhGUaM9qRS7aKR6rFWm5ZX57FZKlaUpxuQeAaWQyI7DVqBnaI+H4U5SrJKWq8WcnwDb1AcgmDyoFUgjNUWMzqTzoovN0eaLBxF9iHHtL87YyzXRDzGoCrINRogOWfLNJJfw2IVThfS2cKQ4QJgCk1O5GKHnjOKc8oKryywEvMv4Sl5LnhAuHNCN82TvggRyTPHiqQ4iTkfG8Zoasza8pavyvOgrsVFmNHi+kGEHa4U-oRQlALnj-n1u+d4M4MjOQqmVWoaQp6ItiMOUCjU0QvPuUarF+9TXITESQDSWl7Veinh8QcBQOEa39BrNyoEekdj9TQ+M2tA3NWDYarxxrw0xXNXGl4b4bxpOTQmVNJUeKNChLeOEa9HwOUseigpmK96CL8dospUaY23EWdRNskT2gtKjG0OoU9sjVT2WxT4BQmULQaCkRc+qi09oFWG-thj0EzMenTfRQjpkBywEHKQIdwbc3DrzNuHcm6h0rZE0qtR3JuuoZkBqn4wSNFWm8acU8DZfCaDyoNIqQ0lv3b4w9MjzWnoZpIhDIjG43rjnenm0NBgYRoGAVAMMCLcFgAEFgNxK2NDWbZTit53KxniLrBoMS-LFEfCUDIgJu2QL3X2+DUyj2iNmeIlDVSr7ocDp3LmOHI5EDfd8CcM9bHxB-X++xfl+IQjSAJZ8zb0g8c8bvARAmJMBKjefSZZmy4kEwQ-HBX8rTv0ITHKAlaigtPVVxv474gKIv-Ygdhdkoy9iSFOqcAzDO8OMxokpg7qaBOQ17VDgmZG2fvpaBzeD36Wuwtaym7g2CZV8GO4ezx2GJpdQJP1frgQjkYXCkLUZwsGyfFFnehMJlxYvUhyz3WhPpYJVl1+-J3PBlqKciEbRnzrwCwgNod4wtJJ+Kp94gIt1Qb2sWmLXWUvWYSxZs9A6L0KaBJ+lTamuJzbmmtKMaQpwJGnJBwt0HtudaFeJ6RIikMADEkp5YIueoTFbStUueKBdynxWjIlRW+Xso4-WONiB+JMK0FsGe3a93dob+NWa++ZkTJAftYFQFpAikNTKXSB2lgA0lcgA7uwR9ykiBJ3k6D6VUR-x2S+LOulXE2KsT2fkRIMIYyxOHO+FEmOtvY9g7j-riHEvE9J7hCnfUqfHYGwAVRYP9BnTPcNUlZ8nN92SPgzbpf8f4MY8ijj8lCdisSZ4JAXWimXFs5c7Y+9T77yuSdk-vafTXaH-bRp7v0QHA7aksDcKgKAGAiC4gUyL+FmRf1wijEkoXS0FVQjOa0YSgJoztcKaWg9qW-dRpV4H9XpYQ+V7CRz0hMqFWrU7Rn5ECIOzQoAwJHpYWSjdgnq0DbL3Ze8ZxyZvHpSDsiZT8ifiyK50wljOw+xE5nww+qu0BowyPdby94TBTvpWn0STR0+rYJIgIg+GFsLgE2hAjH8ok-6qz-DnafkK-UQGKJDC+nuxEUAMgmBch0EAA */
   createMachine(
     {
       context: {
@@ -16,6 +77,7 @@ export const vizMachine =
         lastLoadingInput: undefined,
         lastLoadingMachineCode: undefined,
         machineExecution: undefined,
+        serverExecutionError: undefined,
       },
       tsTypes: {} as import("./viz.typegen").Typegen0,
       schema: {
@@ -27,6 +89,7 @@ export const vizMachine =
           lastLoadingMachineCode: string | undefined;
           lastLoadingInput: string | undefined;
           machineExecution: MachineExecution | undefined;
+          serverExecutionError: string | undefined;
         },
         events: {} as
           | { type: "Enable playing execution steps" }
@@ -43,7 +106,7 @@ export const vizMachine =
           | { type: "Load" },
         services: {} as {
           "Execute machine and input on server": {
-            data: MachineExecution;
+            data: ServerResponseForMachineExecution;
           };
         },
       },
@@ -123,19 +186,13 @@ export const vizMachine =
             "Managing machine and input execution": {
               initial: "Idle",
               states: {
-                Idle: {
-                  on: {
-                    Load: {
-                      target: "Executing machine and input",
-                    },
-                  },
-                },
+                Idle: {},
                 "Executing machine and input": {
                   entry: [
                     "Cache input and machine code into context",
                     "Reset step index",
+                    "Reset execution server error",
                   ],
-                  exit: "Exit loading state from submit button",
                   type: "parallel",
                   states: {
                     "Making request to server": {
@@ -147,13 +204,20 @@ export const vizMachine =
                             onDone: [
                               {
                                 actions: "Assign machine execution to context",
+                                cond: "Is valid machine execution",
                                 target: "Received response",
+                              },
+                              {
+                                actions:
+                                  "Assign execution server error to context",
+                                target:
+                                  "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input.Known server error",
                               },
                             ],
                             onError: [
                               {
                                 target:
-                                  "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input",
+                                  "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input.Unknown server error",
                               },
                             ],
                           },
@@ -184,18 +248,21 @@ export const vizMachine =
                   },
                 },
                 "Fetched machine and input execution": {
-                  entry: "Allow to play execution steps",
-                  on: {
-                    Load: {
-                      target: "Executing machine and input",
-                    },
-                  },
+                  entry: [
+                    "Allow to play execution steps",
+                    "Exit loading state from submit button",
+                  ],
                 },
                 "Failed to execute machine and input": {
-                  on: {
-                    Load: {
-                      target: "Executing machine and input",
-                    },
+                  entry: [
+                    "Enter error state from submit button",
+                    "Allow to play execution steps",
+                  ],
+                  initial: "Known server error",
+                  states: {
+                    "Known server error": {},
+                    "Unknown server error": {},
+                    "Invalid machine configuration": {},
                   },
                 },
               },
@@ -206,6 +273,16 @@ export const vizMachine =
                 "Set machine code": {
                   actions: "Assign machine code to context",
                 },
+                Load: [
+                  {
+                    cond: "Machine configuration is not valid JSON",
+                    target:
+                      ".Failed to execute machine and input.Invalid machine configuration",
+                  },
+                  {
+                    target: ".Executing machine and input",
+                  },
+                ],
               },
             },
           },
@@ -219,7 +296,7 @@ export const vizMachine =
           stepIndex: (context) => context.stepIndex + 1,
         }),
         "Reset step index": assign({
-          stepIndex: (context) => 0,
+          stepIndex: (_context) => 0,
         }),
         "Assign automatic playing delay to context": assign({
           automaticPlayingDelayMode: (_, event) => event.mode,
@@ -230,6 +307,14 @@ export const vizMachine =
         "Exit loading state from submit button": send(
           {
             type: "Finished loading",
+          },
+          {
+            to: "Submit button",
+          }
+        ),
+        "Enter error state from submit button": send(
+          {
+            type: "Erred",
           },
           {
             to: "Submit button",
@@ -246,7 +331,21 @@ export const vizMachine =
           lastLoadingMachineCode: (context) => context.machineCode,
         }),
         "Assign machine execution to context": assign({
-          machineExecution: (_, { data }) => data,
+          machineExecution: (_, { data }) => {
+            assertIsMachineExecution(data);
+
+            return data;
+          },
+        }),
+        "Assign execution server error to context": assign({
+          serverExecutionError: (_, { data }) => {
+            assertIsServerErrorForMachineExecution(data);
+
+            return data.reason;
+          },
+        }),
+        "Reset execution server error": assign({
+          serverExecutionError: (_context) => undefined,
         }),
       },
       delays: {
@@ -260,6 +359,20 @@ export const vizMachine =
           }
 
           return stepIndex >= machineExecution.tapeHistory.length - 1;
+        },
+        "Is valid machine execution": (_context, { data }) => {
+          return isMachineExecution(data);
+        },
+        "Machine configuration is not valid JSON": ({ machineCode }) => {
+          let isInvalidJSON = false;
+
+          try {
+            JSON.parse(machineCode);
+          } catch {
+            isInvalidJSON = true;
+          }
+
+          return isInvalidJSON;
         },
       },
       services: {
@@ -283,7 +396,9 @@ export const vizMachine =
           );
           const rawResponseBody = await response.json();
 
-          return rawResponseBody as MachineExecution;
+          assertIsServerResponseForMachineExecution(rawResponseBody);
+
+          return rawResponseBody;
         },
       },
     }

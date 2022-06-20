@@ -18,6 +18,6 @@ export interface Typegen0 {
   eventsCausingServices: {};
   eventsCausingGuards: {};
   eventsCausingDelays: {};
-  matchesStates: "Idle" | "Loading" | "Success";
+  matchesStates: "Idle" | "Loading" | "Success" | "Error";
   tags: never;
 }
