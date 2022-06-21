@@ -1,7 +1,7 @@
 FROM erlang:24
 WORKDIR /turing
-
 EXPOSE 8080
 ADD . .
-
+RUN apt-get update
+RUN apt-get -y install lsof
 CMD ./loop.sh
