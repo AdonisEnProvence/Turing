@@ -13,7 +13,7 @@ A head that will read every tape element interpreting them base the defined mach
 
 [Open the visualizer →](https://turing.adonisenprovence.com/)
 
-The visualizer will request machine execution to our server, whom will send back the executed machine.
+The visualizer will request machine execution to our server, which will send back the executed machine.
 The client will interpret the resulting data and display it using human understandable animations.
 From the client machine player you can find several controls:
 
@@ -23,15 +23,14 @@ From the client machine player you can find several controls:
 - Reset
 
 But also edit the input and machine configuration from the related text fields.
-The client will notify the user about any machine nor input configuration error.
+The client will notify the user about any machine or input configuration error.
 
 ## The command line
 
-You can execute Turing machine in local using the CLI.
-Such as:
+You can execute Turing machine locally using the CLI:
 
 ```
-_build/default/bin/turing run our-machines/02n.json "000" --color
+_build/default/bin/turing run our-machines/02n.json "000"
 Interpreter starting...
 [<0>00] (one, 0) -> (two, 0, right)
 [0<0>0] (two, 0) -> (one, 0, right)
@@ -64,33 +63,18 @@ where `02n.json` contains:
 }
 ```
 
-The CLI is called using the command `RUN`.
-For big machine you might need to enable color mode.
-To do so you can use the following flag:
-
-- `--color` or `-c` will enable color mode.
-
-![Turing machine execution with color flag enabled ](docs/execute-machine-with-color.png)
-
 ## Universal Turing Machine
 
 > In computer science, a universal Turing machine (UTM) is a Turing machine that simulates an arbitrary Turing machine on arbitrary input.
 > [Wikipedia](https://en.wikipedia.org/wiki/Universal_Turing_machine)
 
-To say that we have to implement a machine configuration that allow the input to describe its own transitions and states.
+To say that we have to implement a machine configuration that allows the input to describe its own transitions and states.
 
 ### The input
 
 An utm input will be composed as follows:  
 `Initial-state~State_1{[Read To_State Action Write][Read To_State Action Write]...}...&Input`  
-Where `{}` are state definition closure and `[]` are state transitions closure
-`~` the initial state separator and `&` the input beginning
-
-Example:
-
-```bash
-./turing utm-config.json "S~S{[0S>_][1H<1]}&001"
-```
+Where `{}` are state definition closure, `[]` are state transitions closure, `~` the initial state separator and `&` the input beginning
 
 ### An Universal Turing Machine config
 
@@ -99,26 +83,22 @@ For example, you can find the UTM that allows to run the above `02n.json` here:
 
 [our-machines/02n_utm.json →](/our-machines/02n_utm.json)
 
-Finally, you can run the `02n` UTM machine as following:
+Finally, you can run the `02n` UTM machine:
 
-```bash
-./_build/default/bin/turing our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00"
+```txt
+./_build/default/bin/turing run our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00"
 Interpreter starting...
-# ...
+[<E>~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00] (retrieve_initial_state, E) -> (go-to-input-start-for_E, E, right)
+[E<~>E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00] (go-to-input-start-for_E, ~) -> (go-to-input-start-for_E, ~, right)
+...
 [E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00<^>] (execute-transition-H_<_y, ^) -> (HALT, y, left)
 [E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&0<0>y] Final state reached !
 Interpreter closing...
 ```
 
-As building UTM configuration is a pain, we've implemented tools that allow the user to generate any kind of UTM he needs.  
-The UTM generator script requires the following input to be building the `02n_utm.json`
+Building an UTM configuration is really time-consuming and hardly maintainable. That's why we've implemented tools that allow the user to generate any kind of UTM he needs.  
 
-```json
-{
-  "inputCharacters": ["0", "y", "n"],
-  "states": ["E", "P"]
-}
-```
+[Universal Turing Machine tools documentation →](docs/technical.md#universal-turing-machine-tools)
 
 ## Docs
 

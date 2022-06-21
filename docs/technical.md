@@ -14,7 +14,7 @@ Inside the client we're using:
 
 ## Universal Turing Machine tools
 
-#### Input translator script
+### Input translator script
 
 This script is located [/universal_turing_machine_generator/index.js](/universal_turing_machine_generator/index.js)
 To manually translate a classic machine config into an utm input can be quite fastidious.
@@ -27,7 +27,7 @@ node universal_turing_machine_generator/machine_to_input_declaration.js our-mach
 
 _Important note:_ the script does neither parse nor validate the arg file. We recommend passing a working classic machine config.
 
-#### Utm generator script
+### Utm generator script
 
 The script is located [here](/universal_turing_machine_generator/index.js).
 The script takes a json file as only argument, this json file must contain the following data set:
@@ -51,16 +51,18 @@ node universal_turing_machine_generator/index.js universal_turing_machine_genera
 
 Finally, you can run an 02n utm machine as following:
 
-```bash
-./_build/default/bin/turing our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00"
+```txt
+./_build/default/bin/turing run our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00"
 Interpreter starting...
-# ...
+[<E>~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00] (retrieve_initial_state, E) -> (go-to-input-start-for_E, E, right)
+[E<~>E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00] (go-to-input-start-for_E, ~) -> (go-to-input-start-for_E, ~, right)
+...
 [E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00<^>] (execute-transition-H_<_y, ^) -> (HALT, y, left)
 [E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&0<0>y] Final state reached !
 Interpreter closing...
 ```
 
-#### Unauthorized characters:
+### Unauthorized characters:
 
 - inputCharacters
 
