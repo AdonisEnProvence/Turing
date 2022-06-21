@@ -9,7 +9,7 @@ A head that will read every tape element interpreting them base the defined mach
 
 ## The visualizer
 
-GIF HERE
+![Visualizer screenshot](docs/visualizer-screenshot.png)
 
 [Open the visualizer →](https://turing.adonisenprovence.com/)
 
