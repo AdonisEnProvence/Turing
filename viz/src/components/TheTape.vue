@@ -175,8 +175,8 @@ function handleAutomaticPlayingDelayMode() {
 </script>
 
 <template>
-  <div class="relative flex justify-center">
-    <div class="flex flex-col space-y-8">
+  <div class="flex justify-center w-full">
+    <div class="flex flex-col space-y-8 w-full">
       <div class="flex items-center justify-between">
         <p>
           State: <code>{{ currentState }}</code>
@@ -187,47 +187,49 @@ function handleAutomaticPlayingDelayMode() {
         </AppBadge>
       </div>
 
-      <div>
-        <div
-          class="overflow-hidden"
-          :style="{
-            width: `calc(${displayedTapeLength} * 3.5rem - (3.5rem / 6 * 5 * 2))`,
-          }"
-        >
+      <div class="w-full h-14 overflow-hidden relative">
+        <div class="absolute left-1/2 flex justify-center" :style="{ transform: 'translateX(-50%)' }">
           <div
-            class="relative inline-flex"
-            :style="{ marginLeft: 'calc(-1 * 3.5rem / 6 * 5)' }"
+            class="overflow-hidden"
+            :style="{
+              width: `calc(${displayedTapeLength} * 3.5rem - (3.5rem / 6 * 5 * 2))`,
+            }"
           >
-            <TransitionGroup
-              leave-from-class="opacity-0"
-              leave-active-class="absolute transition-all duration-[0s]"
-              leave-to-class="opacity-0"
-              move-class="transition-all duration-200"
+            <div
+              class="relative inline-flex"
+              :style="{ marginLeft: 'calc(-1 * 3.5rem / 6 * 5)' }"
             >
-              <div
-                v-for="{ key, value } in displayedTape"
-                :id="key"
-                :key="key"
-                class="flex items-center justify-center text-center border border-gray-100 w-14 h-14"
+              <TransitionGroup
+                leave-from-class="opacity-0"
+                leave-active-class="absolute transition-all duration-[0s]"
+                leave-to-class="opacity-0"
+                move-class="transition-all duration-200"
               >
-                <Transition
-                  mode="out-in"
-                  enter-active-class="duration-300 ease-out"
-                  enter-from-class="opacity-0"
-                  enter-to-class="opacity-100"
-                  leave-active-class="duration-200 ease-in"
-                  leave-from-class="opacity-100"
-                  leave-to-class="opacity-0"
+                <div
+                  v-for="{ key, value } in displayedTape"
+                  :id="key"
+                  :key="key"
+                  class="flex items-center justify-center text-center border border-gray-100 w-14 h-14"
                 >
-                  <p :key="value">
-                    <code>{{ value }}</code>
-                  </p>
-                </Transition>
-              </div>
-            </TransitionGroup>
+                  <Transition
+                    mode="out-in"
+                    enter-active-class="duration-300 ease-out"
+                    enter-from-class="opacity-0"
+                    enter-to-class="opacity-100"
+                    leave-active-class="duration-200 ease-in"
+                    leave-from-class="opacity-100"
+                    leave-to-class="opacity-0"
+                  >
+                    <p :key="value">
+                      <code>{{ value }}</code>
+                    </p>
+                  </Transition>
+                </div>
+              </TransitionGroup>
 
-            <div class="absolute inset-x-0 flex justify-center">
-              <div class="bg-yellow-100 opacity-50 w-14 h-14" />
+              <div class="absolute inset-x-0 flex justify-center">
+                <div class="bg-yellow-100 opacity-50 w-14 h-14" />
+              </div>
             </div>
           </div>
         </div>
