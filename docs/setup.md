@@ -34,7 +34,7 @@ docker build -f Dockerfile.local -t turing .
 # Run the image named `turing`, attach local directory to /turing directory in the container, thanks to volumes.
 # If we change files on our computer, the changes will be reflected in the container.
 # Run the container in detached mode so that we can access the container with a shell when we want.
-docker run -d --name turing -v $PWD:/turing turing
+docker run -d --name turing -v $PWD:/turing -p 8080:8080 turing
 
 # Launch a shell inside the container.
 # We will write the same commands as if we were developing directly on our machine.
