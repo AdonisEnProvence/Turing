@@ -4,8 +4,8 @@
 
 > A Turing machine is a mathematical model of computation describing an abstract machine that manipulates symbols on a strip of tape according to a table of rules. Despite the model's simplicity, it is capable of implementing any computer algorithm. [Wikipedia](https://en.wikipedia.org/wiki/Turing_machine)
 
-We then have a tape, where is injected the machine input.
-A head that will read every tape element interpreting them base the defined machine configuration.
+We then have a tape, where the machine input is injected.
+A head reads every tape element, interpreting them based on machine configuration.
 
 ## The visualizer
 
@@ -13,17 +13,17 @@ A head that will read every tape element interpreting them base the defined mach
 
 [Open the visualizer →](https://turing.adonisenprovence.com/)
 
-The visualizer will request machine execution to our server, which will send back the executed machine.
-The client will interpret the resulting data and display it using human understandable animations.
-From the client machine player you can find several controls:
+The visualizer requests machine execution to the server, which sends back the executed machine.
+The client displays execution steps using smooth animations.
 
+The input and the machine configuration can be edited. Some samples can be chosen. Configuration errors are shown to the user.
+
+Several controls can be found on the visualizer:
+
+- Pause and play
 - Choose execution speed
-- Pause/Play
-- Enter manual mode
-- Reset
-
-But also edit the input and machine configuration from the related text fields.
-The client will notify the user about any machine or input configuration error.
+- Run step by step
+- Restart the execution
 
 ## The command line
 
@@ -68,20 +68,22 @@ where `02n.json` contains:
 > In computer science, a universal Turing machine (UTM) is a Turing machine that simulates an arbitrary Turing machine on arbitrary input.
 > [Wikipedia](https://en.wikipedia.org/wiki/Universal_Turing_machine)
 
-To say that we have to implement a machine configuration that allows the input to describe its own transitions and states.
+It means we have to implement a machine configuration that allows the input to describe its own transitions and states.
 
 ### The input
 
-An utm input will be composed as follows:  
-`Initial-state~State_1{[Read To_State Action Write][Read To_State Action Write]...}...&Input`  
-Where `{}` are state definition closure, `[]` are state transitions closure, `~` the initial state separator and `&` the input beginning
+An UTM input is composed as follows:
 
-### An Universal Turing Machine config
+```
+Initial-state~State_1{[Read To_State Action Write][Read To_State Action Write]...}...&Input
+```
 
-The UTM configuration must store by its definition the possible transitions that would be allowed inside the input.
-For example, you can find the UTM that allows to run the above `02n.json` here:
+Where `{}` are state definition closure, `[]` are state transitions closure, `~` is the initial state separator and `&` is the input beginning.
 
-[our-machines/02n_utm.json →](/our-machines/02n_utm.json)
+### An Universal Turing Machine configuration
+
+The UTM configuration must store in its definition the possible transitions that are allowed inside the input.
+For example, you can find [the UTM that allows to run the above `02n.json`](our-machines/02n_utm.json).
 
 Finally, you can run the `02n` UTM machine:
 
@@ -96,13 +98,13 @@ Interpreter starting...
 Interpreter closing...
 ```
 
-Building an UTM configuration is really time-consuming and hardly maintainable. That's why we've implemented tools that allow the user to generate any kind of UTM he needs.  
+Building an UTM configuration is really time-consuming and hardly maintainable. That's why we've implemented tools that allow the user to generate any kind of UTM needed.
 
 [Universal Turing Machine tools documentation →](docs/technical.md#universal-turing-machine-tools)
 
 ## Docs
 
-You can find more details about running the project in local and the technical details in files below:
+You can read more about running the project locally and technical details:
 
 [See technical details →](docs/technical.md)
 

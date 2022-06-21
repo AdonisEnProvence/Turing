@@ -2,35 +2,41 @@
 
 ## The stack
 
-The cli and server are built using [erlang](https://www.erlang.org/).  
-We're working on a [cowboy](https://ninenines.eu/) server.
+CLI and server are built using [Erlang](https://www.erlang.org/).
+
+We're working on a [Cowboy](https://ninenines.eu/) server.
 
 Inside the client we're using:
 
-- [vue](https://vuejs.org/)
-- [xstate](https://xstate.js.org/docs/)
-- [tailwindcss](https://tailwindcss.com/)
-- [ace](https://ace.c9.io/)
+- [Vue.js](https://vuejs.org/)
+- [XState](https://xstate.js.org/docs/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Ace](https://ace.c9.io/)
 
 ## Universal Turing Machine tools
 
 ### Input translator script
 
-This script is located [/universal_turing_machine_generator/index.js](/universal_turing_machine_generator/index.js)
-To manually translate a classic machine config into an utm input can be quite fastidious.
-The script then takes a classic machine config json file as only argument:
+Manually translating a classic machine config into an UTM input can be quite fastidious. We wrote a script to simplify the process.
+
+[See script →](/universal_turing_machine_generator/machine_to_input_declaration.js)
+
+The script takes a classic machine configuration as argument:
 
 ```bash
 node universal_turing_machine_generator/machine_to_input_declaration.js our-machines/02n.json
 # "one~one{[0two>0][_HALT<y]}two{[0one>0][_HALT<n]}&YOUR_INPUT"
 ```
 
-_Important note:_ the script does neither parse nor validate the arg file. We recommend passing a working classic machine config.
+_Important note:_ the script does neither parse nor validate the machine configuration. We recommend passing a working machine configuration.
 
-### Utm generator script
+### UTM generator script
 
-The script is located [here](/universal_turing_machine_generator/index.js).
-The script takes a json file as only argument, this json file must contain the following data set:
+Building an UTM configuration is really time-consuming and hardly maintainable. We also wrote a script to simplify the process.
+
+[See script →](/universal_turing_machine_generator/index.js)
+
+The script takes a json file as only argument, which must contain the following data set:
 
 ```json
 {
@@ -39,17 +45,20 @@ The script takes a json file as only argument, this json file must contain the f
 }
 ```
 
-The script build states for each possible `inputCharacters` and `states` combination but also for skipping to next inside input transitions input nor states declaration etc.  
-See [generate_unary_add_machine_config.json](/universal_turing_machine_generator/generate_unary_add_utm_machine_config.json)
+The script builds states for each possible `inputCharacters` and `states` combination but also for skipping to next input transitions or states declaration etc.  
 
-Run example
+[See input example →](/universal_turing_machine_generator/generate_unary_add_utm_machine_config.json)
+
+Run example:
 
 ```bash
 node universal_turing_machine_generator/index.js universal_turing_machine_generator/generate_02n_utm_machine_config.json
 # creates ./data.json
 ```
 
-Finally, you can run an 02n utm machine as following:
+_Important note:_ the script does neither parse nor validate the machine configuration. We recommend passing a working machine configuration.
+
+Finally, you can run an 02n UTM machine as following:
 
 ```txt
 ./_build/default/bin/turing run our-machines/02n_utm.json "E~E{[0P>0][_H<y]}P{[0E>0][_H<n]}&00"
@@ -62,16 +71,14 @@ Interpreter starting...
 Interpreter closing...
 ```
 
-### Unauthorized characters:
+### Unauthorized characters
 
 - inputCharacters
 
-Must not contain any `_`, that is the blank input alias used inside the input states and transitions definition. And the `.` being the default blank character.
+  Must not contain any `_` character as it's the blank input alias used inside the input states and transitions definition. `.` character is forbidden too as it's the default blank character.
+- states
 
-_Important note:_ the script does neither parse nor validate the generator arg file as the process result will be parsed by the turing machine itself.
-Just to say you can generate invalid machine config such as duplicated alphabet characters. It's just a tool.
+  Every `states` names must be strings made of a single character. Beware of `inputCharacters` and `states` conflicts.
+  The `H` state is used as default final state `"HALT"`
 
-- States
-
-Every `states` names must be chars. Beware of `inputCharacters` and `states` conflicts.
-The `H` state is used as default final state `"HALT"`
+_Important note:_ the script does neither parse nor validate the configuration file passed to generator as the process result will be parsed by the turing machine itself.

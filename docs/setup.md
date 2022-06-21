@@ -2,33 +2,50 @@
 
 ## Build
 
-    $ rebar3 escriptize
+```bash
+rebar3 escriptize
+```
 
 ## Run CLI
 
-    $ _build/default/bin/turing run machine-config.json "YOUR_INPUT"
+```bash
+_build/default/bin/turing run machine-config.json "YOUR_INPUT"
+```
 
 ## Start server
 
-    $ _build/default/bin/turing serve
+```bash
+_build/default/bin/turing serve
+```
 
-## Test
+## Unit tests
 
-    $ rebar3 eunit
+```bash
+rebar3 eunit
+```
 
 ### Generate code coverage reports
 
-    $ rebar3 cover --verbose
+```bash
+rebar3 cover --verbose
+```
 
 You can visualize code coverage, and which lines of code are not tested, by opening `_build/test/cover/index.html`.
+
+## Integrations tests
+
+```bash
+./bats-core/bin/bats test/
+```
 
 ## Dockerfile
 
 Follow those steps to launch a local Docker container with Erlang installed.
 
-```sh
+```bash
 # Build an image defined in the `Dockerfile` of `.` directory and name it `turing`.
 
+# Note: Dockerfile.prod is for production only; it starts the server automatically.
 docker build -f Dockerfile.local -t turing .
 
 # Run the image named `turing`, attach local directory to /turing directory in the container, thanks to volumes.
@@ -44,15 +61,6 @@ docker exec -it turing bash
 docker rm -f turing
 ```
 
-## Bats shell tests
-
-To run shell tests you have to be inside the docker container
-Run
-
-```sh
-./bats-core/bin/bats test/
-```
-
-## Run the visualizer in local
+## Run the visualizer locally
 
 [See Visualizer setup →](/viz/README.md)
