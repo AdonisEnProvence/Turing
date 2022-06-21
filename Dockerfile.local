@@ -1,6 +1,7 @@
 FROM erlang:24
 WORKDIR /turing
 
+EXPOSE 8080
 ADD . .
 
 CMD ./loop.sh
