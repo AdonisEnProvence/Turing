@@ -68,7 +68,7 @@ const { machineCode: defaultMachineCode, input: defaultInput } =
   getMachineCodeAndInput("unary_add");
 
 export const vizMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaACYAVgAOEgBOeIA2AEYAFmiABgBmTPSk9PSAGhA+KOz0klSkgHZ6rLz62Jy6gF8O8rRMXAJicipaO1YOWC4efiERMRdZPoViZTUNEN19Q0k2EzMLMitbRgcnLalWbywMWDAwgKCQsIiESLyc2JJo9NS29NiCvLxTJpcqVF55dL1Eg5YE5IFJXLfeLxLo9OT9RRDaj2UbsTjcXgCYSicTbBbyAZKVTqTTMFgbZzbXbmSz0Gx2E6bFwXFQmBhgEhYNymIgACiubKO9kcXO2EDAmwAlJ5ehTMZRsXQQuNJoSZiT5uillTVrTtD4zjtTCyDpKOTLGedQkgQPdgnSnlE-jV-mlYoUcll6vl6qConEavEEYDohl6kk2rFYqiQKqMYMNSNtfipkTZqSpOT0yaaesLS5mbBPAA5VT0K1mO6Bd2sT0vTLxkh5OL1IEZVKpApJVJhl7+nIkdLxBL1H4I4f1FNp41YrN0nUE6bEuZko2UlalukMy2VzxNh4el3PaJJPKTyHxdLRCFT9I5aKhipVdqTwepVoQnkt6xOkeRLnu6rDDi2YTJueYGruiz7tSaxHgASjwNAABaQMoLAQK4bgNuYngYTc9aVueLbOqAzyZEkSSfHUHb1JksQ-JkeSxKOMSBiQ8TxsUxSgbO-rROBSGQZquIbrm+o7oWEHLChZr0gAkhAOBgJ4ACiogAEZaQ6loqdqlEum6jxXlEaSpNC0R+g5aQdu0PGZDkUIwkiw4MUkhRJBJaoZlBWrrjmerbgWMhKSWqEXAAymA9YSuyxzGS48qbFRVm0YgJT+rUrFZJxeSpF5PGlT6Py9rG-5sYOybdKmMWrtBYWwXJkWGpJymmiEngADJMLw2WXrlLyPhOgKAu+DlAYUZRfi8dTRMkXGAvRTTsf+gXFq1oVjOFW75i4tjYRIYBsCIBESBQmgHnF9I6X1p1YOdLCXddHAsHd9AzAA1i43AAI4YHA9ZsjsxDSIMiX4UDYCg+DngQKwAoSNITD-QKy6UvtMlHfBClsGdWEXVd+Hfb9D2qSQz2HtspPk19t2aADCNIyYbCQzcRAw6QcMQBzYMmAgGNMAdLAANo5AAuqNrbWQgAKTtk9F5G8A4Dh+o6zlC8QfjeXE-O8w67SumZtYdHURSdjNvWTH0UzdP33aZR706h9vvZ9lOs39wiA9sIMixDTBQ3zsNgPDweI6HnjEEQTCkE49BuMn1gkLjUlrtburHQhUhM07LOu-W7vaJ7tLe47vsu797Ox5zYcR-zJCC8L4NiywmOSzL8sWc2OXhFE-p2R2XE5HCqTqzrS3-okhS5E0U85A0Xzm3jluS7JtuFyTDvM37Zc0+sVeMDXR-12zAAiCqOmwODDULTL0PyujRy-UCeLyb+mIKwpiCijfFPZU2dgrSRgvnImUVi51ypm7F6lcXqXxLsfBud9ZRSCfrwCsf8BQ6E-kYBWNER7K1vJOVi+RSq5DSFxbiS0Eh3nci0AosR4zsX+JvHOVs8Q2wLsTOBzsEHlyQU9FBRdD5oOvvQFGaMSB8n-uA0g28Cb8Jga9H2wj-anw9hIg+WjS6-RIW2EoHYSD0VAsVL47RvijhnoxeEM9BwsNNtwiBuc+HQPkrAqR8CdEVxYJ4RK9Z-YmKVpELIaQSD1HWvkKe3poiZFHD2Wo3YITAjMakeIXF3EqJCmo7xXVUH+JPoE4JSUDG1zYDQJg8pwnjUiSBTIlCnEazfKVXWTQSBtD8mxL4cQUiZDyfjKBcEfGaOqUYxBh4LhDRGoPC8itGnZMSHUIE7EGJJINkkUckJGIQhvBkP4sY-gNC6E1FgdS4BhGUaM9qRS7aKR6rFWm5ZX57FZKlaUpxuQeAaWQyI7DVqBnaI+H4U5SrJKWq8WcnwDb1AcgmDyoFUgjNUWMzqTzoovN0eaLBxF9iHHtL87YyzXRDzGoCrINRogOWfLNJJfw2IVThfS2cKQ4QJgCk1O5GKHnjOKc8oKryywEvMv4Sl5LnhAuHNCN82TvggRyTPHiqQ4iTkfG8Zoasza8pavyvOgrsVFmNHi+kGEHa4U-oRQlALnj-n1u+d4M4MjOQqmVWoaQp6ItiMOUCjU0QvPuUarF+9TXITESQDSWl7Veinh8QcBQOEa39BrNyoEekdj9TQ+M2tA3NWDYarxxrw0xXNXGl4b4bxpOTQmVNJUeKNChLeOEa9HwOUseigpmK96CL8dospUaY23EWdRNskT2gtKjG0OoU9sjVT2WxT4BQmULQaCkRc+qi09oFWG-thj0EzMenTfRQjpkBywEHKQIdwbc3DrzNuHcm6h0rZE0qtR3JuuoZkBqn4wSNFWm8acU8DZfCaDyoNIqQ0lv3b4w9MjzWnoZpIhDIjG43rjnenm0NBgYRoGAVAMMCLcFgAEFgNxK2NDWbZTit53KxniLrBoMS-LFEfCUDIgJu2QL3X2+DUyj2iNmeIlDVSr7ocDp3LmOHI5EDfd8CcM9bHxB-X++xfl+IQjSAJZ8zb0g8c8bvARAmJMBKjefSZZmy4kEwQ-HBX8rTv0ITHKAlaigtPVVxv474gKIv-Ygdhdkoy9iSFOqcAzDO8OMxokpg7qaBOQ17VDgmZG2fvpaBzeD36Wuwtaym7g2CZV8GO4ezx2GJpdQJP1frgQjkYXCkLUZwsGyfFFnehMJlxYvUhyz3WhPpYJVl1+-J3PBlqKciEbRnzrwCwgNod4wtJJ+Kp94gIt1Qb2sWmLXWUvWYSxZs9A6L0KaBJ+lTamuJzbmmtKMaQpwJGnJBwt0HtudaFeJ6RIikMADEkp5YIueoTFbStUueKBdynxWjIlRW+Xso4-WONiB+JMK0FsGe3a93dob+NWa++ZkTJAftYFQFpAikNTKXSB2lgA0lcgA7uwR9ykiBJ3k6D6VUR-x2S+LOulXE2KsT2fkRIMIYyxOHO+FEmOtvY9g7j-riHEvE9J7hCnfUqfHYGwAVRYP9BnTPcNUlZ8nN92SPgzbpf8f4MY8ijj8lCdisSZ4JAXWimXFs5c7Y+9T77yuSdk-vafTXaH-bRp7v0QHA7aksDcKgKAGAiC4gUyL+FmRf1wijEkoXS0FVQjOa0YSgJoztcKaWg9qW-dRpV4H9XpYQ+V7CRz0hMqFWrU7Rn5ECIOzQoAwJHpYWSjdgnq0DbL3Ze8ZxyZvHpSDsiZT8ifiyK50wljOw+xE5nww+qu0BowyPdby94TBTvpWn0STR0+rYJIgIg+GFsLgE2hAjH8ok-6qz-DnafkK-UQGKJDC+nuxEUAMgmBch0EAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QDUCWsCuBDANqgXmAE4B0AggA4V4DGWALqgPYB2ABOm0WFhAJ4kAslhZYoqFlDYA3dNjyEibMAA8wNDI1YkACjix8JU2PTAVY5TUwC2DVDTbUDRtkwBmbgMR6DiUBSZYVC0WPxAVRABaACYAVgAOEgBOeIA2AEYAFmiABgBmTPSk9PSAGhA+KOz0klSkgHZ6rLz62Jy6gF8O8rRMXAJicipaO1YOWC4efiERMRdZPoViZTUNEN19Q0k2EzMLMitbRgcnLalWbywMWDAwgKCQsIiESLyc2JJo9NS29NiCvLxTJpcqVF55dL1Eg5YE5IFJXLfeLxLo9OT9RRDaj2UbsTjcXgCYSicTbBbyAZKVTqTTMFgbZzbXbmSz0Gx2E6bFwXFQmBhgEhYNymIgACiubKO9kcXO2EDAmwAlJ5ehTMZRsXQQuNJoSZiT5uillTVrTtD4zjtTCyDpKOTLGedQkgQPdgnSnlFotEobF6hlonkkj9AcDoqCvQUSHkfci-u9UtFgyjuiBVRjBhqRtr8VMibNSVJyRmTTT1haXMzYJ4AHKqehWsx3QLu1iel6xVKJQrpNKxdJfH4-CMdwq1f6pQo5adJHLRTKotNGylY7N0nUE6bEuZk5eKFZlukMy1VzzNh4el3PJN5EglerxAcQ3vpOf1EeRTLtO+pPKpVoQkGeT9nki7psaq44jmEybvmBq7oslIHmsR4AEo8DQAAWkDKCwECuG4jbmJ46E3A2Vbnq2zqgM8mRJEknx1JkjSZJ2sSZMBH6IiQ8T1PRRQlC0PzZGBe6ZsMUHrrmerboWMhiaWKHaAAkhAOBgJ4ACiogAEbqQ6lrUkp7AUS6bqPFeUSztE0J-nOXadgiJQfm8mR3ik0TxNZfGxN6omIeqElalJMF5vqO5FgpyFmiwngAMpgA2ErsscBkuPKmyURZNGICU7G1PUhSZBxdmFC5GQkGxD7RKk-6sb+sT+Wq4mariG5hbJhoBcsRkxZ4AAyTC8Fll45S8j45NG8SAnOnlBj2H51DZSTAaGDR-LV9RNSWkHBWM0lbgWLi2FhEhgGwIj4RIFCaNF6yaaajDbCdmFnRdeEcCwN30DMADWLjcAAjhgcANmyOzENIgwJXhANgMDoOeBArAChI0hML9ArgSuWaSftoUyUdz1YKdLDnZdn3fXdR4PYexOk+TH3XZof1wwjJhsODNxEFDpAwxAbMgyYCBo0we0sAA2jkAC6I1tpZCCFQxDSsb2U50UkmQjq+RQ8ZOuQFMCGTpKBqbY4FrXQbqh3wVIL1vRTzMNr192PcdJOvWT71XV9LPCP92xA0LYNMBDPPQ2AsOB-DweeMQRBMKQTj0G4ifWCQ5stWu+PW3BEVsPbXuO77ztu9otMofTnuMz732s9H7Mh2HvMkPzgugyLLDo+LUuy2ZLbZeEuX9rUf6eRNNX8Xk2s5LraTZPkxVpCUC5mwpu1tQdedyYXNeU7dLs027VcO0zJckAAIgqjpsDgQ0C0y9D8rokcP1Ani8k-piCsKxCiq+05lSZ1ILjcW7VCa2wLh7U+tcD5l3pBXWkJ8i5nzrlfWUUg768ErF-AUOhX5GDltRIeCBfw2SBK+eoQZ-RwlaCOVI+RkjxASHCV8j5-TpG2hBUBm8CY23zrvb2+9S6HnLsfO20CUGwPoEjFGJA+Tf2ARvK2sFwo70kXvJ21MxF0wkQzIRTsiHtgKDUX8XY4jMT-A+JI2s2gMWYr5YCvlmH9hTGibqICgq8Nzmo92+ji5U0PhcBKDZDH9wvPLMakQshpBIFQ-4+Rpx-AHFrCoiA4hQjIRCYEK8uzAS4TjLxKiOpEz0dXAxJdtGxRCVA-RNAmDyiMQraJ-Y3KQnhL+CE+RUgjkaDUOxxVfIDliCkVe7jmqeMtiFHxnVkGaMqUE2Kg1hrhKou2SIDlkgxnaPEdoZiHzaw4skB87SHLfDiF0VMLAGlwDCEonhxSIH52LMaKpx4cF7FZClaUpxuQeCaVEv0NlZ47O+K4v8qSwSvH9J8eIPpPJJDaE0P8BSLbZzxHw7eXUJlvIrI-T5tpvmchvpE10A9RokOiWOb0cK3jennH8ViLkYWeR9HUXZXkRmoqznjDFMzSnyQ8bijBRF4CrMHs8SIIzUjQlfF2MFvYIWLTiLUViEJNZUPnE0blkz0XgP4XJF5SFFkkHQh7HCr8CKioBSQ-8UJdm5FiAkDh89yqTS7AwnI9Q4jBhNo1NeHjlHTNUbMyKQqTWqXUjayVACPidOYoivIwESofkKLedirQVqJj4rVC5AaJlBpziGgVRr9yLOjVEV8SZR4FB8km9iSaPyNBlQiJoPoqEcL4jqwtfLi2QMEQEuBoj6SRtuOKilMb2huU5e0WcMIap+kOR8QM2QiolAaCkLa+adoPODSU-tGiKmBPgSQRBT0ykwOEfXKQQdQac1DtzFubcG7BwrQgb0t4NXFThLs4MX5YjaxXneLyj5gy1qTW4pcgbd1Fv3QIw9g6RHGVPeI2p5TEPXsmI3e9zdBjoRoGAVAUN8LcFgAEFgNw30lGYdCL1msnXFGXjPOiPEIRwr4oisFYyoMFpg72uD6j-GoKHchs9fj0PCZ+v7duHMuaQ0GAAVRYL9a5AB3dg8dE6uBoBobgEAqMQlqPkP4XxXyAk8pCxAQJlr0TnMw9oQZAzdr4-qrFcyj0iZiih3RaHL1O0w7e2TD75OkAANJqY00QBOSgxa6cgG+uF7rhkBkyF2GE8RtbPmjLOfiZjfzeuc0UvdTzBMSekW8sT7mMPSZfXeuT4ciBUa9UZiEQyzNwqBL0potHvXMMKovEohWpmwZK+JvzCyT2VYvVIq96Cb5YLflaZ++Co5QDfRxNyN5IS9j9ImYZI4RlQgTX+yEMJ1VDb1VvXxVXJMVdQwOyTl9r6WgWzg5+ZqsIWo+u4NgGVfDjtJc8R8y7vXZs45CGqB2GgkGO5OU7HEigXd5a567035nHuHd5yuaOPM-Tmy9++b3TDrdfJ8Fa22+t7biAdlVwI4WuJGUmDiSOwFXdDb5mbWiTVTY5+jzQCXbwMNa6Z-IHXLMIF7DKp1CQZe9hA1Qln3i+3waE+Vk1AAxRKn38IPbV-Aprv4eL9hqoUXi8btYZA+OTr1h3po-C3eMndRWRsGrG5zibmP1dYFQOpfC4MXbnV11e8LTB1O4apFFxOb6NksvjImQM7E-Ti-a9CDi7GgwMM8orx5rubt6899733OGA+89xyQJTKnQ8mRC8oSPjWAfEMlZswMCI4irXM9PNJCANWVX-BChI2RarZ+K7nnHiG3le59zhf3j1A8Ice8pLu-QdeHvqSwNwqAoAYCILiaPKeLOpZ-QiZiyf2hQj+A0EZgkvJOe3dw53-HRt5+ERPwv0-Q4l6D2E-w5LAeVvaDZAfgwsiMfoVL0siJVCtJmqGHlNEMPi7m5mPrduWg3usmwokDOnUNOIPoul3iMkwpONKgAbVPknfoUsNo-vwHvv8IkO0nRJ0mZj0l3pEAiJ+rPBkHGHOJrKkDqtQYmHeA+PQUmowR+PRB8F5DGA0Kyr+CtJch0EAA */
   createMachine(
     {
       context: {
@@ -80,6 +80,7 @@ export const vizMachine =
         lastLoadingMachineCode: undefined,
         machineExecution: undefined,
         serverExecutionError: undefined,
+        unknownErrorHasOccuredWhileSendingRequest: false,
       },
       tsTypes: {} as import("./viz.typegen").Typegen0,
       schema: {
@@ -92,6 +93,7 @@ export const vizMachine =
           lastLoadingInput: string | undefined;
           machineExecution: MachineExecution | undefined;
           serverExecutionError: string | undefined;
+          unknownErrorHasOccuredWhileSendingRequest: boolean;
         },
         events: {} as
           | { type: "Enable playing execution steps" }
@@ -194,6 +196,7 @@ export const vizMachine =
                     "Cache input and machine code into context",
                     "Reset step index",
                     "Reset execution server error",
+                    "Reset that unknown error has occured while sending request",
                   ],
                   type: "parallel",
                   states: {
@@ -212,19 +215,25 @@ export const vizMachine =
                               {
                                 actions:
                                   "Assign execution server error to context",
-                                target:
-                                  "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input.Known server error",
+                                target: "Known error occured",
                               },
                             ],
                             onError: [
                               {
-                                target:
-                                  "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input.Unknown server error",
+                                target: "Unknown error occured",
                               },
                             ],
                           },
                         },
                         "Received response": {
+                          type: "final",
+                        },
+                        "Unknown error occured": {
+                          entry:
+                            "Assign unknown error has occured while sending request to context",
+                          type: "final",
+                        },
+                        "Known error occured": {
                           type: "final",
                         },
                       },
@@ -245,9 +254,21 @@ export const vizMachine =
                       },
                     },
                   },
-                  onDone: {
-                    target: "Fetched machine and input execution",
-                  },
+                  onDone: [
+                    {
+                      cond: "Unknown error has occured while sending request",
+                      target:
+                        "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input.Unknown server error",
+                    },
+                    {
+                      cond: "Known error has occured while sending request",
+                      target:
+                        "#Visualizer.Application is ready.Managing machine and input execution.Failed to execute machine and input.Known server error",
+                    },
+                    {
+                      target: "Fetched machine and input execution",
+                    },
+                  ],
                 },
                 "Fetched machine and input execution": {
                   entry: [
@@ -349,6 +370,13 @@ export const vizMachine =
         "Reset execution server error": assign({
           serverExecutionError: (_context) => undefined,
         }),
+        "Assign unknown error has occured while sending request to context":
+          assign({
+            unknownErrorHasOccuredWhileSendingRequest: (_context) => true,
+          }),
+        "Reset that unknown error has occured while sending request": assign({
+          unknownErrorHasOccuredWhileSendingRequest: (_context) => false,
+        }),
       },
       delays: {
         "automatic playing delay": (context) =>
@@ -376,6 +404,12 @@ export const vizMachine =
 
           return isInvalidJSON;
         },
+        "Known error has occured while sending request": ({
+          serverExecutionError,
+        }) => serverExecutionError !== undefined,
+        "Unknown error has occured while sending request": ({
+          unknownErrorHasOccuredWhileSendingRequest,
+        }) => unknownErrorHasOccuredWhileSendingRequest === true,
       },
       services: {
         "Start submit button machine": submitButtonMachine,

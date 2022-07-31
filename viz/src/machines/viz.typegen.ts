@@ -2,33 +2,24 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
-  eventsCausingActions: {
-    "Assign automatic playing delay to context": "Set automatic playing delay";
-    "Increment step index":
-      | "Next step"
-      | "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
-    "Reset step index": "Reset steps" | "Load";
-    "Assign input to context": "Set input";
-    "Assign machine code to context": "Set machine code";
-    "Assign machine execution to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
-    "Assign execution server error to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
-    "Cache input and machine code into context": "Load";
-    "Reset execution server error": "Load";
-    "Allow to play execution steps": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
-    "Exit loading state from submit button": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
-    "Enter error state from submit button": "xstate.init";
-  };
   internalEvents: {
     "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on": {
       type: "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
+    };
+    "xstate.after(1000)#Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state.Pending": {
+      type: "xstate.after(1000)#Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state.Pending";
     };
     "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]": {
       type: "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
-    "": { type: "" };
+    "error.platform.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]": {
+      type: "error.platform.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
+      data: unknown;
+    };
     "xstate.init": { type: "xstate.init" };
+    "": { type: "" };
     "done.invoke.Submit button": {
       type: "done.invoke.Submit button";
       data: unknown;
@@ -49,6 +40,28 @@ export interface Typegen0 {
     guards: never;
     delays: never;
   };
+  eventsCausingActions: {
+    "Assign automatic playing delay to context": "Set automatic playing delay";
+    "Increment step index":
+      | "Next step"
+      | "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
+    "Reset step index": "Reset steps" | "Load";
+    "Assign input to context": "Set input";
+    "Assign machine code to context": "Set machine code";
+    "Assign machine execution to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
+    "Assign execution server error to context": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
+    "Cache input and machine code into context": "Load";
+    "Reset execution server error": "Load";
+    "Reset that unknown error has occured while sending request": "Load";
+    "Assign unknown error has occured while sending request to context": "error.platform.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
+    "Allow to play execution steps":
+      | "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input"
+      | "Load";
+    "Exit loading state from submit button": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+    "Enter error state from submit button":
+      | "Load"
+      | "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+  };
   eventsCausingServices: {
     "Start submit button machine": "xstate.init";
     "Execute machine and input on server": "Load";
@@ -56,10 +69,14 @@ export interface Typegen0 {
   eventsCausingGuards: {
     "Has reached end of steps": "";
     "Machine configuration is not valid JSON": "Load";
+    "Unknown error has occured while sending request": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
+    "Known error has occured while sending request": "done.state.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input";
     "Is valid machine execution": "done.invoke.Visualizer.Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request:invocation[0]";
   };
   eventsCausingDelays: {
-    "automatic playing delay": "xstate.init";
+    "automatic playing delay":
+      | "Play"
+      | "xstate.after(automatic playing delay)#Visualizer.Application is ready.Managing visualizer execution.Playing steps.Automatic playing on";
   };
   matchesStates:
     | "Application is ready"
@@ -75,6 +92,8 @@ export interface Typegen0 {
     | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server"
     | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Sending request"
     | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Received response"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Unknown error occured"
+    | "Application is ready.Managing machine and input execution.Executing machine and input.Making request to server.Known error occured"
     | "Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state"
     | "Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state.Pending"
     | "Application is ready.Managing machine and input execution.Executing machine and input.Delaying loading state.Reached end of delay"
@@ -109,7 +128,9 @@ export interface Typegen0 {
                       | {
                           "Making request to server"?:
                             | "Sending request"
-                            | "Received response";
+                            | "Received response"
+                            | "Unknown error occured"
+                            | "Known error occured";
                           "Delaying loading state"?:
                             | "Pending"
                             | "Reached end of delay";
