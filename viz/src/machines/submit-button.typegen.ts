@@ -2,10 +2,13 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
-  eventsCausingActions: {
-    "Forward button has been clicked to parent": "Load";
-  };
   internalEvents: {
+    "xstate.after(2000)#Submit button.Success": {
+      type: "xstate.after(2000)#Submit button.Success";
+    };
+    "xstate.after(2000)#Submit button.Error": {
+      type: "xstate.after(2000)#Submit button.Error";
+    };
     "xstate.init": { type: "xstate.init" };
   };
   invokeSrcNameMap: {};
@@ -14,6 +17,9 @@ export interface Typegen0 {
     services: never;
     guards: never;
     delays: never;
+  };
+  eventsCausingActions: {
+    "Forward button has been clicked to parent": "Load";
   };
   eventsCausingServices: {};
   eventsCausingGuards: {};
