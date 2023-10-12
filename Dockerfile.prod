@@ -1,4 +1,4 @@
-FROM erlang:24-alpine
+FROM erlang:26-alpine
 WORKDIR /turing
 ADD . /turing
 RUN rebar3 escriptize
